@@ -1,0 +1,31 @@
+{
+  "name": "attendee",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "timestamp": {
+      "type": "date",
+      "default": "$now",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "events": {
+      "type": "belongsTo",
+      "model": "event",
+      "foreignKey": "eventId"
+    },
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
+

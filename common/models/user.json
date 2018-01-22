@@ -1,0 +1,56 @@
+{
+  "name": "user",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "bio": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "tokens": {
+      "type": [
+        "string"
+      ]
+    },
+    "photo": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "events": {
+      "type": "hasMany",
+      "model": "event",
+      "foreignKey": "userId",
+      "through": "attendee"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

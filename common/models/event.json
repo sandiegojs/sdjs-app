@@ -1,0 +1,35 @@
+{
+  "name": "event",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "event_title": {
+      "type": "string",
+      "required": true
+    },
+    "meetup_id": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string"
+    },
+    "location": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "eventId",
+      "through": "attendee"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
