@@ -39,8 +39,8 @@ app.post('/signup', (req, res) => {
       res.send(response.data);
     })
     .catch(error => {
-      console.log('inside error');
-      res.send(error);
+      console.log('inside error', error);
+      res.send(error.message);
     });
 });
 
