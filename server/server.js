@@ -22,6 +22,7 @@ app.start = function () {
 app.use(bodyParser.json());
 
 app.post('/signup', (req, res) => {
+  console.log('inside route');
   const { first_name, last_name, email, password } = req.body;
 
   const signUpObj = {
@@ -30,14 +31,17 @@ app.post('/signup', (req, res) => {
     "email": email,
     "password": password
   }
-  
+
   axios
     .post('/api/users', signUpObj)
     .then(response => {
       console.log( 'response', response);
-      res.send(response.data)
+      res.send(response.data);
     })
-    .catch(error => res.send(error));
+    .catch(error => {
+      console.log('inside error');
+      res.send(error);
+    });
 });
 
 
