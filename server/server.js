@@ -27,14 +27,14 @@ app.post('/signup', (req, res) => {
   console.log("server-side-req.body",req.body)
 
   const signUpObj = {
-    "first_name": firstName,
-    "last_name": lastName,
+    "first_name": first_name,
+    "last_name": last_name,
     "email": email,
     "password": password
   } 
 
   console.log("server-side-signUpObj",signUpObj)
-  
+
   const signUpData = axios
     .post('api/users', signUpObj)
     .then(response => {
