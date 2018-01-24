@@ -33,7 +33,11 @@ console.log("server-side-req.body",req.body)
 } 
 console.log("server-side-signUpObj",signUpObj)
   const signUpData = axios
-    .post('api/users', signUpObj)
+    .post('api/users', signUpObj, {
+      headers: {
+        'Content-type' : 'application/json'
+      }
+    })
     .then(response => {
       return response.data
     })

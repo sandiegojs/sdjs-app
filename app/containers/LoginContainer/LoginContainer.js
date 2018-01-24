@@ -51,6 +51,7 @@ class LoginContainer extends React.Component {
             "email": email,
             "password": password
         }
+        console.log(signUpObj);
         dispatch(signUpEntry(signUpObj));
 
     
