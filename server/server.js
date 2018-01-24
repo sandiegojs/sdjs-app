@@ -19,21 +19,26 @@ app.start = function () {
 };
 
 app.get('/signup', (req, res) => {
-  res.send('ok it worked!');
+  
+  const { first_name, last_name, email, password } = req.body;
 
-//   const signUpObj = req.body.//don't know??
-//   const signUpData = axios
-//     .post('/api/users', signUpObj)
-//     .then(response => {
-//       return response.data
-//     })
-//     .catch(error => {
-//       console.log(error)
-//     })
-// });
-
-// res.send(signUpData)
+  const signUpObj = {
+    "first_name": firstName,
+    "last_name": lastName,
+    "email": email,
+    "password": password
+}
+  const signUpData = axios
+    .post('/api/users', signUpObj)
+    .then(response => {
+      return response.data
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    res.send(signUpData)
 });
+
 
 
 // Bootstrap the application, configure models, datasources and middleware.
