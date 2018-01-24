@@ -5,6 +5,7 @@ var boot = require('loopback-boot');
 var axios = require('axios')
 
 var app = module.exports = loopback();
+app.use(bodyParser.json());
 
 app.start = function () {
   // start the web server
@@ -18,33 +19,6 @@ app.start = function () {
     }
   });
 };
-
-app.use(bodyParser.json());
-
-app.post('/signup', (req, res) => {
-  console.log('inside route');
-  const { first_name, last_name, email, password } = req.body;
-
-  const signUpObj = {
-    "first_name": first_name,
-    "last_name": last_name,
-    "email": email,
-    "password": password
-  }
-
-  axios
-    .post('/api/users', signUpObj)
-    .then(response => {
-      console.log( 'response', response);
-      res.send(response.data);
-    })
-    .catch(error => {
-      console.log('inside error', error);
-      res.send(error.message);
-    });
-});
-
-
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
