@@ -24,5 +24,10 @@
   "user": {
     "dataSource": "MongoDB",
     "public": true
+  },
+  "AccessToken": {
+    "dataSource": "MongoDB",
+    "public": false,
+    "strict": true
   }
 }

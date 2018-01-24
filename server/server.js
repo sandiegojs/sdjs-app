@@ -2,8 +2,8 @@
 var bodyParser = require('body-parser');
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-
 var app = module.exports = loopback();
+
 app.use(bodyParser.json());
 
 app.start = function () {
