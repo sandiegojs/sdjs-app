@@ -37,7 +37,7 @@ export function signUpEntry(signUpObj) {
         type: 'SIGN_UP_ENTRY',
         payload: 
         axios
-        .get('/signup')
+        .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
         .then( response => {
             console.log(response)
             return response.data;
