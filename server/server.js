@@ -21,7 +21,7 @@ app.start = function () {
 
 app.use(bodyParser.json());
 
-app.get('/signup', (req, res) => {
+app.post('/signup', (req, res) => {
   
   const { first_name, last_name, email, password } = req.body;
 console.log("server-side-req.body",req.body)
