@@ -17,7 +17,15 @@ module.exports = function(app) {
           .then(response => {
             console.log( 'user was posted');
 
-            axios.post(baseUrl + '/api/users/login', { email, password })
+
+            var signinObj = {
+                email,
+                password
+            }
+
+            console.log('user is about to sign in with: ',signinObj);
+
+            axios.post(baseUrl + '/api/users/login', signinObj)
             .then(r => {
                 console.log('user was logged in');
                 res.send(r.data.id)
