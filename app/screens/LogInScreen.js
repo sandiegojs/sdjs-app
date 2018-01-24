@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { FormLabel, FormInput, Button } from 'react-native-elements'
+import LoginContainer from '../containers/LoginContainer/LoginContainer'
 
 export default class LogInScreen extends React.Component {
   static navigationOptions = {
@@ -8,21 +10,8 @@ export default class LogInScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Button
-        title="Go to Events Screen"
-        onPress={() =>
-          navigate('Events')
-        }
-      />
+      <LoginContainer />
     );
   }
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

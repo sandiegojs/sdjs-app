@@ -1,3 +1,4 @@
+import './ReactotronConfig'; 
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './rootStore';
@@ -6,6 +7,7 @@ import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
 import LogInScreen from './screens/LogInScreen';
 import ProfileScreen from './screens/ProfileScreen';
+
 
 
 class App extends React.Component {
