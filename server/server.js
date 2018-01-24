@@ -1,7 +1,8 @@
 'use strict';
-
+var bodyParser = require('body-parser');
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var axios = require('axios')
 
 var app = module.exports = loopback();
 
@@ -18,18 +19,21 @@ app.start = function () {
   });
 };
 
+app.use(bodyParser.json());
+
 app.get('/signup', (req, res) => {
   
   const { first_name, last_name, email, password } = req.body;
-
+console.log("server-side-req.body",req.body)
   const signUpObj = {
     "first_name": firstName,
     "last_name": lastName,
     "email": email,
     "password": password
-}
+} 
+console.log("server-side-signUpObj",signUpObj)
   const signUpData = axios
-    .post('/api/users', signUpObj)
+    .post('api/users', signUpObj)
     .then(response => {
       return response.data
     })
