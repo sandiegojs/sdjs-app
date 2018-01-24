@@ -63,13 +63,13 @@ class LoginContainer extends React.Component {
         return (
             <View style={styles.container}>
                 <FormLabel>FIRST NAME </FormLabel>
-                <FormInput onChangeText={this.handleFirstNameInput} value={firstName} />
+                <FormInput onChangeText={this.handleFirstNameInput}/>
                 <FormLabel>LAST NAME</FormLabel>
-                <FormInput onChangeText={this.handleLastNameInput} value={lastName} />
+                <FormInput onChangeText={this.handleLastNameInput}/>
                 <FormLabel>EMAIL</FormLabel>
-                <FormInput onChangeText={this.handleEmailInput} value={email} />
+                <FormInput onChangeText={this.handleEmailInput}/>
                 <FormLabel>PASSWORD</FormLabel>
-                <FormInput onChangeText={this.handlePasswordInput} value={password} />
+                <FormInput onChangeText={this.handlePasswordInput}/>
                 <Button style={styles.button} onPress={this.handleSignUpSubmission}
                     large
                     icon={{ name: 'anchor', type: 'font-awesome' }}

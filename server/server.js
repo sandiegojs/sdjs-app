@@ -22,29 +22,28 @@ app.start = function () {
 app.use(bodyParser.json());
 
 app.post('/signup', (req, res) => {
-  
   const { first_name, last_name, email, password } = req.body;
-console.log("server-side-req.body",req.body)
+
+  console.log("server-side-req.body",req.body)
+
   const signUpObj = {
     "first_name": firstName,
     "last_name": lastName,
     "email": email,
     "password": password
-} 
-console.log("server-side-signUpObj",signUpObj)
+  } 
+
+  console.log("server-side-signUpObj",signUpObj)
+  
   const signUpData = axios
-    .post('api/users', signUpObj, {
-      headers: {
-        'Content-type' : 'application/json'
-      }
-    })
+    .post('api/users', signUpObj)
     .then(response => {
       return response.data
     })
     .catch(error => {
       console.log(error)
-    })
-    res.send(signUpData)
+    });
+  res.send(signUpData)
 });
 
 
