@@ -1,4 +1,5 @@
 var axios = require('axios');
+var userAuth = null;
 
 module.exports = function(app) {
 
@@ -7,23 +8,25 @@ module.exports = function(app) {
         var baseUrl = app.get('url').replace(/\/$/, '');
 
         const { first_name, last_name, email, password } = req.body;
-      
-        const signUpObj = {
-          "first_name": first_name,
-          "last_name": last_name,
-          "email": email,
-          "password": password
-        }
-      
+
+        const signUpObj = { first_name, last_name, email, password };
+
+        console.log('data to signup', signUpObj);
         axios
           .post(baseUrl + '/api/users', signUpObj)
           .then(response => {
-            console.log( 'response', response);
-            res.send(response.data);
+            console.log( 'user was posted');
+
+            axios.post(baseUrl + '/api/users/login', { email, password })
+            .then(r => {
+                console.log('user was logged in');
+                res.send(r.data.id)
+            })
+            .catch(e => {
+                console.log('error logging in');
+                res.send(e.message)
+            })
           })
-          .catch(error => {
-            console.log('inside error', error);
-            res.send(error.message);
-          });
+          .catch(error => res.send(error.message));
     });
 }
