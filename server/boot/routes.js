@@ -1,11 +1,11 @@
+var axios = require('axios');
+
 module.exports = function(app) {
-    // Install a "/ping" route that returns "pong"
-    app.get('/ping', function(req, res) {
-      res.send('pong');
-    });
 
     app.post('/signup', (req, res) => {
         console.log('inside route');
+        var baseUrl = app.get('url').replace(/\/$/, '');
+
         const { first_name, last_name, email, password } = req.body;
       
         const signUpObj = {
@@ -16,7 +16,7 @@ module.exports = function(app) {
         }
       
         axios
-          .post('/api/users', signUpObj)
+          .post(baseUrl + '/api/users', signUpObj)
           .then(response => {
             console.log( 'response', response);
             res.send(response.data);
