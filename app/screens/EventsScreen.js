@@ -30,13 +30,7 @@ export default class EventsScreen extends React.Component {
             navigate('Profile')
           }
         />
-        <EventsContainer />
-        <Button
-          title="Go to Event Details Screen"
-          onPress={() =>
-            navigate('EventDetails')
-          }
-        />
+        <EventsContainer navigation={this.props.navigation}/>
       </View>
     );
   }

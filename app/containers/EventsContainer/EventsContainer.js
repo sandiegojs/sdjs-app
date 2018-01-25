@@ -1,43 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateEventsTextInput, updateEventsData } from './eventsActions'
-import { Text, View, TextInput, FlatList } from 'react-native';
+import { updateEventsData } from './eventsActions';
+import { FlatList } from 'react-native';
 import { List, ListItem } from "react-native-elements";
-import data from './eventsData.json'
+import { getDayOfTheWeek , getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
 class EventsContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleTextInput = this.handleTextInput.bind(this);
 
   }
   componentWillMount(){
     const { dispatch } = this.props
     const eventsData = null;
 
-    //dispatch(updateEventsData(text));
+    dispatch(updateEventsData(eventsData));
 
   }
 
-  handleTextInput(text) {
-    const { dispatch } = this.props
-    dispatch(updateEventsTextInput(text));
-  }
   render() {
-
-    const { inputText } = this.props
+    const { navigate } = this.props.navigation;
+    const { eventsData } = this.props
     return (
       <List>
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={this.handleTextInput}
-          value={inputText}
-        />
         <FlatList
-          data={data}
+          data={eventsData}
           renderItem={({ item }) => <ListItem
-            title={`${item.name} ${item.name}`}
+          key={item.id}
+            title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)} ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
             subtitle={item.name}
+            onPress={() =>
+            navigate('EventDetails')
+          }
           />}
         />
       </List>
@@ -47,7 +41,7 @@ class EventsContainer extends React.Component {
 
 function mapStoreToProps(store) {
   return {
-    inputText: store.eventsData.text,
+    eventsData: store.eventsData.eventsData,
 
   };
 }

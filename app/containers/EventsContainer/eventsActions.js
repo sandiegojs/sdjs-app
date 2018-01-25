@@ -9,7 +9,7 @@ export function updateEventsData(search) {
        type: 'UPDATE_EVENTS_DATA',
        payload:
        axios
-           .get('https://api.meetup.com/sandiegojs/events?&sign=true&photo-host=public&page=5&key=7c1c22226a10175697e6e91e4870')
+           .get('https://api.meetup.com/sandiegojs/events?&sign=true&photo-host=public&page=6&key=7c1c22226a10175697e6e91e4870')
            .then(response => {
                console.log(response.data)
                return response.data;
@@ -25,11 +25,3 @@ export function updateEventsData(search) {
        
    }
 }
-
-export function updateEventsTextInput(text) {
-    
-        return {
-            type: 'UPDATE_EVENTS_TEXT_INPUT',
-            payload: text
-        }
-    };

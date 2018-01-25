@@ -1,5 +1,5 @@
 const defaultState = {
-    text:'Its working',
+    eventsData:'',
   };
   
   export default function EventsReducer (state = defaultState, action) {
@@ -9,14 +9,14 @@ const defaultState = {
       
       
   
-      case 'UPDATE_EVENTS_TEXT_INPUT': {
+      case 'UPDATE_EVENTS_DATA_FULFILLED': {
         return {
           ...state,
-          text: payload
+          eventsData: payload
         };
       }
       default: {
         return state;
       }
     }
-  }
+  };
