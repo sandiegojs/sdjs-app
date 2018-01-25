@@ -7,6 +7,7 @@
     "password": "teagen123",
     "name": "MongoDB",
     "user": "clay",
-    "connector": "loopback-connector-mongodb"
+    "connector": "loopback-connector-mongodb",
+    "file":"db.json"
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { AuthSession } from 'expo';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
 import { FormLabel, FormInput, Button, SocialIcon } from 'react-native-elements';
