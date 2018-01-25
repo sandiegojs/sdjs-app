@@ -1,7 +1,8 @@
 import React from 'react';
+import { AuthSession } from 'expo';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
+import { FormLabel, FormInput, Button, SocialIcon } from 'react-native-elements';
 import {
     firstNameEntry,
     lastNameEntry,
@@ -9,19 +10,34 @@ import {
     passwordEntry,
     signUpEntry
 } from './loginActions';
+import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 
 class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
+        state = {
+            githubToken: null,
+            redditToken: null,
+            error: null,
+          };
 
         this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
         this.handleEmailInput = this.handleEmailInput.bind(this);
         this.handlePasswordInput = this.handlePasswordInput.bind(this);
         this.handleSignUpSubmission = this.handleSignUpSubmission.bind(this);
-        
-
     }
+
+
+
+    // componentDidMount() {
+    //     const { user } = this.props;
+    //     const navigate  = this.props.navigation;
+    //     if (!!user) {
+    //         navigate('Events');
+    //     }
+    // }
+
     handleFirstNameInput(text) {
         const { dispatch } = this.props;
         dispatch(firstNameEntry(text));
@@ -41,7 +57,7 @@ class LoginContainer extends React.Component {
         const { dispatch } = this.props;
         dispatch(passwordEntry(text));
     }
-    handleSignUpSubmission(){
+    handleSignUpSubmission() {
         const { dispatch } = this.props;
         const { firstName, lastName, email, password } = this.props;
 
@@ -53,30 +69,50 @@ class LoginContainer extends React.Component {
         }
         console.log(signUpObj);
         dispatch(signUpEntry(signUpObj));
+        
+_authenticateWithGithubAsync = async () => {
+    try {
+      let result = await authenticateWithGithubAsync();
+      this.setState({githubToken: result});
+    } catch(e) {
+      this.setState({error: JSON.stringify(e)});
+    }
+  }
 
-    
+
     }
 
     render() {
-        const { firstName, lastName, email, password } = this.props;
-        console.log(password)
+        const { firstName, lastName, email, password, user } = this.props;
+        const { navigate } = this.props.navigation;
+
+        if (!!user) { navigate('Events') }
         return (
             <View style={styles.container}>
                 <FormLabel>FIRST NAME </FormLabel>
-                <FormInput onChangeText={this.handleFirstNameInput}/>
+                <FormInput onChangeText={this.handleFirstNameInput} />
                 <FormLabel>LAST NAME</FormLabel>
-                <FormInput onChangeText={this.handleLastNameInput}/>
+                <FormInput onChangeText={this.handleLastNameInput} />
                 <FormLabel>EMAIL</FormLabel>
-                <FormInput onChangeText={this.handleEmailInput}/>
+                <FormInput onChangeText={this.handleEmailInput} />
                 <FormLabel>PASSWORD</FormLabel>
-                <FormInput onChangeText={this.handlePasswordInput}/>
+                <FormInput onChangeText={this.handlePasswordInput} />
                 <Button style={styles.button} onPress={this.handleSignUpSubmission}
                     large
                     icon={{ name: 'anchor', type: 'font-awesome' }}
                     title='LOG IN' />
-                {/* </View> */}
+                <View>
+                    <Button
+                        onPress={this._authenticateWithGithubAsync}
+                        large
+                        icon={{ name: 'github', type: 'font-awesome' }}
+                        title='GITHUB' />
+                        <Button
+                        large
+                        icon={{ name: 'google-plus', type: 'font-awesome' }}
+                        title='GOOGLE' />
+                </View>
             </View>
-
 
         )
     }
@@ -107,7 +143,8 @@ function mapStoreToProps(store) {
         firstName: store.loginData.firstName,
         lastName: store.loginData.lastName,
         email: store.loginData.email,
-        password: store.loginData.password
+        password: store.loginData.password,
+        user: store.loginData.user
 
     };
 }

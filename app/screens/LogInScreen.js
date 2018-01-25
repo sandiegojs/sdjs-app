@@ -10,7 +10,7 @@ export default class LogInScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <LoginContainer />
+      <LoginContainer navigation={this.props.navigation} />
     );
   }
 };
