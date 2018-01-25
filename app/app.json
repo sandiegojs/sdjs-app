@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "my-new-project5",
+    "name": "sdci",
     "description": "This project is really great.",
-    "slug": "my-new-project5",
+    "slug": "sdci",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
