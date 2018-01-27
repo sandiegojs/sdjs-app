@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Constants, Location, Permissions } from 'expo';
 import { updateEventsData, updateSelectedEvent } from './eventsActions';
-import { FlatList } from 'react-native';
-import { List, ListItem } from "react-native-elements";
-import { getDayOfTheWeek , getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
-
+import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { List, ListItem, Button } from "react-native-elements";
+import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
 class EventsContainer extends React.Component {
   constructor(props) {
     super(props);
-this.selectionHandler = this.selectionHandler.bind(this)
+    this.selectionHandler = this.selectionHandler.bind(this)
+    this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
 
   }
-  componentWillMount(){
+  componentWillMount() {
     const { dispatch } = this.props
     const eventsData = null;
 
@@ -28,9 +29,43 @@ this.selectionHandler = this.selectionHandler.bind(this)
       navigate('EventDetails')
 
   }
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
+    this.setState({ isCheckedIn: true });
+
+    //console.log({ location });
+  };
+
+  handleUnCheckIn(){
+    this.setState({isCheckedIn:false})
+  }
 
   render() {  
     const { eventsData } = this.props
+    
+    let button = null;
+    console.log(button)
+    if (this.state.isCheckedIn) {
+      button = <Button
+        onPress={this.handleUnCheckIn}
+        title="Undo Check In"
+        buttonStyle={styles.purple}
+      />
+    } else {
+      button = <Button
+        onPress={this._getLocationAsync}
+        title="Check In!"
+        buttonStyle={styles.green}
+      />
+    }
+    
     return (
       <List>
         <FlatList
@@ -47,6 +82,17 @@ this.selectionHandler = this.selectionHandler.bind(this)
     );
   }
 };
+
+const styles = StyleSheet.create({
+  green: {
+    backgroundColor: 'green',
+    color: 'white'
+  },
+  purple: {
+    backgroundColor: 'purple',
+    color: 'white'
+  },
+});
 
 function mapStoreToProps(store) {
   return {

@@ -12,7 +12,7 @@
     "splash": {
       "image": "./assets/sandiegojs.png",
       "resizeMode": "contain",
-      "backgroundColor": "#346abb"
+      "backgroundColor": "#1884c3"//346abb
     },
     "ios": {
       "supportsTablet": true
