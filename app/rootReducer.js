@@ -4,7 +4,8 @@ import LoginReducer from './containers/LoginContainer/loginReducer';
 
 const rootReducer = combineReducers({
     eventsData: EventsReducer,
-    loginData: LoginReducer
+    loginData: LoginReducer,
+    result: LoginReducer
     
 });
 

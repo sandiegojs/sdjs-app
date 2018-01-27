@@ -41,3 +41,14 @@ export function signUpEntry(signUpObj) {
         })
     }
 }
+
+export function googleEntry(googleResult) {
+    return {
+        type: 'GOOGLE_ENTRY',
+        payload: axios
+        .post('https://sdci-backend.herokuapp.com/signup', googleResult)
+        .then(response => response.data)
+        .catch(error => {
+        })
+    }
+}

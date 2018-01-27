@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import LoginContainer from '../containers/LoginContainer/LoginContainer';
+import EventDetailsContainer from '../containers/EventDetailsContainer/EventDetailsContainer';
 
 export default class EventDetailsScreen extends React.Component {
   static navigationOptions = {
@@ -8,9 +10,7 @@ export default class EventDetailsScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <Text>Events Detail Page</Text>
-      </View>
+      <EventDetailsContainer />
     );
   }
 };

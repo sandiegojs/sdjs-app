@@ -14,6 +14,7 @@ export default class EventsScreen extends React.Component {
     }
   static navigationOptions = {
     title: 'Events',
+    headerLeft: null
   };
 
 

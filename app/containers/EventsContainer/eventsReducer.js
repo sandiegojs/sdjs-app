@@ -1,5 +1,6 @@
 const defaultState = {
     eventsData:'',
+    selectedEvent: ''
   };
   
   export default function EventsReducer (state = defaultState, action) {
@@ -13,6 +14,13 @@ const defaultState = {
         return {
           ...state,
           eventsData: payload
+        };
+      }
+
+      case 'UPDATE_SELECETED_EVENT': {
+        return {
+          ...state,
+          selectedEvent: payload
         };
       }
       default: {

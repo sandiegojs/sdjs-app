@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
-import { FormLabel, FormInput, Button, SocialIcon } from 'react-native-elements';
+import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
 import {
     firstNameEntry,
     lastNameEntry,
     emailEntry,
     passwordEntry,
-    signUpEntry
+    signUpEntry,
+    googleEntry
 } from './loginActions';
 import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 
@@ -18,7 +19,7 @@ class LoginContainer extends React.Component {
             githubToken: null,
             redditToken: null,
             error: null,
-          };
+        };
 
         this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
@@ -64,22 +65,54 @@ class LoginContainer extends React.Component {
             "first_name": firstName,
             "last_name": lastName,
             "email": email,
-            "password": password
+            "password": password,
         }
-        console.log(signUpObj);
         dispatch(signUpEntry(signUpObj));
+
         
-_authenticateWithGithubAsync = async () => {
-    try {
-      let result = await authenticateWithGithubAsync();
-      this.setState({githubToken: result});
-    } catch(e) {
-      this.setState({error: JSON.stringify(e)});
-    }
-  }
 
 
     }
+
+    _authenticateWithGithubAsync = async () => {
+        try {
+            let result = await authenticateWithGithubAsync();
+            console.log("frontend",result)
+            this.setState({ githubToken: result });
+        } catch (e) {
+            this.setState({ error: JSON.stringify(e) });
+        }
+    }
+
+    signInWithGoogleAsync = async () => {
+        const { dispatch } = this.props;
+        try {
+          const result = await Expo.Google.logInAsync({
+            androidClientId: '283233290300-1oc4f8ovd34f6gju3p7aktr0bqsi4jhh.apps.googleusercontent.com',
+            iosClientId: '283233290300-rr1pffml6mfnacp9amsrhokemmc5nras.apps.googleusercontent.com',
+            scopes: ['profile', 'email'],
+          });
+
+          if (result.type === 'success') {
+              let googleResult = result
+            // return result.accessToken;
+
+            const googleObj = {
+                "first_name": googleResult.user.givenName,
+                "last_name": googleResult.user.familyName,
+                "email": googleResult.user.email,
+                "password": googleResult.user.id
+            } 
+            console.log(googleObj)
+            dispatch(signUpEntry(googleObj));
+
+          } else {
+            return {cancelled: true};
+          }
+        } catch(e) {
+          return {error: true};
+        }
+      }
 
     render() {
         const { firstName, lastName, email, password, user } = this.props;
@@ -98,15 +131,16 @@ _authenticateWithGithubAsync = async () => {
                 <FormInput onChangeText={this.handlePasswordInput} />
                 <Button style={styles.button} onPress={this.handleSignUpSubmission}
                     large
-                    icon={{ name: 'anchor', type: 'font-awesome' }}
+                    icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='LOG IN' />
-                <View>
+                <View style={styles.socialButtonsContainer}>
                     <Button
-                        onPress={this._authenticateWithGithubAsync}
+                        onPress = {this._authenticateWithGithubAsync}
                         large
                         icon={{ name: 'github', type: 'font-awesome' }}
                         title='GITHUB' />
-                        <Button
+                    <Button
+                     onPress = {this. signInWithGoogleAsync}
                         large
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
@@ -122,18 +156,18 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#DCDCDC',
         alignItems: 'center',
-        // justifyContent: 'center',
         paddingTop: 30
     },
-    // form: {
-    //   height: 40,
-    //   width: 70,
-    //   borderColor: 'black',
-    //   borderWidth: 1
-    // },
     button: {
         marginTop: 55,
         width: 305
+    },
+    socialButtonsContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 8,
+        paddingHorizontal: 25
     }
 });
 

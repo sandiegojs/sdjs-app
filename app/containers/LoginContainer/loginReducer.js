@@ -41,6 +41,12 @@ export default function loginReducer (state = defaultState, action){
                 user: payload
             }
         }
+        case 'GOOGLE_ENTRY_FULFILLED': {
+            return {
+                ...state,
+                googleResult: payload
+            }
+        }
         default: {
             return state;
         }
