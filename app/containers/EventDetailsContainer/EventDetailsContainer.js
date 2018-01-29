@@ -15,6 +15,8 @@ class EventDetailsContainer extends React.Component {
     render() {
         const { eventDetails, eventsData } = this.props;
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
+        const latitude = eventInfo[0].venue.lat
+        const longitude = eventInfo[0].venue.lon
 
         return (
             <ScrollView style={styles.container}>
@@ -33,8 +35,8 @@ class EventDetailsContainer extends React.Component {
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: 37.78825,
-                        longitude: -122.4324,
+                        latitude: latitude,
+                        longitude: longitude,
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}

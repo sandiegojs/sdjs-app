@@ -69,7 +69,7 @@ class LoginContainer extends React.Component {
         }
         dispatch(signUpEntry(signUpObj));
 
-        
+
 
 
     }
@@ -77,7 +77,7 @@ class LoginContainer extends React.Component {
     _authenticateWithGithubAsync = async () => {
         try {
             let result = await authenticateWithGithubAsync();
-            console.log("frontend",result)
+            console.log("frontend", result)
             this.setState({ githubToken: result });
         } catch (e) {
             this.setState({ error: JSON.stringify(e) });
@@ -87,32 +87,32 @@ class LoginContainer extends React.Component {
     signInWithGoogleAsync = async () => {
         const { dispatch } = this.props;
         try {
-          const result = await Expo.Google.logInAsync({
-            androidClientId: '283233290300-1oc4f8ovd34f6gju3p7aktr0bqsi4jhh.apps.googleusercontent.com',
-            iosClientId: '283233290300-rr1pffml6mfnacp9amsrhokemmc5nras.apps.googleusercontent.com',
-            scopes: ['profile', 'email'],
-          });
+            const result = await Expo.Google.logInAsync({
+                androidClientId: '283233290300-1oc4f8ovd34f6gju3p7aktr0bqsi4jhh.apps.googleusercontent.com',
+                iosClientId: '283233290300-rr1pffml6mfnacp9amsrhokemmc5nras.apps.googleusercontent.com',
+                scopes: ['profile', 'email'],
+            });
 
-          if (result.type === 'success') {
-              let googleResult = result
-            // return result.accessToken;
+            if (result.type === 'success') {
+                let googleResult = result
+                // return result.accessToken;
 
-            const googleObj = {
-                "first_name": googleResult.user.givenName,
-                "last_name": googleResult.user.familyName,
-                "email": googleResult.user.email,
-                "password": googleResult.user.id
-            } 
-            console.log(googleObj)
-            dispatch(signUpEntry(googleObj));
+                const googleObj = {
+                    "first_name": googleResult.user.givenName,
+                    "last_name": googleResult.user.familyName,
+                    "email": googleResult.user.email,
+                    "password": googleResult.user.id
+                }
+                console.log(googleObj)
+                dispatch(signUpEntry(googleObj));
 
-          } else {
-            return {cancelled: true};
-          }
-        } catch(e) {
-          return {error: true};
+            } else {
+                return { cancelled: true };
+            }
+        } catch (e) {
+            return { error: true };
         }
-      }
+    }
 
     render() {
         const { firstName, lastName, email, password, user } = this.props;
@@ -121,26 +121,33 @@ class LoginContainer extends React.Component {
         if (!!user) { navigate('Events') }
         return (
             <View style={styles.container}>
-                <FormLabel>FIRST NAME </FormLabel>
-                <FormInput onChangeText={this.handleFirstNameInput} />
-                <FormLabel>LAST NAME</FormLabel>
-                <FormInput onChangeText={this.handleLastNameInput} />
-                <FormLabel>EMAIL</FormLabel>
-                <FormInput onChangeText={this.handleEmailInput} />
-                <FormLabel>PASSWORD</FormLabel>
-                <FormInput onChangeText={this.handlePasswordInput} />
-                <Button style={styles.button} onPress={this.handleSignUpSubmission}
+                <View style={styles.formContainer}>
+                    <FormLabel>FIRST NAME </FormLabel>
+                    <FormInput onChangeText={this.handleFirstNameInput} />
+                    <FormLabel>LAST NAME</FormLabel>
+                    <FormInput onChangeText={this.handleLastNameInput} />
+                    <FormLabel>EMAIL</FormLabel>
+                    <FormInput onChangeText={this.handleEmailInput} />
+                    <FormLabel>PASSWORD</FormLabel>
+                    <FormInput onChangeText={this.handlePasswordInput} />
+                </View>
+                <Button style={styles.button}
+                    onPress={this.handleSignUpSubmission}
+                    backgroundColor={'#346abb'}
+                    borderRadius={3}
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='LOG IN' />
                 <View style={styles.socialButtonsContainer}>
                     <Button
-                        onPress = {this._authenticateWithGithubAsync}
+                        onPress={this._authenticateWithGithubAsync}
+                        backgroundColor={'#346abb'}
                         large
                         icon={{ name: 'github', type: 'font-awesome' }}
                         title='GITHUB' />
                     <Button
-                     onPress = {this. signInWithGoogleAsync}
+                        onPress={this.signInWithGoogleAsync}
+                        backgroundColor={'#346abb'}
                         large
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
@@ -168,6 +175,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: 8,
         paddingHorizontal: 25
+    },
+    formContainer: {
+        width: 350
     }
 });
 
