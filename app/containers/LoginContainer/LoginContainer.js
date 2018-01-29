@@ -142,12 +142,14 @@ class LoginContainer extends React.Component {
                     <Button
                         onPress={this._authenticateWithGithubAsync}
                         backgroundColor={'#346abb'}
+                        borderRadius={3}
                         large
                         icon={{ name: 'github', type: 'font-awesome' }}
                         title='GITHUB' />
                     <Button
                         onPress={this.signInWithGoogleAsync}
                         backgroundColor={'#346abb'}
+                        borderRadius={3}
                         large
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
@@ -167,17 +169,19 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 55,
-        width: 305
+        width: 320
     },
     socialButtonsContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        width: 350,
         paddingTop: 8,
         paddingHorizontal: 25
     },
     formContainer: {
         width: 350
+        // padding: 50
     }
 });
 
