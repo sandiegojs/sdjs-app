@@ -14,7 +14,7 @@ class App extends React.Component {
   render() {
 
     const AppRoot = StackNavigator({
-      // LogIn: { screen: LogInScreen },
+      LogIn: { screen: LogInScreen },
       Events: { screen: EventsScreen },
       Profile: { screen: ProfileScreen },
       EventDetails: { screen: EventDetailsScreen },
