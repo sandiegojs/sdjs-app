@@ -32,7 +32,6 @@ export function passwordEntry(text) {
     }
 }
 export function signUpEntry(signUpObj) {
-    
     return {
         type: 'SIGN_UP_ENTRY',
         payload: axios

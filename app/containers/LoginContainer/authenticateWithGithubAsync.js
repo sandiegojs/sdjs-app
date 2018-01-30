@@ -32,7 +32,6 @@ export default async function authenticateWithGithubAsync() {
     var token = result.access_token;
     var user = await _getGithubUser(token);
     
-    console.log("thuissss",user);
     return user;
   } catch (e) {
     console.error(e);

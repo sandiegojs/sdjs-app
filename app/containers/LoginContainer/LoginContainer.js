@@ -7,8 +7,7 @@ import {
     lastNameEntry,
     emailEntry,
     passwordEntry,
-    signUpEntry,
-    googleEntry
+    signUpEntry
 } from './loginActions';
 import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 
@@ -75,16 +74,16 @@ class LoginContainer extends React.Component {
     }
 
     _authenticateWithGithubAsync = async () => {
+        const { dispatch } = this.props;
         try {
             let user = await authenticateWithGithubAsync();
-            console.log("GHUser", user)
             const githubObj = {
-                "first_name": googleResult.user.givenName,
-                "last_name": googleResult.user.familyName,
-                "email": googleResult.user.email,
-                "password": googleResult.user.id
+                "first_name": user.name.split(' ')[0],
+                "last_name": user.name.substr(user.name.indexOf(' ') + 1),
+                "email": user.email,
+                "password": user.id.toString()
             }
-            dispatch(signUpEntry(googleObj));
+            dispatch(signUpEntry(githubObj));
 
             this.setState({ githubToken: result });
         } catch (e) {
@@ -103,7 +102,6 @@ class LoginContainer extends React.Component {
 
             if (result.type === 'success') {
                 let googleResult = result
-                // return result.accessToken;
 
                 const googleObj = {
                     "first_name": googleResult.user.givenName,
@@ -111,6 +109,7 @@ class LoginContainer extends React.Component {
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
+                // console.log("GoogleUser", googleObj)
                 dispatch(signUpEntry(googleObj));
 
             } else {

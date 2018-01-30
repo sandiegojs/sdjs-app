@@ -13,12 +13,12 @@ class EventDetailsContainer extends React.Component {
     }
 
     render() {
-        const { eventDetails, eventsData, loginData } = this.props;
+        const { eventDetails, eventsData, user } = this.props;
+        console.log("ed",user)
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
         const latitude = eventInfo[0].venue.lat
         const longitude = eventInfo[0].venue.lon
         const location = { latitude, longitude }
-        // console.log("state", loginData)
         return (
             <ScrollView style={styles.container}>
                 <View>
@@ -66,7 +66,8 @@ class EventDetailsContainer extends React.Component {
 function mapStoreToProps(store) {
     return {
         eventDetails: store.eventsData.selectedEvent,
-        eventsData: store.eventsData.eventsData
+        eventsData: store.eventsData.eventsData,
+        user: store.loginData.user
     };
 }
 
@@ -79,7 +80,6 @@ const styles = StyleSheet.create({
         lineHeight: 50
     },
     container: {
-        // height: 1000,
         paddingHorizontal: 20,
         paddingTop: 20,
         flex: 2
