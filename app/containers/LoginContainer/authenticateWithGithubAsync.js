@@ -23,13 +23,17 @@ export default async function authenticateWithGithubAsync() {
     }
 
     let code = authResult.params.code;
-    console.log("authresult",authResult)
 
     // Warning! You should actually do this part on your server so you don't leak your secret!
     // I only put it here for fun.
     let result = await _createTokenWithCode(code);
-    console.log("result", result)
-    return result.access_token;
+    
+    //Returns token to access users information
+    var token = result.access_token;
+    var user = await _getGithubUser(token);
+    
+    console.log("thuissss",user);
+    return user;
   } catch (e) {
     console.error(e);
     return null;
@@ -50,4 +54,18 @@ function _createTokenWithCode(code) {
       'Content-Type': 'application/json'
     },
   }).then(res => res.json());
+}
+
+
+function _getGithubUser(token) {
+  const url = `https://api.github.com/user`;
+
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      "Authorization": `token ${token}`,
+      'Content-Type': 'application/json'
+    },
+  }).then(res => res.json())
+  .catch(err => err.message);
 }

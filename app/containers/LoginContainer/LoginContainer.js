@@ -76,8 +76,16 @@ class LoginContainer extends React.Component {
 
     _authenticateWithGithubAsync = async () => {
         try {
-            let result = await authenticateWithGithubAsync();
-            console.log("frontend", result)
+            let user = await authenticateWithGithubAsync();
+            console.log("GHUser", user)
+            const githubObj = {
+                "first_name": googleResult.user.givenName,
+                "last_name": googleResult.user.familyName,
+                "email": googleResult.user.email,
+                "password": googleResult.user.id
+            }
+            dispatch(signUpEntry(googleObj));
+
             this.setState({ githubToken: result });
         } catch (e) {
             this.setState({ error: JSON.stringify(e) });
@@ -103,7 +111,6 @@ class LoginContainer extends React.Component {
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
-                console.log(googleObj)
                 dispatch(signUpEntry(googleObj));
 
             } else {

@@ -23,7 +23,6 @@ this.selectionHandler = this.selectionHandler.bind(this)
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
       selectedEventId = id;
-      console.log("fstuff",selectedEventId)
       dispatch(updateSelectedEvent(selectedEventId));
 
       navigate('EventDetails')

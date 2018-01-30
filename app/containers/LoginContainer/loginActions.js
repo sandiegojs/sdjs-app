@@ -32,12 +32,14 @@ export function passwordEntry(text) {
     }
 }
 export function signUpEntry(signUpObj) {
+    
     return {
         type: 'SIGN_UP_ENTRY',
         payload: axios
         .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
         .then( response => response.data)
         .catch(error => {
+            
         })
     }
 }
