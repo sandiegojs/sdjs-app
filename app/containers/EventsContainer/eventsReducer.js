@@ -1,6 +1,8 @@
 const defaultState = {
     eventsData:'',
-    selectedEvent: ''
+    selectedEvent: '',
+    locationError:'',
+    checkedIn: false,
   };
   
   export default function EventsReducer (state = defaultState, action) {
@@ -21,6 +23,24 @@ const defaultState = {
         return {
           ...state,
           selectedEvent: payload
+        }
+      };
+      case 'SET_LOCATION_ERROR': {
+        return {
+          ...state,
+          locationError: payload
+        };
+      }
+      case 'CHECKED_IN_TRUE': {
+        return {
+          ...state,
+          checkedIn: payload
+        };
+      }
+      case 'CHECKED_IN_FALSE': {
+        return {
+          ...state,
+          checkedIn: payload
         };
       }
       default: {

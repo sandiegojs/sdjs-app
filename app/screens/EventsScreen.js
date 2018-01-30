@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import EventsContainer from '../containers/EventsContainer/EventsContainer'
+import { StyleSheet, Text, View, Button, TextInput, StatusBar } from 'react-native';
+import EventsContainer from '../containers/EventsContainer/EventsContainer';
+import RootNavigation from '../tabNavigation/RootNavigation';
 
 
 
@@ -32,6 +33,11 @@ export default class EventsScreen extends React.Component {
           }
         />
         <EventsContainer navigation={this.props.navigation}/>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+          <RootNavigation navigation={this.props.navigation}/>
+        </View>
       </View>
     );
   }
@@ -40,8 +46,10 @@ export default class EventsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#red',
+  },
+  statusBarUnderlay: {
+    height: 24,
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
 });
