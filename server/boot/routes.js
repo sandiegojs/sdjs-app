@@ -5,6 +5,7 @@ module.exports = function (app) {
 
     app.post('/signup', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
+        console.log(baseUrl);
         const { first_name, last_name, email, password } = req.body;
         //Create a new user
         axios
@@ -21,6 +22,8 @@ module.exports = function (app) {
             })
             .catch(error => res.send(error.message));
     });
+
+    //ANother Endpoint for fornt end data 
 
 //     //Google auth
 //     app.post('/signup', (req, res) => {
