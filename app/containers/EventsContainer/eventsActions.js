@@ -56,14 +56,35 @@ export function checkedInFalse(checkedInFalse) {
         payload: false
     }
 }
-// export function addAttendeeToEvent(eventObj, userId) {
+
+export function addAttendeeToEvent(eventObj, userId) {
+    return {
+        type: 'ADD_ATTENDEE_TO_EVENT',
+        payload:
+        axios
+            .post('https://sdci-backend.herokuapp.com/checkin', eventObj, userId)
+            .then(response => {
+                console.log('returned data', response.data)
+                return response.data;
+            })
+            .catch(error => {
+                const errorSearch = {
+                    error: true
+                }
+
+                return errorSearch;
+            })
+    }
+}
+
+// export function removeAttendee(attendeeId) {
 //     return {
-//         type: 'ADD_ATTENDEE_TO_EVENT',
+//         type: 'REMOVE_ATTENDEE',
 //         payload:
 //         axios
-//             .post('https://sdci-backend.herokuapp.com/addattendeetoevent', eventObj, userId)
+//             .delete('https://sdci-backend.herokuapp.com/deleteattendee', attendeeId)
 //             .then(response => {
-
+//                 console.log('returned data', response.data)
 //                 return response.data;
 //             })
 //             .catch(error => {
@@ -76,45 +97,21 @@ export function checkedInFalse(checkedInFalse) {
 //     }
 // }
 
-export function addAttendeeToEvent(eventObj, userId) {
-    console.log("userId", userId)
+export function removeAttendee(attendeeId) {
     return {
-        type: 'ADD_ATTENDEE_TO_EVENT',
+        type: 'REMOVE_ATTENDEE',
         payload:
         axios
-            .get('https://sdci-backend.herokuapp.com/api/events?filter[where][meetup_id]='+ eventObj.meetup_id)//1049303
+            .delete('https://sdci-backend.herokuapp.com/api/attendees/' + attendeeId)
             .then(response => {
-                //if no event exist create event
-                if (response.data[0] === undefined) {
-                    console.log("inside if statement in post")
-                    axios
-                    .post('https://sdci-backend.herokuapp.com/api/users/'+ '5a70c7adc7f6050014b20c09' +'/events', eventObj )//5a70c7adc7f6050014b20c09  change to userId
-                    .then(response =>{
-                        console.log('created event', response.data);
-                        return response.data
-                    })
-                    .catch(error => console.log("error on post event", error))
-                    //else create attendee
-                } else {
-                    console.log('Matching Event found')
-                    attendeeObj = {
-                        'eventId': response.data[0].id,
-                        'userId': '5a70c0505d0ddece4381d2d7',//changeto userId
-                    }
-                    axios
-                        .post('https://sdci-backend.herokuapp.com/api/attendees', attendeeObj)
-                        .then(response => {
-                            console.log("post data", response.data)
-                            return response.data;
-                        })
-                        .catch(error => console.log("error on post attendee", error))
-                     }
-                })
+                console.log('deleted data', response.data)
+                return response.data;
+            })
             .catch(error => {
                 const errorSearch = {
                     error: true
                 }
-                console.log('get failed', error)
+
                 return errorSearch;
             })
     }
