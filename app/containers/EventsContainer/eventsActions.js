@@ -22,6 +22,7 @@ export function updateEventsData(search) {
 
     }
 }
+
 export function updateSelectedEvent(selectedEventId) {
     return {
         type: 'UPDATE_SELECETED_EVENT',
@@ -91,11 +92,21 @@ export function addAttendeeToEvent(eventObj, userId) {
 //                 const errorSearch = {
 //                     error: true
 //                 }
+export function profileQuery(userId) {
+    return {
+        type: 'PROFILE_QUERY',
+        payload: 
+        axios
+        .get('https://sdci-backend.herokuapp.com/api/users/' + userId)
+        .then( response => {
+            return response.data
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+}
 
-//                 return errorSearch;
-//             })
-//     }
-// }
 
 export function removeAttendee(attendeeId) {
     return {
@@ -115,4 +126,32 @@ export function removeAttendee(attendeeId) {
                 return errorSearch;
             })
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+
+
+// export function addAttendeeToEvent(eventObj, userId) {
+//     return {
+//         type: 'ADD_ATTENDEE_TO_EVENT',
+//         payload:
+//         axios
+//             .post('https://sdci-backend.herokuapp.com/addattendeetoevent', eventObj, userId)
+//             .then(response => {
+
+//                 return response.data;
+//             })
+//             .catch(error => {
+//                 const errorSearch = {
+//                     error: true
+//                 }
+
+//                 return errorSearch;
+//             })
+//     }
+// }
+>>>>>>> connected profile action to store

@@ -4,6 +4,7 @@ const defaultState = {
     locationError:'',
     checkedIn: false,
     attendeeId: '',
+    profileData: {}
   };
   
   export default function EventsReducer (state = defaultState, action) {
@@ -49,6 +50,12 @@ const defaultState = {
           ...state,
           attendeeId: payload
         };
+      }
+      case 'PROFILE_QUERY_FULFILLED': {
+        return {
+          ...state,
+          profileData: payload
+        }
       }
       default: {
         return state;

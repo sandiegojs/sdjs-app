@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-//import ProfileContainer from '../containers/ProfileContainer/ProfileContainer';
+import ProfileContainer from '../containers/ProfileContainer/ProfileContainer'
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {

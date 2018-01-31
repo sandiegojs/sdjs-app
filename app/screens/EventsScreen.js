@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Button, TextInput, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, StatusBar, navigate } from 'react-native';
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
 import RootNavigation from '../tabNavigation/RootNavigation';
 
@@ -12,31 +12,28 @@ export default class EventsScreen extends React.Component {
 
 
 
-    }
+  }
   static navigationOptions = {
     title: 'Events',
     headerLeft: null
   };
 
+  
 
 
-   
+
+
   render() {
     const { navigate } = this.props.navigation;
-   
+    const { user } = this.props;
+    console.log("ed",user)
     return (
       <View>
-        <Button
-          title="Go to Profile Screen"
-          onPress={() =>
-            navigate('Profile')
-          }
-        />
-        <EventsContainer navigation={this.props.navigation}/>
+        <EventsContainer navigation={this.props.navigation} />
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-          <RootNavigation navigation={this.props.navigation}/>
+          {/* {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />} */}
+          <RootNavigation navigation={this.props.navigation} />
         </View>
       </View>
     );
@@ -45,7 +42,7 @@ export default class EventsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   statusBarUnderlay: {
     height: 24,
