@@ -3,6 +3,7 @@ const defaultState = {
     selectedEvent: '',
     locationError:'',
     checkedIn: false,
+    attendeeId: '',
   };
   
   export default function EventsReducer (state = defaultState, action) {
@@ -41,6 +42,12 @@ const defaultState = {
         return {
           ...state,
           checkedIn: payload
+        };
+      }
+      case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
+        return {
+          ...state,
+          attendeeId: payload
         };
       }
       default: {

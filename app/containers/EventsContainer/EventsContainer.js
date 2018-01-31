@@ -8,7 +8,8 @@ import {
   setLocationError,
   checkedInTrue,
   checkedInFalse,
-  addAttendeeToEvent
+  addAttendeeToEvent,
+  removeAttendee
 } from './eventsActions';
 import { FlatList, StyleSheet, View, Text, } from 'react-native';
 import { List, ListItem, Button } from "react-native-elements";
@@ -124,7 +125,8 @@ class EventsContainer extends React.Component {
   };
 
   handleUnCheckIn() {
-    const { dispatch } = this.props;
+    const { dispatch, attendeeId} = this.props;
+    dispatch(removeAttendee(attendeeId))
     dispatch(checkedInFalse(false));
   }
 
@@ -192,7 +194,8 @@ function mapStoreToProps(store) {
     eventsData: store.eventsData.eventsData,
     locationError: store.eventsData.locationError,
     checkedIn: store.eventsData.checkedIn,
-    user: store.loginData.user
+    user: store.loginData.user,
+    attendeeId: store.eventsData.attendeeId,
 
   };
 }

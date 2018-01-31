@@ -46,7 +46,6 @@ export default class EventsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#red',
   },
   statusBarUnderlay: {
     height: 24,

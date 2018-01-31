@@ -23,6 +23,58 @@ module.exports = function (app) {
             .catch(error => res.send(error.message));
     });
 
+    app.post('/checkin', (req, res) => {
+        let baseUrl = app.get('url').replace(/\/$/, '');
+        const { eventObj, userId } = req.body;
+
+        console.log("eventObj", eventObj);
+        console.log("userId", userId);
+        //Create a new user
+        axios
+            .get(baseUrl + '/api/events?filter[where][meetup_id]=//1049303')// ')+ eventObj.meetup_id)//1049303
+            .then(response => {
+                //if no event exist create event through users/{id}/events
+                if (response.data[0] === undefined) {
+                    console.log("inside if statement in post")
+                    axios
+                        .post(baseUrl + '/api/users/' + '5a70c7adc7f6050014b20c09' + '/events', eventObj)//5a70c7adc7f6050014b20c09  change to userId
+                        .then(response => {
+                            res.send(response.data.id)
+                        })
+                        .catch(error => console.log("error on post event/attendee", error))
+                    //else create attendee
+                } else {
+                    console.log('Matching Event found')
+                    var attendeeObj = {
+                        'eventId': response.data[0].id,
+                        'userId': '5a70c0505d0ddece4381d2d7'//changeto userId
+                    }
+                    axios
+                        .post(baseUrl + '/api/attendees', attendeeObj)
+                        .then(response => {
+                            console.log("post data", response.data)
+                            res.send(response.data.id)
+                        })
+                        .catch(error => console.log("error on post attendee", error))
+                }
+            })
+            .catch(e => res.send(e.message))
+    });
+
+}
+app.delete('/deleteattendee', (req, res) => {
+    let baseUrl = app.get('url').replace(/\/$/, '');
+    console.log(baseUrl);
+    const { attendeeId } = req.body;
+    //Create a new user
+    axios
+        .delete(baseUrl + '/api/users', { attendeeId })
+        .then(response => {
+
+            res.send(response.data);
+        })
+        .catch(error => res.send(error.message));
+});
     //ANother Endpoint for fornt end data 
 
 //     //Google auth
@@ -45,4 +97,4 @@ module.exports = function (app) {
 //             })
 //             .catch(error => res.send(error.message));
 //     });
-}
+
