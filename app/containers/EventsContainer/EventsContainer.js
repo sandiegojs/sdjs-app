@@ -9,9 +9,11 @@ import {
   checkedInTrue,
   checkedInFalse,
   addAttendeeToEvent,
-  removeAttendee
+  removeAttendee,
+  profileQuery
 } from './eventsActions';
-import { FlatList, StyleSheet, View, Text, } from 'react-native';
+import { FlatList, StyleSheet, View, Text} from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from "react-native-elements";
 import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
 
@@ -20,6 +22,7 @@ class EventsContainer extends React.Component {
     super(props);
     this.selectionHandler = this.selectionHandler.bind(this)
     this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
+    this.profilePageHandler = this.profilePageHandler.bind(this);
 
   }
   componentWillMount() {
@@ -33,10 +36,9 @@ class EventsContainer extends React.Component {
   selectionHandler(id) {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
-      selectedEventId = id;
-      dispatch(updateSelectedEvent(selectedEventId));
-
-      navigate('EventDetails')
+    selectedEventId = id;
+    dispatch(updateSelectedEvent(selectedEventId));
+    navigate('EventDetails')
 
   }
   _getLocationAsync = async () => {
@@ -130,6 +132,14 @@ class EventsContainer extends React.Component {
     dispatch(checkedInFalse(false));
   }
 
+//Queries DB with user ID and sends to profile page
+  profilePageHandler() {
+    const { user, dispatch} = this.props;
+    const { navigate } = this.props.navigation;
+    dispatch(profileQuery(user.id))
+    navigate('Profile')
+  }
+
   render() {
     const { eventsData, locationError, checkedIn } = this.props
 
@@ -138,13 +148,17 @@ class EventsContainer extends React.Component {
       checkInButton = <Button
         onPress={this.handleUnCheckIn}
         title="Undo Check In"
-        buttonStyle={styles.purple}
+        // style={styles.purple}
+        color="white"
+        backgroundColor='#551a8b'
       />
     } else {
       checkInButton = <Button
         onPress={this._getLocationAsync}
         title="Check In!"
-        buttonStyle={styles.green}
+        // style={styles.green}
+        color="white"
+        backgroundColor='#008000'
       />
     }
 
@@ -153,8 +167,11 @@ class EventsContainer extends React.Component {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
     }
     return (
-
       <View>
+        <Button
+          title="Go to Profile Screen"
+          onPress={() => this.profilePageHandler()}
+        />
         {checkInButton}
         {locationErrorMessage}
         <List>
@@ -176,16 +193,13 @@ class EventsContainer extends React.Component {
 
 const styles = StyleSheet.create({
   green: {
-    backgroundColor: 'green',
-    color: 'white'
+    backgroundColor: '#008000'
   },
   purple: {
-    backgroundColor: 'purple',
-    color: 'white'
+    backgroundColor: '#551a8b'
   },
   locationErrorMessage: {
-    textAlign: 'center',
-    color: 'red'
+    textAlign: 'center'
   },
 });
 

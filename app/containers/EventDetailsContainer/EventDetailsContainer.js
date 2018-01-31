@@ -14,7 +14,6 @@ class EventDetailsContainer extends React.Component {
 
     render() {
         const { eventDetails, eventsData, user } = this.props;
-        console.log("ed",user)
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
         const latitude = eventInfo[0].venue.lat
         const longitude = eventInfo[0].venue.lon
