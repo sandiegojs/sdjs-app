@@ -31,13 +31,13 @@ module.exports = function (app) {
         console.log("userId", userId);
         //Create a new user
         axios
-            .get(baseUrl + '/api/events?filter[where][meetup_id]=//1049303')// ')+ eventObj.meetup_id)//1049303
+            .get(baseUrl + '/api/events?filter[where][meetup_id]=1049303')// ')+ eventObj.meetup_id)//1049303
             .then(response => {
                 //if no event exist create event through users/{id}/events
                 if (response.data[0] === undefined) {
                     console.log("inside if statement in post")
                     axios
-                        .post(baseUrl + '/api/users/' + '5a70c7adc7f6050014b20c09' + '/events', eventObj)//5a70c7adc7f6050014b20c09  change to userId
+                        .post(baseUrl + '/api/users/' + userId + '/events', eventObj)//5a70c7adc7f6050014b20c09  change to userId
                         .then(response => {
                             res.send(response.data.id)
                         })
@@ -61,12 +61,13 @@ module.exports = function (app) {
             .catch(e => res.send(e.message))
     });
 
-}
 app.delete('/deleteattendee', (req, res) => {
     let baseUrl = app.get('url').replace(/\/$/, '');
     console.log(baseUrl);
+   
     const { attendeeId } = req.body;
-    //Create a new user
+     console.log(attendeeId);
+     //Create a new user
     axios
         .delete(baseUrl + '/api/users', { attendeeId })
         .then(response => {
@@ -75,6 +76,7 @@ app.delete('/deleteattendee', (req, res) => {
         })
         .catch(error => res.send(error.message));
 });
+}
     //ANother Endpoint for fornt end data 
 
 //     //Google auth
