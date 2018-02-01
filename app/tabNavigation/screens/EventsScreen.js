@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 
 
 
@@ -13,7 +13,15 @@ export default class EventsScreen extends React.Component {
 
     }
  static navigationOptions = {
-    header: null,
+    title: 'tabBAR',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+                source={require('../../assets/images/sdjs.png')}
+                fadeDuration={0}
+                style={{width: 30, height:30}}
+                onPress={() =>this.props.navigation.navigate('Profile')}
+              />
+    ),
   };
 
 

@@ -9,7 +9,11 @@ export default class ProfileScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
+<<<<<<< HEAD
       <ProfileContainer navigation={this.props.navigation}/>
+=======
+      <Text>Profile</Text>
+>>>>>>> added styles to buttons
     );
   }
 };

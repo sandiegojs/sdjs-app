@@ -32,10 +32,14 @@ module.exports = function (app) {
         //Create a new user
         axios
 <<<<<<< HEAD
+<<<<<<< HEAD
             .get(baseUrl + '/api/events?filter[where][meetup_id]='+ eventObj.meetup_id)//1049303
 =======
             .get(baseUrl + '/api/events?filter[where][meetup_id]=1049303')// ')+ eventObj.meetup_id)//1049303
 >>>>>>> updated routes
+=======
+            .get(baseUrl + '/api/events?filter[where][meetup_id]='+ eventObj.meetup_id)//1049303
+>>>>>>> added styles to buttons
             .then(response => {
                 //if no event exist create event through users/{id}/events
                 if (!!response.data && !response.data.length) {
