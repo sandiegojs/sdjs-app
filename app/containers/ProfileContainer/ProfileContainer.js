@@ -2,36 +2,75 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { List, ListItem, FormLabel, FormInput, Button } from "react-native-elements";
-import { firstNameUpdate, lastNameUpdate, emailUpdate } from './profileActions'
+import { StackNavigator } from 'react-navigation';
+import * as actions from './profileActions'
 
 class ProfileContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.handleProfileUpdate = this.handleProfileUpdate.bind(this);
         this.handleFirstNameUpdate = this.handleFirstNameUpdate.bind(this);
         this.handleLastNameUpdate = this.handleLastNameUpdate.bind(this);
         this.handleEmailUpdate = this.handleEmailUpdate.bind(this);
+        this.handleBioUpdate = this.handleBioUpdate.bind(this);
+        this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
+        this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
+        this.handleLocationUpdate = this.handleLocationUpdate.bind(this);
+    }
+
+    handleProfileUpdate(obj) {
+        const { navigate } = this.props.navigation;
+        const { dispatch, profileData, profileUpdate } = this.props;
+        const newProfileData = {...profileData, ...profileUpdate};
+        dispatch(actions.profileUpdate(newProfileData));
+        navigate('Events');
+
     }
 
     handleFirstNameUpdate(firstName) {
         const { dispatch } = this.props;
-        dispatch(firstNameUpdate(firstName))
+        dispatch(actions.firstNameUpdate(firstName))
     }
 
     handleLastNameUpdate(lastName) {
         const { dispatch } = this.props;
-        dispatch(lastNameUpdate(lastName))
+        dispatch(actions.lastNameUpdate(lastName))
     }
 
     handleEmailUpdate(email) {
         const { dispatch } = this.props;
-        dispatch(emailUpdate(email))
+        dispatch(actions.emailUpdate(email))
         console.log("email",email)
+    }
+
+    handleBioUpdate(bio) {
+        const { dispatch } = this.props;
+        dispatch(actions.bioUpdate(bio))
+        console.log("bio",bio)
+    }
+
+    handleCompanyUpdate(company) {
+        const { dispatch } = this.props;
+        dispatch(actions.companyUpdate(company))
+        console.log("company",company)
+    }
+
+    handleUrlUpdate(url) {
+        const { dispatch } = this.props;
+        dispatch(actions.urlUpdate(url))
+        console.log("url",url)
+    }
+
+    handleLocationUpdate(location) {
+        const { dispatch } = this.props;
+        dispatch(actions.locationUpdate(location))
+        console.log("location",location)
     }
 
     render() {
         const { profileData } = this.props;
-        const firstName = profileData.first_name;
-        console.log("profileData", profileData.last_name)
+        const { profileUpdate } = this.props;
+        console.log("profileupdatedata", profileUpdate)
         return (
             <View>
                 <FormLabel>First Name</FormLabel>
@@ -75,6 +114,7 @@ class ProfileContainer extends React.Component {
                     backgroundColor='#346abb'
                     borderRadius={3}
                     style={styles.updateButton}
+                    onPress={this.handleProfileUpdate}
                     title="UPDATE" />
             </View>
         )
@@ -93,9 +133,8 @@ function mapStoreToProps(store) {
         firstName: store.loginData.firstName,
         lastName: store.loginData.lastName,
         email: store.loginData.email,
-        profileData: store.eventsData.profileData
-
-
+        profileData: store.eventsData.profileData,
+        profileUpdate: store.profileUpdate
     };
 }
 
