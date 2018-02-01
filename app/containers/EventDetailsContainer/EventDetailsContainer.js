@@ -10,6 +10,21 @@ import EventMap from './EventMap'
 class EventDetailsContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.state= ({
+            checkIn: false
+        })
+        this.checkInFalse = this.checkInFalse.bind(this);
+        this.checkInTrue = this.checkInTrue.bind(this);
+    }
+
+    checkInTrue(){
+        console.log("in CHeck In True")
+        this.setState({checkIn:true});
+    }
+
+    checkInFalse(){
+        this.setState({checkIn:false})
+        console.log("in CHeck In false")
     }
 
     render() {
@@ -18,21 +33,40 @@ class EventDetailsContainer extends React.Component {
         const latitude = eventInfo[0].venue.lat
         const longitude = eventInfo[0].venue.lon
         const location = { latitude, longitude }
+
+        let checkInButton = null;
+        if (this.state.checkIn == true) {
+            checkInButton = <Button
+                large
+                backgroundColor={'#D95351'}
+                borderRadius={3}
+                style={styles.checkInButton}
+                raised
+                icon={{ name: 'undo', type: 'font-awesome' }}
+                title=' UNDO CHECK-IN'
+                onPress={this.checkInFalse}
+
+            />
+        } else {
+            checkInButton = <Button
+                large
+                backgroundColor={'#346abb'}
+                borderRadius={3}
+                style={styles.checkInButton}
+                raised
+                icon={{ name: 'check-circle', type: 'font-awesome' }}
+                title=' CHECK-IN'
+                onPress={this.checkInTrue}
+            />
+        }
+
         return (
             <ScrollView style={styles.container}>
                 <View>
                     <Text style={styles.title}>{eventInfo[0].name}</Text>
                     <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
                     {/* <Text style={styles.checkInHeader}>CHECK-IN</Text> */}
-                    <Button
-                        large
-                        backgroundColor={'#346abb'}
-                        borderRadius={3}
-                        style={styles.checkInButton}
-                        raised
-                        icon={{ name: 'check-circle', type: 'font-awesome' }}
-                        title=' CHECK-IN'
-                    />
+                    {checkInButton}
                     <View style={styles.venueContainer}>
                         <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
                         <Text>{`${eventInfo[0].venue.address_1}, ${eventInfo[0].venue.city}`}</Text>
@@ -87,7 +121,7 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         marginTop: 19,
         marginBottom: 50,
-        fontSize: 14 
+        fontSize: 14
     },
     map: {
         flex: 1,
