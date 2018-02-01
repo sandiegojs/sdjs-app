@@ -33,11 +33,7 @@ export default class EventsScreen extends React.Component {
         <View style={styles.container}>
           {/* {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />} */}
-<<<<<<< HEAD
-          <RootNavigation navigation={this.props.navigation} />
-=======
           <RootNavigator navigation={this.props.navigation}/>
->>>>>>> added styles to buttons
         </View>
       </View>
     );

@@ -31,15 +31,7 @@ module.exports = function (app) {
         console.log("userId", userId);
         //Create a new user
         axios
-<<<<<<< HEAD
-<<<<<<< HEAD
             .get(baseUrl + '/api/events?filter[where][meetup_id]='+ eventObj.meetup_id)//1049303
-=======
-            .get(baseUrl + '/api/events?filter[where][meetup_id]=1049303')// ')+ eventObj.meetup_id)//1049303
->>>>>>> updated routes
-=======
-            .get(baseUrl + '/api/events?filter[where][meetup_id]='+ eventObj.meetup_id)//1049303
->>>>>>> added styles to buttons
             .then(response => {
                 //if no event exist create event through users/{id}/events
                 if (!!response.data && !response.data.length) {
@@ -70,10 +62,6 @@ module.exports = function (app) {
             .catch(e => res.send(e.message))
     });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> updated routes
 app.delete('/deleteattendee', (req, res) => {
     let baseUrl = app.get('url').replace(/\/$/, '');
     console.log(baseUrl);
