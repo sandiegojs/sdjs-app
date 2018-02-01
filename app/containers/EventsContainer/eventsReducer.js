@@ -4,7 +4,20 @@ const defaultState = {
     locationError:'',
     checkedIn: false,
     attendeeId: '',
-    profileData: {}
+    profileData: {
+      username: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      bio: "",
+      url: "",
+      location: "",
+      company: "",
+      tokens: [
+        
+      ],
+      photo: ""
+    }
   };
   
   export default function EventsReducer (state = defaultState, action) {

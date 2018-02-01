@@ -22,7 +22,8 @@
     "users": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "userId"
+      "foreignKey": "userId",
+      "required": true
     }
   },
   "acls": [],

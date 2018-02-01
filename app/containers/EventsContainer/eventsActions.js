@@ -59,11 +59,13 @@ export function checkedInFalse(checkedInFalse) {
 }
 
 export function addAttendeeToEvent(eventObj, userId) {
+    console.log("eventObj actions", eventObj);
+    console.log("userId actions", userId);
     return {
         type: 'ADD_ATTENDEE_TO_EVENT',
         payload:
             axios
-                .post('https://sdci-backend.herokuapp.com/checkin', eventObj, userId)
+                .post('https://sdci-backend.herokuapp.com/checkin', { eventObj, userId })
                 .then(response => {
                     console.log('returned data', response.data)
                     return response.data;
@@ -101,7 +103,7 @@ export function removeAttendee(attendeeId) {
             axios
                 .delete('https://sdci-backend.herokuapp.com/api/attendees/' + attendeeId)
                 .then(response => {
-                    console.log('deleted data', response.data)
+                    // console.log('deleted data', response.data)
                     return response.data;
                 })
                 .catch(error => {
