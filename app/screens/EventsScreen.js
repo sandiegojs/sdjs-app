@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button, TextInput, StatusBar, navigate } from 'react-native';
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
-import RootNavigation from '../tabNavigation/RootNavigation';
+import RootNavigator from '../tabNavigation/MainTabNavigator';
 
 
 
@@ -33,7 +33,7 @@ export default class EventsScreen extends React.Component {
         <View style={styles.container}>
           {/* {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />} */}
-          <RootNavigation navigation={this.props.navigation} />
+          <RootNavigator navigation={this.props.navigation}/>
         </View>
       </View>
     );

@@ -146,20 +146,26 @@ class EventsContainer extends React.Component {
     let checkInButton = null;
     if (checkedIn) {
       checkInButton = <Button
-        onPress={this.handleUnCheckIn}
-        title="Undo Check In"
-        // style={styles.purple}
-        color="white"
-        backgroundColor='#551a8b'
-      />
+      large
+      backgroundColor={'#D95351'}
+      borderRadius={3}
+      style={styles.checkInButton}
+      raised
+      icon={{ name: 'undo', type: 'font-awesome' }}
+      title=' UNDO CHECK-IN'
+      onPress={this.handleUnCheckIn}
+  />
     } else {
       checkInButton = <Button
-        onPress={this._getLocationAsync}
-        title="Check In!"
-        // style={styles.green}
-        color="white"
-        backgroundColor='#008000'
-      />
+      large
+      backgroundColor={'#346abb'}
+      borderRadius={3}
+      style={styles.checkInButton}
+      raised
+      icon={{ name: 'check-circle', type: 'font-awesome' }}
+      title=' CHECK-IN'
+      onPress={this._getLocationAsync}
+  />
     }
 
     let locationErrorMessage = null;
