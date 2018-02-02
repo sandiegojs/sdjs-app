@@ -12,7 +12,7 @@ import {
   removeAttendee,
   profileQuery
 } from './eventsActions';
-import { FlatList, StyleSheet, View, Text} from 'react-native';
+import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from "react-native-elements";
 import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
@@ -127,14 +127,14 @@ class EventsContainer extends React.Component {
   };
 
   handleUnCheckIn() {
-    const { dispatch, attendeeId} = this.props;
+    const { dispatch, attendeeId } = this.props;
     dispatch(removeAttendee(attendeeId))
     dispatch(checkedInFalse(false));
   }
 
-//Queries DB with user ID and sends to profile page
+  //Queries DB with user ID and sends to profile page
   profilePageHandler() {
-    const { user, dispatch} = this.props;
+    const { user, dispatch } = this.props;
     const { navigate } = this.props.navigation;
     dispatch(profileQuery(user.id))
     navigate('Profile')
@@ -150,7 +150,6 @@ class EventsContainer extends React.Component {
       backgroundColor={'#D95351'}
       borderRadius={3}
       style={styles.checkInButton}
-      raised
       icon={{ name: 'undo', type: 'font-awesome' }}
       title=' UNDO CHECK-IN'
       onPress={this.handleUnCheckIn}
@@ -161,7 +160,6 @@ class EventsContainer extends React.Component {
       backgroundColor={'#346abb'}
       borderRadius={3}
       style={styles.checkInButton}
-      raised
       icon={{ name: 'check-circle', type: 'font-awesome' }}
       title=' CHECK-IN'
       onPress={this._getLocationAsync}
@@ -173,10 +171,12 @@ class EventsContainer extends React.Component {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
     }
     return (
-      <View>
+      <View style={styles.mainContainer} >
         <Button
           title="Go to Profile Screen"
           onPress={() => this.profilePageHandler()}
+          backgroundColor='#ffc2b5'
+          borderRadius={3}
         />
         {checkInButton}
         {locationErrorMessage}
@@ -207,6 +207,12 @@ const styles = StyleSheet.create({
   locationErrorMessage: {
     textAlign: 'center'
   },
+  checkInButton: {
+    marginTop: 25
+  },
+  mainContainer: {
+    paddingTop: 15
+  }
 });
 
 function mapStoreToProps(store) {
