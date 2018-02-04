@@ -1,7 +1,7 @@
 import React from 'react';
 import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
-import { Constants, Location, Permissions } from 'expo';
+import { Constants, Location, Permissions, LinearGradient } from 'expo';
 import {
   updateEventsData,
   updateSelectedEvent,
@@ -10,7 +10,9 @@ import {
   checkedInFalse,
   addAttendeeToEvent,
   removeAttendee,
-  profileQuery
+  profileQuery,
+  rsvpTrue,
+  rsvpFalse,
 } from './eventsActions';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
@@ -23,6 +25,10 @@ class EventsContainer extends React.Component {
     this.selectionHandler = this.selectionHandler.bind(this)
     this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     this.profilePageHandler = this.profilePageHandler.bind(this);
+    this.handleButtons = this.handleButtons.bind(this);
+    this.handleUnRSVP = this.handleUnRSVP.bind(this);
+    this.handleRSVP = this.handleRSVP.bind(this);
+
 
   }
   componentWillMount() {
@@ -42,50 +48,15 @@ class EventsContainer extends React.Component {
 
   }
   _getLocationAsync = async () => {
+    console.log("inside check in ")
 
     const { dispatch, eventsData, user } = this.props;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       let errorMessage = 'Permission to access location was denied';
       dispatch(setLocationError(errorMessage));
-    }
-
-    var d = new Date();
-    var todaysISOdate = d.toISOString().slice(0, 10);
-    var exampleDate = "2018-02-06";// for testing, REMOVE and update to todaysISODate
-    var todaysEvents = eventsData.filter(event => event.local_date == exampleDate);
-
-    var eventTime = null;
-    var hoursPriorToEvent = null;
-    var hoursAfterEventStart = null;
-    var currentTime = null;
-
-    if (todaysEvents[0] === undefined) {
-      console.log("No Meetup found for today")
     } else {
-      function addZero(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
-      var hours = addZero(d.getHours());
-      var mins = addZero(d.getMinutes());
-      eventTime = parseInt(todaysEvents[0].local_time.replace(':', ''));
-      console.log("event time", eventTime);
-      //changes hrs allowed for check in before or after event start time.
-      //ex. 1h == 100
-      hoursPriorToEvent = eventTime - 200;
-      hoursAfterEventStart = eventTime + 400;
-      console.log("before", hoursPriorToEvent);
-      console.log("after", hoursAfterEventStart);
 
-      currentTime = 1830//parseInt(hours+mins);  currently set to 1230 for testing
-      console.log("current", currentTime);
-    }
-    if (currentTime < hoursPriorToEvent || currentTime > hoursAfterEventStart) {
-      console.log("Unable to check in at this time")
-    } else {
 
       let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
@@ -107,23 +78,21 @@ class EventsContainer extends React.Component {
       // maxDistanceInKM - max point distance from startPoint in KM's
       // result - array of points inside the max distance
       var result = Geofence.filterByProximity(startPoint, points, maxDistanceInKM);
-
+      console.log('result', result)
       if (result[0] === undefined) {
         console.log("Geolocation cannot confirm your location to the event, please try again")
       } else {
         eventObj = {
-          "event_title": todaysEvents[0].name,
-          "meetup_id": todaysEvents[0].id,
-          "url": todaysEvents[0].group.urlname + ".org",
+          "event_title": eventsData[0].name,
+          "meetup_id": eventsData[0].id,
+          "url": eventsData[0].group.urlname + ".org",
           "location": startPoint
         };
         dispatch(checkedInTrue(true));
         dispatch(addAttendeeToEvent(eventObj, user.id));
 
       }
-
     }
-
   };
 
   handleUnCheckIn() {
@@ -139,61 +108,146 @@ class EventsContainer extends React.Component {
     dispatch(profileQuery(user.id))
     navigate('Profile')
   }
+  handleRSVP() {
+    const { dispatch } = this.props;
+    dispatch(rsvpTrue(true));
+  }
 
-  render() {
-    const { eventsData, locationError, checkedIn } = this.props
+  handleUnRSVP() {
+    const { dispatch } = this.props;
+    dispatch(rsvpFalse(false));
+  }
 
-    let checkInButton = null;
-    if (checkedIn) {
-      checkInButton = <Button
-      large
-      backgroundColor={'#D95351'}
-      borderRadius={3}
-      style={styles.checkInButton}
-      icon={{ name: 'undo', type: 'font-awesome' }}
-      title=' UNDO CHECK-IN'
-      onPress={this.handleUnCheckIn}
-  />
-    } else {
-      checkInButton = <Button
-      large
-      backgroundColor={'#346abb'}
-      borderRadius={3}
-      style={styles.checkInButton}
-      icon={{ name: 'check-circle', type: 'font-awesome' }}
-      title=' CHECK-IN'
-      onPress={this._getLocationAsync}
-  />
+  handleButtons() {
+    const { eventsData, checkedIn, rsvp } = this.props;
+
+    function addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
     }
 
+
+
+    var d = new Date();
+    var todaysISOdate = d.toISOString().slice(0, 10);
+
+    var exampleDate = "2018-02-06";// for testing, REMOVE and update to todaysISODate
+    var nextEvent = eventsData[0];
+
+    var hours = addZero(d.getHours());
+    var mins = addZero(d.getMinutes());
+
+
+
+
+    var currentTime = null;//parseInt(hours+mins);  currently set to 1230 for testing
+    var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
+    var hoursPriorToEvent = eventTime - 100;
+    var hoursAfterEventStart = eventTime + 400;
+
+    currentTime = 2300//parseInt(hours+mins);  currently set to 1230 for testing
+    console.log("current", currentTime);
+    console.log("before", hoursPriorToEvent);
+    console.log("after", hoursAfterEventStart);
+    console.log('event start time', eventTime);
+
+
+    if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
+      if (checkedIn) {
+        nextEventButton = <Button
+          large
+          backgroundColor={'#D95351'}
+          borderRadius={3}
+          style={styles.checkInButton}
+          raised
+          icon={{ name: 'undo', type: 'font-awesome' }}
+          title=' UNDO CHECK-IN'
+          onPress={this.handleUnCheckIn}
+        />
+      }
+      if (!checkedIn) {
+        nextEventButton = <Button
+          large
+          backgroundColor={'#346abb'}
+          borderRadius={3}
+          style={styles.checkInButton}
+          raised
+          icon={{ name: 'check-circle', type: 'font-awesome' }}
+          title=' CHECK-IN'
+          onPress={this._getLocationAsync}
+        />
+      }
+    }
+
+    if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
+      if (rsvp) {
+        nextEventButton = <Button
+          large
+          backgroundColor={'#D95351'}
+          borderRadius={3}
+          style={styles.checkInButton}
+          raised
+          icon={{ name: 'undo', type: 'font-awesome' }}
+          title=' UN-RVSP'
+          onPress={this.handleUnRSVP}
+        />
+      }
+
+      if (!rsvp) {
+        nextEventButton = <Button
+          large
+          backgroundColor={'green'}
+          borderRadius={3}
+          style={styles.checkInButton}
+          raised
+          icon={{ name: 'check-circle', type: 'font-awesome' }}
+          title=' RSVP'
+          onPress={this.handleRSVP}
+        />
+      }
+    }
+    if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
+      nextEventButton = "null"
+    }
+
+    return nextEventButton;
+  }
+
+
+  render() {
+    const { eventsData, locationError } = this.props;
     let locationErrorMessage = null;
     if (!!locationError) {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
     }
-    return (
-      <View style={styles.mainContainer} >
-        {/* <Button
-          title="Go to Profile Screen"
-          onPress={() => this.profilePageHandler()}
-          backgroundColor='#ffc2b5'
-          borderRadius={3}
-        /> */}
-        {checkInButton}
-        {locationErrorMessage}
-        <List style={styles.listContainer}>
-          <FlatList
-            data={eventsData}
-            renderItem={({ item }) => <ListItem
-              key={item.id}
-              title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)} ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
-              subtitle={item.name}
-              onPress={() => this.selectionHandler(item.id)
-              }
-            />}
-          />
-        </List>
-      </View>
-    );
+    if (!!eventsData) {
+      return (
+        <View>
+          <Text style={{ textAlign: 'center', paddingVertical: 10, fontWeight: 'bold' }}>Next Event: {eventsData[0].name} </Text>
+          {this.handleButtons()}
+          {locationErrorMessage}
+          <Text style={{ textAlign: 'center', paddingTop: 10, marginBottom: 0 }}>Upcoming Events</Text>
+          <List>
+            <FlatList
+              data={eventsData}
+              renderItem={({ item }) => <ListItem
+                key={item.id}
+                title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)} ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
+                subtitle={item.name}
+                onPress={() => this.selectionHandler(item.id)
+                }
+              />}
+            />
+          </List>
+        </View>
+      );
+    } else {
+      return (
+        <Text></Text>
+      )
+    }
   }
 };
 
@@ -225,6 +279,7 @@ function mapStoreToProps(store) {
     checkedIn: store.eventsData.checkedIn,
     user: store.signupData.user,
     attendeeId: store.eventsData.attendeeId,
+    rsvp: store.eventsData.rsvp,
 
   };
 }

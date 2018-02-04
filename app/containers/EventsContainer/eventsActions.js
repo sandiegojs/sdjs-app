@@ -57,6 +57,18 @@ export function checkedInFalse(checkedInFalse) {
         payload: false
     }
 }
+export function rsvpTrue(rsvpTrue) {
+    return {
+        type: 'RSVP_TRUE',
+        payload: true
+    }
+}
+export function rsvpFalse(rsvpFalse) {
+    return {
+        type: 'RSVP_FALSE',
+        payload: false
+    }
+}
 
 export function addAttendeeToEvent(eventObj, userId) {
     console.log("eventObj actions", eventObj);

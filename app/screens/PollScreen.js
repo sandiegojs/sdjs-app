@@ -5,6 +5,8 @@ import PollContainer from '../containers/PollContainer/PollContainer';
 export default class PollScreen extends React.Component {
   static navigationOptions = {
     title: 'Poll',
+    tabBarLabel: 'Poll',
+    headerLeft: null
   };
   render() {
     const { navigate } = this.props.navigation;

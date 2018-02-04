@@ -1,8 +1,9 @@
 const defaultState = {
     eventsData:'',
     selectedEvent: '',
-    locationError:'',
+    locationError:false,
     checkedIn: false,
+    rsvp:false,
     attendeeId: '',
     profileData: {
       username: "",
@@ -56,6 +57,18 @@ const defaultState = {
         return {
           ...state,
           checkedIn: payload
+        };
+      }
+      case 'RSVP_TRUE': {
+        return {
+          ...state,
+          rsvp: payload
+        };
+      }
+      case 'RSVP_FALSE': {
+        return {
+          ...state,
+          rsvp: payload
         };
       }
       case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
