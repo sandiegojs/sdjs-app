@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { List, ListItem, FormLabel, FormInput, Button } from "react-native-elements";
 import { StackNavigator } from 'react-navigation';
 import * as actions from './profileActions'
@@ -21,7 +22,7 @@ class ProfileContainer extends React.Component {
     handleProfileUpdate(obj) {
         const { navigate } = this.props.navigation;
         const { dispatch, profileData, profileUpdate } = this.props;
-        const newProfileData = {...profileData, ...profileUpdate};
+        const newProfileData = { ...profileData, ...profileUpdate };
         dispatch(actions.profileUpdate(newProfileData));
         navigate('Events');
 
@@ -40,31 +41,28 @@ class ProfileContainer extends React.Component {
     handleEmailUpdate(email) {
         const { dispatch } = this.props;
         dispatch(actions.emailUpdate(email))
-        console.log("email",email)
     }
 
     handleBioUpdate(bio) {
         const { dispatch } = this.props;
         dispatch(actions.bioUpdate(bio))
-        console.log("bio",bio)
     }
 
     handleCompanyUpdate(company) {
         const { dispatch } = this.props;
         dispatch(actions.companyUpdate(company))
-        console.log("company",company)
     }
 
     handleUrlUpdate(url) {
         const { dispatch } = this.props;
         dispatch(actions.urlUpdate(url))
-        console.log("url",url)
+        console.log("url", url)
     }
 
     handleLocationUpdate(location) {
         const { dispatch } = this.props;
         dispatch(actions.locationUpdate(location))
-        console.log("location",location)
+        console.log("location", location)
     }
 
     render() {
@@ -72,7 +70,12 @@ class ProfileContainer extends React.Component {
         const { profileUpdate } = this.props;
         console.log("profileupdatedata", profileUpdate)
         return (
-            <View>
+            <KeyboardAwareScrollView
+                style={{ backgroundColor: '#fff' }}
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                contentContainerStyle={styles.container}
+                scrollEnabled={false}
+            >
                 <FormLabel>First Name</FormLabel>
                 <FormInput
                     defaultValue={profileData.first_name}
@@ -116,7 +119,7 @@ class ProfileContainer extends React.Component {
                     style={styles.updateButton}
                     onPress={this.handleProfileUpdate}
                     title="UPDATE" />
-            </View>
+            </KeyboardAwareScrollView>
         )
     }
 

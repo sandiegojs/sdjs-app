@@ -5,25 +5,26 @@ import { StyleSheet, Text, View, Linking, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements'
 import { updateEventsData } from '../EventsContainer/eventsActions';
 import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from '../EventsContainer/eventsDateAndTime';
+import Hyperlink from 'react-native-hyperlink'
 import EventMap from './EventMap'
 
 class EventDetailsContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state= ({
+        this.state = ({
             checkIn: false
         })
         this.checkInFalse = this.checkInFalse.bind(this);
         this.checkInTrue = this.checkInTrue.bind(this);
     }
 
-    checkInTrue(){
+    checkInTrue() {
         console.log("in CHeck In True")
-        this.setState({checkIn:true});
+        this.setState({ checkIn: true });
     }
 
-    checkInFalse(){
-        this.setState({checkIn:false})
+    checkInFalse() {
+        this.setState({ checkIn: false })
         console.log("in CHeck In false")
     }
 
@@ -87,9 +88,11 @@ class EventDetailsContainer extends React.Component {
                         coordinate={{ latitude: latitude, longitude: longitude }}
                     />
                 </MapView>
-                <View>
-                    <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, '')}</Text>
-                </View>
+                <Hyperlink linkDefault={true} linkStyle={ { color: '#2980b9'}}>
+                    <View>
+                        <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, '')}</Text>
+                    </View>
+                </Hyperlink>
             </ScrollView>
 
         )

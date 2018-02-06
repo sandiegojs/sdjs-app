@@ -172,15 +172,15 @@ class EventsContainer extends React.Component {
     }
     return (
       <View style={styles.mainContainer} >
-        <Button
+        {/* <Button
           title="Go to Profile Screen"
           onPress={() => this.profilePageHandler()}
           backgroundColor='#ffc2b5'
           borderRadius={3}
-        />
+        /> */}
         {checkInButton}
         {locationErrorMessage}
-        <List>
+        <List style={styles.listContainer}>
           <FlatList
             data={eventsData}
             renderItem={({ item }) => <ListItem
@@ -212,6 +212,9 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     paddingTop: 15
+  },
+  listContainer: {
+    paddingBottom: 200
   }
 });
 
