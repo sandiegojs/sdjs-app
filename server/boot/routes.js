@@ -97,7 +97,7 @@ module.exports = function (app) {
 
         axios.get(baseUrl + '/api/users?filter[where][email]=' + email)
             .then(r => {
-                console.log("req.body", req.body) 
+                console.log("baseURl", baseUrl) 
                 console.log("get data", r.data)
                 if (!!r.data && !r.data.length) {
                     axios.post(baserUrl + '/signup', { first_name, last_name, email, password })
@@ -106,6 +106,7 @@ module.exports = function (app) {
                         })
                         .catch(e => res.send(e.message))
                 } else {
+                    console.log('in else third party')
                     axios.post(baseUrl + '/login', { email, password })
                         .then(r => {
                             console.log("email matches", r.data)
