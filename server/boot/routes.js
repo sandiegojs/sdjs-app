@@ -26,12 +26,12 @@ module.exports = function (app) {
     app.post('/checkin', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
         const { eventObj, userId } = req.body;
- 
+
         console.log("eventObj", eventObj);
         console.log("userId", userId);
         //Create a new user
         axios
-            .get(baseUrl + '/api/events?filter[where][meetup_id]='+ eventObj.meetup_id)//1049303
+            .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)//1049303
             .then(response => {
                 //if no event exist create event through users/{id}/events
                 if (!!response.data && !response.data.length) {
@@ -62,42 +62,35 @@ module.exports = function (app) {
             .catch(e => res.send(e.message))
     });
 
-app.delete('/deleteattendee', (req, res) => {
-    let baseUrl = app.get('url').replace(/\/$/, '');
-    console.log(baseUrl);
-   
-    const { attendeeId } = req.body;
-     console.log(attendeeId);
-     //Create a new user
-    axios
-        .delete(baseUrl + '/api/users', { attendeeId })
-        .then(response => {
+    app.delete('/deleteattendee', (req, res) => {
+        let baseUrl = app.get('url').replace(/\/$/, '');
+        console.log(baseUrl);
 
-            res.send(response.data);
-        })
-        .catch(error => res.send(error.message));
-});
+        const { attendeeId } = req.body;
+        console.log(attendeeId);
+        //Create a new user
+        axios
+            .delete(baseUrl + '/api/users', { attendeeId })
+            .then(response => {
+
+                res.send(response.data);
+            })
+            .catch(error => res.send(error.message));
+    });
 }
-    //ANother Endpoint for fornt end data 
 
-//     //Google auth
-//     app.post('/signup', (req, res) => {
-//         let baseUrl = app.get('url').replace(/\/$/, '');
-//         const { first_name, last_name, email } = req.body;
+app.get('/login', (req, res) => { res.send('YourE at login')
+    // let baseUrl = app.get('url').replace(/\/$/, '');
+    // console.log(baseUrl);
+    // const { email, password } = req.body;
+    // console.log("email login", email)
+    // console.log("password login", password)
+    // //Create a new user
 
-//         //Create a new user
-//         axios
-//             .post(baseUrl + '/api/users', { first_name, last_name, email, password })
-//             .then(response => {
+    // //Once user has signed up successfully, log them in
+    // axios.post(baseUrl + '/api/users/login', { email, password })
+    //     .then(r => console.log("res login",r))
+    //     .catch(e => res.send(e.message))
+});
 
-//                 //Once user has signed up successfully, log them in
-//                 axios.post(baseUrl + '/api/users/login', { email, password })
-//                     .then(r => res.json({
-//                         token: r.data.id,
-//                         id: r.data.userId
-//                     }))
-//                     .catch(e => res.send(e.message))
-//             })
-//             .catch(error => res.send(error.message));
-//     });
 

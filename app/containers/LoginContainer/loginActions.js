@@ -1,41 +1,26 @@
 import axios from 'axios';
 
-export function firstNameEntry(text) {
+
+export function emailLoginEntry(text) {
 
     return {
-        type: 'FIRST_NAME_ENTRY',
+        type: 'EMAIL_LOGIN_ENTRY',
         payload: text
     }
 }
 
-export function lastNameEntry(text) {
+export function passwordLoginEntry(text) {
 
     return {
-        type: 'LAST_NAME_ENTRY',
+        type: 'PASSWORD_LOGIN_ENTRY',
         payload: text
     }
 }
-
-export function emailEntry(text) {
-
+export function loginEntry(loginObj) {
     return {
-        type: 'EMAIL_ENTRY',
-        payload: text
-    }
-}
-
-export function passwordEntry(text) {
-
-    return {
-        type: 'PASSWORD_ENTRY',
-        payload: text
-    }
-}
-export function signUpEntry(signUpObj) {
-    return {
-        type: 'SIGN_UP_ENTRY',
+        type: 'LOGIN_ENTRY',
         payload: axios
-        .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
+        .post('https://sdci-backend.herokuapp.com/login', loginObj)
         .then( response => response.data)
         .catch(error => {
             console.log(error)

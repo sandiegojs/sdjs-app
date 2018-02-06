@@ -2,41 +2,74 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
-import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
-import {emailLoginEntry, passwordLoginEntry, loginEntry} from './loginActions';
+import {
+    firstNameEntry,
+    lastNameEntry,
+    emailEntry,
+    passwordEntry,
+    signUpEntry
+} from './signupActions';
+import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 
-class LoginContainer extends React.Component {
+class SignupContainer extends React.Component {
     constructor(props) {
         super(props);
         state = {
             githubToken: null,
+            redditToken: null,
             error: null,
         };
 
-        this.handleLoginEmailInput = this.handleLoginEmailInput.bind(this);
-        this.handleLoginPasswordInput = this.handleLoginPasswordInput.bind(this);
-        this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
+        this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
+        this.handleLastNameInput = this.handleLastNameInput.bind(this);
+        this.handleEmailInput = this.handleEmailInput.bind(this);
+        this.handlePasswordInput = this.handlePasswordInput.bind(this);
+        this.handleSignUpSubmission = this.handleSignUpSubmission.bind(this);
     }
 
 
-    handleLoginEmailInput(text) {
+
+    // componentDidMount() {
+    //     const { user } = this.props;
+    //     const navigate  = this.props.navigation;
+    //     if (!!user) {
+    //         navigate('Events');
+    //     }
+    // }
+
+    handleFirstNameInput(text) {
         const { dispatch } = this.props;
-        dispatch(emailLoginEntry(text));
+        dispatch(firstNameEntry(text));
     }
 
-    handleLoginPasswordInput(text) {
+    handleLastNameInput(text) {
         const { dispatch } = this.props;
-        dispatch(passwordLoginEntry(text));
+        dispatch(lastNameEntry(text));
     }
-    handleLoginSubmission() {
-        const { dispatch } = this.props;
-        const { loginEmail, loginPassword } = this.props;
 
-        const loginObj = {
-            "email": loginEmail,
-            "password": loginPassword,
+    handleEmailInput(text) {
+        const { dispatch } = this.props;
+        dispatch(emailEntry(text));
+    }
+
+    handlePasswordInput(text) {
+        const { dispatch } = this.props;
+        dispatch(passwordEntry(text));
+    }
+    handleSignUpSubmission() {
+        const { dispatch } = this.props;
+        const { firstName, lastName, email, password } = this.props;
+
+        const signUpObj = {
+            "first_name": firstName,
+            "last_name": lastName,
+            "email": email,
+            "password": password,
         }
-        dispatch(loginEntry(loginObj));
+        dispatch(signUpEntry(signUpObj));
+
+
+
 
     }
 
@@ -89,20 +122,24 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { firstName, lastName, email, password, user } = this.props;
         const { navigate } = this.props.navigation;
 
         if (!!user) { navigate('Events') }
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
+                    <FormLabel>FIRST NAME </FormLabel>
+                    <FormInput onChangeText={this.handleFirstNameInput} />
+                    <FormLabel>LAST NAME</FormLabel>
+                    <FormInput onChangeText={this.handleLastNameInput} />
                     <FormLabel>EMAIL</FormLabel>
-                    <FormInput onChangeText={this.handleLoginEmailInput} />
+                    <FormInput onChangeText={this.handleEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput onChangeText={this.handleLoginPasswordInput} />
+                    <FormInput onChangeText={this.handlePasswordInput} />
                 </View>
                 <Button style={styles.button}
-                    onPress={this.handleLoginSubmission}
+                    onPress={this.handleSignUpSubmission}
                     backgroundColor={'#346abb'}
                     borderRadius={3}
                     large
@@ -123,6 +160,16 @@ class LoginContainer extends React.Component {
                         large
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
+                </View>
+                <View>
+                    <Button 
+                    title='Already a user? Log In Here'
+                    style={styles.switchToLogin}
+                    onPress={() => this.props.navigation.navigate('Login')}
+                    transparent={true}
+                    color='#346abb'
+
+                    />
                 </View>
             </View>
 
@@ -154,7 +201,7 @@ const styles = StyleSheet.create({
         // padding: 50
     },
     switchToLogin: {
-
+        
 
 
     }
@@ -162,10 +209,13 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        loginEmail: store.loginData.loginEmail,
-        loginPassword: store.loginData.loginPassword
+        firstName: store.signupData.firstName,
+        lastName: store.signupData.lastName,
+        email: store.signupData.email,
+        password: store.signupData.password,
+        user: store.signupData.user
 
     };
 }
 
-export default connect(mapStoreToProps)(LoginContainer)
+export default connect(mapStoreToProps)(SignupContainer)

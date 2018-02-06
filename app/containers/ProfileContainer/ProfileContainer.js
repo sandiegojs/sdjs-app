@@ -133,9 +133,9 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        firstName: store.loginData.firstName,
-        lastName: store.loginData.lastName,
-        email: store.loginData.email,
+        firstName: store.signupData.firstName,
+        lastName: store.signupData.lastName,
+        email: store.signupData.email,
         profileData: store.eventsData.profileData,
         profileUpdate: store.profileUpdate
     };

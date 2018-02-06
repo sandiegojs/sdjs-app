@@ -223,7 +223,7 @@ function mapStoreToProps(store) {
     eventsData: store.eventsData.eventsData,
     locationError: store.eventsData.locationError,
     checkedIn: store.eventsData.checkedIn,
-    user: store.loginData.user,
+    user: store.signupData.user,
     attendeeId: store.eventsData.attendeeId,
 
   };

@@ -1,16 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
-import LoginContainer from '../containers/LoginContainer/LoginContainer';
+import SignupContainer from '../containers/SignupContainer/SignupContainer';
 
-export default class LoginScreen extends React.Component {
+export default class SignupScreen extends React.Component {
   static navigationOptions = {
-    title: 'Log In',
+    title: 'Sign Up',
   };
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <LoginContainer navigation={this.props.navigation} />
+      <SignupContainer navigation={this.props.navigation} />
     );
   }
 };
+

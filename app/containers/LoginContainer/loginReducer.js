@@ -1,8 +1,6 @@
 const defaultState = {
-    firstName: " ",
-    lastName: " ",
-    email: " ",
-    password: " ",
+    loginEmail: " ",
+    loginPassword: " ",
     user: ""
 }
 
@@ -11,42 +9,24 @@ export default function loginReducer (state = defaultState, action){
 
     switch(type) {
 
-        case 'FIRST_NAME_ENTRY': {
+        case 'EMAIL_LOGIN_ENTRY': {
             return {
                 ...state,
-                firstName: payload
+                loginEmail: payload
             }
         }
-        case 'LAST_NAME_ENTRY': {
+        case 'PASSWORD_LOGIN_ENTRY': {
             return {
                 ...state,
-                lastName: payload
+                loginPassword: payload
             }
         }
-        case 'EMAIL_ENTRY': {
-            return {
-                ...state,
-                email: payload
-            }
-        }
-        case 'PASSWORD_ENTRY': {
-            return {
-                ...state,
-                password: payload
-            }
-        }
-        case 'SIGN_UP_ENTRY_FULFILLED': {
+        case 'LOGIN_ENTRY_FULFILLED': {
             return {
                 ...state,
                 user: payload
             }
         }
-        // case 'GOOGLE_ENTRY_FULFILLED': {
-        //     return {
-        //         ...state,
-        //         googleResult: payload
-        //     }
-        // }
         default: {
             return state;
         }

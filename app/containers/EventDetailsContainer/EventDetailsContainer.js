@@ -103,7 +103,7 @@ function mapStoreToProps(store) {
     return {
         eventDetails: store.eventsData.selectedEvent,
         eventsData: store.eventsData.eventsData,
-        user: store.loginData.user
+        user: store.signupData.user
     };
 }
 

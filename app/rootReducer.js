@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
 import EventsReducer from './containers/EventsContainer/eventsReducer';
-import LoginReducer from './containers/LoginContainer/loginReducer';
-import ProfileReducer from './containers/ProfileContainer/profileReducer'
+import SignupReducer from './containers/SignupContainer/signupReducer';
+import ProfileReducer from './containers/ProfileContainer/profileReducer';
+import LoginReducer from './containers/LoginContainer/loginReducer'
 
 
 const rootReducer = combineReducers({
     eventsData: EventsReducer,
-    loginData: LoginReducer,
-    result: LoginReducer,
-    profileUpdate: ProfileReducer
+    signupData: SignupReducer,
+    result: SignupReducer,
+    profileUpdate: ProfileReducer,
+    loginData: LoginReducer
     
 });
 
