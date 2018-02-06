@@ -81,15 +81,13 @@ module.exports = function (app) {
 
     app.post('/login', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
-        console.log(baseUrl);
         const { email, password } = req.body;
-        console.log("email login", email)
-        console.log("password login", password)
-        //Create a new user
 
-        //Once user has signed up successfully, log them in
         axios.post(baseUrl + '/api/users/login', { email, password })
-            .then(r => console.log("res login",r))
+            .then(r => res.json({
+                token: r.data.id,
+                id: r.data.userId
+            }))
             .catch(e => res.send(e.message))
     });
 

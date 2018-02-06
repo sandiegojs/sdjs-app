@@ -89,10 +89,10 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { loginUser } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (!!user) { navigate('Events') }
+        if (!!loginUser) { navigate('Events') }
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
 function mapStoreToProps(store) {
     return {
         loginEmail: store.loginData.loginEmail,
-        loginPassword: store.loginData.loginPassword
+        loginPassword: store.loginData.loginPassword,
+        loginUser: store.loginData.loginUser
 
     };
 }

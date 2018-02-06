@@ -1,7 +1,7 @@
 const defaultState = {
     loginEmail: " ",
     loginPassword: " ",
-    user: ""
+    loginUser: ""
 }
 
 export default function loginReducer (state = defaultState, action){
@@ -24,7 +24,7 @@ export default function loginReducer (state = defaultState, action){
         case 'LOGIN_ENTRY_FULFILLED': {
             return {
                 ...state,
-                user: payload
+                loginUser: payload
             }
         }
         default: {
