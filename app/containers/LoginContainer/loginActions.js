@@ -27,3 +27,14 @@ export function loginEntry(loginObj) {
         })
     }
 }
+export function thirdPartyLogin(loginObj) {
+    return {
+        type: 'THIRD_PARTY_LOGIN',
+        payload: axios
+        .post('https://sdci-backend.herokuapp.com/loginthirdparty', loginObj)
+        .then( response => response.data)
+        .catch(error => {
+            console.log(error)
+        })
+    }
+}

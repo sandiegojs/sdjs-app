@@ -91,4 +91,29 @@ module.exports = function (app) {
             .catch(e => res.send(e.message))
     });
 
+    app.post('/loginthirdparty', (req, res) => {
+        let baseUrl = app.get('url').replace(/\/$/, '');
+        const { email, password, first_name, last_name } = req.body;
+
+        axios.get(baseUrl + '/api/users?filter[where][email]=' + email)
+            .then(r => {
+                if (!!response.data && !response.data.length) {
+                    axios.post(baserUrl + '/signup', { first_name, last_name, email, password })
+                        .then(r => {
+                            console.log("no matching email", r.data)
+                        })
+                        .catch(e => res.send(e.message))
+                } else {
+                    axios.post(baseUrl + '/login', { email, password })
+                        .then(r => {
+                            console.log("email matches", r.data)
+                        })
+                        .catch(e => res.send(e.message))
+                }
+            })
+            .catch(e => res.send(e.message))
+
+    })
+
+
 }

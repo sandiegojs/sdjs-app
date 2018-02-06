@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
-import {emailLoginEntry, passwordLoginEntry, loginEntry} from './loginActions';
+import {emailLoginEntry, passwordLoginEntry, loginEntry, thirdPartyLogin} from './loginActions';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -50,7 +50,7 @@ class LoginContainer extends React.Component {
                 "email": user.email,
                 "password": user.id.toString()
             }
-            dispatch(signUpEntry(githubObj));
+            dispatch(thirdPartyLogin(githubObj));
             console.log(githubObj)
             this.setState({ githubToken: result });
         } catch (e) {
@@ -77,7 +77,7 @@ class LoginContainer extends React.Component {
                     "password": googleResult.user.id
                 }
                 // console.log("GoogleUser", googleObj)
-                dispatch(signUpEntry(googleObj));
+                dispatch(thirdPartyLogin(googleObj));
                 console.log(googleObj)
 
             } else {
@@ -107,7 +107,7 @@ class LoginContainer extends React.Component {
                     borderRadius={3}
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
-                    title='SIGN UP' />
+                    title='LOG IN' />
                 <View style={styles.socialButtonsContainer}>
                     <Button
                         onPress={this._authenticateWithGithubAsync}
