@@ -101,7 +101,7 @@ module.exports = function (app) {
                 console.log("get data length", r.data.length)
                 if (!!r.data && !r.data.length) {
                     console.log("indie of first if")
-                    axios.post(baserUrl + '/signup', { first_name, last_name, email, password })
+                    axios.post(baseUrl + '/signup', { first_name, last_name, email, password })
                         .then(r => {
                             console.log("no matching email", r.data)
                         })
