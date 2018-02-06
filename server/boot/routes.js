@@ -98,8 +98,9 @@ module.exports = function (app) {
         axios.get(baseUrl + '/api/users?filter[where][email]=' + email)
             .then(r => {
                 console.log("baseURl", baseUrl) 
-                console.log("get data", r.data)
+                console.log("get data length", r.data.length)
                 if (!!r.data && !r.data.length) {
+                    console.log("indie of first if")
                     axios.post(baserUrl + '/signup', { first_name, last_name, email, password })
                         .then(r => {
                             console.log("no matching email", r.data)
