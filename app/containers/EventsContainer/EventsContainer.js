@@ -170,7 +170,6 @@ class EventsContainer extends React.Component {
           backgroundColor={'#D95351'}
           borderRadius={3}
           style={styles.checkInButton}
-          raised
           icon={{ name: 'undo', type: 'font-awesome' }}
           title=' UNDO CHECK-IN'
           onPress={this.handleUnCheckIn}
@@ -183,7 +182,6 @@ class EventsContainer extends React.Component {
           backgroundColor={'#346abb'}
           borderRadius={3}
           style={styles.checkInButton}
-          raised
           icon={{ name: 'check-circle', type: 'font-awesome' }}
           title=' CHECK-IN'
           onPress={this._getLocationAsync}
@@ -198,7 +196,6 @@ class EventsContainer extends React.Component {
           backgroundColor={'#D95351'}
           borderRadius={3}
           style={styles.checkInButton}
-          raised
           icon={{ name: 'undo', type: 'font-awesome' }}
           title=' UN-RVSP'
           onPress={this.handleUnRSVP}
@@ -211,7 +208,6 @@ class EventsContainer extends React.Component {
           backgroundColor={'green'}
           borderRadius={3}
           style={styles.checkInButton}
-          raised
           icon={{ name: 'check-circle', type: 'font-awesome' }}
           title=' RSVP'
           onPress={this.handleRSVP}
