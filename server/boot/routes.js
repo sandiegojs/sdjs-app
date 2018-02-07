@@ -14,10 +14,12 @@ module.exports = function (app) {
 
                 //Once user has signed up successfully, log them in
                 axios.post(baseUrl + '/api/users/login', { email, password })
-                    .then(r => res.json({
+                    .then(r => {
+                        console.log("from signup sever", r.data)
+                        res.json({
                         token: r.data.id,
                         id: r.data.userId
-                    }))
+                    })})
                     .catch(e => res.send(e.message))
             })
             .catch(error => res.send(error.message));
@@ -103,7 +105,10 @@ module.exports = function (app) {
                         .catch(e => res.send(e.message))
                 } else {
                     axios.post(baseUrl + '/login', { email, password })
-                    .then(r => console.log("From server, match found", r.data))
+                        .then(r => res.json({
+                            token: r.data.id,
+                            id: r.data.userId
+                        }))
                         .catch(e => res.send(e.message))
                 }
             })
