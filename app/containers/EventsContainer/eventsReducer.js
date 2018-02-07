@@ -1,9 +1,13 @@
 const defaultState = {
     eventsData:'',
     selectedEvent: '',
-    locationError:'',
+    locationError:false,
     checkedIn: false,
+    checkedInStatus: null,
+    rsvp:false,
+    eventDetailsRSVP: null,
     attendeeId: '',
+    userRSVPs:[],
     profileData: {
       username: "",
       first_name: "",
@@ -58,6 +62,18 @@ const defaultState = {
           checkedIn: payload
         };
       }
+      case 'RSVP_TRUE': {
+        return {
+          ...state,
+          rsvp: payload
+        };
+      }
+      case 'RSVP_FALSE': {
+        return {
+          ...state,
+          rsvp: payload
+        };
+      }
       case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
         return {
           ...state,
@@ -68,6 +84,24 @@ const defaultState = {
         return {
           ...state,
           profileData: payload
+        }
+      }
+      case 'UPDATE_RSVP_LIST_FULFILLED': {
+        return {
+          ...state,
+          userRSVPs: payload
+        }
+      }
+      case 'UPDATE_EVENT_DETAILS_RSVP': {
+        return {
+          ...state,
+          eventDetailsRSVP: payload
+        }
+      }
+      case 'UPDATE_CHECKED_IN_STATUS': {
+        return {
+          ...state,
+          checkedInStatus: payload
         }
       }
       default: {

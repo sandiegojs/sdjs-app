@@ -25,6 +25,10 @@
     "dataSource": "MongoDB",
     "public": true
   },
+  "rsvp": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
   "AccessToken": {
     "dataSource": "MongoDB",
     "public": false,

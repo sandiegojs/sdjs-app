@@ -14,7 +14,8 @@ export default class EventsScreen extends React.Component {
 
   }
   static navigationOptions = {
-    title: 'Events',
+    title: 'San Diego JS',
+    tabBarLabel:'Events',
     headerLeft: null
   };
 
