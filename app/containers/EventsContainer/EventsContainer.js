@@ -13,6 +13,9 @@ import {
   profileQuery,
   rsvpTrue,
   rsvpFalse,
+  updateRSVPList,
+  updateEventDetailsRSVP,
+  updateCheckedInStatus,
 } from './eventsActions';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
@@ -32,18 +35,23 @@ class EventsContainer extends React.Component {
 
   }
   componentWillMount() {
-    const { dispatch } = this.props
+    const { dispatch, user } = this.props
     const eventsData = null;
 
     dispatch(updateEventsData(eventsData));
+    // dispatch(updateRSVPList(user.id));
+    // dispatch(updateCheckedInStatus(user.id, eventsData[0].id));
+    
+    
 
   }
 
-  selectionHandler(id) {
+  selectionHandler(id, rsvp) {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
     selectedEventId = id;
     dispatch(updateSelectedEvent(selectedEventId));
+    dispatch(updateEventDetailsRSVP(rsvp));
     navigate('EventDetails')
 
   }
@@ -147,7 +155,7 @@ class EventsContainer extends React.Component {
     var hoursPriorToEvent = eventTime - 100;
     var hoursAfterEventStart = eventTime + 400;
 
-    currentTime = 2300//parseInt(hours+mins);  currently set to 1230 for testing
+    currentTime = 1300//parseInt(hours+mins);  currently set to 1230 for testing
     console.log("current", currentTime);
     console.log("before", hoursPriorToEvent);
     console.log("after", hoursAfterEventStart);
@@ -155,6 +163,7 @@ class EventsContainer extends React.Component {
 
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
+      //if(!!checkedInStatus) is true
       if (checkedIn) {
         nextEventButton = <Button
           large
@@ -167,6 +176,7 @@ class EventsContainer extends React.Component {
           onPress={this.handleUnCheckIn}
         />
       }
+      //if(!checkedInStatus) is false
       if (!checkedIn) {
         nextEventButton = <Button
           large
@@ -217,7 +227,15 @@ class EventsContainer extends React.Component {
 
 
   render() {
-    const { eventsData, locationError } = this.props;
+    const { eventsData, locationError,userRSVPs } = this.props;
+    // for(let i = 0; i <eventsData.length; i++){
+    //   for(let j = 0; j < userRSVPs.length; j++){
+    //     if(eventsData[i].eventId === userRSVPs[j].eventId){
+    //       eventsData[i].rsvp = true
+    //     }
+    //   }
+    // }
+
     let locationErrorMessage = null;
     if (!!locationError) {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
@@ -236,7 +254,7 @@ class EventsContainer extends React.Component {
                 key={item.id}
                 title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)} ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
                 subtitle={item.name}
-                onPress={() => this.selectionHandler(item.id)
+                onPress={() => this.selectionHandler(item.id)//,item.rsvp)
                 }
               />}
             />
@@ -280,6 +298,8 @@ function mapStoreToProps(store) {
     user: store.signupData.user,
     attendeeId: store.eventsData.attendeeId,
     rsvp: store.eventsData.rsvp,
+    userRSVPs: store.eventsData.userRSVPs,
+    checkedInStatus: store.eventsData.checkedInStatus
 
   };
 }

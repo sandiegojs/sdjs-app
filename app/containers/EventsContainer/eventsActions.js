@@ -9,15 +9,15 @@ export function updateEventsData(search) {
             .get('https://api.meetup.com/sandiegojs/events?&sign=true&photo-host=public&page=8&key=7c1c22226a10175697e6e91e4870')
             .then(response => {
 
-                    return response.data;
-                })
-                .catch(error => {
-                    const errorSearch = {
-                        error: true
-                    }
+                return response.data;
+            })
+            .catch(error => {
+                const errorSearch = {
+                    error: true
+                }
 
-                    return errorSearch;
-                })
+                return errorSearch;
+            })
 
 
     }
@@ -76,19 +76,19 @@ export function addAttendeeToEvent(eventObj, userId) {
     return {
         type: 'ADD_ATTENDEE_TO_EVENT',
         payload:
-            axios
-                .post('https://sdci-backend.herokuapp.com/checkin', { eventObj, userId })
-                .then(response => {
-                    console.log('returned data', response.data)
-                    return response.data;
-                })
-                .catch(error => {
-                    const errorSearch = {
-                        error: true
-                    }
+        axios
+            .post('https://sdci-backend.herokuapp.com/checkin', { eventObj, userId })
+            .then(response => {
+                console.log('returned data', response.data)
+                return response.data;
+            })
+            .catch(error => {
+                const errorSearch = {
+                    error: true
+                }
 
-                    return errorSearch;
-                })
+                return errorSearch;
+            })
     }
 }
 
@@ -96,20 +96,20 @@ export function profileQuery(userId) {
     return {
         type: 'PROFILE_QUERY',
         payload:
-            axios
-                .get('https://sdci-backend.herokuapp.com/api/users/' + userId)
-                .then(response => {
-                    return response.data
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+        axios
+            .get('https://sdci-backend.herokuapp.com/api/users/' + userId)
+            .then(response => {
+                return response.data
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 }
 
 
 export function removeAttendee(attendeeId) {
-    console.log('attendeeId',attendeeId)
+    console.log('attendeeId', attendeeId)
     return {
         type: 'REMOVE_ATTENDEE',
         payload:
@@ -126,5 +126,63 @@ export function removeAttendee(attendeeId) {
 
                 return errorSearch;
             })
+    }
+}
+
+export function updateRSVPList(user) {
+
+    return {
+        type: 'UPDATE_RSVP_LIST',
+        payload:
+        axios
+            .get('https://sdci-backend.herokuapp.com/api/rsvps?filter[where][userId]=' + user)
+            .then(response => {
+
+                return response.data;
+            })
+            .catch(error => {
+                const errorSearch = {
+                    error: true
+                }
+
+                return errorSearch;
+            })
+
+
+    }
+}
+
+export function updateEventDetailsRSVP(rsvp) {
+    return {
+        type: 'UPDATE_EVENT_DETAILS_RSVP',
+        payload: rsvp
+    }
+}
+//?filter[where][and][0][userId]=[where][and][1][eventId]=
+
+export function updateCheckedInStatus(userID, eventId) {
+
+    return {
+        type: 'UPDATE_CHECKED_IN_STATUS',
+        payload:
+        axios
+            .get('https://sdci-backend.herokuapp.com/api/attendees?filter[where][and][0][userId]=' + userId + '&filter[where][and][1][eventId]=' + eventId)
+            .then(response => {
+
+                if (!!response.data && !response.data.length) {
+                    return false;
+                } else {
+                    return true;
+                }
+            })
+            .catch(error => {
+                const errorSearch = {
+                    error: true
+                }
+
+                return errorSearch;
+            })
+
+
     }
 }

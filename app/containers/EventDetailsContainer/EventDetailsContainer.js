@@ -1,7 +1,9 @@
 import React from 'react';
+import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { StyleSheet, Text, View, Linking, ScrollView } from 'react-native';
+import { Constants, Location, Permissions } from 'expo';
 import { Button } from 'react-native-elements'
 import {
     setLocationError,
@@ -15,29 +17,18 @@ import {
 import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from '../EventsContainer/eventsDateAndTime';
 import Hyperlink from 'react-native-hyperlink'
 import EventMap from './EventMap'
-
+// do a get request with user id to get all events user has RSVP'd for, with event id's, return in the form of array
+// use the rsvpArray to 
+// somehow add a boolean to to the events data to determine whether to see the RSVP button to green/false(rsvp) or red/true(unrsvp)
+// during list render in EventsContainer add to the onPress={{this.handleRSVPOnEventDetails(item.rsvp)}}
+// add a handleRSVPOnEventDetails(){ to dispatch value, true or false to update a prop rsvp}
 class EventDetailsContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = ({
-            checkIn: false
-        })
-        this.checkInFalse = this.checkInFalse.bind(this);
-        this.checkInTrue = this.checkInTrue.bind(this);
         this.handleButtons = this.handleButtons.bind(this);
         this.handleUnRSVP = this.handleUnRSVP.bind(this);
         this.handleRSVP = this.handleRSVP.bind(this);
         this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
-    }
-
-    checkInTrue() {
-        console.log("in CHeck In True")
-        this.setState({ checkIn: true });
-    }
-
-    checkInFalse() {
-        this.setState({ checkIn: false })
-        console.log("in CHeck In false")
     }
 
     _getLocationAsync = async () => {
@@ -95,7 +86,7 @@ class EventDetailsContainer extends React.Component {
     }
 
 
-
+//delete both, 
     handleRSVP() {
         const { dispatch } = this.props;
         dispatch(rsvpTrue(true));
@@ -170,6 +161,7 @@ class EventDetailsContainer extends React.Component {
         }
 
         if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
+            //if(!!eventDetailRSVP) if true
             if (rsvp) {
                 nextEventButton = <Button
                     large
@@ -182,7 +174,7 @@ class EventDetailsContainer extends React.Component {
                     onPress={this.handleUnRSVP}
                 />
             }
-
+            //if(!!eventDetailRSVP) if false
             if (!rsvp) {
                 nextEventButton = <Button
                     large
@@ -260,6 +252,10 @@ function mapStoreToProps(store) {
         eventsData: store.eventsData.eventsData,
         user: store.signupData.user,
         locationError: store.eventsData.locationError,
+        rsvp: store.eventsData.rsvp,
+        checkedIn: store.eventsData.checkedIn,
+        attendeeId: store.eventsData.attendeeId,
+        eventDetailsRSVP: store.eventsData.eventDetailsRSVP,
     };
 }
 
