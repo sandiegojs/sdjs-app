@@ -6,10 +6,10 @@ const defaultState = {
     user: ""
 }
 
-export default function signupReducer (state = defaultState, action){
-    const {type, payload} = action;
+export default function signupReducer(state = defaultState, action) {
+    const { type, payload } = action;
 
-    switch(type) {
+    switch (type) {
 
         case 'FIRST_NAME_ENTRY': {
             return {
@@ -36,6 +36,19 @@ export default function signupReducer (state = defaultState, action){
             }
         }
         case 'SIGN_UP_ENTRY_FULFILLED': {
+            return {
+                ...state,
+                user: payload
+            }
+        }
+        case 'LOGIN_ENTRY_FULFILLED': {
+            return {
+                ...state,
+                user: payload
+            }
+        }
+        case 'THIRD_PARTY_LOGIN_FULFILLED': {
+            console.log('inside of thirdPartyLoginFulfilled', payload)
             return {
                 ...state,
                 user: payload

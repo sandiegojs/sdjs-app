@@ -1,7 +1,7 @@
 const defaultState = {
     loginEmail: " ",
     loginPassword: " ",
-    loginUser: ""
+
 }
 
 export default function loginReducer (state = defaultState, action){
@@ -21,12 +21,19 @@ export default function loginReducer (state = defaultState, action){
                 loginPassword: payload
             }
         }
-        case 'LOGIN_ENTRY_FULFILLED': {
-            return {
-                ...state,
-                loginUser: payload
-            }
-        }
+        // case 'LOGIN_ENTRY_FULFILLED': {
+        //     return {
+        //         ...state,
+        //         store.signupData.user: payload
+        //     }
+        // }
+        // case 'THIRD_PARTY_LOGIN_FULFILLED': {
+        //     return {
+        //         ...state,
+        //         user: payload
+        //     }
+        // }
+
         default: {
             return state;
         }

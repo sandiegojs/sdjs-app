@@ -97,21 +97,13 @@ module.exports = function (app) {
 
         axios.get(baseUrl + '/api/users?filter[where][email]=' + email)
             .then(r => {
-                console.log("baseURl", baseUrl) 
-                console.log("get data length", r.data.length)
                 if (!!r.data && !r.data.length) {
-                    console.log("indie of first if")
                     axios.post(baseUrl + '/signup', { first_name, last_name, email, password })
-                        .then(r => {
-                            console.log("no matching email", r.data)
-                        })
+                        .then(r => console.log("From server no match", r.data))
                         .catch(e => res.send(e.message))
                 } else {
-                    console.log('in else third party')
                     axios.post(baseUrl + '/login', { email, password })
-                        .then(r => {
-                            console.log("email matches", r.data)
-                        })
+                    .then(r => console.log("From server, match found", r.data))
                         .catch(e => res.send(e.message))
                 }
             })

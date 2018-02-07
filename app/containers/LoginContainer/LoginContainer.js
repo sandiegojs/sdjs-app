@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
-import {emailLoginEntry, passwordLoginEntry, loginEntry, thirdPartyLogin} from './loginActions';
+import {emailLoginEntry, passwordLoginEntry} from './loginActions';
+import {loginEntry, thirdPartyLogin} from '../SignupContainer/signupActions';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -89,10 +90,10 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        const { loginUser } = this.props;
+        const { user } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (!!loginUser) { navigate('Events') }
+        if (user === undefined) { navigate('Events') }
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
@@ -152,19 +153,16 @@ const styles = StyleSheet.create({
     formContainer: {
         width: 350
         // padding: 50
-    },
-    switchToLogin: {
-
-
-
     }
+
 });
 
 function mapStoreToProps(store) {
     return {
         loginEmail: store.loginData.loginEmail,
         loginPassword: store.loginData.loginPassword,
-        loginUser: store.loginData.loginUser
+        loginUser: store.loginData.loginUser,
+        user: store.signupData.user
 
     };
 }
