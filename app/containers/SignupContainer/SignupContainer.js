@@ -28,15 +28,6 @@ class SignupContainer extends React.Component {
     }
 
 
-
-    // componentDidMount() {
-    //     const { user } = this.props;
-    //     const navigate  = this.props.navigation;
-    //     if (!!user) {
-    //         navigate('Events');
-    //     }
-    // }
-
     handleFirstNameInput(text) {
         const { dispatch } = this.props;
         dispatch(firstNameEntry(text));

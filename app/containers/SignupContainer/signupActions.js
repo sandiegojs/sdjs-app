@@ -59,10 +59,7 @@ export function thirdPartyLogin(loginObj) {
         type: 'THIRD_PARTY_LOGIN',
         payload: axios
         .post('https://sdci-backend.herokuapp.com/loginthirdparty', loginObj)
-        .then( response => {
-            console.log('returned res.data', response.data)
-            return response.data
-        })
+        .then( response => response.data)
         .catch(error => {
             console.log(error)
         })
