@@ -7,8 +7,10 @@ import {
     lastNameEntry,
     emailEntry,
     passwordEntry,
-    signUpEntry
+    signUpEntry,
+    thirdPartyLogin
 } from './signupActions';
+
 import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 
 class SignupContainer extends React.Component {
@@ -74,7 +76,7 @@ class SignupContainer extends React.Component {
                 "email": user.email,
                 "password": user.id.toString()
             }
-            dispatch(signUpEntry(githubObj));
+            dispatch(thirdPartyLogin(githubObj));
             this.setState({ githubToken: result });
         } catch (e) {
             this.setState({ error: JSON.stringify(e) });
@@ -99,7 +101,7 @@ class SignupContainer extends React.Component {
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
-                dispatch(signUpEntry(googleObj));
+                dispatch(thirdPartyLogin(googleObj));
 
             } else {
                 return { cancelled: true };

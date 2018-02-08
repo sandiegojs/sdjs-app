@@ -16,7 +16,7 @@ class ProfileContainer extends React.Component {
         this.handleBioUpdate = this.handleBioUpdate.bind(this);
         this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
         this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
-        this.handleLocationUpdate = this.handleLocationUpdate.bind(this);
+        // this.handleLocationUpdate = this.handleLocationUpdate.bind(this);
     }
 
     handleProfileUpdate(obj) {
@@ -58,10 +58,10 @@ class ProfileContainer extends React.Component {
         dispatch(actions.urlUpdate(url))
     }
 
-    handleLocationUpdate(location) {
-        const { dispatch } = this.props;
-        dispatch(actions.locationUpdate(location))
-    }
+    // handleLocationUpdate(location) {
+    //     const { dispatch } = this.props;
+    //     dispatch(actions.locationUpdate(location))
+    // }
 
     render() {
         const { profileData } = this.props;
@@ -103,12 +103,12 @@ class ProfileContainer extends React.Component {
                     defaultValue={profileData.url}
                     onChangeText={this.handleUrlUpdate}
                 />
-                <FormLabel>Location</FormLabel>
+                {/* <FormLabel>Location</FormLabel>
                 <FormInput
                     defaultValue={profileData.location}
                     onChangeText={this.handleLocationUpdate}
                     style={styles.bottomInput}
-                />
+                /> */}
                 <Button
                     large
                     backgroundColor='#346abb'

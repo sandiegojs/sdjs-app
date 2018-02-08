@@ -73,6 +73,7 @@ class App extends React.Component {
                     )
                     break;
                   case 'Profile':
+                  console.log("user ID", this.props)
                     return (
                       <Image
                         source={require('./assets/images/survey.png')}

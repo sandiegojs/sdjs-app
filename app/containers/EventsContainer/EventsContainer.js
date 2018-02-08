@@ -27,7 +27,7 @@ class EventsContainer extends React.Component {
     super(props);
     this.selectionHandler = this.selectionHandler.bind(this)
     this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
-    this.profilePageHandler = this.profilePageHandler.bind(this);
+    // this.profilePageHandler = this.profilePageHandler.bind(this);
     this.handleButtons = this.handleButtons.bind(this);
     this.handleUnRSVP = this.handleUnRSVP.bind(this);
     this.handleRSVP = this.handleRSVP.bind(this);
@@ -37,6 +37,7 @@ class EventsContainer extends React.Component {
   componentWillMount() {
     const { dispatch, user } = this.props
     const eventsData = null;
+    dispatch(profileQuery(user.id))
 
     dispatch(updateEventsData(eventsData));
     // dispatch(updateRSVPList(user.id));
@@ -107,12 +108,11 @@ class EventsContainer extends React.Component {
   }
 
   //Queries DB with user ID and sends to profile page
-  profilePageHandler() {
-    const { user, dispatch } = this.props;
-    const { navigate } = this.props.navigation;
-    dispatch(profileQuery(user.id))
-    navigate('Profile')
-  }
+  // profilePageHandler() {
+  //   const { user, dispatch } = this.props;
+  //   const { navigate } = this.props.navigation;
+  //   dispatch(profileQuery(user.id))
+  // }
   handleRSVP() {
     const { dispatch } = this.props;
     dispatch(rsvpTrue(true));
@@ -231,11 +231,13 @@ class EventsContainer extends React.Component {
     }
     if (!!eventsData) {
       return (
-        <View>
-          <Text style={{ textAlign: 'center', paddingVertical: 10, fontWeight: 'bold' }}>Next Event: {eventsData[0].name} </Text>
+        <View
+        style={styles.listWrapper}
+        >
+          <Text style={{ textAlign: 'center', paddingTop: 10, fontWeight: 'bold' }}>Next Event: {eventsData[0].name} </Text>
           {this.handleButtons()}
           {locationErrorMessage}
-          <Text style={{ textAlign: 'center', paddingTop: 10, marginBottom: 0 }}>Upcoming Events</Text>
+          <Text style={{ textAlign: 'center', paddingTop: 20, marginBottom: 0 }}>Upcoming Events</Text>
           <List>
             <FlatList
               data={eventsData}
@@ -274,8 +276,8 @@ const styles = StyleSheet.create({
   mainContainer: {
     paddingTop: 15
   },
-  listContainer: {
-    paddingBottom: 200
+  listWrapper: {
+    marginBottom: 457
   }
 });
 
