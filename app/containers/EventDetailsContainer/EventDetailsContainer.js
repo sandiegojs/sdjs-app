@@ -11,17 +11,17 @@ import {
     checkedInFalse,
     addAttendeeToEvent,
     removeAttendee,
-    rsvpTrue,
-    rsvpFalse,
+    rsvpEventDetailsTrue,
+    rsvpEventDetailsFalse,
+    addRSVPToEvent,
+    removeRSVPFromEvent,
+    updateEventsData,
+    updateRSVPList,
 } from '../EventsContainer/eventsActions';
 import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from '../EventsContainer/eventsDateAndTime';
 import Hyperlink from 'react-native-hyperlink'
 import EventMap from './EventMap'
-// do a get request with user id to get all events user has RSVP'd for, with event id's, return in the form of array
-// use the rsvpArray to 
-// somehow add a boolean to to the events data to determine whether to see the RSVP button to green/false(rsvp) or red/true(unrsvp)
-// during list render in EventsContainer add to the onPress={{this.handleRSVPOnEventDetails(item.rsvp)}}
-// add a handleRSVPOnEventDetails(){ to dispatch value, true or false to update a prop rsvp}
+
 class EventDetailsContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -30,6 +30,13 @@ class EventDetailsContainer extends React.Component {
         this.handleRSVP = this.handleRSVP.bind(this);
         this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     }
+    componentDidMount() {
+        const { dispatch, user } = this.props
+        const launch = null;
+    
+        dispatch(updateEventsData(launch));
+        dispatch(updateRSVPList(user.id));
+      }
 
     _getLocationAsync = async () => {
 
@@ -83,19 +90,45 @@ class EventDetailsContainer extends React.Component {
     }
 
 
-//delete both, 
+    //delete both, 
     handleRSVP() {
-        const { dispatch } = this.props;
-        dispatch(rsvpTrue(true));
+        const { dispatch, user, eventsData, eventDetails } = this.props;
+        const eventInfo = eventsData.filter(event => event.id === eventDetails)
+
+        eventObj = {
+            "event_title": eventInfo[0].name,
+            "meetup_id": eventInfo[0].id,
+            "url": eventInfo[0].group.urlname + ".org",
+            "location": {
+                "latitude": eventInfo[0].venue.lat,
+                "longitude": eventInfo[0].venue.lon
+            }
+        };
+        console.log("eventObj eventDetails rsvp",eventObj)
+
+        dispatch(addRSVPToEvent(eventObj, user.id))
+        dispatch(rsvpEventDetailsTrue(true));
     }
+
     handleUnRSVP() {
-        const { dispatch } = this.props;
-        dispatch(rsvpFalse(false));
+        const { dispatch, rsvpEventId, eventDetailsRSVPEventId } = this.props;
+
+        
+        dispatch(rsvpEventDetailsFalse(false));
+        if(!!eventDetailsRSVPEventId){
+            dispatch(removeRSVPFromEvent(eventDetailsRSVPEventId));
+        }
+        if(!eventDetailsRSVPEventId && !!rsvpEventId){
+        dispatch(removeRSVPFromEvent(rsvpEventId));
+        }
+        if(!!eventDetailsRSVPEventId && !!rsvpEventId){
+            dispatch(removeRSVPFromEvent(eventDetailsRSVPEventId));
+        }
     }
 
 
     handleButtons() {
-        const { eventsData, checkedIn, rsvp } = this.props;
+        const { eventsData, checkedIn, eventDetailsRSVP } = this.props;
 
         function addZero(i) {
             if (i < 10) {
@@ -155,7 +188,7 @@ class EventDetailsContainer extends React.Component {
 
         if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
             //if(!!eventDetailRSVP) if true
-            if (rsvp) {
+            if (eventDetailsRSVP===true) {
                 nextEventButton = <Button
                     large
                     backgroundColor={'#D95351'}
@@ -168,7 +201,7 @@ class EventDetailsContainer extends React.Component {
                 />
             }
             //if(!!eventDetailRSVP) if false
-            if (!rsvp) {
+            if (eventDetailsRSVP===false) {
                 nextEventButton = <Button
                     large
                     backgroundColor={'green'}
@@ -189,15 +222,15 @@ class EventDetailsContainer extends React.Component {
     }
 
     render() {
-        const { eventDetails, eventsData, user, locationError } = this.props;
+        const { eventDetails, eventsData, user, locationError, dispatch } = this.props;
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
         const latitude = eventInfo[0].venue.lat
         const longitude = eventInfo[0].venue.lon
-        const location = { latitude, longitude }
+        const location = { latitude, longitude}
 
         let locationErrorMessage = null;
         if (!!locationError) {
-          locationErrorMessage = <Text style={styles.locationErrorMessage}>Please Enable </Text>
+            locationErrorMessage = <Text style={styles.locationErrorMessage}>Please Enable </Text>
         }
 
         return (
@@ -228,7 +261,7 @@ class EventDetailsContainer extends React.Component {
                         coordinate={{ latitude: latitude, longitude: longitude }}
                     />
                 </MapView>
-                <Hyperlink linkDefault={true} linkStyle={ { color: '#2980b9'}}>
+                <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
                     <View>
                         <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, '')}</Text>
                     </View>
@@ -245,10 +278,11 @@ function mapStoreToProps(store) {
         eventsData: store.eventsData.eventsData,
         user: store.signupData.user,
         locationError: store.eventsData.locationError,
-        rsvp: store.eventsData.rsvp,
+        eventDetailsRSVP: store.eventsData.eventDetailsRSVP,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,
         eventDetailsRSVP: store.eventsData.eventDetailsRSVP,
+        eventDetailsRSVPEventId: store.eventsData.eventDetailsRSVPEventId,
     };
 }
 
@@ -299,7 +333,7 @@ const styles = StyleSheet.create({
     },
     locationErrorMessage: {
         textAlign: 'center'
-      },
+    },
 })
 
 export default connect(mapStoreToProps)(EventDetailsContainer);
