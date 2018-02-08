@@ -48,9 +48,14 @@ export function loginEntry(loginObj) {
         payload: axios
         .post('https://sdci-backend.herokuapp.com/login', loginObj)
         .then( response => {
-            return response.data
+            if (response.data.includes("failed")) {
+                return null
+            } else {
+                return response.data
+            }
         })
         .catch(error => {
+            console.log('invalid');
             alert('Invalid Login')
         })
     }

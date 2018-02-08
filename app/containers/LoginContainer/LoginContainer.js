@@ -89,9 +89,9 @@ class LoginContainer extends React.Component {
     render() {
         const { user } = this.props;
         const { navigate } = this.props.navigation;
-        console.log("state", this.props)
+        //console.log("state", this.props)
 
-        if (!!user) { navigate('Events') }
+        if (!!user) { navigate('Events' ) }
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>

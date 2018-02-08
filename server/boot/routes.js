@@ -90,7 +90,7 @@ module.exports = function (app) {
                 token: r.data.id,
                 id: r.data.userId
             }))
-            .catch(e => res.send(e.message))
+            .catch(e => res.status(e.statusCode).send(e.message))
     });
 
     app.post('/loginthirdparty', (req, res) => {

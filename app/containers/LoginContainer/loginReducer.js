@@ -1,7 +1,7 @@
 const defaultState = {
     loginEmail: " ",
     loginPassword: " ",
-
+    user: null
 }
 
 export default function loginReducer (state = defaultState, action){
