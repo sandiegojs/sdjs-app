@@ -16,6 +16,9 @@ import {
   updateRSVPList,
   updateEventDetailsRSVP,
   updateCheckedInStatus,
+  addRSVPToEvent,
+  removeRSVPFromEvent,
+  updateEventDetailsRSVPEventId,
 } from './eventsActions';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
@@ -34,25 +37,23 @@ class EventsContainer extends React.Component {
 
 
   }
-  componentWillMount() {
+  componentDidMount() {
     const { dispatch, user } = this.props
-    const eventsData = null;
-    dispatch(profileQuery(user.id))
+    const launch = null;
 
-    dispatch(updateEventsData(eventsData));
-    // dispatch(updateRSVPList(user.id));
-    // dispatch(updateCheckedInStatus(user.id, eventsData[0].id));
-    
-    
-
+    dispatch(updateEventsData(launch));
+    dispatch(updateRSVPList(user.id));
   }
 
-  selectionHandler(id, rsvp) {
+  selectionHandler(id, rsvpEventDetails, rsvpEventId) {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
     selectedEventId = id;
     dispatch(updateSelectedEvent(selectedEventId));
-    dispatch(updateEventDetailsRSVP(rsvp));
+    if(!!rsvpEventDetails){dispatch(updateEventDetailsRSVP(rsvpEventDetails));}
+    if(!rsvpEventDetails){dispatch(updateEventDetailsRSVP(false));}
+    if(!!rsvpEventId){dispatch(updateEventDetailsRSVPEventId(rsvpEventId));}
+    if(!rsvpEventId){dispatch(updateEventDetailsRSVPEventId(false));}
     navigate('EventDetails')
 
   }
@@ -114,12 +115,29 @@ class EventsContainer extends React.Component {
   //   dispatch(profileQuery(user.id))
   // }
   handleRSVP() {
-    const { dispatch } = this.props;
+    const { dispatch, user, eventsData } = this.props;
+
+    eventObj = {
+      "event_title": eventsData[0].name,
+      "meetup_id": eventsData[0].id,
+      "url": eventsData[0].group.urlname + ".org",
+      "location": {
+        "latitude": eventsData[0].venue.lat,
+        "longitude": eventsData[0].venue.lon
+      }
+    };
+
+    dispatch(addRSVPToEvent(eventObj, user.id))
     dispatch(rsvpTrue(true));
   }
 
   handleUnRSVP() {
-    const { dispatch } = this.props;
+    const { dispatch, rsvpEventId, userRSVPs, eventsData } = this.props;
+    for(let i = 0; i <userRSVPs.length; i++){
+      if(eventsData[0].id === userRSVPs[i].meetup_id){
+        dispatch(removeRSVPFromEvent(userRSVPs[i].id));
+      }
+    }
     dispatch(rsvpFalse(false));
   }
 
@@ -216,20 +234,29 @@ class EventsContainer extends React.Component {
 
 
   render() {
-    const { eventsData, locationError,userRSVPs } = this.props;
-    // for(let i = 0; i <eventsData.length; i++){
-    //   for(let j = 0; j < userRSVPs.length; j++){
-    //     if(eventsData[i].eventId === userRSVPs[j].eventId){
-    //       eventsData[i].rsvp = true
-    //     }
-    //   }
-    // }
+    const { eventsData, locationError, userRSVPs, user, dispatch } = this.props;
+    for(let i = 0; i <eventsData.length; i++){
+      for(let j = 0; j < userRSVPs.length; j++){
+        if(eventsData[i].id === userRSVPs[j].meetup_id){
+          eventsData[i].rsvpEventDetails = true;
+          eventsData[i].rsvpEventId = userRSVPs[j].id;
+        }
+      }
+    }
+    
+    console.log("rsvpList", userRSVPs)
+    console.log("eventsData inside the render", eventsData)
 
     let locationErrorMessage = null;
     if (!!locationError) {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
     }
     if (!!eventsData) {
+      for(let i = 0; i <userRSVPs.length; i++){
+        if(eventsData[0].id === userRSVPs[i].meetup_id){
+          dispatch(rsvpTrue(true));
+        }
+      }
       return (
         <View
         style={styles.listWrapper}
@@ -245,7 +272,7 @@ class EventsContainer extends React.Component {
                 key={item.id}
                 title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)} ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
                 subtitle={item.name}
-                onPress={() => this.selectionHandler(item.id)//,item.rsvp)
+                onPress={() => this.selectionHandler(item.id, item.rsvpEventDetails, item.rsvpEventId)
                 }
               />}
             />
@@ -290,7 +317,8 @@ function mapStoreToProps(store) {
     attendeeId: store.eventsData.attendeeId,
     rsvp: store.eventsData.rsvp,
     userRSVPs: store.eventsData.userRSVPs,
-    checkedInStatus: store.eventsData.checkedInStatus
+    checkedInStatus: store.eventsData.checkedInStatus,
+    rsvpEventId: store.eventsData.rsvpEventId
 
   };
 }

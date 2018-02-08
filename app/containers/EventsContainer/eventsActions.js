@@ -69,6 +69,18 @@ export function rsvpFalse(rsvpFalse) {
         payload: false
     }
 }
+export function rsvpEventDetailsTrue(rsvpEventDetailsTrue) {
+    return {
+        type: 'RSVP_EVENT_DETAILS_TRUE',
+        payload: true
+    }
+}
+export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
+    return {
+        type: 'RSVP_EVENT_DETAILS_FALSE',
+        payload: false
+    }
+}
 
 export function addAttendeeToEvent(eventObj, userId) {
     return {
@@ -124,6 +136,49 @@ export function removeAttendee(attendeeId) {
     }
 }
 
+export function addRSVPToEvent(eventObj, userId) {
+    console.log("eventObj actions", eventObj);
+    console.log("userId actions", userId);
+    return {
+        type: 'ADD_RSVP_TO_EVENT',
+        payload:
+        axios
+            .post('https://sdci-backend.herokuapp.com/rsvp', { eventObj, userId })
+            .then(response => {
+                console.log('returned data', response.data)
+                return response.data;
+            })
+            .catch(error => {
+                const errorSearch = {
+                    error: true
+                }
+
+                return errorSearch;
+            })
+    }
+}
+export function removeRSVPFromEvent(rsvpEventId) {
+    console.log('rsvpEventId in actions', rsvpEventId)
+    return {
+        type: 'REMOVE_RSVP_FROM_EVENT',
+        payload:
+        axios
+            .delete('https://sdci-backend.herokuapp.com/api/rsvps/' + rsvpEventId)
+            .then(response => {
+                console.log('deleted data rsvp', response.data)
+                return response.data;
+            })
+            .catch(error => {
+                const errorSearch = {
+                    error: true
+                }
+
+                return errorSearch;
+            })
+    }
+}
+
+
 export function updateRSVPList(user) {
 
     return {
@@ -153,31 +208,38 @@ export function updateEventDetailsRSVP(rsvp) {
         payload: rsvp
     }
 }
-//?filter[where][and][0][userId]=[where][and][1][eventId]=
-
-export function updateCheckedInStatus(userID, eventId) {
-
+export function updateEventDetailsRSVPEventId(eventDetailsRSVPEventId) {
     return {
-        type: 'UPDATE_CHECKED_IN_STATUS',
-        payload:
-        axios
-            .get('https://sdci-backend.herokuapp.com/api/attendees?filter[where][and][0][userId]=' + userId + '&filter[where][and][1][eventId]=' + eventId)
-            .then(response => {
-
-                if (!!response.data && !response.data.length) {
-                    return false;
-                } else {
-                    return true;
-                }
-            })
-            .catch(error => {
-                const errorSearch = {
-                    error: true
-                }
-
-                return errorSearch;
-            })
-
-
+        type: 'UPDATE_EVENT_DETAILS_RSVP_EVENT_ID',
+        payload: eventDetailsRSVPEventId
     }
 }
+
+//?filter[where][and][0][userId]=[where][and][1][eventId]=
+
+// export function updateCheckedInStatus(userId, eventId) {
+// console.log("update checked in status")
+//     return {
+//         type: 'UPDATE_CHECKED_IN_STATUS',
+//         payload:
+//         axios
+//             .get('https://sdci-backend.herokuapp.com/api/attendees?filter[where][and][0][userId]=' + userId + '&filter[where][and][1][eventId]=' + eventId)
+//             .then(response => {
+
+//                 if (!!response.data && !response.data.length) {
+//                     return false;
+//                 } else {
+//                     return true;
+//                 }
+//             })
+//             .catch(error => {
+//                 const errorSearch = {
+//                     error: true
+//                 }
+
+//                 return errorSearch;
+//             })
+
+
+//     }
+// }
