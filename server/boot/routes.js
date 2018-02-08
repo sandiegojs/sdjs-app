@@ -78,7 +78,9 @@ module.exports = function (app) {
             .catch(error => res.send(error.message));
     });
 
-
+    // app.use(loopback.token({
+    //     headers: [  ]
+    // }));
     app.post('/login', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
         const { email, password } = req.body;
@@ -134,7 +136,8 @@ module.exports = function (app) {
                         .then(response => {
                             var rsvpObj = {
                                 'eventId': response.data.id,
-                                'userId': userId
+                                'userId': userId,
+                                'meetup_id': response.data.meetup_id
                             }
                             console.log("rsvpObj in if statement server", rsvpObj)
                             axios
@@ -151,7 +154,8 @@ module.exports = function (app) {
                     console.log('Matching Event found')
                     var rsvpObj = {
                         'eventId': response.data[0].id,
-                        'userId': userId
+                        'userId': userId,
+                        'meetup_id': response.data[0].meetup_id
                     }
                     axios
                         .post(baseUrl + '/api/rsvps', rsvpObj)

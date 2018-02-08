@@ -75,7 +75,6 @@ class SignupContainer extends React.Component {
                 "password": user.id.toString()
             }
             dispatch(signUpEntry(githubObj));
-            console.log(githubObj)
             this.setState({ githubToken: result });
         } catch (e) {
             this.setState({ error: JSON.stringify(e) });
@@ -100,9 +99,7 @@ class SignupContainer extends React.Component {
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
-                // console.log("GoogleUser", googleObj)
                 dispatch(signUpEntry(googleObj));
-                console.log(googleObj)
 
             } else {
                 return { cancelled: true };

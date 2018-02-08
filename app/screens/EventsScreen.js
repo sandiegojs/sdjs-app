@@ -27,7 +27,6 @@ export default class EventsScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { user } = this.props;
-    console.log("ed",user)
     return (
       <View>
         <EventsContainer navigation={this.props.navigation} />

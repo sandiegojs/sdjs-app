@@ -56,7 +56,6 @@ class EventsContainer extends React.Component {
 
   }
   _getLocationAsync = async () => {
-    console.log("inside check in ")
 
     const { dispatch, eventsData, user } = this.props;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -86,9 +85,7 @@ class EventsContainer extends React.Component {
       // maxDistanceInKM - max point distance from startPoint in KM's
       // result - array of points inside the max distance
       var result = Geofence.filterByProximity(startPoint, points, maxDistanceInKM);
-      console.log('result', result)
       if (result[0] === undefined) {
-        console.log("Geolocation cannot confirm your location to the event, please try again")
       } else {
         eventObj = {
           "event_title": eventsData[0].name,
@@ -156,10 +153,6 @@ class EventsContainer extends React.Component {
     var hoursAfterEventStart = eventTime + 400;
 
     currentTime = 1300//parseInt(hours+mins);  currently set to 1230 for testing
-    console.log("current", currentTime);
-    console.log("before", hoursPriorToEvent);
-    console.log("after", hoursAfterEventStart);
-    console.log('event start time', eventTime);
 
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {

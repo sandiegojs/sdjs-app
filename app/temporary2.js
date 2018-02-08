@@ -11,13 +11,9 @@ class EventDetailsContainer extends React.Component {
         super(props);
     }
 
-    //      console.log("props", eventDetails)
-    //     console.log("Second",eventsData)
-
     render() {
         const { eventDetails, eventsData } = this.props;
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
-        console.log("name", eventInfo[0].name)
 
         return (
             <View style={styles.container}>

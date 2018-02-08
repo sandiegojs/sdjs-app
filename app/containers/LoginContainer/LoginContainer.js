@@ -52,7 +52,6 @@ class LoginContainer extends React.Component {
                 "password": user.id.toString()
             }
             dispatch(thirdPartyLogin(githubObj));
-            console.log(githubObj)
             this.setState({ githubToken: result });
         } catch (e) {
             this.setState({ error: JSON.stringify(e) });
@@ -77,9 +76,7 @@ class LoginContainer extends React.Component {
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
-                // console.log("GoogleUser", googleObj)
                 dispatch(thirdPartyLogin(googleObj));
-                console.log(googleObj)
 
             } else {
                 return { cancelled: true };
@@ -92,6 +89,7 @@ class LoginContainer extends React.Component {
     render() {
         const { user } = this.props;
         const { navigate } = this.props.navigation;
+        console.log("state", this.props)
 
         if (!!user) { navigate('Events') }
         return (

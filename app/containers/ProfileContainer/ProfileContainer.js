@@ -56,19 +56,16 @@ class ProfileContainer extends React.Component {
     handleUrlUpdate(url) {
         const { dispatch } = this.props;
         dispatch(actions.urlUpdate(url))
-        console.log("url", url)
     }
 
     handleLocationUpdate(location) {
         const { dispatch } = this.props;
         dispatch(actions.locationUpdate(location))
-        console.log("location", location)
     }
 
     render() {
         const { profileData } = this.props;
         const { profileUpdate } = this.props;
-        console.log("profileupdatedata", profileUpdate)
         return (
             <KeyboardAwareScrollView
                 style={{ backgroundColor: '#fff' }}

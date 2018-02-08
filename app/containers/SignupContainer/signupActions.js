@@ -48,24 +48,21 @@ export function loginEntry(loginObj) {
         payload: axios
         .post('https://sdci-backend.herokuapp.com/login', loginObj)
         .then( response => {
-            console.log(response.data)
             return response.data
         })
         .catch(error => {
             alert('Invalid Login')
-            console.log('Error: ',error)
         })
     }
 }
 export function thirdPartyLogin(loginObj) {
-    console.log('inside of thirdPartyLogin')
     return {
         type: 'THIRD_PARTY_LOGIN',
         payload: axios
         .post('https://sdci-backend.herokuapp.com/loginthirdparty', loginObj)
         .then( response => response.data)
         .catch(error => {
-            console.log(error)
+            console.log("this one", error)
         })
     }
 }
