@@ -98,7 +98,7 @@ class LoginContainer extends React.Component {
                     <FormLabel>EMAIL</FormLabel>
                     <FormInput onChangeText={this.handleLoginEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput onChangeText={this.handleLoginPasswordInput} />
+                    <FormInput secureTextEntry={true} onChangeText={this.handleLoginPasswordInput} />
                 </View>
                 <Button style={styles.button}
                     onPress={this.handleLoginSubmission}
@@ -122,6 +122,16 @@ class LoginContainer extends React.Component {
                         large
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
+                </View>
+                <View>
+                    <Button 
+                    title='New User? Sign Up Here'
+                    style={styles.switchToLogin}
+                    onPress={() => this.props.navigation.navigate('Signup')}
+                    transparent={true}
+                    color='#346abb'
+
+                    />
                 </View>
             </View>
 
