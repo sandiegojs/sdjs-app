@@ -43,6 +43,7 @@ class EventsContainer extends React.Component {
 
     dispatch(updateEventsData(launch));
     dispatch(updateRSVPList(user.id));
+    dispatch(profileQuery(user.id))
   }
 
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {

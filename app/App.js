@@ -7,7 +7,7 @@ import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
 import SignupScreen from './screens/SignupScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import LoginScreen from './screens/LoginScreen';
+import LoginScreen from './screens/LogInScreen';
 import PollScreen from './screens/PollScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
@@ -17,9 +17,9 @@ class App extends React.Component {
 
   render() {
 
-    const AppRoot = StackNavigator({
-      Signup: { screen: SignupScreen },
+    const AppRoot = StackNavigator({ 
       Login: { screen: LoginScreen },
+      Signup: { screen: SignupScreen },
       Events: {
         screen: TabNavigator(
           {
