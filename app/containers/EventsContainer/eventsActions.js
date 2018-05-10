@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function updateEventsData(search) {
+export function updateEventsData() {
 
     return {
         type: 'UPDATE_EVENTS_DATA',

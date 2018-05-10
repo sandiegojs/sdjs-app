@@ -1,6 +1,7 @@
 const defaultState = {
     loginEmail: " ",
     loginPassword: " ",
+    loadingScreen: false,
     user: null
 }
 
@@ -19,6 +20,12 @@ export default function loginReducer (state = defaultState, action){
             return {
                 ...state,
                 loginPassword: payload
+            }
+        }
+        case 'LOADING_SCREEN': {
+            return {
+                ...state,
+                loadingScreen: payload
             }
         }
         default: {

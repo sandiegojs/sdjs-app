@@ -8,13 +8,11 @@ import EventsScreen from './screens/EventsScreen';
 import SignupScreen from './screens/SignupScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import LoginScreen from './screens/LogInScreen';
-import PollScreen from './screens/PollScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
 
 
 class App extends React.Component {
-
   render() {
 
     const AppRoot = StackNavigator({ 
@@ -34,9 +32,6 @@ class App extends React.Component {
             },
             Profile: {
               screen: ProfileScreen,
-            },
-            Poll: {
-              screen: PollScreen,
             },
           },
           {
@@ -73,7 +68,6 @@ class App extends React.Component {
                     )
                     break;
                   case 'Profile':
-                  console.log("user ID", this.props)
                     return (
                       <Image
                         source={require('./assets/images/survey.png')}
@@ -82,14 +76,6 @@ class App extends React.Component {
                       />
                     )
                     break;
-                  case 'Poll':
-                    return (
-                      <Image
-                        source={require('./assets/images/poll.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
                 }
               },
             }),

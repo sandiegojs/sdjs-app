@@ -3,7 +3,7 @@ import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { StyleSheet, Text, View, Linking, ScrollView } from 'react-native';
-import { Constants, Location, Permissions } from 'expo';
+import { Constants, Location, Permissions, WebBrowser } from 'expo';
 import { Button } from 'react-native-elements'
 import {
     setLocationError,
@@ -11,12 +11,6 @@ import {
     checkedInFalse,
     addAttendeeToEvent,
     removeAttendee,
-    rsvpEventDetailsTrue,
-    rsvpEventDetailsFalse,
-    addRSVPToEvent,
-    removeRSVPFromEvent,
-    updateEventsData,
-    updateRSVPList,
 } from '../EventsContainer/eventsActions';
 import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from '../EventsContainer/eventsDateAndTime';
 import Hyperlink from 'react-native-hyperlink'
@@ -26,18 +20,8 @@ class EventDetailsContainer extends React.Component {
     constructor(props) {
         super(props);
         this.handleButtons = this.handleButtons.bind(this);
-        this.handleUnRSVP = this.handleUnRSVP.bind(this);
-        this.handleRSVP = this.handleRSVP.bind(this);
         this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     }
-    componentDidMount() {
-        const { dispatch, user } = this.props
-        const launch = null;
-    
-        dispatch(updateEventsData(launch));
-        dispatch(updateRSVPList(user.id));
-      }
-
     _getLocationAsync = async () => {
 
         const { dispatch, eventsData, user } = this.props;
@@ -90,45 +74,17 @@ class EventDetailsContainer extends React.Component {
     }
 
 
-    //delete both, 
-    handleRSVP() {
-        const { dispatch, user, eventsData, eventDetails } = this.props;
+    _handlePressButtonAsync = async () => {
+
+        const { eventDetails, eventsData } = this.props;
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
 
-        eventObj = {
-            "event_title": eventInfo[0].name,
-            "meetup_id": eventInfo[0].id,
-            "url": eventInfo[0].group.urlname + ".org",
-            "location": {
-                "latitude": eventInfo[0].venue.lat,
-                "longitude": eventInfo[0].venue.lon
-            }
-        };
-        console.log("eventObj eventDetails rsvp",eventObj)
+        let result = await WebBrowser.openBrowserAsync(eventInfo[0].link);
 
-        dispatch(addRSVPToEvent(eventObj, user.id))
-        dispatch(rsvpEventDetailsTrue(true));
-    }
-
-    handleUnRSVP() {
-        const { dispatch, rsvpEventId, eventDetailsRSVPEventId } = this.props;
-
-        
-        dispatch(rsvpEventDetailsFalse(false));
-        if(!!eventDetailsRSVPEventId){
-            dispatch(removeRSVPFromEvent(eventDetailsRSVPEventId));
-        }
-        if(!eventDetailsRSVPEventId && !!rsvpEventId){
-        dispatch(removeRSVPFromEvent(rsvpEventId));
-        }
-        if(!!eventDetailsRSVPEventId && !!rsvpEventId){
-            dispatch(removeRSVPFromEvent(eventDetailsRSVPEventId));
-        }
-    }
-
+    };
 
     handleButtons() {
-        const { eventsData, checkedIn, eventDetailsRSVP } = this.props;
+        const { eventsData, checkedIn } = this.props;
 
         function addZero(i) {
             if (i < 10) {
@@ -187,21 +143,7 @@ class EventDetailsContainer extends React.Component {
         }
 
         if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
-            //if(!!eventDetailRSVP) if true
-            if (eventDetailsRSVP===true) {
-                nextEventButton = <Button
-                    large
-                    backgroundColor={'#D95351'}
-                    borderRadius={3}
-                    style={styles.checkInButton}
-                    raised
-                    icon={{ name: 'undo', type: 'font-awesome' }}
-                    title=' UN-RVSP'
-                    onPress={this.handleUnRSVP}
-                />
-            }
-            //if(!!eventDetailRSVP) if false
-            if (eventDetailsRSVP===false) {
+            
                 nextEventButton = <Button
                     large
                     backgroundColor={'green'}
@@ -210,9 +152,9 @@ class EventDetailsContainer extends React.Component {
                     raised
                     icon={{ name: 'check-circle', type: 'font-awesome' }}
                     title=' RSVP'
-                    onPress={this.handleRSVP}
+                    onPress={this._handlePressButtonAsync}
                 />
-            }
+            
         }
         if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
             nextEventButton = "null"
@@ -224,13 +166,27 @@ class EventDetailsContainer extends React.Component {
     render() {
         const { eventDetails, eventsData, user, locationError, dispatch } = this.props;
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
-        const latitude = eventInfo[0].venue.lat
-        const longitude = eventInfo[0].venue.lon
-        const location = { latitude, longitude}
+        var latitude = 32.7157
+        if (!!eventInfo[0].venue) {
+            latitude = eventInfo[0].venue.lat;
+        }
+        var longitude = -117.1611
+        if (!!eventInfo[0].venue) {
+            longitude = eventInfo[0].venue.lon;
+        }
+        var location = { latitude, longitude }
+
+        var locationText = null;
+        if (!!eventInfo[0].venue) {
+            locationText =  <View>
+                                <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
+                                <Text>{`${eventInfo[0].venue.address_1}, ${eventInfo[0].venue.city}`}</Text>
+                            </View>
+        }
 
         let locationErrorMessage = null;
         if (!!locationError) {
-            locationErrorMessage = <Text style={styles.locationErrorMessage}>Please Enable </Text>
+            locationErrorMessage = <Text style={styles.locationErrorMessage}>Please Enable location services </Text>
         }
 
         return (
@@ -238,12 +194,10 @@ class EventDetailsContainer extends React.Component {
                 <View>
                     <Text style={styles.title}>{eventInfo[0].name}</Text>
                     <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
-                    {/* <Text style={styles.checkInHeader}>CHECK-IN</Text> */}
                     {this.handleButtons()}
                     {locationErrorMessage}
                     <View style={styles.venueContainer}>
-                        <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
-                        <Text>{`${eventInfo[0].venue.address_1}, ${eventInfo[0].venue.city}`}</Text>
+                        {locationText}
                     </View>
                 </View>
                 <MapView
@@ -278,11 +232,10 @@ function mapStoreToProps(store) {
         eventsData: store.eventsData.eventsData,
         user: store.signupData.user,
         locationError: store.eventsData.locationError,
-        eventDetailsRSVP: store.eventsData.eventDetailsRSVP,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,
-        eventDetailsRSVP: store.eventsData.eventDetailsRSVP,
-        eventDetailsRSVPEventId: store.eventsData.eventDetailsRSVPEventId,
+ 
+       
     };
 }
 

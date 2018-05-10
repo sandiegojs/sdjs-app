@@ -16,3 +16,11 @@ export function passwordLoginEntry(text) {
         payload: text
     }
 }
+
+export function loadingScreen() {
+    
+        return {
+            type: 'LOADING_SCREEN',
+            payload: true
+        }
+    }

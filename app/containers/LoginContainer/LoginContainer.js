@@ -4,7 +4,8 @@ import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
 import {emailLoginEntry, passwordLoginEntry} from './loginActions';
-import {loginEntry, thirdPartyLogin} from '../SignupContainer/signupActions';
+import {loginEntry, thirdPartyLogin } from '../SignupContainer/signupActions';
+import {loadingScreen} from '../LoginContainer/loginActions';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -69,14 +70,16 @@ class LoginContainer extends React.Component {
 
             if (result.type === 'success') {
                 let googleResult = result
-
+dispatch(loadingScreen());
                 const googleObj = {
                     "first_name": googleResult.user.givenName,
                     "last_name": googleResult.user.familyName,
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
+                
                 dispatch(thirdPartyLogin(googleObj));
+                console.log('done')
 
             } else {
                 return { cancelled: true };
@@ -84,14 +87,15 @@ class LoginContainer extends React.Component {
         } catch (e) {
             return { error: true };
         }
+
     }
 
     render() {
-        const { user } = this.props;
+        const { user, loadingScreen } = this.props;
         const { navigate } = this.props.navigation;
-        //console.log("state", this.props)
-
-        if (!!user) { navigate('Events' ) }
+        console.log(loadingScreen)
+        if (!!user && !!loadingScreen) { navigate('Events' ) }
+        else if(!!loadingScreen){ return (<View></View>)}
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
@@ -170,7 +174,8 @@ function mapStoreToProps(store) {
         loginEmail: store.loginData.loginEmail,
         loginPassword: store.loginData.loginPassword,
         loginUser: store.loginData.loginUser,
-        user: store.signupData.user
+        user: store.signupData.user,
+        loadingScreen: store.loginData.loadingScreen
 
     };
 }

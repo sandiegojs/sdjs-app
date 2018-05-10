@@ -1,7 +1,7 @@
 import React from 'react';
 import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
-import { Constants, Location, Permissions, LinearGradient } from 'expo';
+import { Constants, Location, Permissions, LinearGradient, WebBrowser } from 'expo';
 import {
   updateEventsData,
   updateSelectedEvent,
@@ -10,54 +10,36 @@ import {
   checkedInFalse,
   addAttendeeToEvent,
   removeAttendee,
-  profileQuery,
-  rsvpTrue,
-  rsvpFalse,
-  updateRSVPList,
-  updateEventDetailsRSVP,
-  updateCheckedInStatus,
-  addRSVPToEvent,
-  removeRSVPFromEvent,
-  updateEventDetailsRSVPEventId,
+  profileQuery
 } from './eventsActions';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from "react-native-elements";
 import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
 
+
 class EventsContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.selectionHandler = this.selectionHandler.bind(this)
+
+    this.selectionHandler = this.selectionHandler.bind(this);
     this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
-    // this.profilePageHandler = this.profilePageHandler.bind(this);
     this.handleButtons = this.handleButtons.bind(this);
-    this.handleUnRSVP = this.handleUnRSVP.bind(this);
-    this.handleRSVP = this.handleRSVP.bind(this);
-
-
   }
   componentDidMount() {
     const { dispatch, user } = this.props
-    const launch = null;
-
-    dispatch(updateEventsData(launch));
-    dispatch(updateRSVPList(user.id));
-    dispatch(profileQuery(user.id))
+    dispatch(updateEventsData());
+    dispatch(profileQuery(user.id));
   }
-
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
     selectedEventId = id;
     dispatch(updateSelectedEvent(selectedEventId));
-    if(!!rsvpEventDetails){dispatch(updateEventDetailsRSVP(rsvpEventDetails));}
-    if(!rsvpEventDetails){dispatch(updateEventDetailsRSVP(false));}
-    if(!!rsvpEventId){dispatch(updateEventDetailsRSVPEventId(rsvpEventId));}
-    if(!rsvpEventId){dispatch(updateEventDetailsRSVPEventId(false));}
     navigate('EventDetails')
 
   }
+
   _getLocationAsync = async () => {
 
     const { dispatch, eventsData, user } = this.props;
@@ -115,35 +97,17 @@ class EventsContainer extends React.Component {
   //   const { navigate } = this.props.navigation;
   //   dispatch(profileQuery(user.id))
   // }
-  handleRSVP() {
-    const { dispatch, user, eventsData } = this.props;
 
-    eventObj = {
-      "event_title": eventsData[0].name,
-      "meetup_id": eventsData[0].id,
-      "url": eventsData[0].group.urlname + ".org",
-      "location": {
-        "latitude": eventsData[0].venue.lat,
-        "longitude": eventsData[0].venue.lon
-      }
-    };
+  _handlePressButtonAsync = async () => {
 
-    dispatch(addRSVPToEvent(eventObj, user.id))
-    dispatch(rsvpTrue(true));
+    const { eventsData } = this.props;
+    let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
   }
 
-  handleUnRSVP() {
-    const { dispatch, rsvpEventId, userRSVPs, eventsData } = this.props;
-    for(let i = 0; i <userRSVPs.length; i++){
-      if(eventsData[0].id === userRSVPs[i].meetup_id){
-        dispatch(removeRSVPFromEvent(userRSVPs[i].id));
-      }
-    }
-    dispatch(rsvpFalse(false));
-  }
+
 
   handleButtons() {
-    const { eventsData, checkedIn, rsvp } = this.props;
+    const { eventsData, checkedIn } = this.props;
 
     function addZero(i) {
       if (i < 10) {
@@ -202,29 +166,16 @@ class EventsContainer extends React.Component {
     }
 
     if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
-      if (rsvp) {
-        nextEventButton = <Button
-          large
-          backgroundColor={'#D95351'}
-          borderRadius={3}
-          style={styles.checkInButton}
-          icon={{ name: 'undo', type: 'font-awesome' }}
-          title=' UN-RVSP'
-          onPress={this.handleUnRSVP}
-        />
-      }
-
-      if (!rsvp) {
-        nextEventButton = <Button
-          large
-          backgroundColor={'green'}
-          borderRadius={3}
-          style={styles.checkInButton}
-          icon={{ name: 'check-circle', type: 'font-awesome' }}
-          title=' RSVP'
-          onPress={this.handleRSVP}
-        />
-      }
+      nextEventButton = <Button
+        large
+        backgroundColor={'green'}
+        borderRadius={3}
+        style={styles.checkInButton}
+        raised
+        icon={{ name: 'check-circle', type: 'font-awesome' }}
+        title=' RSVP'
+        onPress={this._handlePressButtonAsync}
+      />
     }
     if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
       nextEventButton = "null"
@@ -235,32 +186,15 @@ class EventsContainer extends React.Component {
 
 
   render() {
-    const { eventsData, locationError, userRSVPs, user, dispatch } = this.props;
-    for(let i = 0; i <eventsData.length; i++){
-      for(let j = 0; j < userRSVPs.length; j++){
-        if(eventsData[i].id === userRSVPs[j].meetup_id){
-          eventsData[i].rsvpEventDetails = true;
-          eventsData[i].rsvpEventId = userRSVPs[j].id;
-        }
-      }
-    }
-    
-    console.log("rsvpList", userRSVPs)
-    console.log("eventsData inside the render", eventsData)
-
+    const { eventsData, locationError, user, dispatch } = this.props;
     let locationErrorMessage = null;
     if (!!locationError) {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
     }
     if (!!eventsData) {
-      for(let i = 0; i <userRSVPs.length; i++){
-        if(eventsData[0].id === userRSVPs[i].meetup_id){
-          dispatch(rsvpTrue(true));
-        }
-      }
       return (
         <View
-        style={styles.listWrapper}
+          style={styles.listWrapper}
         >
           <Text style={{ textAlign: 'center', paddingTop: 10, fontWeight: 'bold' }}>Next Event: {eventsData[0].name} </Text>
           {this.handleButtons()}
@@ -273,7 +207,7 @@ class EventsContainer extends React.Component {
                 key={item.id}
                 title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)} ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
                 subtitle={item.name}
-                onPress={() => this.selectionHandler(item.id, item.rsvpEventDetails, item.rsvpEventId)
+                onPress={() => this.selectionHandler(item.id)
                 }
               />}
             />
@@ -316,10 +250,8 @@ function mapStoreToProps(store) {
     checkedIn: store.eventsData.checkedIn,
     user: store.signupData.user,
     attendeeId: store.eventsData.attendeeId,
-    rsvp: store.eventsData.rsvp,
-    userRSVPs: store.eventsData.userRSVPs,
-    checkedInStatus: store.eventsData.checkedInStatus,
-    rsvpEventId: store.eventsData.rsvpEventId
+    checkedInStatus: store.eventsData.checkedInStatus
+
 
   };
 }
