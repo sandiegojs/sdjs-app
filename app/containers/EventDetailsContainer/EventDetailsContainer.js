@@ -84,7 +84,7 @@ class EventDetailsContainer extends React.Component {
     };
 
     handleButtons() {
-        const { eventsData, checkedIn } = this.props;
+        const { eventsData, checkedIn, eventDetails } = this.props;
 
         function addZero(i) {
             if (i < 10) {
@@ -98,8 +98,8 @@ class EventDetailsContainer extends React.Component {
         var d = new Date();
         var todaysISOdate = d.toISOString().slice(0, 10);
 
-        var exampleDate = "2018-02-06";// for testing, REMOVE and update to todaysISODate
-        var nextEvent = eventsData[0];
+        var exampleDate = "2018-05-15";// for testing, REMOVE and update to todaysISODate
+        var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
         var hours = addZero(d.getHours());
         var mins = addZero(d.getMinutes());
@@ -108,14 +108,14 @@ class EventDetailsContainer extends React.Component {
 
 
         var currentTime = null;//parseInt(hours+mins);  currently set to 1230 for testing
-        var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
+        var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
         var hoursPriorToEvent = eventTime - 100;
         var hoursAfterEventStart = eventTime + 400;
 
-        currentTime = 1300//parseInt(hours+mins);  currently set to 1230 for testing
+        currentTime = 1900//parseInt(hours+mins);  currently set to 1230 for testing
 
 
-        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
+        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
             if (checkedIn) {
                 nextEventButton = <Button
                     large
@@ -142,21 +142,21 @@ class EventDetailsContainer extends React.Component {
             }
         }
 
-        if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
-            
-                nextEventButton = <Button
-                    large
-                    backgroundColor={'green'}
-                    borderRadius={3}
-                    style={styles.checkInButton}
-                    raised
-                    icon={{ name: 'check-circle', type: 'font-awesome' }}
-                    title=' RSVP'
-                    onPress={this._handlePressButtonAsync}
-                />
-            
+        if (currentTime < hoursPriorToEvent || exampleDate != nextEvent[0].local_date) {
+
+            nextEventButton = <Button
+                large
+                backgroundColor={'green'}
+                borderRadius={3}
+                style={styles.checkInButton}
+                raised
+                icon={{ name: 'check-circle', type: 'font-awesome' }}
+                title=' RSVP'
+                onPress={this._handlePressButtonAsync}
+            />
+
         }
-        if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
+        if (currentTime > hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
             nextEventButton = "null"
         }
 
@@ -178,10 +178,11 @@ class EventDetailsContainer extends React.Component {
 
         var locationText = null;
         if (!!eventInfo[0].venue) {
-            locationText =  <View>
-                                <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
-                                <Text>{`${eventInfo[0].venue.address_1}, ${eventInfo[0].venue.city}`}</Text>
-                            </View>
+            locationText = <View>
+                <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
+                <Text style={styles.venueAddress}>{`${eventInfo[0].venue.address_1}`}</Text>
+                <Text style={styles.venueAddress}>{`${eventInfo[0].venue.city}, ${eventInfo[0].venue.state}`}</Text>
+            </View>
         }
 
         let locationErrorMessage = null;
@@ -194,6 +195,11 @@ class EventDetailsContainer extends React.Component {
                 <View>
                     <Text style={styles.title}>{eventInfo[0].name}</Text>
                     <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
+                    <Text style={{ fontWeight: 'bold', paddingLeft:20, fontSize: 16, marginBottom:10 }}>
+                        Are you going? 
+                        <Text style={{ fontSize: 16, fontWeight: '100' }}> {`  ${eventInfo[0].rsvp_limit - eventInfo[0].yes_rsvp_count} spots left`}
+                        </Text>
+                    </Text>
                     {this.handleButtons()}
                     {locationErrorMessage}
                     <View style={styles.venueContainer}>
@@ -217,7 +223,7 @@ class EventDetailsContainer extends React.Component {
                 </MapView>
                 <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
                     <View>
-                        <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, '')}</Text>
+                        <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
                     </View>
                 </Hyperlink>
             </ScrollView>
@@ -234,8 +240,8 @@ function mapStoreToProps(store) {
         locationError: store.eventsData.locationError,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,
- 
-       
+
+
     };
 }
 
@@ -245,7 +251,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontWeight: 'bold',
         fontFamily: 'Kailasa',
-        lineHeight: 50
+        lineHeight: 50,
+        paddingTop: 5
     },
     container: {
         paddingHorizontal: 20,
@@ -255,6 +262,8 @@ const styles = StyleSheet.create({
     bodyText: {
         lineHeight: 24,
         marginTop: 19,
+        paddingRight: 10,
+        paddingLeft: 10,
         marginBottom: 50,
         fontSize: 14
     },
@@ -274,12 +283,15 @@ const styles = StyleSheet.create({
         color: '#346abb',
         letterSpacing: 3,
         marginTop: -10,
-        marginBottom: 50
+        marginBottom: 30
     },
     venueName: {
         fontSize: 16,
         fontWeight: 'bold',
         marginTop: 43
+    },
+    venueAddress: {
+        marginTop: 1,
     },
     venueContainer: {
         paddingLeft: 20

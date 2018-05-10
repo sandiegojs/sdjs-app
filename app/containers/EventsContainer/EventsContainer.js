@@ -121,7 +121,7 @@ class EventsContainer extends React.Component {
     var d = new Date();
     var todaysISOdate = d.toISOString().slice(0, 10);
 
-    var exampleDate = "2018-02-06";// for testing, REMOVE and update to todaysISODate
+    var exampleDate = "2018-05-15";// for testing, REMOVE and update to todaysISODate
     var nextEvent = eventsData[0];
 
     var hours = addZero(d.getHours());
@@ -135,47 +135,47 @@ class EventsContainer extends React.Component {
     var hoursPriorToEvent = eventTime - 100;
     var hoursAfterEventStart = eventTime + 400;
 
-    currentTime = 1300//parseInt(hours+mins);  currently set to 1230 for testing
+    currentTime = 1900//parseInt(hours+mins);  currently set to 1230 for testing
 
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
       //if(!!checkedInStatus) is true
       if (checkedIn) {
         nextEventButton = <Button
-          large
-          backgroundColor={'#D95351'}
-          borderRadius={3}
-          style={styles.checkInButton}
-          icon={{ name: 'undo', type: 'font-awesome' }}
-          title=' UNDO CHECK-IN'
-          onPress={this.handleUnCheckIn}
-        />
+                            large
+                            backgroundColor={'#D95351'}
+                            borderRadius={3}
+                            style={styles.checkInButton}
+                            icon={{ name: 'undo', type: 'font-awesome' }}
+                            title=' UNDO CHECK-IN'
+                            onPress={this.handleUnCheckIn}
+                          />
       }
       //if(!checkedInStatus) is false
       if (!checkedIn) {
         nextEventButton = <Button
-          large
-          backgroundColor={'#346abb'}
-          borderRadius={3}
-          style={styles.checkInButton}
-          icon={{ name: 'check-circle', type: 'font-awesome' }}
-          title=' CHECK-IN'
-          onPress={this._getLocationAsync}
-        />
+                            large
+                            backgroundColor={'#346abb'}
+                            borderRadius={3}
+                            style={styles.checkInButton}
+                            icon={{ name: 'check-circle', type: 'font-awesome' }}
+                            title=' CHECK-IN'
+                            onPress={this._getLocationAsync}
+                          />
       }
     }
 
     if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
       nextEventButton = <Button
-        large
-        backgroundColor={'green'}
-        borderRadius={3}
-        style={styles.checkInButton}
-        raised
-        icon={{ name: 'check-circle', type: 'font-awesome' }}
-        title=' RSVP'
-        onPress={this._handlePressButtonAsync}
-      />
+                          large
+                          backgroundColor={'green'}
+                          borderRadius={3}
+                          style={styles.checkInButton}
+                          raised
+                          icon={{ name: 'check-circle', type: 'font-awesome' }}
+                          title=' RSVP'
+                          onPress={this._handlePressButtonAsync}
+                        />
     }
     if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
       nextEventButton = "null"
@@ -233,13 +233,13 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   checkInButton: {
-    marginTop: 25
+    //marginTop: 25
   },
   mainContainer: {
     paddingTop: 15
   },
   listWrapper: {
-    marginBottom: 457
+    marginBottom: 380
   }
 });
 
