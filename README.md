@@ -8,9 +8,9 @@ The main app source code is in `\app` and the local development server is a loop
 
 * Running instance of MongoDB on port 27017
 * Run `npm install` once from the root project directory and once in the app folder to ensure all dependancies are installed.
-* Install the Expo app on your mobile device
-* Install Expo XDE
-* Create an account on Expo
+* Install the [Expo app](https://expo.io/tools#client) on your mobile device
+* Install [Expo XDE](https://github.com/expo/xde/releases)
+* Create an account on [Expo website](https://expo.io)
 
 ## Starting the app
 
