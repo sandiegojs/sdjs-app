@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "sdci",
-    "description": "This project is really great.",
-    "slug": "sdci",
+    "name": "sdjs-app",
+    "description": "San Diego JavaScript Community, Inc.",
+    "slug": "sdjs",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],

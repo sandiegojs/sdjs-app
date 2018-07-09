@@ -1,0 +1,13 @@
+{
+  "MongoDB": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "sdjsapp",
+    "password": "",
+    "name": "MongoDB",
+    "user": "",
+    "connector": "loopback-connector-mongodb",
+    "file":"db.json"
+  }
+}
