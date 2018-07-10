@@ -129,12 +129,10 @@ dispatch(loadingScreen());
                 </View>
                 <View>
                     <Button 
-                    title='New User? Sign Up Here'
-                    style={styles.switchToLogin}
+                    title='CREATE ACCOUNT'
+                    style={styles.button}
+                    backgroundColor={'#346abb'}
                     onPress={() => this.props.navigation.navigate('Signup')}
-                    transparent={true}
-                    color='#346abb'
-
                     />
                 </View>
             </View>
@@ -152,6 +150,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 55,
+        marginBottom: 20,
         width: 320
     },
     socialButtonsContainer: {

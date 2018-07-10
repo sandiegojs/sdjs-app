@@ -2,7 +2,7 @@
   "MongoDB": {
     "host": "ds046267.mlab.com",
     "port": 46267,
-    "url": "mongodb://clay:teagen123@ds046267.mlab.com:46267/sdci",
+    "url": "mongodb://localhost/local",
     "database": "sdci",
     "password": "teagen123",
     "name": "MongoDB",
