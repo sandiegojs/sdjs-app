@@ -77,7 +77,7 @@ dispatch(loadingScreen());
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
-                
+
                 dispatch(thirdPartyLogin(googleObj));
                 console.log('done')
 
@@ -100,12 +100,12 @@ dispatch(loadingScreen());
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>EMAIL</FormLabel>
-                    <FormInput 
+                    <FormInput
                         defaultValue={this.props.loginEmail}
                         onChangeText={this.handleLoginEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput 
-                        secureTextEntry={true} 
+                    <FormInput
+                        secureTextEntry={true}
                         onChangeText={this.handleLoginPasswordInput} />
                 </View>
                 <Button style={styles.button}
@@ -132,7 +132,7 @@ dispatch(loadingScreen());
                         title='GOOGLE' />
                 </View> */}
                 <View>
-                    <Button 
+                    <Button
                     title='CREATE ACCOUNT'
                     style={styles.button}
                     backgroundColor={'#346abb'}
