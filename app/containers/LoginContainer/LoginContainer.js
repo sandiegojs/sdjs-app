@@ -133,10 +133,12 @@ dispatch(loadingScreen());
                 </View> */}
                 <View>
                     <Button 
-                    title='CREATE ACCOUNT'
-                    style={styles.button}
-                    backgroundColor={'#346abb'}
+                    title='New User? Sign Up Here'
+                    style={styles.switchToLogin}
                     onPress={() => this.props.navigation.navigate('Signup')}
+                    transparent = {true}
+                    color='#346abb'
+
                     />
                 </View>
             </View>
