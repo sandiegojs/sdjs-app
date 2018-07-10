@@ -135,7 +135,7 @@ class SignupContainer extends React.Component {
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='SIGN UP' />
-                <View style={styles.socialButtonsContainer}>
+                {/* <View style={styles.socialButtonsContainer}>
                     <Button
                         onPress={this._authenticateWithGithubAsync}
                         backgroundColor={'#346abb'}
@@ -150,7 +150,7 @@ class SignupContainer extends React.Component {
                         large
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
-                </View>
+                </View> */}
             </View>
 
         )
