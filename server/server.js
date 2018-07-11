@@ -12,7 +12,9 @@ app.start = function () {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     if (app.get('loopback-component-explorer')) {
-      var explorerPath = app.get('loopback-component-explorer').mountPath;    }
+      var explorerPath = app.get('loopback-component-explorer').mountPath;
+      console.log(`Server is running on port :: ${baseUrl}`);
+    }
   });
 };
 
@@ -25,11 +27,3 @@ boot(app, __dirname, function (err) {
   if (require.main === module)
     app.start();
 });
-
-
-
-
-
-
-
-

@@ -111,7 +111,7 @@ dispatch(loadingScreen());
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='LOG IN' />
-                <View style={styles.socialButtonsContainer}>
+                {/* <View style={styles.socialButtonsContainer}>
                     <Button
                         onPress={this._authenticateWithGithubAsync}
                         backgroundColor={'#346abb'}
@@ -126,15 +126,13 @@ dispatch(loadingScreen());
                         large
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
-                </View>
+                </View> */}
                 <View>
                     <Button 
-                    title='New User? Sign Up Here'
-                    style={styles.switchToLogin}
+                    title='CREATE ACCOUNT'
+                    style={styles.button}
+                    backgroundColor={'#346abb'}
                     onPress={() => this.props.navigation.navigate('Signup')}
-                    transparent={true}
-                    color='#346abb'
-
                     />
                 </View>
             </View>
@@ -152,6 +150,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 55,
+        marginBottom: 20,
         width: 320
     },
     socialButtonsContainer: {
