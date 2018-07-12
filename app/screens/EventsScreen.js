@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {  
-    BackHandler, 
-    Alert, 
     StyleSheet, 
     Text, 
     View, 
@@ -16,36 +14,7 @@ import RootNavigator from '../tabNavigation/MainTabNavigator';
 
 
 export default class EventsScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-
-
-  }
   
-handleBackButton = () => {               
-  Alert.alert(
-      'Exit App',
-      'Exiting the application?', [{
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel'
-      }, {
-          text: 'OK',
-          onPress: () => BackHandler.exitApp()
-      }, ], {
-          cancelable: false
-      }
-   )
-   return true;
- }
- componentDidMount() {
-  BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-}
-
-componentWillUnmount() {
-  BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-}
   static navigationOptions = {
     title: 'San Diego JS',
     tabBarLabel:'Events',
