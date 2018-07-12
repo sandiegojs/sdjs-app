@@ -1,9 +1,9 @@
 const defaultState = {
-    firstName: " ",
-    lastName: " ",
-    email: " ",
-    password: " ",
-    user: ""
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    user: ''
 }
 
 export default function signupReducer(state = defaultState, action) {
