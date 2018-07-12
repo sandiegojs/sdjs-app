@@ -29,65 +29,29 @@ class SignupContainer extends React.Component {
     }
 
     handleFirstNameInput(text) {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }
+        const { dispatch } = this.props;
         dispatch(firstNameEntry(text));
     }
 
     handleLastNameInput(text) {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }
+        const { dispatch } = this.props;
         dispatch(lastNameEntry(text));
     }
 
     handleEmailInput(text) {
-<<<<<<< HEAD
         const { dispatch } = this.props;
-=======
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }
->>>>>>> disabled submit button in SignupContainer to ensure empty form cannot be submitted
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-<<<<<<< HEAD
         const { dispatch } = this.props;
-        dispatch(passwordEntry(text));
-    }
-=======
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }
         dispatch(passwordEntry(text));
     }
 
     handleSignUpSubmission() {
-        const { dispatch } = this.props;
-        const { firstName, lastName, email, password } = this.props;
->>>>>>> disabled submit button in SignupContainer to ensure empty form cannot be submitted
-
-    handleSignUpSubmission() {
         const { dispatch, firstName, lastName, email, password } = this.props;
+
+        const { navigate } = this.props.navigation;
 
         if(firstName == '' || lastName == '' || email == '' || password == '') {
             Alert.alert(
@@ -105,12 +69,8 @@ class SignupContainer extends React.Component {
                 "email": email,
                 "password": password,
             }
-            dispatch(signUpEntry(signUpObj));
+            dispatch(signUpEntry(signUpObj, navigate));
         }
-<<<<<<< HEAD
-=======
-        dispatch(signUpEntry(signUpObj));
->>>>>>> disabled submit button in SignupContainer to ensure empty form cannot be submitted
     }
 
     _authenticateWithGithubAsync = async () => {
@@ -162,7 +122,6 @@ class SignupContainer extends React.Component {
         const { firstName, lastName, email, password, user } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (!!user) { navigate('Events') }
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
@@ -179,7 +138,6 @@ class SignupContainer extends React.Component {
                     onPress={this.handleSignUpSubmission}
                     backgroundColor={'#346abb'}
                     borderRadius={3}
-                    disabled={this.state.buttonDisable}
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='SIGN UP' />
