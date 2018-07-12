@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var app = module.exports = loopback();
+// const PORT =PORT || 3000;
 
 app.use(bodyParser.json());
 
