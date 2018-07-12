@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './rootStore';
-import { Image } from 'react-native';
+import { Image,  BackHandler, Alert } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
@@ -13,6 +13,30 @@ import SlackScreen from './screens/SlackScreen';
 
 
 class App extends React.Component {
+  
+handleBackButton = () => {               
+  Alert.alert(
+      'Exit App',
+      'Exiting the application?', [{
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel'
+      }, {
+          text: 'OK',
+          onPress: () => BackHandler.exitApp()
+      }, ], {
+          cancelable: false
+      }
+   )
+   return true;
+ }
+ componentDidMount() {
+  BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+}
+
+componentWillUnmount() {
+  BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+}
   render() {
 
     const AppRoot = StackNavigator({ 
@@ -82,7 +106,7 @@ class App extends React.Component {
             tabBarComponent: TabBarBottom,
             tabBarPosition: 'bottom',
             animationEnabled: false,
-            swipeEnabled: false,
+            swipeEnabled: true,
             initialRouteName: 'Events',
           }
         )
