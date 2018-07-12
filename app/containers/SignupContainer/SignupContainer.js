@@ -25,12 +25,24 @@ class SignupContainer extends React.Component {
     }
 
     handleFirstNameInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }
         dispatch(firstNameEntry(text));
     }
 
     handleLastNameInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }        
         dispatch(lastNameEntry(text));
     }
 
