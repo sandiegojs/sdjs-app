@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import {
     BackHandler,
     Alert,
@@ -9,6 +10,15 @@ import {
     Button,
     TextInput,
     StatusBar,
+=======
+import {  
+    StyleSheet, 
+    Text, 
+    View, 
+    Button, 
+    TextInput, 
+    StatusBar, 
+>>>>>>> Ccf sdjsapp 6 (#10)
     navigate } from 'react-native';
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
 import RootNavigator from '../tabNavigation/MainTabNavigator';
@@ -16,6 +26,10 @@ import RootNavigator from '../tabNavigation/MainTabNavigator';
 
 
 export default class EventsScreen extends React.Component {
+<<<<<<< HEAD
+=======
+  
+>>>>>>> Ccf sdjsapp 6 (#10)
   static navigationOptions = {
     title: 'San Diego JS',
     tabBarLabel:'Events',
