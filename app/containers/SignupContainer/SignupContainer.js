@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
-import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
+import { StyleSheet, Text, View, TextInput, Linking, Alert } from 'react-native';
+import { FormLabel, FormInput, Button, FormValidationMessage, Icon } from 'react-native-elements';
 import {
     firstNameEntry,
     lastNameEntry,
@@ -17,7 +17,6 @@ class SignupContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttonDisable: true,
             githubToken: null,
             error: null,
         };
@@ -30,60 +29,46 @@ class SignupContainer extends React.Component {
     }
 
     handleFirstNameInput(text) {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }
+        const { dispatch } = this.props;
         dispatch(firstNameEntry(text));
     }
 
     handleLastNameInput(text) {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }        
+        const { dispatch } = this.props;    
         dispatch(lastNameEntry(text));
     }
 
     handleEmailInput(text) {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }        
+        const { dispatch } = this.props;   
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
-            this.setState({ buttonDisable: true });
-        } else {
-            this.setState({ buttonDisable: false });
-        }        
+        const { dispatch } = this.props;      
         dispatch(passwordEntry(text));
     }
 
     handleSignUpSubmission() {
-        const { dispatch } = this.props;
-        const { firstName, lastName, email, password } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
 
-        const signUpObj = {
-            "first_name": firstName,
-            "last_name": lastName,
-            "email": email,
-            "password": password,
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            Alert.alert(
+                'Form Error',
+                'Complete all fields to submit', [{
+                    text: 'OK',
+                    onPress: null,
+                    style: 'cancel'
+                }]
+            )
+        } else {
+            const signUpObj = {
+                "first_name": firstName,
+                "last_name": lastName,
+                "email": email,
+                "password": password,
+            }
+            dispatch(signUpEntry(signUpObj));
         }
-        dispatch(signUpEntry(signUpObj));
     }
 
     _authenticateWithGithubAsync = async () => {
@@ -152,7 +137,6 @@ class SignupContainer extends React.Component {
                     onPress={this.handleSignUpSubmission}
                     backgroundColor={'#346abb'}
                     borderRadius={3}
-                    disabled={this.state.buttonDisable}
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='SIGN UP' />
@@ -187,6 +171,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 55,
+        marginBottom: 20,
         width: 320
     },
     socialButtonsContainer: {
