@@ -189,46 +189,130 @@ class EventDetailsContainer extends React.Component {
         if (!!locationError) {
             locationErrorMessage = <Text style={styles.locationErrorMessage}>Please Enable location services </Text>
         }
+        console.log(eventInfo[0].rsvp_limit, eventInfo[0].yes_rsvp_count, 'hellloooo');
 
-        return (
-            <ScrollView style={styles.container}>
-                <View>
-                    <Text style={styles.title}>{eventInfo[0].name}</Text>
-                    <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
-                    <Text style={{ fontWeight: 'bold', paddingLeft:20, fontSize: 16, marginBottom:10 }}>
-                        Are you going? 
-                        <Text style={{ fontSize: 16, fontWeight: '100' }}> {`  ${eventInfo[0].rsvp_limit - eventInfo[0].yes_rsvp_count} spots left`}
-                        </Text>
-                    </Text>
-                    {this.handleButtons()}
-                    {locationErrorMessage}
-                    <View style={styles.venueContainer}>
-                        {locationText}
-                    </View>
-                </View>
-                <MapView
-                    style={styles.map}
-                    initialRegion={{
-                        latitude: latitude,
-                        longitude: longitude,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                >
-                    <MapView.Marker
-                        key={1}
-                        title='My Marker'
-                        coordinate={{ latitude: latitude, longitude: longitude }}
-                    />
-                </MapView>
-                <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
+        if (eventInfo[0].rsvp_limit == undefined) {
+            return (
+                <ScrollView style={styles.container}>
                     <View>
-                        <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
+                        <Text style={styles.title}>{eventInfo[0].name}</Text>
+                        <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
+                        <Text style={{ fontWeight: 'bold', paddingLeft: 20, fontSize: 16, marginBottom: 10 }}>
+                            Are you going?
+                            <Text style={{ fontSize: 16, fontWeight: '100' }}> {`  ${eventInfo[0].yes_rsvp_count} people are going`}
+                            </Text>
+                        </Text>
+                        {this.handleButtons()}
+                        {locationErrorMessage}
+                        <View style={styles.venueContainer}>
+                            {locationText}
+                        </View>
                     </View>
-                </Hyperlink>
-            </ScrollView>
+                    <MapView
+                        style={styles.map}
+                        initialRegion={{
+                            latitude: latitude,
+                            longitude: longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    >
+                        <MapView.Marker
+                            key={1}
+                            title='My Marker'
+                            coordinate={{ latitude: latitude, longitude: longitude }}
+                        />
+                    </MapView>
+                    <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
+                        <View>
+                            <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
+                        </View>
+                    </Hyperlink>
+                </ScrollView>
+            )
 
-        )
+        } else if (eventInfo[0].yes_rsvp_count == undefined) {
+
+            return (
+                <ScrollView style={styles.container}>
+                    <View>
+                        <Text style={styles.title}>{eventInfo[0].name}</Text>
+                        <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
+                        <Text style={{ fontWeight: 'bold', paddingLeft: 20, fontSize: 16, marginBottom: 10 }}>
+                            Are you going?
+                        </Text>
+                        {this.handleButtons()}
+                        {locationErrorMessage}
+                        <View style={styles.venueContainer}>
+                            {locationText}
+                        </View>
+                    </View>
+                    <MapView
+                        style={styles.map}
+                        initialRegion={{
+                            latitude: latitude,
+                            longitude: longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    >
+                        <MapView.Marker
+                            key={1}
+                            title='My Marker'
+                            coordinate={{ latitude: latitude, longitude: longitude }}
+                        />
+                    </MapView>
+                    <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
+                        <View>
+                            <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
+                        </View>
+                    </Hyperlink>
+                </ScrollView>
+
+            )
+
+        } else {
+
+            return (
+                <ScrollView style={styles.container}>
+                    <View>
+                        <Text style={styles.title}>{eventInfo[0].name}</Text>
+                        <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
+                        <Text style={{ fontWeight: 'bold', paddingLeft: 20, fontSize: 16, marginBottom: 10 }}>
+                            Are you going?
+                        <Text style={{ fontSize: 16, fontWeight: '100' }}> {`  ${eventInfo[0].rsvp_limit - eventInfo[0].yes_rsvp_count} spots left`}
+                            </Text>
+                        </Text>
+                        {this.handleButtons()}
+                        {locationErrorMessage}
+                        <View style={styles.venueContainer}>
+                            {locationText}
+                        </View>
+                    </View>
+                    <MapView
+                        style={styles.map}
+                        initialRegion={{
+                            latitude: latitude,
+                            longitude: longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    >
+                        <MapView.Marker
+                            key={1}
+                            title='My Marker'
+                            coordinate={{ latitude: latitude, longitude: longitude }}
+                        />
+                    </MapView>
+                    <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
+                        <View>
+                            <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
+                        </View>
+                    </Hyperlink>
+                </ScrollView>
+
+            )
+        }
     }
 }
 
