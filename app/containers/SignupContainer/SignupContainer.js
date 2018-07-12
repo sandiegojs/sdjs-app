@@ -29,22 +29,46 @@ class SignupContainer extends React.Component {
     }
 
     handleFirstNameInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }
         dispatch(firstNameEntry(text));
     }
 
     handleLastNameInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }
         dispatch(lastNameEntry(text));
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }
         dispatch(passwordEntry(text));
     }
 
@@ -138,6 +162,7 @@ class SignupContainer extends React.Component {
                     onPress={this.handleSignUpSubmission}
                     backgroundColor={'#346abb'}
                     borderRadius={3}
+                    disabled={this.state.buttonDisable}
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='SIGN UP' />
@@ -188,7 +213,6 @@ const styles = StyleSheet.create({
         // padding: 50
     },
     switchToLogin: {
-
     }
 });
 
