@@ -16,9 +16,9 @@ import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 class SignupContainer extends React.Component {
     constructor(props) {
         super(props);
-        state = {
+        this.state = {
+            buttonDisable: true,
             githubToken: null,
-            redditToken: null,
             error: null,
         };
 
@@ -29,26 +29,50 @@ class SignupContainer extends React.Component {
         this.handleSignUpSubmission = this.handleSignUpSubmission.bind(this);
     }
 
-
     handleFirstNameInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }
         dispatch(firstNameEntry(text));
     }
 
     handleLastNameInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }        
         dispatch(lastNameEntry(text));
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }        
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
+
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            this.setState({ buttonDisable: true });
+        } else {
+            this.setState({ buttonDisable: false });
+        }        
         dispatch(passwordEntry(text));
     }
+
     handleSignUpSubmission() {
         const { dispatch } = this.props;
         const { firstName, lastName, email, password } = this.props;
@@ -60,10 +84,6 @@ class SignupContainer extends React.Component {
             "password": password,
         }
         dispatch(signUpEntry(signUpObj));
-
-
-
-
     }
 
     _authenticateWithGithubAsync = async () => {
@@ -132,6 +152,7 @@ class SignupContainer extends React.Component {
                     onPress={this.handleSignUpSubmission}
                     backgroundColor={'#346abb'}
                     borderRadius={3}
+                    disabled={this.state.buttonDisable}
                     large
                     icon={{ name: 'sign-in', type: 'font-awesome' }}
                     title='SIGN UP' />
@@ -182,8 +203,6 @@ const styles = StyleSheet.create({
     },
     switchToLogin: {
         
-
-
     }
 });
 
