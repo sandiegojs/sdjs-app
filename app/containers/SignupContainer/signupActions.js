@@ -53,7 +53,7 @@ export function loginEntry(loginObj) {
         .catch(error => {
             console.log(error);
             console.log('invalid');
-            alert('Invalid Login')
+            // alert('Invalid Login')
         })
     }
 }
