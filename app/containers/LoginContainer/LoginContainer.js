@@ -21,7 +21,6 @@ class LoginContainer extends React.Component {
         this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
     }
 
-
     handleLoginEmailInput(text) {
         const { dispatch } = this.props;
         dispatch(emailLoginEntry(text));
@@ -31,6 +30,7 @@ class LoginContainer extends React.Component {
         const { dispatch } = this.props;
         dispatch(passwordLoginEntry(text));
     }
+
     handleLoginSubmission() {
         const { dispatch } = this.props;
         const { loginEmail, loginPassword, user } = this.props;
@@ -48,7 +48,7 @@ class LoginContainer extends React.Component {
         dispatch(loginEntry(loginObj));
 
     }
-  
+
     _authenticateWithGithubAsync = async () => {
         const { dispatch } = this.props;
         try {
@@ -65,7 +65,7 @@ class LoginContainer extends React.Component {
             this.setState({ error: JSON.stringify(e) });
         }
     }
-    
+
     signInWithGoogleAsync = async () => {
         const { dispatch } = this.props;
         try {
@@ -74,7 +74,7 @@ class LoginContainer extends React.Component {
                 iosClientId: '283233290300-rr1pffml6mfnacp9amsrhokemmc5nras.apps.googleusercontent.com',
                 scopes: ['profile', 'email'],
             });
-            
+
             if (result.type === 'success') {
                 let googleResult = result
                 dispatch(loadingScreen());
@@ -84,17 +84,16 @@ class LoginContainer extends React.Component {
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
-                
+
                 dispatch(thirdPartyLogin(googleObj));
                 console.log('done')
-                
+
             } else {
                 return { cancelled: true };
             }
         } catch (e) {
             return { error: true };
         }
-        
     }
 
     render() {

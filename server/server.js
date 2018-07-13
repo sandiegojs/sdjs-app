@@ -9,9 +9,9 @@ app.use(bodyParser.json());
 app.start = function () {
   // start the web server
   return app.listen(function () {
-   
-    app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
+    console.log(`Server is running on port :: ${baseUrl}`);
+    app.emit('started');
     if (app.get('loopback-component-explorer')) {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log(`Server is running on port :: ${baseUrl}`);
