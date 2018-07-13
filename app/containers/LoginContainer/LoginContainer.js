@@ -1,18 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
-import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
+import { FormLabel, FormInput, Button, Icon, FormValidationMessage } from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
-import {emailLoginEntry, passwordLoginEntry} from './loginActions';
-import {loginEntry, thirdPartyLogin } from '../SignupContainer/signupActions';
-import {loadingScreen} from '../LoginContainer/loginActions';
+import { emailLoginEntry, passwordLoginEntry } from './loginActions';
+import { loginEntry, thirdPartyLogin } from '../SignupContainer/signupActions';
+import { loadingScreen } from '../LoginContainer/loginActions';
 
 class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
-        state = {
+        this.state = {
             githubToken: null,
             error: null,
+            message: false
         };
 
         this.handleLoginEmailInput = this.handleLoginEmailInput.bind(this);
@@ -32,16 +33,22 @@ class LoginContainer extends React.Component {
     }
     handleLoginSubmission() {
         const { dispatch } = this.props;
-        const { loginEmail, loginPassword } = this.props;
+        const { loginEmail, loginPassword, user } = this.props;
+        const { navigate } = this.props.navigation;
 
         const loginObj = {
             "email": loginEmail,
             "password": loginPassword,
         }
+        if (user.email === loginEmail && user.password === loginPassword) {
+            return (navigate('Events'))
+        } else {
+            (this.setState({ message: true }));
+        }
         dispatch(loginEntry(loginObj));
 
     }
-
+  
     _authenticateWithGithubAsync = async () => {
         const { dispatch } = this.props;
         try {
@@ -58,7 +65,7 @@ class LoginContainer extends React.Component {
             this.setState({ error: JSON.stringify(e) });
         }
     }
-
+    
     signInWithGoogleAsync = async () => {
         const { dispatch } = this.props;
         try {
@@ -67,10 +74,10 @@ class LoginContainer extends React.Component {
                 iosClientId: '283233290300-rr1pffml6mfnacp9amsrhokemmc5nras.apps.googleusercontent.com',
                 scopes: ['profile', 'email'],
             });
-
+            
             if (result.type === 'success') {
                 let googleResult = result
-dispatch(loadingScreen());
+                dispatch(loadingScreen());
                 const googleObj = {
                     "first_name": googleResult.user.givenName,
                     "last_name": googleResult.user.familyName,
@@ -80,33 +87,36 @@ dispatch(loadingScreen());
                 
                 dispatch(thirdPartyLogin(googleObj));
                 console.log('done')
-
+                
             } else {
                 return { cancelled: true };
             }
         } catch (e) {
             return { error: true };
         }
-
+        
     }
 
     render() {
-        const { user, loadingScreen } = this.props;
-        const { navigate } = this.props.navigation;
-        console.log(loadingScreen)
-        if (!!user && !!loadingScreen) { navigate('Events' ) }
-        else if(!!loadingScreen){ return (<View></View>)}
+        // const { user, loadingScreen, loginEmail, loginPassword } = this.props;
+        // const { navigate } = this.props.navigation;
+        // console.log(loadingScreen)
+        // if (!!user && !!loadingScreen) { navigate('Events' ) }
+        // else if(!!loadingScreen){ return (<View></View>)}
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>EMAIL</FormLabel>
-                    <FormInput 
+                    <FormInput
                         defaultValue={this.props.loginEmail}
                         onChangeText={this.handleLoginEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput 
-                        secureTextEntry={true} 
+                    <FormInput
+                        secureTextEntry={true}
                         onChangeText={this.handleLoginPasswordInput} />
+                </View>
+                <View>
+                    {this.state.message ? <FormValidationMessage> Invalid Login </FormValidationMessage> : null}
                 </View>
                 <Button style={styles.button}
                     onPress={this.handleLoginSubmission}
@@ -132,11 +142,11 @@ dispatch(loadingScreen());
                         title='GOOGLE' />
                 </View> */}
                 <View>
-                    <Button 
-                    title='CREATE ACCOUNT'
-                    style={styles.button}
-                    backgroundColor={'#346abb'}
-                    onPress={() => this.props.navigation.navigate('Signup')}
+                    <Button
+                        title='CREATE ACCOUNT'
+                        style={styles.button}
+                        backgroundColor={'#346abb'}
+                        onPress={() => this.props.navigation.navigate('Signup')}
                     />
                 </View>
             </View>
@@ -168,6 +178,11 @@ const styles = StyleSheet.create({
     formContainer: {
         width: 350
         // padding: 50
+    },
+
+    formMessage: {
+        height: 200,
+        width: 200
     }
 
 });
