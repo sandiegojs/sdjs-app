@@ -149,7 +149,6 @@ class LoginContainer extends React.Component {
                     />
                 </View>
             </View>
-
         )
     }
 }
