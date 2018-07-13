@@ -8,13 +8,13 @@ app.use(bodyParser.json());
 
 app.start = function () {
   // start the web server
-  return app.listen(function () {   
+  return app.listen(function () {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     if (app.get('loopback-component-explorer')) {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log(`Server is running on port :: ${baseUrl}`);
-}
+    }
   });
 };
 
@@ -25,6 +25,6 @@ boot(app, __dirname, function (err) {
 
   // start the server if `$ node server.js`
   if (require.main === module)
-    app.start();     
+    app.start();
 
 });
