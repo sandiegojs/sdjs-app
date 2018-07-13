@@ -8,8 +8,7 @@ app.use(bodyParser.json());
 
 app.start = function () {
   // start the web server
-  return app.listen(function () {
-   
+  return app.listen(function () {   
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     if (app.get('loopback-component-explorer')) {
