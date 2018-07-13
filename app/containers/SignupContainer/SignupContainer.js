@@ -30,7 +30,7 @@ class SignupContainer extends React.Component {
     }
 
     handleLastNameInput(text) {
-        const { dispatch } = this.props;    
+        const { dispatch } = this.props;
         dispatch(lastNameEntry(text));
     }
 
