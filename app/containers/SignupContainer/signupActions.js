@@ -43,7 +43,6 @@ export function signUpEntry(signUpObj) {
     }
 }
 export function loginEntry(loginObj) {
-    // console.log("loginObject",loginObj)
     return {
         type: 'LOGIN_ENTRY',
         payload: axios
