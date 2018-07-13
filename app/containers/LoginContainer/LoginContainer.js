@@ -100,9 +100,13 @@ dispatch(loadingScreen());
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>EMAIL</FormLabel>
-                    <FormInput onChangeText={this.handleLoginEmailInput} />
+                    <FormInput 
+                        defaultValue={this.props.loginEmail}
+                        onChangeText={this.handleLoginEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput secureTextEntry={true} onChangeText={this.handleLoginPasswordInput} />
+                    <FormInput 
+                        secureTextEntry={true} 
+                        onChangeText={this.handleLoginPasswordInput} />
                 </View>
                 <Button style={styles.button}
                     onPress={this.handleLoginSubmission}

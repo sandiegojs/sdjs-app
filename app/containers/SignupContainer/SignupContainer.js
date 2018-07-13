@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
-import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
+import { StyleSheet, Text, View, TextInput, Linking, Alert } from 'react-native';
+import { FormLabel, FormInput, Button, FormValidationMessage, Icon } from 'react-native-elements';
 import {
     firstNameEntry,
     lastNameEntry,
@@ -16,9 +16,8 @@ import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 class SignupContainer extends React.Component {
     constructor(props) {
         super(props);
-        state = {
+        this.state = {
             githubToken: null,
-            redditToken: null,
             error: null,
         };
 
@@ -28,7 +27,6 @@ class SignupContainer extends React.Component {
         this.handlePasswordInput = this.handlePasswordInput.bind(this);
         this.handleSignUpSubmission = this.handleSignUpSubmission.bind(this);
     }
-
 
     handleFirstNameInput(text) {
         const { dispatch } = this.props;
@@ -41,29 +39,36 @@ class SignupContainer extends React.Component {
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch } = this.props;   
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;
+        const { dispatch } = this.props;      
         dispatch(passwordEntry(text));
     }
+
     handleSignUpSubmission() {
-        const { dispatch } = this.props;
-        const { firstName, lastName, email, password } = this.props;
+        const { dispatch, firstName, lastName, email, password } = this.props;
 
-        const signUpObj = {
-            "first_name": firstName,
-            "last_name": lastName,
-            "email": email,
-            "password": password,
+        if(firstName == '' || lastName == '' || email == '' || password == '') {
+            Alert.alert(
+                'Form Error',
+                'Complete all fields to submit', [{
+                    text: 'OK',
+                    onPress: null,
+                    style: 'cancel'
+                }]
+            )
+        } else {
+            const signUpObj = {
+                "first_name": firstName,
+                "last_name": lastName,
+                "email": email,
+                "password": password,
+            }
+            dispatch(signUpEntry(signUpObj));
         }
-        dispatch(signUpEntry(signUpObj));
-
-
-
-
     }
 
     _authenticateWithGithubAsync = async () => {
@@ -166,6 +171,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 55,
+        marginBottom: 20,
         width: 320
     },
     socialButtonsContainer: {
@@ -182,8 +188,6 @@ const styles = StyleSheet.create({
     },
     switchToLogin: {
         
-
-
     }
 });
 
