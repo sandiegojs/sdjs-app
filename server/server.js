@@ -14,6 +14,7 @@ app.start = function () {
     if (app.get('loopback-component-explorer')) {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log(`Server is running on port :: ${baseUrl}`);
+      }
     }
   });
 };
