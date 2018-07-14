@@ -140,7 +140,7 @@ class LoginContainer extends React.Component {
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
                 </View> */}
-                <View>
+                <View style={{paddingTop: 30}}>
                     <Button
                     title='CREATE ACCOUNT'
                     style={styles.button}
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         paddingTop: 30
     },
     button: {
-        marginTop: 55,
+        marginTop: 30,
         marginBottom: 20,
         width: 320
     },
@@ -175,14 +175,11 @@ const styles = StyleSheet.create({
     },
     formContainer: {
         width: 350
-        // padding: 50
     },
-
     formMessage: {
         height: 200,
         width: 200
     }
-
 });
 
 function mapStoreToProps(store) {
@@ -192,7 +189,6 @@ function mapStoreToProps(store) {
         loginUser: store.loginData.loginUser,
         user: store.signupData.user,
         loadingScreen: store.loginData.loadingScreen
-
     };
 }
 
