@@ -39,12 +39,12 @@ class SignupContainer extends React.Component {
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;   
+        const { dispatch } = this.props;
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;      
+        const { dispatch } = this.props;
         dispatch(passwordEntry(text));
     }
 
