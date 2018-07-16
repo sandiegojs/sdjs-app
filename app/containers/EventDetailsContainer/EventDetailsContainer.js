@@ -189,6 +189,7 @@ class EventDetailsContainer extends React.Component {
         if (!!locationError) {
             locationErrorMessage = <Text style={styles.locationErrorMessage}>Please Enable location services </Text>
         }
+        console.log(eventInfo[0].rsvp_limit, eventInfo[0].yes_rsvp_count, 'hellloooo');
 
         if (eventInfo[0].rsvp_limit == undefined) {
             return (
