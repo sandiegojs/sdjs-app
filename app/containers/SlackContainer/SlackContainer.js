@@ -4,7 +4,6 @@ import { ImageBackground, Text, View, StyleSheet } from 'react-native';
 import { Button } from "react-native-elements";
 import { Constants, WebBrowser } from 'expo';
 
-
 class SlackContiner extends React.Component {
     constructor(props) {
         super(props);
@@ -18,14 +17,10 @@ class SlackContiner extends React.Component {
         this.setState({ result });
     };
 
-
     render() {
-        const resizeMode = 'center';
-
         return (
             <ImageBackground style={{
                 flex: 1,
-                resizeMode,
                 position: 'absolute',
                 width: '100%',
                 height: '100%',
@@ -47,6 +42,7 @@ class SlackContiner extends React.Component {
         )
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
