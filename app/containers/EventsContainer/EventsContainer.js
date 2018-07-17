@@ -29,7 +29,7 @@ class EventsContainer extends React.Component {
   componentDidMount() {
     const { dispatch, user } = this.props
     dispatch(updateEventsData());
-    dispatch(profileQuery(user.id));
+    // dispatch(profileQuery(user.id));
   }
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
     const { navigate } = this.props.navigation;
