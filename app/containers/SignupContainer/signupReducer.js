@@ -57,7 +57,9 @@ export default function signupReducer(state = defaultState, action) {
             }
         }
         case 'SIGN_UP_ENTRY_REJECTED': {
-            return state;
+            return {
+                ...state
+            }
         }
         case 'LOGIN_ENTRY_PENDING': {
             return {
