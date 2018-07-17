@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import Alert from 'react-native';
 
 export function firstNameEntry(text) {
 
@@ -57,7 +58,13 @@ export function loginEntry(loginObj, navigate) {
         })
         .catch(error => {
             console.log(error);
-            return Promise.resolve(error);
+            alert(
+                'Invalid Login',
+                'Please submit a valid e-mail and password', [{
+                    text: 'OK',
+                }]
+            )
+            return Promise.resolve(error);           
         })
     }
 }
