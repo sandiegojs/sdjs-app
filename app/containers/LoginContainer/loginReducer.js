@@ -1,6 +1,6 @@
 const defaultState = {
-    loginEmail: " ",
-    loginPassword: " ",
+    loginEmail: '',
+    loginPassword: '',
     loadingScreen: false,
     user: null
 }

@@ -1,9 +1,13 @@
+import { loadingScreen } from "../LoginContainer/loginActions";
+
 const defaultState = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    user: ''
+    token: null,
+    id: null,
+    user: null
 }
 
 export default function signupReducer(state = defaultState, action) {
@@ -35,16 +39,40 @@ export default function signupReducer(state = defaultState, action) {
                 password: payload
             }
         }
+        case 'SIGN_UP_ENTRY_PENDING': {
+            return {
+                ...state,
+            }
+        }    
         case 'SIGN_UP_ENTRY_FULFILLED': {
             return {
                 ...state,
                 user: payload
             }
         }
-        case 'LOGIN_ENTRY_FULFILLED': {
+        case 'SIGN_UP_ENTRY_REJECTED': {
+            return state;
+        }
+        case 'LOGIN_ENTRY_PENDING': {
             return {
                 ...state,
-                user: payload
+                loadingScreen: true
+            }
+        }
+        case 'LOGIN_ENTRY_FULFILLED': {
+            const loginInfo = payload;
+            return {
+                ...state,
+                user: payload,
+                token: loginInfo.id,
+                id: loginInfo.userId,
+                loadingScreen: false
+            }
+        }
+        case 'LOGIN_ENTRY_REJECTED': {
+            return {
+                ...state,
+                loadingScreen: false
             }
         }
         case 'THIRD_PARTY_LOGIN_FULFILLED': {
