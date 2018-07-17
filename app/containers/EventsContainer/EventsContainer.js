@@ -204,12 +204,12 @@ class EventsContainer extends React.Component {
             <FlatList
               data={eventsData}
               renderItem={({ item }) => <ListItem
-                key={item.id}
                 title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)} ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
                 subtitle={item.name}
                 onPress={() => this.selectionHandler(item.id)
                 }
               />}
+              keyExtractor={(item, index) => item.id}
             />
           </List>
         </View>
