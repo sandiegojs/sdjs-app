@@ -67,8 +67,15 @@ export function loginEntry(loginObj, navigate) {
             return response.data
         })
         .catch(error => {
+            alert(
+                'Invalid Login',
+                'Please submit a valid e-mail and password', [{
+                    text: 'OK',
+                }]
+            )
             console.log(error);
-            console.log('invalid');
+            console.log('invalid login');
+            return Promise.resolve(error);
         })
     }
 }
