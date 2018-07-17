@@ -19,6 +19,7 @@ class SignupContainer extends React.Component {
         this.state = {
             githubToken: null,
             error: null,
+            isError: false,
         };
 
         this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
@@ -49,8 +50,9 @@ class SignupContainer extends React.Component {
     }
 
     handleSignUpSubmission() {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
+        const { dispatch, firstName, lastName, email, password} = this.props;
+        const { navigate } = this.props.navigation;
+        
         if(firstName == '' || lastName == '' || email == '' || password == '') {
             Alert.alert(
                 'Form Error',
@@ -66,8 +68,8 @@ class SignupContainer extends React.Component {
                 "last_name": lastName,
                 "email": email,
                 "password": password,
-            }
-            dispatch(signUpEntry(signUpObj));
+            } 
+            dispatch(signUpEntry(signUpObj, navigate));
         }
     }
 
@@ -120,7 +122,6 @@ class SignupContainer extends React.Component {
         const { firstName, lastName, email, password, user } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (!!user) { navigate('Events') }
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
@@ -131,7 +132,9 @@ class SignupContainer extends React.Component {
                     <FormLabel>EMAIL</FormLabel>
                     <FormInput onChangeText={this.handleEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} />
+                    <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} blurOnSubmit={false} />   
+                </View>
+                <View>
                 </View>
                 <Button style={styles.button}
                     onPress={this.handleSignUpSubmission}

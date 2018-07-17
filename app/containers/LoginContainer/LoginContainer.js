@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
@@ -92,8 +93,7 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        const { user, loadingScreen, loginEmail, loginPassword } = this.props;
-   
+        const { user, loadingScreen, loginEmail, loginPassword } = this.props;   
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
