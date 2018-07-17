@@ -45,9 +45,15 @@ export default function signupReducer(state = defaultState, action) {
             }
         }    
         case 'SIGN_UP_ENTRY_FULFILLED': {
+               
             return {
                 ...state,
-                user: payload
+                user: payload,
+            }
+        }
+        case 'SIGN_UP_ENTRY_REJECTED': {
+            return {
+                ...state,
             }
         }
         case 'SIGN_UP_ENTRY_REJECTED': {
@@ -62,6 +68,7 @@ export default function signupReducer(state = defaultState, action) {
         case 'LOGIN_ENTRY_FULFILLED': {
             const loginInfo = payload;
             return {
+              
                 ...state,
                 user: payload,
                 token: loginInfo.id,
@@ -78,7 +85,8 @@ export default function signupReducer(state = defaultState, action) {
         case 'THIRD_PARTY_LOGIN_FULFILLED': {
             return {
                 ...state,
-                user: payload
+                user: payload,
+                
             }
         }
         // case 'GOOGLE_ENTRY_FULFILLED': {
