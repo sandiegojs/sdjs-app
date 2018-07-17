@@ -4,7 +4,7 @@ export function profileUpdate(newProfileData) {
     return {
         type: 'PROFILE_UPDATE',
         payload: axios
-                    .patch('https://sdci-backend.herokuapp.com/api/users/' + newProfileData.id, newProfileData)
+                    .patch('https://sdjs-app.now.sh/api/users/' + newProfileData.id, newProfileData)
                     .then(r => r.data)
 
     }
