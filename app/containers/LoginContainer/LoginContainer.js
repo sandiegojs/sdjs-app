@@ -40,13 +40,8 @@ class LoginContainer extends React.Component {
             "email": loginEmail,
             "password": loginPassword,
         }
-        if (user.email === loginEmail && user.password === loginPassword) {
-            return (navigate('Events'))
-        } else {
-            (this.setState({ message: true }));
-        }
-        dispatch(loginEntry(loginObj));
 
+        dispatch(loginEntry(loginObj, navigate));
     }
 
     _authenticateWithGithubAsync = async () => {
@@ -97,17 +92,14 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        // const { user, loadingScreen, loginEmail, loginPassword } = this.props;
-        // const { navigate } = this.props.navigation;
-        // console.log(loadingScreen)
-        // if (!!user && !!loadingScreen) { navigate('Events' ) }
-        // else if(!!loadingScreen){ return (<View></View>)}
+        const { user, loadingScreen, loginEmail, loginPassword } = this.props;
+   
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>EMAIL</FormLabel>
                     <FormInput
-                        defaultValue={this.props.loginEmail}
+                        defaultValue={loginEmail}
                         onChangeText={this.handleLoginEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
                     <FormInput
@@ -188,7 +180,9 @@ function mapStoreToProps(store) {
         loginPassword: store.loginData.loginPassword,
         loginUser: store.loginData.loginUser,
         user: store.signupData.user,
-        loadingScreen: store.loginData.loadingScreen
+        loadingScreen: store.loginData.loadingScreen,
+        token: store.signupData.token,
+        id: store.signupData.id
     };
 }
 

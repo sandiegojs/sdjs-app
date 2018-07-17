@@ -5,7 +5,6 @@ module.exports = function (app) {
 
     app.post('/signup', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
-        console.log(baseUrl);
         const { first_name, last_name, email, password } = req.body;
         //Create a new user
         axios
@@ -81,17 +80,19 @@ module.exports = function (app) {
     // app.use(loopback.token({
     //     headers: [  ]
     // }));
-    app.post('/login', (req, res) => {
-        let baseUrl = app.get('url').replace(/\/$/, '');
-        const { email, password } = req.body;
+    // ABOVE CODE COMMENTED OUT CAUSE THAT'S HOW CLAY AND FRANCISCO LEFT IT
+    // BELOW LOGIN ROUTE COMMENTED OUT BECAUSE WE DECIDED TO HANDLE THIS COMPLETELY IN SIGNUPACTIONS.JS
+    // app.post('/login', (req, res) => {
+    //     let baseUrl = app.get('url').replace(/\/$/, '');
+    //     const { email, password } = req.body;
 
-        axios.post(baseUrl + '/api/users/login', { email, password })
-            .then(r => res.json({
-                token: r.data.id,
-                id: r.data.userId
-            }))
-            .catch(e => res.status(e.statusCode).send(e.message))
-    });
+    //     axios.post(baseUrl + '/api/users/login', { email, password })
+    //         .then(r => res.json({
+    //             token: r.data.id,
+    //             id: r.data.userId
+    //         }))
+    //         .catch(e => res.status(e.statusCode).send(e.message))
+    // });
 
     app.post('/loginthirdparty', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');

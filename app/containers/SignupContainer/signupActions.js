@@ -31,36 +31,42 @@ export function passwordEntry(text) {
         payload: text
     }
 }
+
 export function signUpEntry(signUpObj) {
     return {
         type: 'SIGN_UP_ENTRY',
         payload: axios
-        .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
+        .post('https://sdjs-app.now.sh/signup', signUpObj)
         .then( response => response.data)
         .catch(error => {
             console.log(error)
         })
     }
 }
-export function loginEntry(loginObj) {
+
+export function loginEntry(loginObj, navigate) {
+    const email = loginObj.email;
+    const password = loginObj.password;
     return {
         type: 'LOGIN_ENTRY',
         payload: axios
-        .post('https://sdci-backend.herokuapp.com/login', loginObj)
+        .post('https://sdjs-app.now.sh/api/users/login', { email, password })
         .then( response => {
-                return response.data
+            navigate('Events')
+            return response.data
         })
         .catch(error => {
             console.log(error);
-            console.log('invalid');
+            return Promise.resolve(error);
         })
     }
 }
+
 export function thirdPartyLogin(loginObj) {
     return {
         type: 'THIRD_PARTY_LOGIN',
         payload: axios
-        .post('https://sdci-backend.herokuapp.com/loginthirdparty', loginObj)
+        .post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
         .then( response => response.data)
         .catch(error => {
             console.log("this one", error)
