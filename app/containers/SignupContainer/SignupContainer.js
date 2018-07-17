@@ -19,6 +19,7 @@ class SignupContainer extends React.Component {
         this.state = {
             githubToken: null,
             error: null,
+            isError: false,
         };
 
         this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
@@ -39,18 +40,17 @@ class SignupContainer extends React.Component {
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;   
+        const { dispatch } = this.props;
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;      
+        const { dispatch } = this.props;
         dispatch(passwordEntry(text));
     }
 
     handleSignUpSubmission() {
-        const { dispatch, firstName, lastName, email, password } = this.props;
-
+        const { dispatch, firstName, lastName, email, password} = this.props;
         const { navigate } = this.props.navigation;
 
         if(firstName == '' || lastName == '' || email == '' || password == '') {
@@ -132,7 +132,9 @@ class SignupContainer extends React.Component {
                     <FormLabel>EMAIL</FormLabel>
                     <FormInput onChangeText={this.handleEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} />
+                    <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} blurOnSubmit={false} />
+                </View>
+                <View>
                 </View>
                 <Button style={styles.button}
                     onPress={this.handleSignUpSubmission}
