@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
 export function firstNameEntry(text) {
 
@@ -25,21 +26,31 @@ export function emailEntry(text) {
 }
 
 export function passwordEntry(text) {
-
     return {
         type: 'PASSWORD_ENTRY',
         payload: text
     }
 }
 
-export function signUpEntry(signUpObj) {
+export function signUpEntry(signUpObj, navigate) {
     return {
         type: 'SIGN_UP_ENTRY',
         payload: axios
-        .post('https://sdjs-app.now.sh/signup', signUpObj)
-        .then( response => response.data)
+        .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
+        .then( response => {
+            // Must force error with if statement b/c Loopback does not send a failing res.status for repeat emails
+            if (response.data === 'Request failed with status code 422' ){
+                let error = {error: 'invalid'}
+                throw error                      
+            }
+           else {
+            navigate('Events')
+            return response.data
+           }
+         
+        })
         .catch(error => {
-            console.log(error)
+            alert('An account exists for this email address. Please try again.')
         })
     }
 }
@@ -57,7 +68,7 @@ export function loginEntry(loginObj, navigate) {
         })
         .catch(error => {
             console.log(error);
-            return Promise.resolve(error);
+            console.log('invalid');
         })
     }
 }
