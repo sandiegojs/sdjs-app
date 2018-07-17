@@ -106,9 +106,9 @@ class LoginContainer extends React.Component {
                         secureTextEntry={true}
                         onChangeText={this.handleLoginPasswordInput} />
                 </View>
-                <View>
+                {/* <View>
                     {this.state.message ? <FormValidationMessage> Invalid Login </FormValidationMessage> : null}
-                </View>
+                </View> */}
                 <Button style={styles.button}
                     onPress={this.handleLoginSubmission}
                     backgroundColor={'#346abb'}
