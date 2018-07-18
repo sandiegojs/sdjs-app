@@ -38,8 +38,8 @@ export function signUpEntry(signUpObj, navigate) {
         payload: axios
         .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
         .then( response => {
-            // Must force error with if statement b/c Loopback does not send a failing res.status for repeat emails
-            if (response.data === 'Request failed with status code 422' ){
+             // Must force error with if statement b/c Loopback does not send a failing res.status for repeat emails
+             if (response.data === 'Request failed with status code 422' ){
                 let error = {error: 'invalid'}
                 throw error                      
             }
@@ -57,18 +57,25 @@ export function signUpEntry(signUpObj, navigate) {
 
 export function loginEntry(loginObj, navigate) {
     const email = loginObj.email;
-    const password = loginObj.password;
+    const password = loginObj.password;    
     return {
         type: 'LOGIN_ENTRY',
         payload: axios
         .post('https://sdjs-app.now.sh/api/users/login', { email, password })
         .then( response => {
             navigate('Events')
-            return response.data
+                return response.data
         })
         .catch(error => {
+            alert(
+            'Invalid Login',
+            'Please submit a valid e-mail and password', [{
+                text: 'OK',
+            }]
+        )
             console.log(error);
-            console.log('invalid');
+            console.log('invalid login');
+            return Promise.resolve(error);
         })
     }
 }
