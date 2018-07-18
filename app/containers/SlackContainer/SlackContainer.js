@@ -33,7 +33,7 @@ class SlackContiner extends React.Component {
                     large
                     backgroundColor={'#346abb'}
                     borderRadius={3}
-                    style={{style:styles.paragraph, width:300, alignItems: 'center',marginTop: 180}}
+                    style={{ width:300, alignItems: 'center', marginTop: 180}}
                     title="SAN DIEGO JS SLACK"
                     onPress={this._handlePressButtonAsync}
                 />

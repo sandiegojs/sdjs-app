@@ -20,12 +20,10 @@ class SDJSContiner extends React.Component {
 
 
     render() {
-        const resizeMode = 'center';
 
         return (
             <ImageBackground style={{
                 flex: 1,
-                resizeMode,
                 position: 'absolute',
                 width: '100%',
                 height: '100%',
@@ -38,7 +36,7 @@ class SDJSContiner extends React.Component {
                     large
                     backgroundColor={'#346abb'}
                     borderRadius={3}
-                    style={{style:styles.paragraph, width:220, alignItems: 'center',marginTop: 180}}
+                    style={{width:220, alignItems: 'center', marginTop: 180}}
                     title="SAN DIEGO"
                     onPress={this._handlePressButtonAsync}
                 />
