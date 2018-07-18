@@ -42,8 +42,8 @@ class EventDetailsContainer extends React.Component {
             ]
 
             var startPoint = { //venue lat lon
-                latitude: 32.70893096923828,//todaysEvents.venue.lat
-                longitude: -117.15599060058594//todaysEvents.venue.lon
+                latitude: todaysEvents.venue.lat,
+                longitude: todaysEvents.venue.lon
             }
 
             var maxDistanceInKM = 5; // 500m distance
@@ -92,18 +92,18 @@ class EventDetailsContainer extends React.Component {
         var d = new Date();
         var todaysISOdate = d.toISOString().slice(0, 10);
 
-        var exampleDate = "2018-07-18";// for testing, REMOVE and update to todaysISODate
+        var exampleDate = todaysISOdate;
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
-        var hours = addZero(d.getHours());
-        var mins = addZero(d.getMinutes());
+        var hours = (addZero(d.getHours())).toString();
+        var mins = (addZero(d.getMinutes())).toString();
 
-        var currentTime = null;//parseInt(hours+mins);  currently set to 1230 for testing
+        var currentTime = parseInt(hours+mins);  //currently set to 1230 for testing
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
         var hoursPriorToEvent = eventTime - 100;
         var hoursAfterEventStart = eventTime + 400;
 
-        currentTime = 1900//parseInt(hours+mins);  currently set to 1230 for testing
+        currentTime = parseInt(hours+mins); // currently set to 1230 for testing
 
         if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
             if (checkedIn) {
@@ -313,8 +313,6 @@ function mapStoreToProps(store) {
         locationError: store.eventsData.locationError,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,
-
-
     };
 }
 
