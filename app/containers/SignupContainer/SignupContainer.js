@@ -16,11 +16,6 @@ import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 class SignupContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            githubToken: null,
-            error: null,
-            isError: false,
-        };
 
         this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
@@ -132,7 +127,7 @@ class SignupContainer extends React.Component {
                     <FormLabel>EMAIL</FormLabel>
                     <FormInput onChangeText={this.handleEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} blurOnSubmit={false} />
+                    <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} />
                 </View>
                 <View>
                 </View>

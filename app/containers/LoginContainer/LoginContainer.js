@@ -11,12 +11,7 @@ import { loadingScreen } from '../LoginContainer/loginActions';
 class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            githubToken: null,
-            error: null,
-            message: false
-        };
-
+        
         this.handleLoginEmailInput = this.handleLoginEmailInput.bind(this);
         this.handleLoginPasswordInput = this.handleLoginPasswordInput.bind(this);
         this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
@@ -106,9 +101,6 @@ class LoginContainer extends React.Component {
                         secureTextEntry={true}
                         onChangeText={this.handleLoginPasswordInput} />
                 </View>
-                {/* <View>
-                    {this.state.message ? <FormValidationMessage> Invalid Login </FormValidationMessage> : null}
-                </View> */}
                 <Button style={styles.button}
                     onPress={this.handleLoginSubmission}
                     backgroundColor={'#346abb'}
