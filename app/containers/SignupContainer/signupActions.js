@@ -36,7 +36,7 @@ export function signUpEntry(signUpObj, navigate) {
     return {
         type: 'SIGN_UP_ENTRY',
         payload: axios
-        .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
+        .post('https://sdjs-app.now.sh/signup', signUpObj)
         .then( response => {
             var statusCode = RegExp('422*');
             signUpRes = response.data;
