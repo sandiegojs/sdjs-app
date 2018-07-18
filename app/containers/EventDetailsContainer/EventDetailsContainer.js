@@ -19,6 +19,7 @@ import EventMap from './EventMap'
 class EventDetailsContainer extends React.Component {
     constructor(props) {
         super(props);
+
         this.handleButtons = this.handleButtons.bind(this);
         this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     }
@@ -30,7 +31,6 @@ class EventDetailsContainer extends React.Component {
             let errorMessage = 'Permission to access location was denied';
             dispatch(setLocationError(errorMessage));
         } else {
-
 
             let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
@@ -62,7 +62,6 @@ class EventDetailsContainer extends React.Component {
                 };
                 dispatch(checkedInTrue(true));
                 dispatch(addAttendeeToEvent(eventObj, user.id));
-
             }
         }
     };
@@ -73,14 +72,11 @@ class EventDetailsContainer extends React.Component {
         dispatch(checkedInFalse(false));
     }
 
-
     _handlePressButtonAsync = async () => {
-
         const { eventDetails, eventsData } = this.props;
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
 
         let result = await WebBrowser.openBrowserAsync(eventInfo[0].link);
-
     };
 
     handleButtons() {
@@ -93,19 +89,14 @@ class EventDetailsContainer extends React.Component {
             return i;
         }
 
-
-
         var d = new Date();
         var todaysISOdate = d.toISOString().slice(0, 10);
 
-        var exampleDate = "2018-05-15";// for testing, REMOVE and update to todaysISODate
+        var exampleDate = "2018-07-18";// for testing, REMOVE and update to todaysISODate
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
         var hours = addZero(d.getHours());
         var mins = addZero(d.getMinutes());
-
-
-
 
         var currentTime = null;//parseInt(hours+mins);  currently set to 1230 for testing
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
@@ -113,7 +104,6 @@ class EventDetailsContainer extends React.Component {
         var hoursAfterEventStart = eventTime + 400;
 
         currentTime = 1900//parseInt(hours+mins);  currently set to 1230 for testing
-
 
         if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
             if (checkedIn) {

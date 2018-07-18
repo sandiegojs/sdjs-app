@@ -18,8 +18,6 @@ export function updateEventsData() {
 
                 return errorSearch;
             })
-
-
     }
 }
 
@@ -31,50 +29,54 @@ export function updateSelectedEvent(selectedEventId) {
 }
 
 export function addLocationData(location) {
-
     return {
         type: 'ADD_LOCATION_DATA',
         payload: location
-
-
     }
 }
+
 export function setLocationError(errorMessage) {
     return {
         type: 'SET_LOCATION_ERROR',
         payload: errorMessage
     }
 }
+
 export function checkedInTrue(checkedInTrue) {
     return {
         type: 'CHECKED_IN_TRUE',
         payload: true
     }
 }
+
 export function checkedInFalse(checkedInFalse) {
     return {
         type: 'CHECKED_IN_FALSE',
         payload: false
     }
 }
+
 export function rsvpTrue(rsvpTrue) {
     return {
         type: 'RSVP_TRUE',
         payload: true
     }
 }
+
 export function rsvpFalse(rsvpFalse) {
     return {
         type: 'RSVP_FALSE',
         payload: false
     }
 }
+
 export function rsvpEventDetailsTrue(rsvpEventDetailsTrue) {
     return {
         type: 'RSVP_EVENT_DETAILS_TRUE',
         payload: true
     }
 }
+
 export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
     return {
         type: 'RSVP_EVENT_DETAILS_FALSE',
@@ -95,7 +97,6 @@ export function addAttendeeToEvent(eventObj, userId) {
                 const errorSearch = {
                     error: true
                 }
-
                 return errorSearch;
             })
     }
@@ -178,9 +179,7 @@ export function removeRSVPFromEvent(rsvpEventId) {
     }
 }
 
-
 export function updateRSVPList(user) {
-
     return {
         type: 'UPDATE_RSVP_LIST',
         payload:
@@ -194,11 +193,8 @@ export function updateRSVPList(user) {
                 const errorSearch = {
                     error: true
                 }
-
                 return errorSearch;
             })
-
-
     }
 }
 
@@ -208,6 +204,7 @@ export function updateEventDetailsRSVP(rsvp) {
         payload: rsvp
     }
 }
+
 export function updateEventDetailsRSVPEventId(eventDetailsRSVPEventId) {
     return {
         type: 'UPDATE_EVENT_DETAILS_RSVP_EVENT_ID',
