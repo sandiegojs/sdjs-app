@@ -38,8 +38,11 @@ export function signUpEntry(signUpObj, navigate) {
         payload: axios
         .post('https://sdci-backend.herokuapp.com/signup', signUpObj)
         .then( response => {
-             // Must force error with if statement b/c Loopback does not send a failing res.status for repeat emails
-             if (response.data === 'Request failed with status code 422' ){
+            var statusCode = RegExp('422*');
+            signUpRes = response.data;
+            // Must force error with if statement b/c Loopback does not send a failing res.status for repeat emails
+            if (statusCode.test(signUpRes)){
+                console.log(statusCode.test(signUpRes))
                 let error = {error: 'invalid'}
                 throw error                      
             }
