@@ -1,25 +1,21 @@
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
-import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
+import { FormLabel, FormInput, Button, Icon, FormValidationMessage } from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
-import {emailLoginEntry, passwordLoginEntry} from './loginActions';
-import {loginEntry, thirdPartyLogin } from '../SignupContainer/signupActions';
-import {loadingScreen} from '../LoginContainer/loginActions';
+import { emailLoginEntry, passwordLoginEntry } from './loginActions';
+import { loginEntry, thirdPartyLogin } from '../SignupContainer/signupActions';
+import { loadingScreen } from '../LoginContainer/loginActions';
 
 class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
-        state = {
-            githubToken: null,
-            error: null,
-        };
-
+        
         this.handleLoginEmailInput = this.handleLoginEmailInput.bind(this);
         this.handleLoginPasswordInput = this.handleLoginPasswordInput.bind(this);
         this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
     }
-
 
     handleLoginEmailInput(text) {
         const { dispatch } = this.props;
@@ -30,16 +26,18 @@ class LoginContainer extends React.Component {
         const { dispatch } = this.props;
         dispatch(passwordLoginEntry(text));
     }
+
     handleLoginSubmission() {
         const { dispatch } = this.props;
-        const { loginEmail, loginPassword } = this.props;
+        const { loginEmail, loginPassword, user } = this.props;
+        const { navigate } = this.props.navigation;
 
         const loginObj = {
             "email": loginEmail,
             "password": loginPassword,
         }
-        dispatch(loginEntry(loginObj));
 
+        dispatch(loginEntry(loginObj, navigate));
     }
 
     _authenticateWithGithubAsync = async () => {
@@ -70,14 +68,14 @@ class LoginContainer extends React.Component {
 
             if (result.type === 'success') {
                 let googleResult = result
-dispatch(loadingScreen());
+                dispatch(loadingScreen());
                 const googleObj = {
                     "first_name": googleResult.user.givenName,
                     "last_name": googleResult.user.familyName,
                     "email": googleResult.user.email,
                     "password": googleResult.user.id
                 }
-                
+
                 dispatch(thirdPartyLogin(googleObj));
                 console.log('done')
 
@@ -87,25 +85,20 @@ dispatch(loadingScreen());
         } catch (e) {
             return { error: true };
         }
-
     }
 
     render() {
-        const { user, loadingScreen } = this.props;
-        const { navigate } = this.props.navigation;
-        console.log(loadingScreen)
-        if (!!user && !!loadingScreen) { navigate('Events' ) }
-        else if(!!loadingScreen){ return (<View></View>)}
+        const { user, loadingScreen, loginEmail, loginPassword } = this.props;   
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>EMAIL</FormLabel>
-                    <FormInput 
-                        defaultValue={this.props.loginEmail}
+                    <FormInput
+                        defaultValue={loginEmail}
                         onChangeText={this.handleLoginEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
-                    <FormInput 
-                        secureTextEntry={true} 
+                    <FormInput
+                        secureTextEntry={true}
                         onChangeText={this.handleLoginPasswordInput} />
                 </View>
                 <Button style={styles.button}
@@ -131,8 +124,8 @@ dispatch(loadingScreen());
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
                 </View> */}
-                <View>
-                    <Button 
+                <View style={{paddingTop: 30}}>
+                    <Button
                     title='CREATE ACCOUNT'
                     style={styles.button}
                     backgroundColor={'#346abb'}
@@ -140,7 +133,6 @@ dispatch(loadingScreen());
                     />
                 </View>
             </View>
-
         )
     }
 }
@@ -153,7 +145,7 @@ const styles = StyleSheet.create({
         paddingTop: 30
     },
     button: {
-        marginTop: 55,
+        marginTop: 30,
         marginBottom: 20,
         width: 320
     },
@@ -167,9 +159,11 @@ const styles = StyleSheet.create({
     },
     formContainer: {
         width: 350
-        // padding: 50
+    },
+    formMessage: {
+        height: 200,
+        width: 200
     }
-
 });
 
 function mapStoreToProps(store) {
@@ -178,8 +172,9 @@ function mapStoreToProps(store) {
         loginPassword: store.loginData.loginPassword,
         loginUser: store.loginData.loginUser,
         user: store.signupData.user,
-        loadingScreen: store.loginData.loadingScreen
-
+        loadingScreen: store.loginData.loadingScreen,
+        token: store.signupData.token,
+        id: store.signupData.id
     };
 }
 

@@ -16,10 +16,6 @@ import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 class SignupContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            githubToken: null,
-            error: null,
-        };
 
         this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
         this.handleLastNameInput = this.handleLastNameInput.bind(this);
@@ -39,17 +35,18 @@ class SignupContainer extends React.Component {
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;   
+        const { dispatch } = this.props;
         dispatch(emailEntry(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;      
+        const { dispatch } = this.props;
         dispatch(passwordEntry(text));
     }
 
     handleSignUpSubmission() {
-        const { dispatch, firstName, lastName, email, password } = this.props;
+        const { dispatch, firstName, lastName, email, password} = this.props;
+        const { navigate } = this.props.navigation;
 
         if(firstName == '' || lastName == '' || email == '' || password == '') {
             Alert.alert(
@@ -67,7 +64,7 @@ class SignupContainer extends React.Component {
                 "email": email,
                 "password": password,
             }
-            dispatch(signUpEntry(signUpObj));
+            dispatch(signUpEntry(signUpObj, navigate));
         }
     }
 
@@ -120,7 +117,6 @@ class SignupContainer extends React.Component {
         const { firstName, lastName, email, password, user } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (!!user) { navigate('Events') }
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
@@ -132,6 +128,8 @@ class SignupContainer extends React.Component {
                     <FormInput onChangeText={this.handleEmailInput} />
                     <FormLabel>PASSWORD</FormLabel>
                     <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} />
+                </View>
+                <View>
                 </View>
                 <Button style={styles.button}
                     onPress={this.handleSignUpSubmission}
@@ -187,7 +185,6 @@ const styles = StyleSheet.create({
         // padding: 50
     },
     switchToLogin: {
-        
     }
 });
 
@@ -198,7 +195,6 @@ function mapStoreToProps(store) {
         email: store.signupData.email,
         password: store.signupData.password,
         user: store.signupData.user
-
     };
 }
 

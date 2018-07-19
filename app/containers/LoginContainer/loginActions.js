@@ -18,9 +18,9 @@ export function passwordLoginEntry(text) {
 }
 
 export function loadingScreen() {
-    
-        return {
-            type: 'LOADING_SCREEN',
-            payload: true
-        }
+
+    return {
+        type: 'LOADING_SCREEN',
+        payload: true
     }
+}
