@@ -2,7 +2,7 @@ import React from 'react';
 import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { StyleSheet, Text, View, Linking, ScrollView, Alert, Platform } from 'react-native';
+import { StyleSheet, Text, View, Linking, ScrollView, Platform } from 'react-native';
 import { Constants, Location, Permissions, WebBrowser } from 'expo';
 import { Button } from 'react-native-elements'
 import {
