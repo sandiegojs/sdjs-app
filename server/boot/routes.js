@@ -26,7 +26,7 @@ module.exports = function (app) {
         let baseUrl = app.get('url').replace(/\/$/, '');
         const { eventObj, userId } = req.body;
 
-        console.log("eventObj", eventObj);
+        console.log("eventObj", eventObj); 
         console.log("userId", userId);
         //Create a new user
         axios

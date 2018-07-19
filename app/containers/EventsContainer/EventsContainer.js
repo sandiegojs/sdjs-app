@@ -53,15 +53,15 @@ class EventsContainer extends React.Component {
       let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
       var points = [
-        {//REMOVE & UPDATE currently set to location off site of 350 10th Ave SD 92101
-          latitude: 32.717793.toFixed(6),//location.coords.latitude.toFixed(6)
-          longitude: -117.155565.toFixed(6)//location.coords.longitude.toFixed(6)
+        {
+          latitude: location.coords.latitude.toFixed(6),
+          longitude: location.coords.longitude.toFixed(6)
         }
       ]
 
       var startPoint = { //venue lat lon
-        latitude: 32.70893096923828,//todaysEvents.venue.lat
-        longitude: -117.15599060058594//todaysEvents.venue.lon
+        latitude: eventsData[0].venue.lat,
+        longitude: eventsData[0].todaysEvents.venue.lon
       }
 
       var maxDistanceInKM = 5; // 500m distance
@@ -104,8 +104,6 @@ class EventsContainer extends React.Component {
     let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
   }
 
-
-
   handleButtons() {
     const { eventsData, checkedIn } = this.props;
 
@@ -116,27 +114,21 @@ class EventsContainer extends React.Component {
       return i;
     }
 
-
-
     var d = new Date();
     var todaysISOdate = d.toISOString().slice(0, 10);
 
-    var exampleDate = "2018-05-15";// for testing, REMOVE and update to todaysISODate
+    var exampleDate = todaysISOdate
     var nextEvent = eventsData[0];
 
-    var hours = addZero(d.getHours());
-    var mins = addZero(d.getMinutes());
+    var hours = addZero(d.getHours()).toString();
+    var mins = addZero(d.getMinutes()).toString();
 
-
-
-
-    var currentTime = null;//parseInt(hours+mins);  currently set to 1230 for testing
+    var currentTime = parseInt(hours+mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
     var hoursPriorToEvent = eventTime - 100;
     var hoursAfterEventStart = eventTime + 400;
 
-    currentTime = 1900//parseInt(hours+mins);  currently set to 1230 for testing
-
+    currentTime = parseInt(hours+mins);
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
       //if(!!checkedInStatus) is true
@@ -178,12 +170,11 @@ class EventsContainer extends React.Component {
                         />
     }
     if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
-      nextEventButton = "null"
+      nextEventButton = null;
     }
 
     return nextEventButton;
   }
-
 
   render() {
     const { eventsData, locationError, user, dispatch } = this.props;
