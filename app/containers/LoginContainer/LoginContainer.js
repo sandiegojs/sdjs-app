@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Linking } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Linking, ScrollView } from 'react-native';
 import { FormLabel, FormInput, Button, Icon, FormValidationMessage } from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
 import { emailLoginEntry, passwordLoginEntry } from './loginActions';
@@ -11,7 +10,7 @@ import { loadingScreen } from '../LoginContainer/loginActions';
 class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.handleLoginEmailInput = this.handleLoginEmailInput.bind(this);
         this.handleLoginPasswordInput = this.handleLoginPasswordInput.bind(this);
         this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
@@ -88,27 +87,28 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        const { user, loadingScreen, loginEmail, loginPassword } = this.props;   
+        const { user, loadingScreen, loginEmail, loginPassword } = this.props;
         return (
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <FormLabel>EMAIL</FormLabel>
-                    <FormInput
-                        defaultValue={loginEmail}
-                        onChangeText={this.handleLoginEmailInput} />
-                    <FormLabel>PASSWORD</FormLabel>
-                    <FormInput
-                        secureTextEntry={true}
-                        onChangeText={this.handleLoginPasswordInput} />
-                </View>
-                <Button style={styles.button}
-                    onPress={this.handleLoginSubmission}
-                    backgroundColor={'#346abb'}
-                    borderRadius={3}
-                    large
-                    icon={{ name: 'sign-in', type: 'font-awesome' }}
-                    title='LOG IN' />
-                {/* <View style={styles.socialButtonsContainer}>
+            <ScrollView keyboardDismissMode='on-drag'>
+                <View style={styles.container}>
+                    <View style={styles.formContainer}>
+                        <FormLabel>EMAIL</FormLabel>
+                        <FormInput
+                            defaultValue={loginEmail}
+                            onChangeText={this.handleLoginEmailInput} />
+                        <FormLabel>PASSWORD</FormLabel>
+                        <FormInput
+                            secureTextEntry={true}
+                            onChangeText={this.handleLoginPasswordInput} />
+                    </View>
+                    <Button style={styles.button}
+                        onPress={this.handleLoginSubmission}
+                        backgroundColor={'#346abb'}
+                        borderRadius={3}
+                        large
+                        icon={{ name: 'sign-in', type: 'font-awesome' }}
+                        title='LOG IN' />
+                    {/* <View style={styles.socialButtonsContainer}>
                     <Button
                         onPress={this._authenticateWithGithubAsync}
                         backgroundColor={'#346abb'}
@@ -124,15 +124,16 @@ class LoginContainer extends React.Component {
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
                 </View> */}
-                <View style={{paddingTop: 30}}>
-                    <Button
-                    title='CREATE ACCOUNT'
-                    style={styles.button}
-                    backgroundColor={'#346abb'}
-                    onPress={() => this.props.navigation.navigate('Signup')}
-                    />
+                    <View style={{ paddingTop: 30 }}>
+                        <Button
+                            title='CREATE ACCOUNT'
+                            style={styles.button}
+                            backgroundColor={'#346abb'}
+                            onPress={() => this.props.navigation.navigate('Signup')}
+                        />
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
@@ -142,7 +143,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#DCDCDC',
         alignItems: 'center',
-        paddingTop: 30
+        paddingTop: 30,
+        paddingBottom: 300
     },
     button: {
         marginTop: 30,
