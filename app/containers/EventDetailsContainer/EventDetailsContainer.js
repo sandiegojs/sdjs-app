@@ -2,7 +2,7 @@ import React from 'react';
 import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { StyleSheet, Text, View, Linking, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Linking, ScrollView, Alert, Platform } from 'react-native';
 import { Constants, Location, Permissions, WebBrowser } from 'expo';
 import { Button } from 'react-native-elements'
 import {
@@ -30,18 +30,18 @@ class EventDetailsContainer extends React.Component {
         this.handleButtons = this.handleButtons.bind(this);
         this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     }
+
     _getLocationAsync = async () => {
 
-        const { dispatch, eventsData, user } = this.props;
+        const { dispatch, eventsData, id } = this.props;
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
             let errorMessage = 'Permission to access location was denied';
             dispatch(setLocationError(errorMessage));
         } else {
-
             let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
-            var points = [
+            var points = [ // user's location
                 {
                     latitude: location.coords.latitude.toFixed(6),
                     longitude: location.coords.longitude.toFixed(6)
@@ -53,13 +53,21 @@ class EventDetailsContainer extends React.Component {
                 longitude: eventsData[0].venue.lon
             }
 
-            var maxDistanceInKM = 5; // 500m distance
+            var maxDistanceInKM = 0.5; // 500m distance
             // startPoint - center of perimeter
             // points - array of points
             // maxDistanceInKM - max point distance from startPoint in KM's
             // result - array of points inside the max distance
             var result = Geofence.filterByProximity(startPoint, points, maxDistanceInKM);
             if (result[0] === undefined) {
+                Alert.alert(
+                    'Unable to Check In',
+                    'You need to be within 500 meters of the event location to check in', [{
+                        text: 'OK',
+                    }], {
+                        cancelable: false
+                    }
+                 ) 
             } else {
                 eventObj = {
                     "event_title": eventsData[0].name,
@@ -68,20 +76,20 @@ class EventDetailsContainer extends React.Component {
                     "location": startPoint
                 };
                 dispatch(checkedInTrue(true));
-                dispatch(addAttendeeToEvent(eventObj, user.id));
+                dispatch(addAttendeeToEvent(eventObj, id));
             }
         }
     };
 
     handleUnCheckIn() {
-        const { dispatch, attendeeId } = this.props;
-        dispatch(removeAttendee(attendeeId))
+        const { dispatch, id } = this.props;
         dispatch(checkedInFalse(false));
+        dispatch(removeAttendee(id));
     }
 
     _handlePressButtonAsync = async () => {
         const { eventDetails, eventsData } = this.props;
-        const eventInfo = eventsData.filter(event => event.id === eventDetails)
+        const eventInfo = eventsData.filter(event => event.id === eventDetails);
 
         let result = await WebBrowser.openBrowserAsync(eventInfo[0].link);
     };
@@ -108,9 +116,7 @@ class EventDetailsContainer extends React.Component {
         var currentTime = parseInt(hours+mins);
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
         var hoursPriorToEvent = eventTime - 100;
-        var hoursAfterEventStart = eventTime + 700;
-
-        currentTime = parseInt(hours+mins);
+        var hoursAfterEventStart = eventTime + 900;
 
         if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
             if (checkedIn) {
@@ -306,7 +312,6 @@ class EventDetailsContainer extends React.Component {
                         </View>
                     </Hyperlink>
                 </ScrollView>
-
             )
         }
     }
@@ -316,10 +321,15 @@ function mapStoreToProps(store) {
     return {
         eventDetails: store.eventsData.selectedEvent,
         eventsData: store.eventsData.eventsData,
+        id: store.signupData.id,
         user: store.signupData.user,
+        firstName: store.signupData.firstName,
+        lastName: store.signupData.lastName,
+        email: store.signupData.email,
         locationError: store.eventsData.locationError,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,
+        checkedInStatus: store.eventsData.checkedInStatus
     };
 }
 
@@ -328,9 +338,10 @@ const styles = StyleSheet.create({
         fontSize: 40,
         alignSelf: 'center',
         fontWeight: 'bold',
-        fontFamily: 'Kailasa',
+        fontFamily: Platform.OS === 'ios' ? 'Kailasa' : 'Roboto',
         lineHeight: 50,
-        paddingTop: 5
+        paddingTop: 5,
+        paddingBottom: 10
     },
     container: {
         paddingHorizontal: 20,

@@ -15,8 +15,14 @@ import {
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from "react-native-elements";
-import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
-
+import { 
+        getDayOfTheWeek, 
+        getMonthString, 
+        getMonthAbr, 
+        getDateString, 
+        getYearString, 
+        standardTime 
+      } from './eventsDateAndTime';
 
 class EventsContainer extends React.Component {
   constructor(props) {
@@ -26,18 +32,19 @@ class EventsContainer extends React.Component {
     this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     this.handleButtons = this.handleButtons.bind(this);
   }
+
   componentDidMount() {
     const { dispatch, user } = this.props
     dispatch(updateEventsData());
     // dispatch(profileQuery(user.id));
   }
+
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
     selectedEventId = id;
     dispatch(updateSelectedEvent(selectedEventId));
     navigate('EventDetails')
-
   }
 
   _getLocationAsync = async () => {
@@ -48,11 +55,9 @@ class EventsContainer extends React.Component {
       let errorMessage = 'Permission to access location was denied';
       dispatch(setLocationError(errorMessage));
     } else {
-
-
       let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
-      var points = [
+      var points = [ // user's location
         {
           latitude: location.coords.latitude.toFixed(6),
           longitude: location.coords.longitude.toFixed(6)
@@ -61,16 +66,24 @@ class EventsContainer extends React.Component {
 
       var startPoint = { //venue lat lon
         latitude: eventsData[0].venue.lat,
-        longitude: eventsData[0].todaysEvents.venue.lon
+        longitude: eventsData[0].venue.lon
       }
 
-      var maxDistanceInKM = 5; // 500m distance
+      var maxDistanceInKM = 0.5; // 500m distance
       // startPoint - center of perimeter
       // points - array of points
       // maxDistanceInKM - max point distance from startPoint in KM's
       // result - array of points inside the max distance
       var result = Geofence.filterByProximity(startPoint, points, maxDistanceInKM);
       if (result[0] === undefined) {
+        Alert.alert(
+          'Unable to Check In',
+          'You need to be within 500 meters of the event location to check in', [{
+              text: 'OK',
+          }], {
+              cancelable: false
+          }
+       ) 
       } else {
         eventObj = {
           "event_title": eventsData[0].name,
@@ -79,16 +92,15 @@ class EventsContainer extends React.Component {
           "location": startPoint
         };
         dispatch(checkedInTrue(true));
-        dispatch(addAttendeeToEvent(eventObj, user.id));
-
+        dispatch(addAttendeeToEvent(eventObj, id));
       }
     }
   };
 
   handleUnCheckIn() {
-    const { dispatch, attendeeId } = this.props;
-    dispatch(removeAttendee(attendeeId))
+    const { dispatch, id } = this.props;
     dispatch(checkedInFalse(false));
+    dispatch(removeAttendee(id));
   }
 
   //Queries DB with user ID and sends to profile page
@@ -99,13 +111,14 @@ class EventsContainer extends React.Component {
   // }
 
   _handlePressButtonAsync = async () => {
+    const { eventDetails, eventsData } = this.props;
+    const eventInfo = eventsData.filter(event => event.id === eventDetails);
 
-    const { eventsData } = this.props;
-    let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
+    let result = await WebBrowser.openBrowserAsync(eventsInfo[0].link);
   }
 
   handleButtons() {
-    const { eventsData, checkedIn } = this.props;
+    const { eventsData, checkedIn, eventDetails } = this.props;
 
     function addZero(i) {
       if (i < 10) {
@@ -117,7 +130,7 @@ class EventsContainer extends React.Component {
     var d = new Date();
     var todaysISOdate = d.toISOString().slice(0, 10);
 
-    var exampleDate = todaysISOdate
+    var exampleDate = todaysISOdate;
     var nextEvent = eventsData[0];
 
     var hours = addZero(d.getHours()).toString();
@@ -126,9 +139,7 @@ class EventsContainer extends React.Component {
     var currentTime = parseInt(hours+mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
     var hoursPriorToEvent = eventTime - 100;
-    var hoursAfterEventStart = eventTime + 400;
-
-    currentTime = parseInt(hours+mins);
+    var hoursAfterEventStart = eventTime + 900;
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
       //if(!!checkedInStatus) is true
@@ -236,18 +247,18 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
   return {
+    eventDetails: store.eventsData.selectedEvent,
     eventsData: store.eventsData.eventsData,
+    id: store.signupData.id,
+    user: store.signupData.user,
+    firstName: store.signupData.firstName,
+    lastName: store.signupData.lastName,
+    email: store.signupData.email,
     locationError: store.eventsData.locationError,
     checkedIn: store.eventsData.checkedIn,
-    user: store.signupData.user,
     attendeeId: store.eventsData.attendeeId,
     checkedInStatus: store.eventsData.checkedInStatus
-
-
   };
 }
 
-
 export default connect(mapStoreToProps)(EventsContainer);
-
-

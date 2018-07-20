@@ -19,9 +19,7 @@ const defaultState = {
     url: '',
     location: '',
     company: '',
-    tokens: [
-      
-    ],
+    tokens: [],
     photo: ''
   }
 };
@@ -50,6 +48,7 @@ export default function EventsReducer (state = defaultState, action) {
       };
     }
     case 'CHECKED_IN_TRUE': {
+      console.log('check in true reducer log!!!!!')
       return {
         ...state,
         checkedIn: payload
@@ -86,6 +85,8 @@ export default function EventsReducer (state = defaultState, action) {
       };
     }
     case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
+      console.log('add attendee reducer log fired, dawg!!');
+      console.log(payload);
       return {
         ...state,
         attendeeId: payload
