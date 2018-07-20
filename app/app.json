@@ -15,7 +15,11 @@
       "backgroundColor": "#1884c3"//346abb
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sdjs.SDJSapp"
+    },
+    "android": {
+      "package": "com.sdjs.SDJSapp"
     }
   }
 }
