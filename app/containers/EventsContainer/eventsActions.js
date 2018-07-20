@@ -84,12 +84,12 @@ export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
     }
 }
 
-export function addAttendeeToEvent(eventObj, id) {
+export function addAttendeeToEvent(eventObj, id, firstName, lastName, email) {
     return {
         type: 'ADD_ATTENDEE_TO_EVENT',
         payload:
             axios
-                .post('https://sdjs-app.now.sh/checkin', { eventObj, id })
+                .post('https://sdjs-app.now.sh/checkin', { eventObj, id, firstName, lastName, email })
                 .then(response => {
                     console.log(eventObj);
                     console.log('addAttendeeToEvent action log',response.data);

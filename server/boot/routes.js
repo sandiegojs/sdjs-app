@@ -24,7 +24,7 @@ module.exports = function (app) {
 
     app.post('/checkin', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
-        const { eventObj, userId } = req.body;
+        const { eventObj, id } = req.body;
         //Create a new user
         axios
             .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)//1049303
@@ -32,7 +32,7 @@ module.exports = function (app) {
                 //if no event exist create event through users/{id}/events
                 if (!!response.data && !response.data.length) {
                     axios
-                        .post(baseUrl + '/api/users/' + userId + '/events', eventObj)//5a70c7adc7f6050014b20c09  change to userId
+                        .post(baseUrl + '/api/users/' + id + '/events', eventObj)//5a70c7adc7f6050014b20c09  change to userId
                         .then(response => {
                             res.send(response.data.id)
                         })
@@ -41,7 +41,10 @@ module.exports = function (app) {
                 } else {
                     var attendeeObj = {
                         'eventId': response.data[0].id,
-                        'userId': userId//changeto userId
+                        'userId': id,
+                        'firstName': firstName,
+                        'lastName': lastName,
+                        'email': email
                     }
                     axios
                         .post(baseUrl + '/api/attendees', attendeeObj)

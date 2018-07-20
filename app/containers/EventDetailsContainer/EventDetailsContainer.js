@@ -33,10 +33,10 @@ class EventDetailsContainer extends React.Component {
 
     _getLocationAsync = async () => {
 
-        const { dispatch, eventsData, id } = this.props;
+        const { dispatch, eventsData, id, firstName, lastName, email } = this.props;
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
-            let errorMessage = 'Permission to access location was denied';
+            let errorMessage = 'Permission to access location was denied.';
             dispatch(setLocationError(errorMessage));
         } else {
             let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
@@ -76,7 +76,7 @@ class EventDetailsContainer extends React.Component {
                     "location": startPoint
                 };
                 dispatch(checkedInTrue(true));
-                dispatch(addAttendeeToEvent(eventObj, id));
+                dispatch(addAttendeeToEvent(eventObj, id, firstName, lastName, email));
             }
         }
     };
