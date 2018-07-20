@@ -333,9 +333,10 @@ const styles = StyleSheet.create({
         fontSize: 40,
         alignSelf: 'center',
         fontWeight: 'bold',
-        fontFamily: 'Kailasa',
+        //fontFamily: 'Roboto',
         lineHeight: 50,
-        paddingTop: 5
+        paddingTop: 5,
+        paddingBottom: 10
     },
     container: {
         paddingHorizontal: 20,
