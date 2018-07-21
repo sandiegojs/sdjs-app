@@ -33,7 +33,11 @@ class EventDetailsContainer extends React.Component {
 
     _getLocationAsync = async () => {
 
-        const { dispatch, eventsData, id, firstName, lastName, email } = this.props;
+        const { dispatch, eventsData, user, id, firstName, lastName, email } = this.props;
+        console.log('locationAsync function log');
+        console.log(id, firstName, lastName, email);
+        console.log(user.id);
+        console.log('locationAsync function log end');
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
             let errorMessage = 'Permission to access location was denied.';

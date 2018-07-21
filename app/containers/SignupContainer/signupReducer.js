@@ -45,7 +45,8 @@ export default function signupReducer(state = defaultState, action) {
             }
         }    
         case 'SIGN_UP_ENTRY_FULFILLED': {
-               
+               console.log('sign up entry reducer');
+               console.log(payload);
             return {
                 ...state,
                 user: payload,
@@ -68,13 +69,14 @@ export default function signupReducer(state = defaultState, action) {
             }
         }
         case 'LOGIN_ENTRY_FULFILLED': {
-            const loginInfo = payload;
             return {
-              
                 ...state,
-                user: payload,
-                token: loginInfo.id,
-                id: loginInfo.userId,
+                user: payload[0],
+                token: payload[0].id,
+                id: payload[0].userId,
+                firstName: payload[1].first_name,
+                lastName: payload[1].last_name,
+                email: payload[1].email,
                 loadingScreen: false
             }
         }

@@ -36,7 +36,7 @@ export function signUpEntry(signUpObj, navigate) {
     return {
         type: 'SIGN_UP_ENTRY',
         payload: axios
-        .post('https://sdjs-app.now.sh/signup', signUpObj)
+        .post('https://sdjs-app-udrofiiosm.now.sh/signup', signUpObj)
         .then( response => {
             var statusCode = RegExp('422*');
             signUpRes = response.data;
@@ -64,10 +64,17 @@ export function loginEntry(loginObj, navigate) {
     return {
         type: 'LOGIN_ENTRY',
         payload: axios
-        .post('https://sdjs-app.now.sh/api/users/login', { email, password })
+        .post('https://sdjs-app-udrofiiosm.now.sh/api/users/login', { email, password })
         .then( response => {
-            navigate('Events')
-                return response.data
+            let userId = response.data.userId;
+            let loginResponseObj = response.data;
+            return axios
+                .get('https://sdjs-app-udrofiiosm.now.sh/api/users/' + userId)
+                .then(res => {
+                    let responseArray = [loginResponseObj, res.data];
+                    navigate('Events')
+                    return responseArray
+                });
         })
         .catch(error => {
             alert(
@@ -87,7 +94,7 @@ export function thirdPartyLogin(loginObj) {
     return {
         type: 'THIRD_PARTY_LOGIN',
         payload: axios
-        .post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
+        .post('https://sdjs-app-udrofiiosm.now.sh/loginthirdparty', loginObj)
         .then( response => response.data)
         .catch(error => {
             console.log("this one", error)
