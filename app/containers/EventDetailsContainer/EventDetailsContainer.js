@@ -33,10 +33,9 @@ class EventDetailsContainer extends React.Component {
 
     _getLocationAsync = async () => {
 
-        const { dispatch, eventsData, user, id, firstName, lastName, email } = this.props;
+        const { dispatch, eventsData, user, id, first_name, last_name, email } = this.props;
         console.log('locationAsync function log');
-        console.log(id, firstName, lastName, email);
-        console.log(user.id);
+        console.log(id, first_name, last_name, email);
         console.log('locationAsync function log end');
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
@@ -47,8 +46,8 @@ class EventDetailsContainer extends React.Component {
 
             var points = [ // user's location
                 {
-                    latitude: location.coords.latitude.toFixed(6),
-                    longitude: location.coords.longitude.toFixed(6)
+                    latitude: 32.820396, //location.coords.latitude.toFixed(6),
+                    longitude: -117.179498 //location.coords.longitude.toFixed(6)
                 }
             ]
 
@@ -77,10 +76,13 @@ class EventDetailsContainer extends React.Component {
                     "event_title": eventsData[0].name,
                     "meetup_id": eventsData[0].id,
                     "url": eventsData[0].group.urlname + ".org",
-                    "location": startPoint
+                    "location": startPoint,
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "email": email
                 };
                 dispatch(checkedInTrue(true));
-                dispatch(addAttendeeToEvent(eventObj, id, firstName, lastName, email));
+                dispatch(addAttendeeToEvent(eventObj, id, first_name, last_name, email));
             }
         }
     };
@@ -111,7 +113,7 @@ class EventDetailsContainer extends React.Component {
         var d = new Date();
         var todaysISOdate = d.toISOString().slice(0, 10);
 
-        var exampleDate = todaysISOdate;
+        var exampleDate = '2018-07-24';
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
         var hours = (addZero(d.getHours())).toString();
@@ -119,7 +121,7 @@ class EventDetailsContainer extends React.Component {
 
         var currentTime = parseInt(hours+mins);
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
-        var hoursPriorToEvent = eventTime - 100;
+        var hoursPriorToEvent = eventTime - 1200;
         var hoursAfterEventStart = eventTime + 900;
 
         if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
@@ -327,8 +329,8 @@ function mapStoreToProps(store) {
         eventsData: store.eventsData.eventsData,
         id: store.signupData.id,
         user: store.signupData.user,
-        firstName: store.signupData.firstName,
-        lastName: store.signupData.lastName,
+        first_name: store.signupData.first_name,
+        last_name: store.signupData.last_name,
         email: store.signupData.email,
         locationError: store.eventsData.locationError,
         checkedIn: store.eventsData.checkedIn,

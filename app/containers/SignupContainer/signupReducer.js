@@ -1,8 +1,8 @@
 import { loadingScreen } from "../LoginContainer/loginActions";
 
 const defaultState = {
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     token: null,
@@ -18,13 +18,13 @@ export default function signupReducer(state = defaultState, action) {
         case 'FIRST_NAME_ENTRY': {
             return {
                 ...state,
-                firstName: payload
+                first_name: payload
             }
         }
         case 'LAST_NAME_ENTRY': {
             return {
                 ...state,
-                lastName: payload
+                last_name: payload
             }
         }
         case 'EMAIL_ENTRY': {
@@ -57,11 +57,6 @@ export default function signupReducer(state = defaultState, action) {
                 ...state,
             }
         }
-        case 'SIGN_UP_ENTRY_REJECTED': {
-            return {
-                ...state
-            }
-        }
         case 'LOGIN_ENTRY_PENDING': {
             return {
                 ...state,
@@ -69,13 +64,14 @@ export default function signupReducer(state = defaultState, action) {
             }
         }
         case 'LOGIN_ENTRY_FULFILLED': {
+            console.log('LOGIN_ENTRY_FULFILLED log', payload[1].first_name, payload[1].last_name, payload[1].email);
             return {
                 ...state,
                 user: payload[0],
                 token: payload[0].id,
                 id: payload[0].userId,
-                firstName: payload[1].first_name,
-                lastName: payload[1].last_name,
+                first_name: payload[1].first_name,
+                last_name: payload[1].last_name,
                 email: payload[1].email,
                 loadingScreen: false
             }

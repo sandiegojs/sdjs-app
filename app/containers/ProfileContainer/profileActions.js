@@ -4,23 +4,23 @@ export function profileUpdate(newProfileData) {
     return {
         type: 'PROFILE_UPDATE',
         payload: axios
-                    .patch('https://sdjs-app-udrofiiosm.now.sh/api/users/' + newProfileData.id, newProfileData)
+                    .patch('https://27e0b378.ngrok.io/api/users/' + newProfileData.id, newProfileData)
                     .then(r => r.data)
 
     }
 }
 
-export function firstNameUpdate(firstName) {
+export function firstNameUpdate(first_name) {
     return {
         type: 'FIRST_NAME_UPDATE',
-        payload: firstName
+        payload: first_name
     }
 }
 
-export function lastNameUpdate(lastName) {
+export function lastNameUpdate(last_name) {
     return {
         type: 'LAST_NAME_UPDATE',
-        payload: lastName
+        payload: last_name
     }
 }
 

@@ -24,7 +24,9 @@ module.exports = function (app) {
 
     app.post('/checkin', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
-        const { eventObj, userId, firstName, lastName, email } = req.body;
+        const { eventObj, userId, first_name, last_name, email } = req.body;
+        console.log('routes checkin !!! log start', req.body);
+        console.log(eventObj);
         //Create a new user
         axios
             .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)//1049303
@@ -40,16 +42,20 @@ module.exports = function (app) {
                     //else create attendee
                 } else {
                     var attendeeObj = {
-                        'eventId': response.data[0].id,
-                        'userId': userId//changeto userId
+                        "eventId": response.data[0].id,
+                        "userId": userId,//changeto userId
+                        "first_name": first_name,
+                        "last_name": last_name,
+                        "email": email
                     }
+                    console.log('attendeeObj logged', attendeeObj);
                     var attendeeInfo = {
-                        'firstName': firstName,
-                        'lastName': lastName,
+                        'first_name': first_name,
+                        'last_name': last_name,
                         'email': email
                     }
                     axios
-                        .post(baseUrl + '/api/attendees', attendeeInfo)
+                        .post(baseUrl + '/api/attendees', attendeeObj)
                         .then(response => {
                             console.log("post data", response.data)
                             res.send(response.data.id)

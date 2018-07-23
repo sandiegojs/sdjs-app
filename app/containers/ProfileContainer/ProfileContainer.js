@@ -28,14 +28,14 @@ class ProfileContainer extends React.Component {
 
     }
 
-    handleFirstNameUpdate(firstName) {
+    handleFirstNameUpdate(first_name) {
         const { dispatch } = this.props;
-        dispatch(actions.firstNameUpdate(firstName))
+        dispatch(actions.firstNameUpdate(first_name))
     }
 
-    handleLastNameUpdate(lastName) {
+    handleLastNameUpdate(last_name) {
         const { dispatch } = this.props;
-        dispatch(actions.lastNameUpdate(lastName))
+        dispatch(actions.lastNameUpdate(last_name))
     }
 
     handleEmailUpdate(email) {
@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        firstName: store.signupData.firstName,
-        lastName: store.signupData.lastName,
+        first_name: store.signupData.first_name,
+        last_name: store.signupData.last_name,
         email: store.signupData.email,
         profileData: store.eventsData.profileData,
         profileUpdate: store.profileUpdate
