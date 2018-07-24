@@ -73,16 +73,21 @@ class EventDetailsContainer extends React.Component {
                  ) 
             } else {
                 eventObj = {
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "email": email,
                     "event_title": eventsData[0].name,
                     "meetup_id": eventsData[0].id,
                     "url": eventsData[0].group.urlname + ".org",
-                    "location": startPoint,
+                    "location": startPoint
+                }
+                attendeeInfo = {
                     "first_name": first_name,
                     "last_name": last_name,
                     "email": email
                 };
                 dispatch(checkedInTrue(true));
-                dispatch(addAttendeeToEvent(eventObj, id, first_name, last_name, email));
+                dispatch(addAttendeeToEvent(eventObj, id, first_name, last_name, email, attendeeInfo));
             }
         }
     };

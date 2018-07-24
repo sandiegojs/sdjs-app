@@ -84,17 +84,55 @@ export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
     }
 }
 
-export function addAttendeeToEvent(eventObj, userId, first_name, last_name, email) {
+export function addAttendeeToEvent(eventObj, userId, first_name, last_name, email, attendeeInfo) {
+    let baseUrl = 'https://27e0b378.ngrok.io';
+    console.log('add attendee action log', eventObj);
     return {
         type: 'ADD_ATTENDEE_TO_EVENT',
         payload:
         axios
-            .post('https://27e0b378.ngrok.io/checkin', { eventObj, userId, first_name, last_name, email })
+            // .post('https://27e0b378.ngrok.io/checkin', { eventObj, userId, first_name, last_name, email })
+            .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)//1049303
             .then(response => {
-                console.log('add attendee action log', response.data);
+                console.log(eventObj.meetup_id);
+                console.log(eventObj.last_name);
+                console.log(userId);
+                //if no event exist create event through users/{id}/events
+                if (!!response.data && !response.data.length) {
+                    axios
+                        .post(baseUrl + '/api/users/' + userId + '/events', eventObj)
+                        .then(response => response.data.id)
+                        .catch(error => console.log("error on post event/attendee", error))
+                    //else create attendee
+                } else {
+                    var attendeeObj = {
+                        ...attendeeInfo,
+                        "eventId": response.data[0].id,
+                        "userId": userId
+                    }
+                    console.log('attendeeObj logged', attendeeObj);
+                    var attendeeInfo = {
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'email': email
+                    }
+                    axios
+                        .post(baseUrl + '/api/attendees', attendeeObj)
+                        .then(response => {
+                            console.log("post data", response.data)
+                            res.send(response.data.id)
+                        })
+                        .catch(error => console.log("error on post attendee", error))
+                }
                 return response.data;
             })
-            .catch(error => console.log(error))
+
+
+            // .then(response => {
+            //     console.log('add attendee action log', response.data);
+            //     return response.data;
+            // })
+            // .catch(error => console.log(error))
     }
 }
 
