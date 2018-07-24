@@ -84,8 +84,7 @@ export default function EventsReducer (state = defaultState, action) {
       };
     }
     case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
-      console.log('add attendee reducer log fired');
-      console.log(payload);
+      console.log('add attendee reducer log fired', payload);
       return {
         ...state,
         attendeeId: payload

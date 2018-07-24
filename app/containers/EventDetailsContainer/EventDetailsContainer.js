@@ -84,7 +84,8 @@ class EventDetailsContainer extends React.Component {
                 attendeeInfo = {
                     "first_name": first_name,
                     "last_name": last_name,
-                    "email": email
+                    "email": email,
+                    "userId": id
                 };
                 dispatch(checkedInTrue(true));
                 dispatch(addAttendeeToEvent(eventObj, id, first_name, last_name, email, attendeeInfo));
