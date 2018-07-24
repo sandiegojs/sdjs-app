@@ -85,13 +85,14 @@ export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
 }
 
 export function addAttendeeToEvent(eventObj, userId, first_name, last_name, email, attendeeInfo) {
-    let baseUrl = 'https://27e0b378.ngrok.io';
+    let baseUrl = 'https://cfd02d1f.ngrok.io';
     console.log('add attendee action log', eventObj);
+    console.log(eventObj.meetup_id);
     return {
         type: 'ADD_ATTENDEE_TO_EVENT',
         payload:
         axios
-            // .post('https://27e0b378.ngrok.io/checkin', { eventObj, userId, first_name, last_name, email })
+            // .post('https://cfd02d1f.ngrok.io/checkin', { eventObj, userId, first_name, last_name, email })
             .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)//1049303
             .then(response => {
                 console.log(eventObj.meetup_id);
@@ -141,7 +142,7 @@ export function profileQuery(userId) {
         type: 'PROFILE_QUERY',
         payload:
         axios
-            .get('https://27e0b378.ngrok.io/api/users/' + userId)
+            .get('https://cfd02d1f.ngrok.io/api/users/' + userId)
             .then(response => {
                 return response.data
             })
@@ -157,7 +158,7 @@ export function removeAttendee(attendeeId) {
         type: 'REMOVE_ATTENDEE',
         payload:
         axios
-            .delete('https://27e0b378.ngrok.io/api/attendees/' + attendeeId)
+            .delete('https://cfd02d1f.ngrok.io/api/attendees/' + attendeeId)
             .then(response => {
                 return response.data;
             })
@@ -178,7 +179,7 @@ export function addRSVPToEvent(eventObj, userId) {
         type: 'ADD_RSVP_TO_EVENT',
         payload:
         axios
-            .post('https://27e0b378.ngrok.io/rsvp', { eventObj, userId })
+            .post('https://cfd02d1f.ngrok.io/rsvp', { eventObj, userId })
             .then(response => {
                 console.log('returned data', response.data)
                 return response.data;
@@ -198,7 +199,7 @@ export function removeRSVPFromEvent(rsvpEventId) {
         type: 'REMOVE_RSVP_FROM_EVENT',
         payload:
         axios
-            .delete('https://27e0b378.ngrok.io/api/rsvps/' + rsvpEventId)
+            .delete('https://cfd02d1f.ngrok.io/api/rsvps/' + rsvpEventId)
             .then(response => {
                 console.log('deleted data rsvp', response.data)
                 return response.data;
@@ -218,7 +219,7 @@ export function updateRSVPList(user) {
         type: 'UPDATE_RSVP_LIST',
         payload:
         axios
-            .get('https://27e0b378.ngrok.io/api/rsvps?filter[where][userId]=' + user)
+            .get('https://cfd02d1f.ngrok.io/api/rsvps?filter[where][userId]=' + user)
             .then(response => {
 
                 return response.data;

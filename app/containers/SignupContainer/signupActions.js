@@ -36,7 +36,7 @@ export function signUpEntry(signUpObj, navigate) {
     return {
         type: 'SIGN_UP_ENTRY',
         payload: axios
-        .post('https://27e0b378.ngrok.io/signup', signUpObj)
+        .post('https://cfd02d1f.ngrok.io/signup', signUpObj)
         .then( response => {
             var statusCode = RegExp('422*');
             signUpRes = response.data;
@@ -64,12 +64,12 @@ export function loginEntry(loginObj, navigate) {
     return {
         type: 'LOGIN_ENTRY',
         payload: axios
-        .post('https://27e0b378.ngrok.io/api/users/login', { email, password })
+        .post('https://cfd02d1f.ngrok.io/api/users/login', { email, password })
         .then( response => {
             let userId = response.data.userId;
             let loginResponseObj = response.data;
             return axios
-                .get('https://27e0b378.ngrok.io/api/users/' + userId)
+                .get('https://cfd02d1f.ngrok.io/api/users/' + userId)
                 .then(res => {
                     let responseArray = [loginResponseObj, res.data];
                     navigate('Events')
@@ -94,7 +94,7 @@ export function thirdPartyLogin(loginObj) {
     return {
         type: 'THIRD_PARTY_LOGIN',
         payload: axios
-        .post('https://27e0b378.ngrok.io/loginthirdparty', loginObj)
+        .post('https://cfd02d1f.ngrok.io/loginthirdparty', loginObj)
         .then( response => response.data)
         .catch(error => {
             console.log("this one", error)
