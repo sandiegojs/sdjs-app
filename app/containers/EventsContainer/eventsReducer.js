@@ -90,7 +90,6 @@ const defaultState = {
       //   return state;
       // }
       case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
-        console.log('ADD_ATTENDEE TO EVENT REDUCER LOG', payload);
         return {
           ...state,
           attendeeId: payload
