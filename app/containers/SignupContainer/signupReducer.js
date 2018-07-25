@@ -45,7 +45,6 @@ export default function signupReducer(state = defaultState, action) {
             }
         }    
         case 'SIGN_UP_ENTRY_FULFILLED': {
-            console.log('SIGN UP ENTRY FULFILLED LOG', payload);
             return {
                 ...state,
                 user: payload,
