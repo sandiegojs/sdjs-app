@@ -45,10 +45,10 @@ class SignupContainer extends React.Component {
     }
 
     handleSignUpSubmission() {
-        const { dispatch, firstName, lastName, email, password } = this.props;
+        const { dispatch, first_name, last_name, email, password } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (firstName == '' || lastName == '' || email == '' || password == '') {
+        if (first_name == '' || last_name == '' || email == '' || password == '') {
             Alert.alert(
                 'Form Error',
                 'Complete all fields to submit', [{
@@ -59,8 +59,8 @@ class SignupContainer extends React.Component {
             )
         } else {
             const signUpObj = {
-                "first_name": firstName,
-                "last_name": lastName,
+                "first_name": first_name,
+                "last_name": last_name,
                 "email": email,
                 "password": password,
             }
@@ -114,7 +114,7 @@ class SignupContainer extends React.Component {
     }
 
     render() {
-        const { firstName, lastName, email, password, user } = this.props;
+        const { first_name, last_name, email, password, user } = this.props;
         const { navigate } = this.props.navigation;
 
         return (
@@ -192,8 +192,8 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        firstName: store.signupData.firstName,
-        lastName: store.signupData.lastName,
+        first_name: store.signupData.first_name,
+        last_name: store.signupData.last_name,
         email: store.signupData.email,
         password: store.signupData.password,
         user: store.signupData.user

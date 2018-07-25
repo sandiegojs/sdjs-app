@@ -18,8 +18,6 @@ export function updateEventsData() {
 
                 return errorSearch;
             })
-
-
     }
 }
 
@@ -31,50 +29,54 @@ export function updateSelectedEvent(selectedEventId) {
 }
 
 export function addLocationData(location) {
-
     return {
         type: 'ADD_LOCATION_DATA',
         payload: location
-
-
     }
 }
+
 export function setLocationError(errorMessage) {
     return {
         type: 'SET_LOCATION_ERROR',
         payload: errorMessage
     }
 }
+
 export function checkedInTrue(checkedInTrue) {
     return {
         type: 'CHECKED_IN_TRUE',
         payload: true
     }
 }
+
 export function checkedInFalse(checkedInFalse) {
     return {
         type: 'CHECKED_IN_FALSE',
         payload: false
     }
 }
+
 export function rsvpTrue(rsvpTrue) {
     return {
         type: 'RSVP_TRUE',
         payload: true
     }
 }
+
 export function rsvpFalse(rsvpFalse) {
     return {
         type: 'RSVP_FALSE',
         payload: false
     }
 }
+
 export function rsvpEventDetailsTrue(rsvpEventDetailsTrue) {
     return {
         type: 'RSVP_EVENT_DETAILS_TRUE',
         payload: true
     }
 }
+
 export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
     return {
         type: 'RSVP_EVENT_DETAILS_FALSE',
@@ -91,13 +93,7 @@ export function addAttendeeToEvent(eventObj, userId) {
             .then(response => {
                 return response.data;
             })
-            .catch(error => {
-                const errorSearch = {
-                    error: true
-                }
-
-                return errorSearch;
-            })
+            .catch(error => console.log(error))
     }
 }
 
@@ -116,7 +112,6 @@ export function profileQuery(userId) {
     }
 }
 
-
 export function removeAttendee(attendeeId) {
     return {
         type: 'REMOVE_ATTENDEE',
@@ -127,18 +122,12 @@ export function removeAttendee(attendeeId) {
                 return response.data;
             })
             .catch(error => {
-                const errorSearch = {
-                    error: true
-                }
-
-                return errorSearch;
+                console.log(error)
             })
     }
 }
 
 export function addRSVPToEvent(eventObj, userId) {
-    console.log("eventObj actions", eventObj);
-    console.log("userId actions", userId);
     return {
         type: 'ADD_RSVP_TO_EVENT',
         payload:
@@ -157,8 +146,8 @@ export function addRSVPToEvent(eventObj, userId) {
             })
     }
 }
+
 export function removeRSVPFromEvent(rsvpEventId) {
-    console.log('rsvpEventId in actions', rsvpEventId)
     return {
         type: 'REMOVE_RSVP_FROM_EVENT',
         payload:
@@ -178,9 +167,7 @@ export function removeRSVPFromEvent(rsvpEventId) {
     }
 }
 
-
 export function updateRSVPList(user) {
-
     return {
         type: 'UPDATE_RSVP_LIST',
         payload:
@@ -194,11 +181,8 @@ export function updateRSVPList(user) {
                 const errorSearch = {
                     error: true
                 }
-
                 return errorSearch;
             })
-
-
     }
 }
 
@@ -208,38 +192,10 @@ export function updateEventDetailsRSVP(rsvp) {
         payload: rsvp
     }
 }
+
 export function updateEventDetailsRSVPEventId(eventDetailsRSVPEventId) {
     return {
         type: 'UPDATE_EVENT_DETAILS_RSVP_EVENT_ID',
         payload: eventDetailsRSVPEventId
     }
 }
-
-//?filter[where][and][0][userId]=[where][and][1][eventId]=
-
-// export function updateCheckedInStatus(userId, eventId) {
-// console.log("update checked in status")
-//     return {
-//         type: 'UPDATE_CHECKED_IN_STATUS',
-//         payload:
-//         axios
-//             .get('https://sdci-backend.herokuapp.com/api/attendees?filter[where][and][0][userId]=' + userId + '&filter[where][and][1][eventId]=' + eventId)
-//             .then(response => {
-
-//                 if (!!response.data && !response.data.length) {
-//                     return false;
-//                 } else {
-//                     return true;
-//                 }
-//             })
-//             .catch(error => {
-//                 const errorSearch = {
-//                     error: true
-//                 }
-
-//                 return errorSearch;
-//             })
-
-
-//     }
-// }

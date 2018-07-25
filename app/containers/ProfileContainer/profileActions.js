@@ -10,17 +10,17 @@ export function profileUpdate(newProfileData) {
     }
 }
 
-export function firstNameUpdate(firstName) {
+export function firstNameUpdate(first_name) {
     return {
         type: 'FIRST_NAME_UPDATE',
-        payload: firstName
+        payload: first_name
     }
 }
 
-export function lastNameUpdate(lastName) {
+export function lastNameUpdate(last_name) {
     return {
         type: 'LAST_NAME_UPDATE',
-        payload: lastName
+        payload: last_name
     }
 }
 

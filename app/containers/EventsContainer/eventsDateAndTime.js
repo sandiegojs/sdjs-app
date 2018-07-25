@@ -44,11 +44,8 @@ export function getMonthString(date) {
             month = "January";
 
     }
-
     return month;
-
 };
-
 
 export function getMonthAbr(date) {
     var d = new Date(date);
@@ -96,12 +93,8 @@ export function getMonthAbr(date) {
             month = "JAN";
 
     }
-
     return month;
-
 };
-
-
 
 export function getDayOfTheWeek(date) {
     var d = new Date(date);
@@ -133,22 +126,16 @@ export function getDayOfTheWeek(date) {
         case 7:
             day = "Sunday";
     }
-
     return day;
-
 };
 
-
-
 export function getDateString(date) {
-
     return date.slice(-2);
 };
 
 export function getYearString(date) {
     return date.substring(0, 4);
 };
-
 
 export function standardTime(time) {
     var hour = time.substring(0, 2);
@@ -158,7 +145,6 @@ export function standardTime(time) {
         hour -= 12;
         amOrPm = " PM";
     }
-
 
     var regTime = hour + ":" + min + amOrPm;
     return regTime;
