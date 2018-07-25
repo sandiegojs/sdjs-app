@@ -84,12 +84,12 @@ export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
     }
 }
 
-export function addAttendeeToEvent(eventObj, userId, firstName, lastName, email) {
+export function addAttendeeToEvent(eventObj, userId) {
     return {
         type: 'ADD_ATTENDEE_TO_EVENT',
         payload:
         axios
-            .post('https://cfd02d1f.ngrok.io/checkin', { eventObj, userId })
+            .post('https://6ea98c01.ngrok.io/checkin', { eventObj, userId })
             .then(response => {
                 return response.data;
             })
@@ -102,7 +102,7 @@ export function profileQuery(userId) {
         type: 'PROFILE_QUERY',
         payload:
         axios
-            .get('https://cfd02d1f.ngrok.io/api/users/' + userId)
+            .get('https://6ea98c01.ngrok.io/api/users/' + userId)
             .then(response => {
                 return response.data
             })
@@ -112,34 +112,27 @@ export function profileQuery(userId) {
     }
 }
 
-
 export function removeAttendee(attendeeId) {
     return {
         type: 'REMOVE_ATTENDEE',
         payload:
         axios
-            .delete('https://cfd02d1f.ngrok.io/api/attendees/' + attendeeId)
+            .delete('https://6ea98c01.ngrok.io/api/attendees/' + attendeeId)
             .then(response => {
                 return response.data;
             })
             .catch(error => {
-                const errorSearch = {
-                    error: true
-                }
-
-                return errorSearch;
+                console.log(error)
             })
     }
 }
 
 export function addRSVPToEvent(eventObj, userId) {
-    console.log("eventObj actions", eventObj);
-    console.log("userId actions", userId);
     return {
         type: 'ADD_RSVP_TO_EVENT',
         payload:
         axios
-            .post('https://cfd02d1f.ngrok.io/rsvp', { eventObj, userId })
+            .post('https://6ea98c01.ngrok.io/rsvp', { eventObj, userId })
             .then(response => {
                 console.log('returned data', response.data)
                 return response.data;
@@ -153,13 +146,13 @@ export function addRSVPToEvent(eventObj, userId) {
             })
     }
 }
+
 export function removeRSVPFromEvent(rsvpEventId) {
-    console.log('rsvpEventId in actions', rsvpEventId)
     return {
         type: 'REMOVE_RSVP_FROM_EVENT',
         payload:
         axios
-            .delete('https://cfd02d1f.ngrok.io/api/rsvps/' + rsvpEventId)
+            .delete('https://6ea98c01.ngrok.io/api/rsvps/' + rsvpEventId)
             .then(response => {
                 console.log('deleted data rsvp', response.data)
                 return response.data;
@@ -179,7 +172,7 @@ export function updateRSVPList(user) {
         type: 'UPDATE_RSVP_LIST',
         payload:
         axios
-            .get('https://cfd02d1f.ngrok.io/api/rsvps?filter[where][userId]=' + user)
+            .get('https://6ea98c01.ngrok.io/api/rsvps?filter[where][userId]=' + user)
             .then(response => {
 
                 return response.data;
@@ -206,32 +199,3 @@ export function updateEventDetailsRSVPEventId(eventDetailsRSVPEventId) {
         payload: eventDetailsRSVPEventId
     }
 }
-
-//?filter[where][and][0][userId]=[where][and][1][eventId]=
-
-// export function updateCheckedInStatus(userId, eventId) {
-// console.log("update checked in status")
-//     return {
-//         type: 'UPDATE_CHECKED_IN_STATUS',
-//         payload:
-//         axios
-//             .get('https://sdci-backend.herokuapp.com/api/attendees?filter[where][and][0][userId]=' + userId + '&filter[where][and][1][eventId]=' + eventId)
-//             .then(response => {
-
-//                 if (!!response.data && !response.data.length) {
-//                     return false;
-//                 } else {
-//                     return true;
-//                 }
-//             })
-//             .catch(error => {
-//                 const errorSearch = {
-//                     error: true
-//                 }
-
-//                 return errorSearch;
-//             })
-
-
-//     }
-// }

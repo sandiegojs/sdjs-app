@@ -33,11 +33,9 @@ class EventDetailsContainer extends React.Component {
 
     _getLocationAsync = async () => {
 
-        const { dispatch, eventsData, user, id, first_name, last_name, email } = this.props;
-        console.log('locationAsync function log');
-        console.log(id, first_name, last_name, email);
-        console.log('locationAsync function log end');
+        const { dispatch, eventsData, user, id } = this.props;
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
         if (status !== 'granted') {
             let errorMessage = 'Permission to access location was denied.';
             dispatch(setLocationError(errorMessage));
@@ -65,38 +63,29 @@ class EventDetailsContainer extends React.Component {
             if (result[0] === undefined) {
                 Alert.alert(
                     'Unable to Check In',
-                    'You need to be within 500 meters of the event location to check in', [{
+                    'You need to be within 500 meters of the event location to check in. Giddy-up!!', [{
                         text: 'OK',
                     }], {
                         cancelable: false
                     }
-                 ) 
+                ) 
             } else {
                 eventObj = {
-                    "first_name": first_name,
-                    "last_name": last_name,
-                    "email": email,
                     "event_title": eventsData[0].name,
                     "meetup_id": eventsData[0].id,
                     "url": eventsData[0].group.urlname + ".org",
                     "location": startPoint
                 }
-                attendeeInfo = {
-                    "first_name": first_name,
-                    "last_name": last_name,
-                    "email": email,
-                    "userId": id
-                };
                 dispatch(checkedInTrue(true));
-                dispatch(addAttendeeToEvent(eventObj, id, first_name, last_name, email, attendeeInfo));
+                dispatch(addAttendeeToEvent(eventObj, id));
             }
         }
     };
 
     handleUnCheckIn() {
-        const { dispatch, id } = this.props;
+        const { dispatch, attendeeId } = this.props;
         dispatch(checkedInFalse(false));
-        dispatch(removeAttendee(id));
+        dispatch(removeAttendee(attendeeId));
     }
 
     _handlePressButtonAsync = async () => {
@@ -117,9 +106,8 @@ class EventDetailsContainer extends React.Component {
         }
 
         var d = new Date();
-        var todaysISOdate = d.toISOString().slice(0, 10);
+        var todaysISOdate = '2018-07-25'; //d.toISOString().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
 
-        var exampleDate = '2018-07-24';
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
         var hours = (addZero(d.getHours())).toString();
@@ -127,10 +115,10 @@ class EventDetailsContainer extends React.Component {
 
         var currentTime = parseInt(hours+mins);
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
-        var hoursPriorToEvent = eventTime - 1200;
-        var hoursAfterEventStart = eventTime + 900;
+        var hoursPriorToEvent = eventTime - 500;
+        var hoursAfterEventStart = eventTime + 400;
 
-        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
+        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysISOdate == nextEvent[0].local_date) {
             if (checkedIn) {
                 nextEventButton = <Button
                     large
@@ -157,7 +145,7 @@ class EventDetailsContainer extends React.Component {
             }
         }
 
-        if (currentTime < hoursPriorToEvent || exampleDate != nextEvent[0].local_date) {
+        if (currentTime < hoursPriorToEvent || todaysISOdate != nextEvent[0].local_date) {
 
             nextEventButton = <Button
                 large
@@ -169,12 +157,10 @@ class EventDetailsContainer extends React.Component {
                 title=' RSVP'
                 onPress={this._handlePressButtonAsync}
             />
-
         }
-        if (currentTime > hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
+        if (currentTime > hoursAfterEventStart && todaysISOdate == nextEvent[0].local_date) {
             nextEventButton = null;
         }
-
         return nextEventButton;
     }
 
@@ -286,7 +272,6 @@ class EventDetailsContainer extends React.Component {
             )
 
         } else {
-
             return (
                 <ScrollView style={styles.container}>
                     <View>
@@ -335,9 +320,6 @@ function mapStoreToProps(store) {
         eventsData: store.eventsData.eventsData,
         id: store.signupData.id,
         user: store.signupData.user,
-        first_name: store.signupData.first_name,
-        last_name: store.signupData.last_name,
-        email: store.signupData.email,
         locationError: store.eventsData.locationError,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,

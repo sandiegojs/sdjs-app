@@ -36,7 +36,7 @@ class EventsContainer extends React.Component {
   componentDidMount() {
     const { dispatch, user } = this.props
     dispatch(updateEventsData());
-    // dispatch(profileQuery(user.id));
+    // dispatch(profileQuery(user.id)); this line uncommented throws error but may be needed when profile returns
   }
 
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
@@ -49,8 +49,9 @@ class EventsContainer extends React.Component {
 
   _getLocationAsync = async () => {
 
-    const { dispatch, eventsData, user } = this.props;
+    const { dispatch, eventsData, user, id } = this.props;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
     if (status !== 'granted') {
       let errorMessage = 'Permission to access location was denied';
       dispatch(setLocationError(errorMessage));
@@ -59,8 +60,8 @@ class EventsContainer extends React.Component {
 
       var points = [ // user's location
         {
-          latitude: location.coords.latitude.toFixed(6),
-          longitude: location.coords.longitude.toFixed(6)
+          latitude: 32.820396, //location.coords.latitude.toFixed(6),
+          longitude: -117.179498 //location.coords.longitude.toFixed(6)
         }
       ]
 
@@ -78,7 +79,7 @@ class EventsContainer extends React.Component {
       if (result[0] === undefined) {
         Alert.alert(
           'Unable to Check In',
-          'You need to be within 500 meters of the event location to check in', [{
+          'You need to be within 500 meters of the event location to check in. Get there!', [{
               text: 'OK',
           }], {
               cancelable: false
@@ -98,9 +99,9 @@ class EventsContainer extends React.Component {
   };
 
   handleUnCheckIn() {
-    const { dispatch, id } = this.props;
+    const { dispatch, attendeeId } = this.props;
     dispatch(checkedInFalse(false));
-    dispatch(removeAttendee(id));
+    dispatch(removeAttendee(attendeeId));
   }
 
   //Queries DB with user ID and sends to profile page
@@ -128,9 +129,8 @@ class EventsContainer extends React.Component {
     }
 
     var d = new Date();
-    var todaysISOdate = d.toISOString().slice(0, 10);
+    var todaysISOdate = '2018-07-25'; // d.toISOString().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
 
-    var exampleDate = todaysISOdate;
     var nextEvent = eventsData[0];
 
     var hours = addZero(d.getHours()).toString();
@@ -138,10 +138,10 @@ class EventsContainer extends React.Component {
 
     var currentTime = parseInt(hours+mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
-    var hoursPriorToEvent = eventTime - 100;
-    var hoursAfterEventStart = eventTime + 900;
+    var hoursPriorToEvent = eventTime - 500;
+    var hoursAfterEventStart = eventTime + 400;
 
-    if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
+    if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysISOdate == nextEvent.local_date) {
       //if(!!checkedInStatus) is true
       if (checkedIn) {
         nextEventButton = <Button
@@ -168,7 +168,7 @@ class EventsContainer extends React.Component {
       }
     }
 
-    if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
+    if (currentTime < hoursPriorToEvent || todaysISOdate != nextEvent.local_date) {
       nextEventButton = <Button
                           large
                           backgroundColor={'green'}
@@ -180,7 +180,7 @@ class EventsContainer extends React.Component {
                           onPress={this._handlePressButtonAsync}
                         />
     }
-    if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
+    if (currentTime > hoursAfterEventStart && todaysISOdate == nextEvent.local_date) {
       nextEventButton = null;
     }
 

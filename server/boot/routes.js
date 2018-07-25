@@ -10,8 +10,7 @@ module.exports = function (app) {
         axios
             .post(baseUrl + '/api/users', { first_name, last_name, email, password })
             .then(response => {
-
-                //Once user has signed up successfully, log them in
+                //Once user has signed up successfully, log them in, yo
                 axios.post(baseUrl + '/api/users/login', { email, password })
                     .then(r => res.json({
                         token: r.data.id,
@@ -29,7 +28,8 @@ module.exports = function (app) {
         axios
             .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)
             .then(response => {
-                //if no event exist create event through users/{id}/events, which also creates the attendee at the same time. Fancy, huh?
+                // if no event exist create event through users/{id}/events, 
+                // which also creates the attendee at the same time. Fancy, huh?
                 if (!!response.data && !response.data.length) {
                     axios
                         .post(baseUrl + '/api/users/' + userId + '/events', eventObj)
@@ -50,18 +50,16 @@ module.exports = function (app) {
                         })
                         .catch(error => console.log("error on post attendee", error))
                 }
-                return response.data;
+                // return response.data;
             })
             .catch(e => res.send(e.message))
     });
-
+    // Below route from original authors. Doesn't seem to be used. All done in actions.
+    // the url path seems to be wrong.
+    // should hit /api/attendees with attendeeId to delete attendee
     app.delete('/deleteattendee', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
-        console.log(baseUrl);
-
         const { attendeeId } = req.body;
-        console.log(attendeeId);
-        //Create a new user
         axios
             .delete(baseUrl + '/api/users', { attendeeId })
             .then(response => {

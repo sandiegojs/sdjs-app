@@ -4,7 +4,7 @@ export function profileUpdate(newProfileData) {
     return {
         type: 'PROFILE_UPDATE',
         payload: axios
-                    .patch('https://cfd02d1f.ngrok.io/api/users/' + newProfileData.id, newProfileData)
+                    .patch('https://6ea98c01.ngrok.io/api/users/' + newProfileData.id, newProfileData)
                     .then(r => r.data)
 
     }
