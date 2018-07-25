@@ -11,18 +11,18 @@ const defaultState = {
     rsvpEventId:'',
     userRSVPs:[],
     profileData: {
-      username: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      bio: "",
-      url: "",
-      location: "",
-      company: "",
+      username: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      bio: '',
+      url: '',
+      location: '',
+      company: '',
       tokens: [
         
       ],
-      photo: ""
+      photo: ''
     }
   };
   
@@ -31,8 +31,6 @@ const defaultState = {
   
     switch (type) {
       
-      
-  
       case 'UPDATE_EVENTS_DATA_FULFILLED': {
         return {
           ...state,
@@ -88,11 +86,29 @@ const defaultState = {
           eventDetailsRSVP: payload
         };
       }
+      case 'ADD_ATTENDEE_TO_EVENT_PENDING': {
+        return state;
+      }
       case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
         return {
           ...state,
           attendeeId: payload
         };
+      }
+      case 'ADD_ATTENDEE_TO_EVENT_REJECTED': {
+        return state;
+      }
+      case 'REMOVE_ATTENDEE_PENDING': {
+        return state;
+      }
+      case 'REMOVE_ATTENDEE_FULFILLED': {
+        return {
+          ...state,
+          attendeeId: ''
+        }
+      }
+      case 'REMOVE_ATTENDEE_REJECTED': {
+        return state;
       }
       case 'PROFILE_QUERY_FULFILLED': {
         return {

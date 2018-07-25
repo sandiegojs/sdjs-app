@@ -160,7 +160,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25
     },
     formContainer: {
-        width: 350
+        width: 350,
+        paddingBottom: 20
     },
     formMessage: {
         height: 200,
