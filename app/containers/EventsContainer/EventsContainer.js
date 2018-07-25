@@ -12,7 +12,7 @@ import {
   removeAttendee,
   profileQuery
 } from './eventsActions';
-import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { FlatList, StyleSheet, View, Text, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from "react-native-elements";
 import { 
@@ -60,8 +60,8 @@ class EventsContainer extends React.Component {
 
       var points = [ // user's location
         {
-          latitude: 32.820396, //location.coords.latitude.toFixed(6),
-          longitude: -117.179498 //location.coords.longitude.toFixed(6)
+          latitude: location.coords.latitude.toFixed(6),
+          longitude: location.coords.longitude.toFixed(6)
         }
       ]
 
@@ -138,7 +138,7 @@ class EventsContainer extends React.Component {
 
     var currentTime = parseInt(hours+mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
-    var hoursPriorToEvent = eventTime - 500;
+    var hoursPriorToEvent = eventTime - 1100;
     var hoursAfterEventStart = eventTime + 400;
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysISOdate == nextEvent.local_date) {

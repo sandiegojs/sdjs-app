@@ -44,8 +44,8 @@ class EventDetailsContainer extends React.Component {
 
             var points = [ // user's location
                 {
-                    latitude: 32.820396, //location.coords.latitude.toFixed(6),
-                    longitude: -117.179498 //location.coords.longitude.toFixed(6)
+                    latitude: location.coords.latitude.toFixed(6),
+                    longitude: location.coords.longitude.toFixed(6)
                 }
             ]
 
@@ -115,7 +115,7 @@ class EventDetailsContainer extends React.Component {
 
         var currentTime = parseInt(hours+mins);
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
-        var hoursPriorToEvent = eventTime - 500;
+        var hoursPriorToEvent = eventTime - 1100;
         var hoursAfterEventStart = eventTime + 400;
 
         if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysISOdate == nextEvent[0].local_date) {

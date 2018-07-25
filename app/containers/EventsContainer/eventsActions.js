@@ -89,7 +89,7 @@ export function addAttendeeToEvent(eventObj, userId) {
         type: 'ADD_ATTENDEE_TO_EVENT',
         payload:
         axios
-            .post('https://6ea98c01.ngrok.io/checkin', { eventObj, userId })
+            .post('https://sdjs-app.now.sh/checkin', { eventObj, userId })
             .then(response => {
                 return response.data;
             })
@@ -102,7 +102,7 @@ export function profileQuery(userId) {
         type: 'PROFILE_QUERY',
         payload:
         axios
-            .get('https://6ea98c01.ngrok.io/api/users/' + userId)
+            .get('https://sdjs-app.now.sh/api/users/' + userId)
             .then(response => {
                 return response.data
             })
@@ -117,7 +117,7 @@ export function removeAttendee(attendeeId) {
         type: 'REMOVE_ATTENDEE',
         payload:
         axios
-            .delete('https://6ea98c01.ngrok.io/api/attendees/' + attendeeId)
+            .delete('https://sdjs-app.now.sh/api/attendees/' + attendeeId)
             .then(response => {
                 return response.data;
             })
@@ -132,7 +132,7 @@ export function addRSVPToEvent(eventObj, userId) {
         type: 'ADD_RSVP_TO_EVENT',
         payload:
         axios
-            .post('https://6ea98c01.ngrok.io/rsvp', { eventObj, userId })
+            .post('https://sdjs-app.now.sh/rsvp', { eventObj, userId })
             .then(response => {
                 console.log('returned data', response.data)
                 return response.data;
@@ -152,7 +152,7 @@ export function removeRSVPFromEvent(rsvpEventId) {
         type: 'REMOVE_RSVP_FROM_EVENT',
         payload:
         axios
-            .delete('https://6ea98c01.ngrok.io/api/rsvps/' + rsvpEventId)
+            .delete('https://sdjs-app.now.sh/api/rsvps/' + rsvpEventId)
             .then(response => {
                 console.log('deleted data rsvp', response.data)
                 return response.data;
@@ -172,7 +172,7 @@ export function updateRSVPList(user) {
         type: 'UPDATE_RSVP_LIST',
         payload:
         axios
-            .get('https://6ea98c01.ngrok.io/api/rsvps?filter[where][userId]=' + user)
+            .get('https://sdjs-app.now.sh/api/rsvps?filter[where][userId]=' + user)
             .then(response => {
 
                 return response.data;

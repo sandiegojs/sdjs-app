@@ -33,9 +33,7 @@ module.exports = function (app) {
                 if (!!response.data && !response.data.length) {
                     axios
                         .post(baseUrl + '/api/users/' + userId + '/events', eventObj)
-                        .then(response => {
-                            res.send(response.data.id)
-                        })
+                        .then(response => response.data.id)
                         .catch(error => console.log("error on post event/attendee", error))
                     //else create attendee
                 } else {
@@ -45,14 +43,12 @@ module.exports = function (app) {
                     }
                     axios
                         .post(baseUrl + '/api/attendees', attendeeObj)
-                        .then(response => {
-                            res.send(response.data.id)
-                        })
+                        .then(response => response.data.id)
                         .catch(error => console.log("error on post attendee", error))
                 }
                 // return response.data;
             })
-            .catch(e => res.send(e.message))
+            .catch(error => console.log(error))
     });
     // Below route from original authors. Doesn't seem to be used. All done in actions.
     // the url path seems to be wrong.
