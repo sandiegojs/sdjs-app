@@ -66,8 +66,15 @@ export function loginEntry(loginObj, navigate) {
         payload: axios
         .post('https://sdjs-app.now.sh/api/users/login', { email, password })
         .then( response => {
-            navigate('Events')
-                return response.data
+            let userId = response.data.userId;
+            let loginResponseObj = response.data;
+            return axios
+                .get('https://sdjs-app.now.sh/api/users/' + userId)
+                .then(res => {
+                    let responseArray = [loginResponseObj, res.data];
+                    navigate('Events')
+                    return responseArray
+                });
         })
         .catch(error => {
             alert(

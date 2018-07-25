@@ -53,10 +53,10 @@ componentWillUnmount() {
             },
             Events: {
               screen: EventsScreen,
-            },
-            Profile: {
-              screen: ProfileScreen,
-            },
+            }
+            // Profile: {
+            //   screen: ProfileScreen,
+            // },
           },
           {
             navigationOptions: ({ navigation }) => ({
