@@ -54,9 +54,9 @@ componentWillUnmount() {
             Events: {
               screen: EventsScreen,
             },
-            Profile: {
-              screen: ProfileScreen,
-            },
+            // Profile: {
+            //   screen: ProfileScreen,
+            // },
           },
           {
             navigationOptions: ({ navigation }) => ({
@@ -91,14 +91,14 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                  case 'Profile':
-                    return (
-                      <Image
-                        source={require('./assets/images/survey.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
+                  // case 'Profile':
+                  //   return (
+                  //     <Image
+                  //       source={require('./assets/images/survey.png')}
+                  //       fadeDuration={0}
+                  //       style={{ width: 30, height: 30 }}
+                  //     />
+                    //)
                     break;
                 }
               },
@@ -111,7 +111,7 @@ componentWillUnmount() {
           }
         )
       },
-      Profile: { screen: ProfileScreen },
+     // Profile: { screen: ProfileScreen },
       EventDetails: { screen: EventDetailsScreen },
     });
     return (
