@@ -46,7 +46,6 @@ module.exports = function (app) {
                         .then(response => response.data.id)
                         .catch(error => console.log("error on post attendee", error))
                 }
-                // return response.data;
             })
             .catch(error => console.log(error))
     });

@@ -48,7 +48,14 @@ export function signUpEntry(signUpObj, navigate) {
             }
            else {
             navigate('Events')
-            return response.data
+            let newUserInfo = {
+                first_name: signUpObj.first_name,
+                last_name: signUpObj.last_name,
+                email: signUpObj.email,
+                id: response.data.id,
+                token: response.data.token
+            };
+            return newUserInfo
            }
          
         })

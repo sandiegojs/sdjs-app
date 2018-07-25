@@ -45,9 +45,16 @@ export default function signupReducer(state = defaultState, action) {
             }
         }    
         case 'SIGN_UP_ENTRY_FULFILLED': {
+            console.log('SIGN UP ENTRY FULFILLED LOG', payload);
             return {
                 ...state,
                 user: payload,
+                token: payload.token,
+                id: payload.id,
+                first_name: payload.first_name,
+                last_name: payload.last_name,
+                email: payload.email,
+                loadingScreen: false
             }
         }
         case 'SIGN_UP_ENTRY_REJECTED': {

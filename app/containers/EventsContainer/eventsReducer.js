@@ -86,9 +86,9 @@ const defaultState = {
           eventDetailsRSVP: payload
         };
       }
-      // case 'ADD_ATTENDEE_TO_EVENT_PENDING': {
-      //   return state;
-      // }
+      case 'ADD_ATTENDEE_TO_EVENT_PENDING': {
+        return state;
+      }
       case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
         return {
           ...state,

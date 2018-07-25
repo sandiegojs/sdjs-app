@@ -106,7 +106,7 @@ class EventDetailsContainer extends React.Component {
         }
 
         var d = new Date();
-        var todaysISOdate = '2018-07-25'; //d.toISOString().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
+        var todaysISOdate = d.toISOString().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
 
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
