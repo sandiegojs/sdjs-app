@@ -12,11 +12,18 @@ import {
   removeAttendee,
   profileQuery
 } from './eventsActions';
-import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { FlatList, StyleSheet, View, Text, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from "react-native-elements";
-import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from './eventsDateAndTime';
-
+import { 
+        getDayOfTheWeek, 
+        getMonthString, 
+        getMonthAbr, 
+        getDateString, 
+        getYearString, 
+        standardTime 
+      } from './eventsDateAndTime';
+const moment = require('moment-timezone');
 
 class EventsContainer extends React.Component {
   constructor(props) {
@@ -26,51 +33,59 @@ class EventsContainer extends React.Component {
     this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     this.handleButtons = this.handleButtons.bind(this);
   }
+
   componentDidMount() {
     const { dispatch, user } = this.props
     dispatch(updateEventsData());
-    // dispatch(profileQuery(user.id));
+    // dispatch(profileQuery(user.id)); this line uncommented throws error but may be needed when profile returns
   }
+
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
     selectedEventId = id;
     dispatch(updateSelectedEvent(selectedEventId));
     navigate('EventDetails')
-
   }
 
   _getLocationAsync = async () => {
 
-    const { dispatch, eventsData, user } = this.props;
+    const { dispatch, eventsData, user, id } = this.props;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
     if (status !== 'granted') {
       let errorMessage = 'Permission to access location was denied';
       dispatch(setLocationError(errorMessage));
     } else {
-
-
       let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
-      var points = [
-        {//REMOVE & UPDATE currently set to location off site of 350 10th Ave SD 92101
-          latitude: 32.717793.toFixed(6),//location.coords.latitude.toFixed(6)
-          longitude: -117.155565.toFixed(6)//location.coords.longitude.toFixed(6)
+      var points = [ // user's location
+        {
+          latitude: location.coords.latitude.toFixed(6),
+          longitude: location.coords.longitude.toFixed(6)
         }
       ]
 
       var startPoint = { //venue lat lon
-        latitude: 32.70893096923828,//todaysEvents.venue.lat
-        longitude: -117.15599060058594//todaysEvents.venue.lon
+        latitude: eventsData[0].venue.lat,
+        longitude: eventsData[0].venue.lon
       }
 
-      var maxDistanceInKM = 5; // 500m distance
+      var maxDistanceInKM = 0.5; // 500m distance
       // startPoint - center of perimeter
       // points - array of points
       // maxDistanceInKM - max point distance from startPoint in KM's
       // result - array of points inside the max distance
       var result = Geofence.filterByProximity(startPoint, points, maxDistanceInKM);
       if (result[0] === undefined) {
+        Alert.alert(
+          'Unable to Check In',
+          'You need to be within 500 meters of the event location to check in', [{
+              text: 'OK',
+          }], {
+              cancelable: false
+          }
+       ) 
       } else {
         eventObj = {
           "event_title": eventsData[0].name,
@@ -79,16 +94,15 @@ class EventsContainer extends React.Component {
           "location": startPoint
         };
         dispatch(checkedInTrue(true));
-        dispatch(addAttendeeToEvent(eventObj, user.id));
-
+        dispatch(addAttendeeToEvent(eventObj, id));
       }
     }
   };
 
   handleUnCheckIn() {
     const { dispatch, attendeeId } = this.props;
-    dispatch(removeAttendee(attendeeId))
     dispatch(checkedInFalse(false));
+    dispatch(removeAttendee(attendeeId));
   }
 
   //Queries DB with user ID and sends to profile page
@@ -99,15 +113,14 @@ class EventsContainer extends React.Component {
   // }
 
   _handlePressButtonAsync = async () => {
+    const { eventDetails, eventsData } = this.props;
+    const eventInfo = eventsData.filter(event => event.id === eventDetails);
 
-    const { eventsData } = this.props;
-    let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
+    let result = await WebBrowser.openBrowserAsync(eventsInfo[0].link);
   }
 
-
-
   handleButtons() {
-    const { eventsData, checkedIn } = this.props;
+    const { eventsData, checkedIn, eventDetails } = this.props;
 
     function addZero(i) {
       if (i < 10) {
@@ -116,30 +129,21 @@ class EventsContainer extends React.Component {
       return i;
     }
 
-
-
     var d = new Date();
-    var todaysISOdate = d.toISOString().slice(0, 10);
+     // below date using moment.js/moment-timezone npm package
+    var todaysDate = moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
 
-    var exampleDate = "2018-05-15";// for testing, REMOVE and update to todaysISODate
     var nextEvent = eventsData[0];
 
-    var hours = addZero(d.getHours());
-    var mins = addZero(d.getMinutes());
+    var hours = addZero(d.getHours()).toString();
+    var mins = addZero(d.getMinutes()).toString();
 
-
-
-
-    var currentTime = null;//parseInt(hours+mins);  currently set to 1230 for testing
+    var currentTime = parseInt(hours+mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
     var hoursPriorToEvent = eventTime - 100;
     var hoursAfterEventStart = eventTime + 400;
 
-    currentTime = 1900//parseInt(hours+mins);  currently set to 1230 for testing
-
-
-    if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent.local_date) {
-      //if(!!checkedInStatus) is true
+    if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate == nextEvent.local_date) {
       if (checkedIn) {
         nextEventButton = <Button
                             large
@@ -165,7 +169,7 @@ class EventsContainer extends React.Component {
       }
     }
 
-    if (currentTime < hoursPriorToEvent || exampleDate != nextEvent.local_date) {
+    if (currentTime < hoursPriorToEvent || todaysDate != nextEvent.local_date) {
       nextEventButton = <Button
                           large
                           backgroundColor={'green'}
@@ -177,13 +181,12 @@ class EventsContainer extends React.Component {
                           onPress={this._handlePressButtonAsync}
                         />
     }
-    if (currentTime > hoursAfterEventStart && exampleDate == nextEvent.local_date) {
-      nextEventButton = "null"
+    if (currentTime > hoursAfterEventStart && todaysDate == nextEvent.local_date) {
+      nextEventButton = null;
     }
 
     return nextEventButton;
   }
-
 
   render() {
     const { eventsData, locationError, user, dispatch } = this.props;
@@ -245,18 +248,18 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
   return {
+    eventDetails: store.eventsData.selectedEvent,
     eventsData: store.eventsData.eventsData,
+    id: store.signupData.id,
+    user: store.signupData.user,
+    first_name: store.signupData.first_name,
+    last_name: store.signupData.last_name,
+    email: store.signupData.email,
     locationError: store.eventsData.locationError,
     checkedIn: store.eventsData.checkedIn,
-    user: store.signupData.user,
     attendeeId: store.eventsData.attendeeId,
     checkedInStatus: store.eventsData.checkedInStatus
-
-
   };
 }
 
-
 export default connect(mapStoreToProps)(EventsContainer);
-
-
