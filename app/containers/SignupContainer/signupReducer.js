@@ -53,7 +53,12 @@ export default function signupReducer(state = defaultState, action) {
                 first_name: payload.first_name,
                 last_name: payload.last_name,
                 email: payload.email,
-                loadingScreen: false
+                loadingScreen: false,
+                profileData:{
+                    first_name: payload.first_name,
+                    last_name: payload.last_name,
+                    email: payload.email
+                }
             }
         }
         case 'SIGN_UP_ENTRY_REJECTED': {
@@ -76,7 +81,10 @@ export default function signupReducer(state = defaultState, action) {
                 first_name: payload[1].first_name,
                 last_name: payload[1].last_name,
                 email: payload[1].email,
-                loadingScreen: false
+                url: payload[1].url,
+                bio: payload[1].bio,
+                company: payload[1].company,
+                loadingScreen: false,
             }
         }
         case 'LOGIN_ENTRY_REJECTED': {

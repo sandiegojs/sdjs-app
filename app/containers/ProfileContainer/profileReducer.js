@@ -1,7 +1,7 @@
 const defaultState = {
     // firstName: '',
     // lastName: '',
-    // email: '',
+    //email: '',
     // bio: '',
     // url: '',
     // location: '',

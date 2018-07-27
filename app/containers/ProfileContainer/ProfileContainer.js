@@ -21,9 +21,9 @@ class ProfileContainer extends React.Component {
 
     handleProfileUpdate(obj) {
         const { navigate } = this.props.navigation;
-        const { dispatch, profileData, profileUpdate } = this.props;
+        const { dispatch, profileData, profileUpdate, id } = this.props;
         const newProfileData = { ...profileData, ...profileUpdate };
-        dispatch(actions.profileUpdate(newProfileData));
+        dispatch(actions.profileUpdate(newProfileData, id));
         navigate('Events');
 
     }
@@ -130,10 +130,15 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        first_name: store.signupData.first_name,
-        last_name: store.signupData.last_name,
-        email: store.signupData.email,
-        profileData: store.eventsData.profileData,
+        profileData: {
+            first_name: store.signupData.first_name,
+            last_name: store.signupData.last_name,
+            email: store.signupData.email,
+            bio: store.signupData.bio,
+            company: store.signupData.company,
+            url: store.signupData.url  
+        },
+        id: store.signupData.id,
         profileUpdate: store.profileUpdate
     };
 }
