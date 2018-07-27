@@ -29,8 +29,8 @@
         "xhdpi": "./assets/images/sandiegojs_xhdpi.png",
         "xxhdpi": "./assets/images/sandiegojs_xxhdpi.png",
         "xxxhdpi": "./assets/images/sandiegojs_xxxhdpi.png"
-        },
-        "config": {
+      },
+      "config": {
         "googleMaps": {
         "apiKey": "AIzaSyCiu2veMcnW9rueYgut2ns3Sby9smkox6w"
         }
