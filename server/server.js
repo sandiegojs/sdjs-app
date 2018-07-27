@@ -15,9 +15,10 @@ app.start = function () {
     if (app.get('loopback-component-explorer')) {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log(`Server is running on port :: ${baseUrl}`);
-}
-  });
-};
+      }
+    });
+  }
+  
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
