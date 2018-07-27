@@ -32,8 +32,22 @@ module.exports = function (app) {
                 // which also creates the attendee at the same time. Fancy, huh?
                 if (!!response.data && !response.data.length) {
                     axios
-                        .post(baseUrl + '/api/users/' + userId + '/events', eventObj)
-                        .then(response => response.data.id)
+                        .post(baseUrl + '/api/events', eventObj)
+                        .then(r => {
+                            let attendeeInfoObj = {
+                                'eventId': r.data.id,
+                                'userId': userId
+                            } 
+                            return axios
+                                .post(baseUrl + '/api/attendees', attendeeInfoObj)
+                                .then(resp => {
+                                    let attendeeId = resp.data.id;
+                                    return attendeeId
+                                })
+                                .catch(e => console.log('error on post attendee', e))
+                        })
+                        // .post(baseUrl + '/api/users/' + userId + '/events', eventObj)
+                        // .then(response => response.data.id)
                         .catch(error => console.log("error on post event/attendee", error))
                     //else create attendee
                 } else {
