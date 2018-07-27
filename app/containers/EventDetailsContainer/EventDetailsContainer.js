@@ -20,8 +20,9 @@ import {
         getYearString, 
         standardTime 
     } from '../EventsContainer/eventsDateAndTime';
-import Hyperlink from 'react-native-hyperlink'
-import EventMap from './EventMap'
+import Hyperlink from 'react-native-hyperlink';
+const moment = require('moment-timezone');
+import EventMap from './EventMap';
 
 class EventDetailsContainer extends React.Component {
     constructor(props) {
@@ -63,7 +64,7 @@ class EventDetailsContainer extends React.Component {
             if (result[0] === undefined) {
                 Alert.alert(
                     'Unable to Check In',
-                    'You need to be within 500 meters of the event location to check in. Giddy-up!!', [{
+                    'You need to be within 500 meters of the event location to check in', [{
                         text: 'OK',
                     }], {
                         cancelable: false
@@ -106,7 +107,8 @@ class EventDetailsContainer extends React.Component {
         }
 
         var d = new Date();
-        var todaysISOdate = d.toISOString().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
+        // below date using moment.js/moment-timezone npm package
+        var todaysDate = moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
 
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
@@ -115,10 +117,10 @@ class EventDetailsContainer extends React.Component {
 
         var currentTime = parseInt(hours+mins);
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
-        var hoursPriorToEvent = eventTime - 1100;
+        var hoursPriorToEvent = eventTime - 100;
         var hoursAfterEventStart = eventTime + 400;
 
-        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysISOdate == nextEvent[0].local_date) {
+        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate == nextEvent[0].local_date) {
             if (checkedIn) {
                 nextEventButton = <Button
                     large
@@ -145,7 +147,7 @@ class EventDetailsContainer extends React.Component {
             }
         }
 
-        if (currentTime < hoursPriorToEvent || todaysISOdate != nextEvent[0].local_date) {
+        if (currentTime < hoursPriorToEvent || todaysDate != nextEvent[0].local_date) {
 
             nextEventButton = <Button
                 large
@@ -158,7 +160,7 @@ class EventDetailsContainer extends React.Component {
                 onPress={this._handlePressButtonAsync}
             />
         }
-        if (currentTime > hoursAfterEventStart && todaysISOdate == nextEvent[0].local_date) {
+        if (currentTime > hoursAfterEventStart && todaysDate == nextEvent[0].local_date) {
             nextEventButton = null;
         }
         return nextEventButton;
