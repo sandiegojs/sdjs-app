@@ -35,14 +35,14 @@ module.exports = function (app) {
                         .post(baseUrl + '/api/events', eventObj)
                         .then(r => {
                             let attendeeInfoObj = {
-                                'eventId': r.data.id,
-                                'userId': userId
+                                eventId: r.data.id,
+                                userId: userId
                             } 
                             return axios
                                 .post(baseUrl + '/api/attendees', attendeeInfoObj)
                                 .then(resp => {
                                     let attendeeId = resp.data.id;
-                                    return attendeeId
+                                    res.send(attendeeId)
                                 })
                                 .catch(e => console.log('error on post attendee', e))
                         })
