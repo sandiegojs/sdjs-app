@@ -61,8 +61,8 @@ class EventsContainer extends React.Component {
 
       var points = [ // user's location
         {
-          latitude: location.coords.latitude.toFixed(6),
-          longitude: location.coords.longitude.toFixed(6)
+          latitude: 32.717673,//location.coords.latitude.toFixed(6),
+          longitude: -117.154940//location.coords.longitude.toFixed(6)
         }
       ]
 
@@ -116,7 +116,7 @@ class EventsContainer extends React.Component {
     const { eventDetails, eventsData } = this.props;
     const eventInfo = eventsData.filter(event => event.id === eventDetails);
 
-    let result = await WebBrowser.openBrowserAsync(eventsInfo[0].link);
+    let result = await WebBrowser.openBrowserAsync(eventInfo[0].link);
   }
 
   handleButtons() {
@@ -140,7 +140,7 @@ class EventsContainer extends React.Component {
 
     var currentTime = parseInt(hours+mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
-    var hoursPriorToEvent = eventTime - 100;
+    var hoursPriorToEvent = eventTime - 1100;
     var hoursAfterEventStart = eventTime + 400;
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate == nextEvent.local_date) {
