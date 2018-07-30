@@ -16,8 +16,8 @@ class App extends React.Component {
   
 handleBackButton = () => {               
   Alert.alert(
-      'Exit App',
-      'Exiting the application?', [{
+      'Exit The App',
+      'Are you sure you want to exit?', [{
           text: 'Cancel',
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel'
