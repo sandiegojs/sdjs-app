@@ -10,6 +10,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
+import PasswordResetScreen from './screens/PasswordResetScreen';
 
 
 class App extends React.Component {
@@ -42,6 +43,7 @@ componentWillUnmount() {
     const AppRoot = StackNavigator({ 
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
+      Password: { screen : PasswordResetScreen},
       Events: {
         screen: TabNavigator(
           {
