@@ -19,9 +19,7 @@ const defaultState = {
       url: '',
       location: '',
       company: '',
-      tokens: [
-        
-      ],
+      tokens: [],
       photo: ''
     }
   };
