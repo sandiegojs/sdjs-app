@@ -19,9 +19,7 @@ const defaultState = {
       url: '',
       location: '',
       company: '',
-      tokens: [
-        
-      ],
+      tokens: [],
       photo: ''
     }
   };
@@ -90,7 +88,6 @@ const defaultState = {
         return state;
       }
       case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
-        console.log('ADD ATTENDEE reducer log', payload);
         return {
           ...state,
           attendeeId: payload
