@@ -61,8 +61,8 @@ class EventsContainer extends React.Component {
 
       var points = [ // user's location
         {
-          latitude: 32.717673,//location.coords.latitude.toFixed(6),
-          longitude: -117.154940//location.coords.longitude.toFixed(6)
+          latitude: location.coords.latitude.toFixed(6),
+          longitude: location.coords.longitude.toFixed(6)
         }
       ]
 
@@ -129,7 +129,7 @@ class EventsContainer extends React.Component {
 
     var d = new Date();
      // below date using moment.js/moment-timezone npm package
-    var todaysDate = '2018-08-07'//moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
+    var todaysDate = moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
 
     var nextEvent = eventsData[0];
 
@@ -138,7 +138,7 @@ class EventsContainer extends React.Component {
 
     var currentTime = parseInt(hours+mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
-    var hoursPriorToEvent = eventTime - 1100;
+    var hoursPriorToEvent = eventTime - 100;
     var hoursAfterEventStart = eventTime + 400;
 
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate == nextEvent.local_date) {
