@@ -9,13 +9,32 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/sdjs.png",
-    "splash": {
-      "image": "./assets/images/sandiegojs.png",
+    "splash": { 
+      "backgroundColor": "#1884c3",
       "resizeMode": "contain",
-      "backgroundColor": "#1884c3"//346abb
+      "image": "./assets/images/sandiegojs.png"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sdjs.SDJSapp"
+    },
+    "android": {
+      "package": "com.sdjs.SDJSapp",
+      "splash": {       
+        "resizeMode": "contain",
+        "backgroundColor": "#1884c3",
+        "ldpi": "./assets/images/sandiegojs_ldpi.png",
+        "mdpi": "./assets/images/sandiegojs_mdpi.png",
+        "hdpi": "./assets/images/sandiegojs_hdpi.png",
+        "xhdpi": "./assets/images/sandiegojs_xhdpi.png",
+        "xxhdpi": "./assets/images/sandiegojs_xxhdpi.png",
+        "xxxhdpi": "./assets/images/sandiegojs_xxxhdpi.png"
+      },
+      "config": {
+        "googleMaps": {
+        "apiKey": "AIzaSyCiu2veMcnW9rueYgut2ns3Sby9smkox6w"
+        }
+      }
     }
   }
 }

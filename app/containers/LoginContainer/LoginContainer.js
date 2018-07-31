@@ -128,6 +128,7 @@ class LoginContainer extends React.Component {
                         <Button
                             title='CREATE ACCOUNT'
                             style={styles.button}
+                            borderRadius={3}
                             backgroundColor={'#346abb'}
                             onPress={() => this.props.navigation.navigate('Signup')}
                         />
@@ -147,6 +148,7 @@ const styles = StyleSheet.create({
         paddingBottom: 300
     },
     button: {
+        borderRadius: 8,
         marginTop: 30,
         marginBottom: 20,
         width: 320
@@ -160,6 +162,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25
     },
     formContainer: {
+        paddingBottom: 20,
         width: 350
     },
     formMessage: {
