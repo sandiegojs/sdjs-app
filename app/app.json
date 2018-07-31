@@ -23,11 +23,11 @@
       "splash": {       
         "resizeMode": "contain",
         "backgroundColor": "#1884c3",
-        "mdpi": "./assets/images/mipmap-mdpi/sdjs_app_mdpi.png",
-        "hdpi": "./assets/images/mipmap-mdpi/sdjs_app_hdpi.png",
-        "xhdpi": "./assets/images/mipmap-mdpi/sdjs_app_xhdpi.png",
-        "xxhdpi": "./assets/images/mipmap-mdpi/sdjs_app_xxhdpi.png",
-        "xxxhdpi": "./assets/images/mipmap-mdpi/sdjs_app_xxxhdpi.png"
+        "mdpi": "./assets/images/mipmap_mdpi/sdjs_app_mdpi.png",
+        "hdpi": "./assets/images/mipmap_mdpi/sdjs_app_hdpi.png",
+        "xhdpi": "./assets/images/mipmap_mdpi/sdjs_app_xhdpi.png",
+        "xxhdpi": "./assets/images/mipmap_mdpi/sdjs_app_xxhdpi.png",
+        "xxxhdpi": "./assets/images/mipmap_mdpi/sdjs_app_xxxhdpi.png"
       },
       "config": {
         "googleMaps": {
