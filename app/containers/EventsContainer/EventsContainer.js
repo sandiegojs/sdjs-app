@@ -116,7 +116,7 @@ class EventsContainer extends React.Component {
     const { eventDetails, eventsData } = this.props;
     const eventInfo = eventsData.filter(event => event.id === eventDetails);
 
-    let result = await WebBrowser.openBrowserAsync(eventsInfo[0].link);
+    let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
   }
 
   handleButtons() {
