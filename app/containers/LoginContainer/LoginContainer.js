@@ -133,6 +133,14 @@ class LoginContainer extends React.Component {
                             onPress={() => this.props.navigation.navigate('Signup')}
                         />
                     </View>
+                    <View>
+                        <Button
+                            title='FORGOT PASSWORD?'
+                            style={styles.button}
+                            backgroundColor={'#364abb'}
+                            onPress={() => this.props.navigation.navigate('Password')}
+                        />
+                    </View>
                 </View>
             </ScrollView>
         )
