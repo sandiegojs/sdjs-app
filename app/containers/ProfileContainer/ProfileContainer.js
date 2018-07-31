@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { List, ListItem, FormLabel, FormInput, Button } from "react-native-elements";
 import { StackNavigator } from 'react-navigation';
@@ -67,56 +67,60 @@ class ProfileContainer extends React.Component {
         const { profileData } = this.props;
         const { profileUpdate } = this.props;
         return (
-            <KeyboardAwareScrollView
-                style={{ backgroundColor: '#fff' }}
-                resetScrollToCoords={{ x: 0, y: 0 }}
-                contentContainerStyle={styles.container}
-                scrollEnabled={false}
-            >
-                <FormLabel>First Name</FormLabel>
-                <FormInput
-                    defaultValue={profileData.first_name}
-                    onChangeText={this.handleFirstNameUpdate}
-                />
-                <FormLabel>Last Name</FormLabel>
-                <FormInput
-                    defaultValue={profileData.last_name}
-                    onChangeText={this.handleLastNameUpdate}
-                />
-                <FormLabel>Email</FormLabel>
-                <FormInput
-                    defaultValue={profileData.email}
-                    onChangeText={this.handleEmailUpdate}
-                />
-                <FormLabel>Bio</FormLabel>
-                <FormInput
-                    defaultValue={profileData.bio}
-                    onChangeText={this.handleBioUpdate}
-                />
-                <FormLabel>Company</FormLabel>
-                <FormInput
-                    defaultValue={profileData.company}
-                    onChangeText={this.handleCompanyUpdate}
-                />
-                <FormLabel>Website</FormLabel>
-                <FormInput
-                    defaultValue={profileData.url}
-                    onChangeText={this.handleUrlUpdate}
-                />
-                {/* <FormLabel>Location</FormLabel>
-                <FormInput
-                    defaultValue={profileData.location}
-                    onChangeText={this.handleLocationUpdate}
-                    style={styles.bottomInput}
-                /> */}
-                <Button
-                    large
-                    backgroundColor='#346abb'
-                    borderRadius={3}
-                    style={styles.updateButton}
-                    onPress={this.handleProfileUpdate}
-                    title="UPDATE" />
-            </KeyboardAwareScrollView>
+            // <KeyboardAwareScrollView
+            //     style={{ backgroundColor: '#fff' }}
+            //     resetScrollToCoords={{ x: 0, y: 0 }}
+            //     contentContainerStyle={styles.container}
+            //     scrollEnabled={false}
+            // >
+            <ScrollView keyboardDismissMode='on-drag'>
+                <View style={styles.container}>
+                    <FormLabel>First Name</FormLabel>
+                    <FormInput
+                        defaultValue={profileData.first_name}
+                        onChangeText={this.handleFirstNameUpdate}
+                    />
+                    <FormLabel>Last Name</FormLabel>
+                    <FormInput
+                        defaultValue={profileData.last_name}
+                        onChangeText={this.handleLastNameUpdate}
+                    />
+                    <FormLabel>Email</FormLabel>
+                    <FormInput
+                        defaultValue={profileData.email}
+                        onChangeText={this.handleEmailUpdate}
+                    />
+                    <FormLabel>Bio</FormLabel>
+                    <FormInput
+                        defaultValue={profileData.bio}
+                        onChangeText={this.handleBioUpdate}
+                    />
+                    <FormLabel>Company</FormLabel>
+                    <FormInput
+                        defaultValue={profileData.company}
+                        onChangeText={this.handleCompanyUpdate}
+                    />
+                    <FormLabel>Website</FormLabel>
+                    <FormInput
+                        defaultValue={profileData.url}
+                        onChangeText={this.handleUrlUpdate}
+                    />
+                    {/* <FormLabel>Location</FormLabel>
+                    <FormInput
+                        defaultValue={profileData.location}
+                        onChangeText={this.handleLocationUpdate}
+                        style={styles.bottomInput}
+                    /> */}
+                    <Button
+                        large
+                        backgroundColor='#346abb'
+                        borderRadius={3}
+                        style={styles.updateButton}
+                        onPress={this.handleProfileUpdate}
+                        title="UPDATE" />
+                </View>
+            </ScrollView>
+            //</KeyboardAwareScrollView>
         )
     }
 
@@ -125,7 +129,13 @@ class ProfileContainer extends React.Component {
 const styles = StyleSheet.create({
     updateButton: {
         marginTop: 30
-    }
+    },
+    container: {
+        flex: 1,
+        paddingTop: 20,
+        paddingBottom: 300
+    },
+
 })
 
 function mapStoreToProps(store) {
