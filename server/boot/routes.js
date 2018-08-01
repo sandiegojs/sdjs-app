@@ -10,8 +10,7 @@ module.exports = function (app) {
         axios
             .post(baseUrl + '/api/users', { first_name, last_name, email, password })
             .then(response => {
-
-                //Once user has signed up successfully, log them in
+                //Once user has signed up successfully, log them in, yo
                 axios.post(baseUrl + '/api/users/login', { email, password })
                     .then(r => res.json({
                         token: r.data.id,
@@ -25,49 +24,53 @@ module.exports = function (app) {
     app.post('/checkin', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
         const { eventObj, userId } = req.body;
-
-        console.log("eventObj", eventObj);
-        console.log("userId", userId);
         //Create a new user
         axios
-            .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)//1049303
+            .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)
             .then(response => {
-                //if no event exist create event through users/{id}/events
+                // if no event exists, create event through api/events, 
+                // then create new attendee of that event; pass attendee id back to action
+                // attendee id will be used to delete attendee should they hit the un-checkin button.
+                // Legacy code used api/users/{id}/events url to create event and attendee at the same time, 
+                // but this did not allow for the attendee id to be received in the response meaning 
+                // the delete would not function properly. 
                 if (!!response.data && !response.data.length) {
-                    console.log("inside if statement in post")
                     axios
-                        .post(baseUrl + '/api/users/' + userId + '/events', eventObj)//5a70c7adc7f6050014b20c09  change to userId
-                        .then(response => {
-                            res.send(response.data.id)
+                        .post(baseUrl + '/api/events', eventObj)
+                        .then(r => {
+                            let attendeeInfoObj = {
+                                eventId: r.data.id,
+                                userId: userId
+                            } 
+                            return axios
+                                .post(baseUrl + '/api/attendees', attendeeInfoObj)
+                                .then(resp => {
+                                    let attendeeId = resp.data.id;
+                                    res.send(attendeeId)
+                                })
+                                .catch(e => console.log('error on post attendee', e))
                         })
                         .catch(error => console.log("error on post event/attendee", error))
                     //else create attendee
                 } else {
-                    console.log('Matching Event found')
                     var attendeeObj = {
                         'eventId': response.data[0].id,
-                        'userId': userId//changeto userId
+                        'userId': userId
                     }
                     axios
                         .post(baseUrl + '/api/attendees', attendeeObj)
-                        .then(response => {
-                            console.log("post data", response.data)
-                            res.send(response.data.id)
-                        })
+                        .then(response => response.data.id)
                         .catch(error => console.log("error on post attendee", error))
                 }
-                return response.data;
             })
-            .catch(e => res.send(e.message))
+            .catch(error => console.log(error))
     });
-
+    // Below route from original authors. Doesn't seem to be used. All done in actions.
+    // the url path seems to be wrong.
+    // should hit /api/attendees with attendeeId to delete attendee
     app.delete('/deleteattendee', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
-        console.log(baseUrl);
-
         const { attendeeId } = req.body;
-        console.log(attendeeId);
-        //Create a new user
         axios
             .delete(baseUrl + '/api/users', { attendeeId })
             .then(response => {

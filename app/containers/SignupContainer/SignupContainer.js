@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Linking, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Linking, Alert, ScrollView } from 'react-native';
 import { FormLabel, FormInput, Button, FormValidationMessage, Icon } from 'react-native-elements';
 import {
     firstNameEntry,
@@ -45,10 +45,10 @@ class SignupContainer extends React.Component {
     }
 
     handleSignUpSubmission() {
-        const { dispatch, firstName, lastName, email, password} = this.props;
+        const { dispatch, first_name, last_name, email, password } = this.props;
         const { navigate } = this.props.navigation;
 
-        if(firstName == '' || lastName == '' || email == '' || password == '') {
+        if (first_name == '' || last_name == '' || email == '' || password == '') {
             Alert.alert(
                 'Form Error',
                 'Complete all fields to submit', [{
@@ -59,8 +59,8 @@ class SignupContainer extends React.Component {
             )
         } else {
             const signUpObj = {
-                "first_name": firstName,
-                "last_name": lastName,
+                "first_name": first_name,
+                "last_name": last_name,
                 "email": email,
                 "password": password,
             }
@@ -114,31 +114,32 @@ class SignupContainer extends React.Component {
     }
 
     render() {
-        const { firstName, lastName, email, password, user } = this.props;
+        const { first_name, last_name, email, password, user } = this.props;
         const { navigate } = this.props.navigation;
 
         return (
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <FormLabel>FIRST NAME </FormLabel>
-                    <FormInput onChangeText={this.handleFirstNameInput} />
-                    <FormLabel>LAST NAME</FormLabel>
-                    <FormInput onChangeText={this.handleLastNameInput} />
-                    <FormLabel>EMAIL</FormLabel>
-                    <FormInput onChangeText={this.handleEmailInput} />
-                    <FormLabel>PASSWORD</FormLabel>
-                    <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} />
-                </View>
-                <View>
-                </View>
-                <Button style={styles.button}
-                    onPress={this.handleSignUpSubmission}
-                    backgroundColor={'#346abb'}
-                    borderRadius={3}
-                    large
-                    icon={{ name: 'sign-in', type: 'font-awesome' }}
-                    title='SIGN UP' />
-                {/* <View style={styles.socialButtonsContainer}>
+            <ScrollView keyboardDismissMode='on-drag'>
+                <View style={styles.container}>
+                    <View style={styles.formContainer}>
+                        <FormLabel>FIRST NAME </FormLabel>
+                        <FormInput onChangeText={this.handleFirstNameInput} />
+                        <FormLabel>LAST NAME</FormLabel>
+                        <FormInput onChangeText={this.handleLastNameInput} />
+                        <FormLabel>EMAIL</FormLabel>
+                        <FormInput onChangeText={this.handleEmailInput} />
+                        <FormLabel>PASSWORD</FormLabel>
+                        <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} />
+                    </View>
+                    <View>
+                    </View>
+                    <Button style={styles.button}
+                        onPress={this.handleSignUpSubmission}
+                        backgroundColor={'#346abb'}
+                        borderRadius={3}
+                        large
+                        icon={{ name: 'sign-in', type: 'font-awesome' }}
+                        title='SIGN UP' />
+                    {/* <View style={styles.socialButtonsContainer}>
                     <Button
                         onPress={this._authenticateWithGithubAsync}
                         backgroundColor={'#346abb'}
@@ -154,8 +155,8 @@ class SignupContainer extends React.Component {
                         icon={{ name: 'google-plus', type: 'font-awesome' }}
                         title='GOOGLE' />
                 </View> */}
-            </View>
-
+                </View>
+            </ScrollView>
         )
     }
 }
@@ -165,7 +166,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#DCDCDC',
         alignItems: 'center',
-        paddingTop: 30
+        paddingTop: 30,
+        paddingBottom: 300
     },
     button: {
         marginTop: 55,
@@ -190,8 +192,8 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        firstName: store.signupData.firstName,
-        lastName: store.signupData.lastName,
+        first_name: store.signupData.first_name,
+        last_name: store.signupData.last_name,
         email: store.signupData.email,
         password: store.signupData.password,
         user: store.signupData.user

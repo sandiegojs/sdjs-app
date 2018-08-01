@@ -10,16 +10,20 @@ import ProfileScreen from './screens/ProfileScreen';
 import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
+<<<<<<< HEAD
 import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
+=======
+import PasswordResetScreen from './screens/PasswordResetScreen';
+>>>>>>> 8835b92e92d840ad4ad4fa0572b5540c66b2effe
 
 
 class App extends React.Component {
   
 handleBackButton = () => {               
   Alert.alert(
-      'Exit App',
-      'Exiting the application?', [{
+      'Exit The App',
+      'Are you sure you want to exit?', [{
           text: 'Cancel',
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel'
@@ -43,7 +47,12 @@ componentWillUnmount() {
 
     const AppRoot = StackNavigator({ 
       Login: { screen: LoginScreen },
+<<<<<<< HEAD
       Signup: { screen: SignupScreen },    
+=======
+      Signup: { screen: SignupScreen },
+      Password: { screen : PasswordResetScreen},
+>>>>>>> 8835b92e92d840ad4ad4fa0572b5540c66b2effe
       Events: {
         screen: TabNavigator(
           {
@@ -125,7 +134,7 @@ componentWillUnmount() {
           }
         )
       },
-      Profile: { screen: ProfileScreen },
+     // Profile: { screen: ProfileScreen },
       EventDetails: { screen: EventDetailsScreen },
       Donate: { screen: DonateScreen },
       ThankYou: { screen: ThankyouScreen }

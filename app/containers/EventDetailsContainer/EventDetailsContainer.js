@@ -2,7 +2,7 @@ import React from 'react';
 import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { StyleSheet, Text, View, Linking, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Linking, ScrollView, Platform } from 'react-native';
 import { Constants, Location, Permissions, WebBrowser } from 'expo';
 import { Button } from 'react-native-elements'
 import {
@@ -12,75 +12,88 @@ import {
     addAttendeeToEvent,
     removeAttendee,
 } from '../EventsContainer/eventsActions';
-import { getDayOfTheWeek, getMonthString, getMonthAbr, getDateString, getYearString, standardTime } from '../EventsContainer/eventsDateAndTime';
-import Hyperlink from 'react-native-hyperlink'
-import EventMap from './EventMap'
+import { 
+        getDayOfTheWeek, 
+        getMonthString, 
+        getMonthAbr, 
+        getDateString, 
+        getYearString, 
+        standardTime 
+    } from '../EventsContainer/eventsDateAndTime';
+import Hyperlink from 'react-native-hyperlink';
+const moment = require('moment-timezone');
+import EventMap from './EventMap';
 
 class EventDetailsContainer extends React.Component {
     constructor(props) {
         super(props);
+
         this.handleButtons = this.handleButtons.bind(this);
         this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
     }
+
     _getLocationAsync = async () => {
 
-        const { dispatch, eventsData, user } = this.props;
+        const { dispatch, eventsData, user, id } = this.props;
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
         if (status !== 'granted') {
-            let errorMessage = 'Permission to access location was denied';
+            let errorMessage = 'Permission to access location was denied.';
             dispatch(setLocationError(errorMessage));
         } else {
-
-
             let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
-            var points = [
-                {//REMOVE & UPDATE currently set to location off site of 350 10th Ave SD 92101
-                    latitude: 32.717793.toFixed(6),//location.coords.latitude.toFixed(6)
-                    longitude: -117.155565.toFixed(6)//location.coords.longitude.toFixed(6)
+            var points = [ // user's location
+                {
+                    latitude: 32.717673,//location.coords.latitude.toFixed(6),
+                    longitude: -117.154940//location.coords.longitude.toFixed(6)
                 }
             ]
 
             var startPoint = { //venue lat lon
-                latitude: 32.70893096923828,//todaysEvents.venue.lat
-                longitude: -117.15599060058594//todaysEvents.venue.lon
+                latitude: eventsData[0].venue.lat,
+                longitude: eventsData[0].venue.lon
             }
 
-            var maxDistanceInKM = 5; // 500m distance
+            var maxDistanceInKM = 0.5; // 500m distance
             // startPoint - center of perimeter
             // points - array of points
             // maxDistanceInKM - max point distance from startPoint in KM's
             // result - array of points inside the max distance
             var result = Geofence.filterByProximity(startPoint, points, maxDistanceInKM);
             if (result[0] === undefined) {
+                Alert.alert(
+                    'Unable to Check In',
+                    'You need to be within 500 meters of the event location to check in', [{
+                        text: 'OK',
+                    }], {
+                        cancelable: false
+                    }
+                ) 
             } else {
                 eventObj = {
                     "event_title": eventsData[0].name,
                     "meetup_id": eventsData[0].id,
                     "url": eventsData[0].group.urlname + ".org",
                     "location": startPoint
-                };
+                }
                 dispatch(checkedInTrue(true));
-                dispatch(addAttendeeToEvent(eventObj, user.id));
-
+                dispatch(addAttendeeToEvent(eventObj, id));
             }
         }
     };
 
     handleUnCheckIn() {
         const { dispatch, attendeeId } = this.props;
-        dispatch(removeAttendee(attendeeId))
         dispatch(checkedInFalse(false));
+        dispatch(removeAttendee(attendeeId));
     }
 
-
     _handlePressButtonAsync = async () => {
-
         const { eventDetails, eventsData } = this.props;
-        const eventInfo = eventsData.filter(event => event.id === eventDetails)
+        const eventInfo = eventsData.filter(event => event.id === eventDetails);
 
         let result = await WebBrowser.openBrowserAsync(eventInfo[0].link);
-
     };
 
     handleButtons() {
@@ -93,29 +106,21 @@ class EventDetailsContainer extends React.Component {
             return i;
         }
 
-
-
         var d = new Date();
-        var todaysISOdate = d.toISOString().slice(0, 10);
+        // below date using moment.js/moment-timezone npm package
+        var todaysDate = '2018-08-07'//moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
 
-        var exampleDate = "2018-05-15";// for testing, REMOVE and update to todaysISODate
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
 
-        var hours = addZero(d.getHours());
-        var mins = addZero(d.getMinutes());
+        var hours = (addZero(d.getHours())).toString();
+        var mins = (addZero(d.getMinutes())).toString();
 
-
-
-
-        var currentTime = null;//parseInt(hours+mins);  currently set to 1230 for testing
+        var currentTime = parseInt(hours+mins);
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
-        var hoursPriorToEvent = eventTime - 100;
+        var hoursPriorToEvent = eventTime - 1100;
         var hoursAfterEventStart = eventTime + 400;
 
-        currentTime = 1900//parseInt(hours+mins);  currently set to 1230 for testing
-
-
-        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
+        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate == nextEvent[0].local_date) {
             if (checkedIn) {
                 nextEventButton = <Button
                     large
@@ -142,7 +147,7 @@ class EventDetailsContainer extends React.Component {
             }
         }
 
-        if (currentTime < hoursPriorToEvent || exampleDate != nextEvent[0].local_date) {
+        if (currentTime < hoursPriorToEvent || todaysDate != nextEvent[0].local_date) {
 
             nextEventButton = <Button
                 large
@@ -154,12 +159,10 @@ class EventDetailsContainer extends React.Component {
                 title=' RSVP'
                 onPress={this._handlePressButtonAsync}
             />
-
         }
-        if (currentTime > hoursAfterEventStart && exampleDate == nextEvent[0].local_date) {
-            nextEventButton = "null"
+        if (currentTime > hoursAfterEventStart && todaysDate == nextEvent[0].local_date) {
+            nextEventButton = null;
         }
-
         return nextEventButton;
     }
 
@@ -271,7 +274,6 @@ class EventDetailsContainer extends React.Component {
             )
 
         } else {
-
             return (
                 <ScrollView style={styles.container}>
                     <View>
@@ -309,7 +311,6 @@ class EventDetailsContainer extends React.Component {
                         </View>
                     </Hyperlink>
                 </ScrollView>
-
             )
         }
     }
@@ -319,12 +320,12 @@ function mapStoreToProps(store) {
     return {
         eventDetails: store.eventsData.selectedEvent,
         eventsData: store.eventsData.eventsData,
+        id: store.signupData.id,
         user: store.signupData.user,
         locationError: store.eventsData.locationError,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,
-
-
+        checkedInStatus: store.eventsData.checkedInStatus
     };
 }
 
@@ -333,9 +334,10 @@ const styles = StyleSheet.create({
         fontSize: 40,
         alignSelf: 'center',
         fontWeight: 'bold',
-        fontFamily: 'Kailasa',
+        fontFamily: Platform.OS === 'ios' ? 'Kailasa' : 'Roboto',
         lineHeight: 50,
-        paddingTop: 5
+        paddingTop: 5,
+        paddingBottom: 10
     },
     container: {
         paddingHorizontal: 20,

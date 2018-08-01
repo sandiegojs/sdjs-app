@@ -1,26 +1,26 @@
 import axios from 'axios';
 
-export function profileUpdate(newProfileData) {
+export function profileUpdate(newProfileData, id) {
     return {
         type: 'PROFILE_UPDATE',
         payload: axios
-                    .patch('https://sdjs-app.now.sh/api/users/' + newProfileData.id, newProfileData)
+                    .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData)
                     .then(r => r.data)
 
     }
 }
 
-export function firstNameUpdate(firstName) {
+export function firstNameUpdate(first_name) {
     return {
         type: 'FIRST_NAME_UPDATE',
-        payload: firstName
+        payload: first_name
     }
 }
 
-export function lastNameUpdate(lastName) {
+export function lastNameUpdate(last_name) {
     return {
         type: 'LAST_NAME_UPDATE',
-        payload: lastName
+        payload: last_name
     }
 }
 
