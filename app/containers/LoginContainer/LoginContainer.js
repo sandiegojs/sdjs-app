@@ -137,7 +137,7 @@ class LoginContainer extends React.Component {
                         <Button
                             title='FORGOT PASSWORD?'
                             style={styles.button}
-                            backgroundColor={'#364abb'}
+                            backgroundColor={'#346abb'}
                             onPress={() => this.props.navigation.navigate('Password')}
                         />
                     </View>

@@ -33,14 +33,14 @@ class PasswordContainer extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View>
+                <View style={styles.formContainer}>
                     <FormLabel>Enter your E-mail</FormLabel>
                     <FormInput onChangeText={this.handleEmailForPassword} />
                 </View>
                 <Button
                     title='RESET PASSWORD'
                     style={styles.button}
-                    backgroundColor={'#364abb'}
+                    backgroundColor={'#346abb'}
                     onPress={this.handleResetPassword}
                 />
             </View>
@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 30,
         paddingBottom: 50
+    },
+    formContainer: {
+        paddingBottom: 20,
+        width: 350
     },
     button: {
         marginTop: 30,
