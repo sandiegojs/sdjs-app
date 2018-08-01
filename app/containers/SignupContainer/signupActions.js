@@ -49,8 +49,7 @@ export function signUpEntry(signUpObj, navigate) {
            else {
             navigate('Events')
             return response.data
-           }
-         
+           }     
         })
         .catch(error => {
             alert('An account exists for this email address. Please try again.')

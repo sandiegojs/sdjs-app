@@ -3,6 +3,7 @@ import EventsReducer from './containers/EventsContainer/eventsReducer';
 import SignupReducer from './containers/SignupContainer/signupReducer';
 import ProfileReducer from './containers/ProfileContainer/profileReducer';
 import LoginReducer from './containers/LoginContainer/loginReducer'
+import DonateReducer from './containers/DonateContainer/donateReducer'
 
 
 const rootReducer = combineReducers({
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
     signupData: SignupReducer,
     result: SignupReducer,
     profileUpdate: ProfileReducer,
-    loginData: LoginReducer
+    loginData: LoginReducer,
+    donateData: DonateReducer
     
 });
 
