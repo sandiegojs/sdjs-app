@@ -4,6 +4,7 @@ import SignupReducer from './containers/SignupContainer/signupReducer';
 import ProfileReducer from './containers/ProfileContainer/profileReducer';
 import LoginReducer from './containers/LoginContainer/loginReducer';
 import PasswordReducer from './containers/PasswordContainer/passwordReducer';
+import DonateReducer from './containers/DonateContainer/donateReducer'
 
 const rootReducer = combineReducers({
     eventsData: EventsReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     result: SignupReducer,
     profileUpdate: ProfileReducer,
     loginData: LoginReducer,
+    donateData: DonateReducer
     // store: PasswordReducer
 });
 

@@ -11,7 +11,8 @@ import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
-
+import DonateScreen from './screens/DonateScreen';
+import ThankyouScreen from './screens/ThankyouScreen';
 
 class App extends React.Component {
   
@@ -56,6 +57,9 @@ componentWillUnmount() {
             Events: {
               screen: EventsScreen,
             },
+            Donate: {
+              screen: DonateScreen,
+            },
             Profile: {
               screen: ProfileScreen,
             },
@@ -93,6 +97,15 @@ componentWillUnmount() {
                       />
                     )
                     break;
+                    case 'Donate':
+                    return (
+                      <Image
+                        source={require('./assets/images/donate.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                    break;
                   case 'Profile':
                     return (
                       <Image
@@ -115,6 +128,8 @@ componentWillUnmount() {
       },
      // Profile: { screen: ProfileScreen },
       EventDetails: { screen: EventDetailsScreen },
+      Donate: { screen: DonateScreen },
+      ThankYou: { screen: ThankyouScreen }
     });
     return (
       <Provider store={store}>
