@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import ProfileContainer from '../containers/ProfileContainer/ProfileContainer'
+import LogOutContainer from '../containers/LogoutContainer/LogoutContainer';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: 'Profile',
     tabBarLabel: 'Profile',
-    headerLeft: null
+    headerright: <LogOutContainer />,
   };
   render() {
     const { navigate } = this.props.navigation;
