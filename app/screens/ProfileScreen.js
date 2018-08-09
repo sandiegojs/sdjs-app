@@ -7,7 +7,8 @@ export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: 'Profile',
     tabBarLabel: 'Profile',
-    headerright: <LogOutContainer />,
+    headerLeft: null,
+    headerRight: <LogOutContainer />,
   };
   render() {
     const { navigate } = this.props.navigation;

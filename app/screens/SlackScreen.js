@@ -7,7 +7,8 @@ export default class SlackScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Slack',
     headerTitle: 'Join us',
-    headerright: <LogOutContainer />,
+    headerLeft: null,
+    headerRight: <LogOutContainer />,
     
   };
 

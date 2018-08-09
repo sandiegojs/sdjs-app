@@ -8,7 +8,9 @@ export default class LogoutContainer extends Component {
   
   }
   _onPressButton() {
+    const { navigate } = this.props.navigation;
     Alert.alert("You've been log out!");
+    <LogInScreen navigation={this.props.navigation}/>
     
   }
 
