@@ -1,42 +1,66 @@
 import React, { Component } from 'react';
-import { Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';
-import LogInScreen from '../../screens/LogInScreen';
+import { ImageBackground, Text, View, StyleSheet } from 'react-native';
+import { Button } from "react-native-elements";
+import { connect } from 'react-redux';
+import { Constants, WebBrowser } from 'expo';
 
-export default class LogoutContainer extends Component {
+class LogoutContainer extends React.Component {
   constructor(props){
     super(props);
-  
   }
-  _onPressButton() {
-    const { navigate } = this.props.navigation;
-    Alert.alert("You've been log out!");
-    <LogInScreen navigation={this.props.navigation}/>
-    
-  }
+
 
   render() {
-   // const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-      <Button
-            onPress={this._onPressButton}
-            title="Log out"
-            style={styles.logoutButton}
-            color="black"
+        <Text style={styles.text}>
+          Do you want to log out?
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            backgroundColor={'#346abb'}
+            onPress={() => this.props.navigation.navigate('Login')}
+            title="Yes"
+            large
           />
         </View>
-    );
+        <View style={styles.buttonContainer}>
+          <Button
+            backgroundColor={'#346abb'}
+            onPress={() => this.props.navigation.navigate('Events')}
+            title="No"
+            large
+          />
+        </View>
+        </View>
+    )
   }
 }
-
 const styles = StyleSheet.create({
   container: {
-   flex: 1,
-   justifyContent: 'center',
+      flex: 1,
+      backgroundColor: '#DCDCDC',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: Constants.statusBarHeight,
+      
   },
-  logoutButton: {
-    margin: 20,
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between'
+  buttonContainer: {
+    borderRadius: 8,
+    marginTop: 30,
+    marginBottom: 20,
+    width: 320
+  },
+  text: {
+    marginBottom:10,
+    fontSize: 16,
   }
 });
+
+function mapStoreToProps(store) {
+  return {
+
+  };
+}
+
+export default connect(mapStoreToProps)(LogoutContainer);
