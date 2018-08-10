@@ -1,6 +1,6 @@
 const defaultState = {
-    loginEmail: '',
-    loginPassword: '',
+    email: '',
+    password: '',
     loadingScreen: false,
     user: null,
 	token: null,
@@ -15,14 +15,14 @@ export default function loginReducer (state = defaultState, action){
         case 'EMAIL_LOGIN_ENTRY': {
             return {
                 ...state,
-                loginEmail: payload
+                email: payload
             }
         }
 
         case 'PASSWORD_LOGIN_ENTRY': {
             return {
                 ...state,
-                loginPassword: payload
+                password: payload
             }
         }
 
@@ -34,17 +34,20 @@ export default function loginReducer (state = defaultState, action){
         }
 
 		case 'LOGIN_ENTRY_FULFILLED': {
+			const {id: token, userId: id} = payload[0];
+			const {first_name, last_name, email, url, bio, company} = payload[1];
+
 			return {
 				...state,
 				user: payload[0],
-				token: payload[0].id,
-				id: payload[0].userId,
-				first_name: payload[1].first_name,
-				last_name: payload[1].last_name,
-				email: payload[1].email,
-				url: payload[1].url,
-				bio: payload[1].bio,
-				company: payload[1].company,
+				token,
+				id,
+				first_name,
+				last_name,
+				email,
+				url,
+				bio,
+				company,
 				loadingScreen: false,
 			}
 		}

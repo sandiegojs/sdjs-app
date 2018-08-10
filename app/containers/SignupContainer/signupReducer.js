@@ -85,12 +85,6 @@ export default function signupReducer(state = defaultState, action) {
             }
         }
 
-        // case 'GOOGLE_ENTRY_FULFILLED': {
-        //     return {
-        //         ...state,
-        //         googleResult: payload
-        //     }
-        // }
         default: {
             return state;
         }
