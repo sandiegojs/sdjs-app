@@ -13,6 +13,8 @@ import SlackScreen from './screens/SlackScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
 import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
+import LogoutScreen from './screens/LogoutScreen';
+
 
 class App extends React.Component {
   
@@ -62,6 +64,9 @@ componentWillUnmount() {
             },
             Profile: {
               screen: ProfileScreen,
+            },
+            Logout: {
+              screen: LogoutScreen,
             },
           },
           {
@@ -115,6 +120,15 @@ componentWillUnmount() {
                       />
                     )
                     break;
+                    case 'Log Out':
+                    return (
+                      <Image
+                        source={require('./assets/images/logout.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                    break;
                 }
               },
             }),
@@ -139,10 +153,4 @@ componentWillUnmount() {
   }
 };
 
-
-
-
-
 export default App;
-
-
