@@ -9,7 +9,6 @@ class LogoutContainer extends React.Component {
     super(props);
   }
 
-
   render() {
     return (
       <View style={styles.container}>
@@ -36,6 +35,7 @@ class LogoutContainer extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   container: {
       flex: 1,

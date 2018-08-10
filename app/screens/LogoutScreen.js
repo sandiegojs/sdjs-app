@@ -13,7 +13,6 @@ export default class LoginScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <LogoutContainer navigation={this.props.navigation} />
-    
     );
   }
 };
