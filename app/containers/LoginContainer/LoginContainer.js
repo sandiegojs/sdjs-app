@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View, TextInput, Linking} from 'react-native';
 import { FormLabel, FormInput, Button, Icon, FormValidationMessage } from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
-import { emailLoginEntry, passwordLoginEntry } from './loginActions';
-import { loginEntry, thirdPartyLogin } from '../SignupContainer/signupActions';
-import { loadingScreen } from '../LoginContainer/loginActions';
+import { emailLoginEntry, passwordLoginEntry, loginEntry, loadingScreen } from './loginActions';
+import { thirdPartyLogin } from '../SignupContainer/signupActions';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -28,67 +27,13 @@ class LoginContainer extends React.Component {
     }
 
     handleLoginSubmission() {
-        const { dispatch } = this.props;
-        const { loginEmail, loginPassword, user } = this.props;
+        const { dispatch, loginEmail, loginPassword } = this.props;
         const { navigate } = this.props.navigation;
-
-        const loginObj = {
-            "email": loginEmail,
-            "password": loginPassword,
-        }
-
-        dispatch(loginEntry(loginObj, navigate));
-    }
-
-    _authenticateWithGithubAsync = async () => {
-        const { dispatch } = this.props;
-        try {
-            let user = await authenticateWithGithubAsync();
-            const githubObj = {
-                "first_name": user.name.split(' ')[0],
-                "last_name": user.name.substr(user.name.indexOf(' ') + 1),
-                "email": user.email,
-                "password": user.id.toString()
-            }
-            dispatch(thirdPartyLogin(githubObj));
-            this.setState({ githubToken: result });
-        } catch (e) {
-            this.setState({ error: JSON.stringify(e) });
-        }
-    }
-
-    signInWithGoogleAsync = async () => {
-        const { dispatch } = this.props;
-        try {
-            const result = await Expo.Google.logInAsync({
-                androidClientId: '283233290300-1oc4f8ovd34f6gju3p7aktr0bqsi4jhh.apps.googleusercontent.com',
-                iosClientId: '283233290300-rr1pffml6mfnacp9amsrhokemmc5nras.apps.googleusercontent.com',
-                scopes: ['profile', 'email'],
-            });
-
-            if (result.type === 'success') {
-                let googleResult = result
-                dispatch(loadingScreen());
-                const googleObj = {
-                    "first_name": googleResult.user.givenName,
-                    "last_name": googleResult.user.familyName,
-                    "email": googleResult.user.email,
-                    "password": googleResult.user.id
-                }
-
-                dispatch(thirdPartyLogin(googleObj));
-                console.log('done')
-
-            } else {
-                return { cancelled: true };
-            }
-        } catch (e) {
-            return { error: true };
-        }
+        dispatch(loginEntry({loginEmail, loginPassword}, navigate));
     }
 
     render() {
-        const { user, loadingScreen, loginEmail, loginPassword } = this.props;
+        const { user, loadingScreen, loginEmail } = this.props;
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
