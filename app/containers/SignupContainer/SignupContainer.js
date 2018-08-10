@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Linking, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Linking, Alert } from 'react-native';
 import { FormLabel, FormInput, Button, FormValidationMessage, Icon } from 'react-native-elements';
 import {
     firstNameEntry,
