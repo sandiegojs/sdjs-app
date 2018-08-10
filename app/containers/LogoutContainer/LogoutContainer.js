@@ -38,12 +38,11 @@ class LogoutContainer extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      backgroundColor: '#DCDCDC',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingTop: Constants.statusBarHeight,
-      
+    flex: 1,
+    backgroundColor: '#DCDCDC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
   },
   buttonContainer: {
     borderRadius: 8,
