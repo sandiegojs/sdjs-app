@@ -16,7 +16,6 @@ export default class EventsScreen extends React.Component {
     title: 'San Diego JS',
     tabBarLabel:'Events',
     headerLeft: null,
- 
   };
 
   render() {
