@@ -10,21 +10,14 @@ import {
     navigate } from 'react-native';
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
 import RootNavigator from '../tabNavigation/MainTabNavigator';
-import LogOutContainer from '../containers/LogoutContainer/LogoutContainer';
-
 
 export default class EventsScreen extends React.Component {
   static navigationOptions = {
     title: 'San Diego JS',
     tabBarLabel:'Events',
     headerLeft: null,
-    headerRight: <LogOutContainer />,
+ 
   };
-
-
-
-
-
 
   render() {
     const { navigate } = this.props.navigation;

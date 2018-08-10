@@ -7,6 +7,7 @@ export default class SignupScreen extends React.Component {
   static navigationOptions = {
     title: 'Sign Up',
   };
+  
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -14,4 +15,3 @@ export default class SignupScreen extends React.Component {
     );
   }
 };
-
