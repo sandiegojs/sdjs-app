@@ -10,6 +10,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
+import LogoutScreen from './screens/LogoutScreen';
 
 
 class App extends React.Component {
@@ -57,6 +58,9 @@ componentWillUnmount() {
             Profile: {
               screen: ProfileScreen,
             },
+            Logout: {
+              screen: LogoutScreen,
+            },
           },
           {
             navigationOptions: ({ navigation }) => ({
@@ -100,6 +104,15 @@ componentWillUnmount() {
                       />
                     )
                     break;
+                    case 'Log Out':
+                    return (
+                      <Image
+                        source={require('./assets/images/logout.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                    break;
                 }
               },
             }),
@@ -122,10 +135,4 @@ componentWillUnmount() {
   }
 };
 
-
-
-
-
 export default App;
-
-
