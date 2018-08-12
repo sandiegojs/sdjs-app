@@ -21,6 +21,12 @@ module.exports = function (app) {
             .catch(error => res.send(error.message));
     });
 
+    app.put('/questionnaire', (req, res) => {
+        let baseUrl = app.get('url').replace(/\/$/, '');
+        const{ answer1, answer2, answer3 } = req.body
+        axios.put(baseUrl + 'api/users/' + id, {answer1, answer2, answer3})
+    })
+
     app.post('/checkin', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
         const { eventObj, userId } = req.body;

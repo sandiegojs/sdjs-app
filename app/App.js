@@ -13,6 +13,7 @@ import SlackScreen from './screens/SlackScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
 import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
+import QuestionnaireScreen from './screens/QuestionnaireScreen';
 
 class App extends React.Component {
   
@@ -63,6 +64,9 @@ componentWillUnmount() {
             Profile: {
               screen: ProfileScreen,
             },
+            Questionnaire: {
+              screen: QuestionnaireScreen,
+            }
           },
           {
             navigationOptions: ({ navigation }) => ({
