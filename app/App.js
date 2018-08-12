@@ -14,7 +14,7 @@ import PasswordResetScreen from './screens/PasswordResetScreen';
 import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
-
+import QuestionnaireScreen from './screens/QuestionnaireScreen';
 
 class App extends React.Component {
   
@@ -68,6 +68,9 @@ componentWillUnmount() {
             Logout: {
               screen: LogoutScreen,
             },
+            Questionnaire: {
+              screen: QuestionnaireScreen,
+            }
           },
           {
             navigationOptions: ({ navigation }) => ({
