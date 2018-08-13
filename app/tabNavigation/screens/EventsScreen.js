@@ -2,16 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 
-
-
-
 export default class EventsScreen extends React.Component {
   constructor(props) {
     super(props);
-
-
-
     }
+    
  static navigationOptions = {
     title: 'tabBAR',
     tabBarIcon: ({ tintColor }) => (
@@ -24,9 +19,6 @@ export default class EventsScreen extends React.Component {
     ),
   };
 
-
-
-   
   render() {
     const { navigate } = this.props.navigation;
    

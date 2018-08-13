@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
-    "expo": "^25.0.0",
+    "expo": "^25.1.2",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
     "qs": "^6.5.1",
@@ -17,7 +17,8 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-promise-middleware": "^5.0.0",
-    "validate.js": "^0.12.0"
+    "validate.js": "^0.12.0",
+    "xde": "^2.10.0"
   },
   "devDependencies": {
     "reactotron-react-native": "^1.14.0"

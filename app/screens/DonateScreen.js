@@ -1,18 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import ProfileContainer from '../containers/ProfileContainer/ProfileContainer'
+import DonateContainer from '../containers/DonateContainer/DonateContainer'
 
-export default class ProfileScreen extends React.Component {
+export default class DonateScreen extends React.Component {
   static navigationOptions = {
-    title: 'Profile',
-    tabBarLabel: 'Profile',
-    headerLeft: null,
+    title: 'Donate',
+    tabBarLabel: 'Donate',
+    headerLeft: null
   };
-  
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ProfileContainer navigation={this.props.navigation}/>
+      <DonateContainer navigation={this.props.navigation}/>
     );
   }
 };

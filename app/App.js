@@ -10,7 +10,11 @@ import ProfileScreen from './screens/ProfileScreen';
 import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
-
+import PasswordResetScreen from './screens/PasswordResetScreen';
+import DonateScreen from './screens/DonateScreen';
+import ThankyouScreen from './screens/ThankyouScreen';
+import LogoutScreen from './screens/LogoutScreen';
+import QuestionnaireScreen from './screens/QuestionnaireScreen';
 
 class App extends React.Component {
   
@@ -42,6 +46,8 @@ componentWillUnmount() {
     const AppRoot = StackNavigator({ 
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
+      Password: { screen : PasswordResetScreen},
+      Questionnaire: { screen : QuestionnaireScreen},
       Events: {
         screen: TabNavigator(
           {
@@ -54,9 +60,18 @@ componentWillUnmount() {
             Events: {
               screen: EventsScreen,
             },
+            Donate: {
+              screen: DonateScreen,
+            },
             Profile: {
               screen: ProfileScreen,
             },
+            Logout: {
+              screen: LogoutScreen,
+            },
+            Questionnaire: {
+              screen: QuestionnaireScreen,
+            }
           },
           {
             navigationOptions: ({ navigation }) => ({
@@ -91,10 +106,28 @@ componentWillUnmount() {
                       />
                     )
                     break;
+                    case 'Donate':
+                    return (
+                      <Image
+                        source={require('./assets/images/donate.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                    break;
                   case 'Profile':
                     return (
                       <Image
                         source={require('./assets/images/survey.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                    break;
+                    case 'Log Out':
+                    return (
+                      <Image
+                        source={require('./assets/images/logout.png')}
                         fadeDuration={0}
                         style={{ width: 30, height: 30 }}
                       />
@@ -106,13 +139,15 @@ componentWillUnmount() {
             tabBarComponent: TabBarBottom,
             tabBarPosition: 'bottom',
             animationEnabled: false,
-            swipeEnabled: true,
+            swipeEnabled: false,
             initialRouteName: 'Events',
           }
         )
       },
      // Profile: { screen: ProfileScreen },
       EventDetails: { screen: EventDetailsScreen },
+      Donate: { screen: DonateScreen },
+      ThankYou: { screen: ThankyouScreen }
     });
     return (
       <Provider store={store}>
@@ -122,10 +157,4 @@ componentWillUnmount() {
   }
 };
 
-
-
-
-
 export default App;
-
-

@@ -167,7 +167,7 @@ class EventDetailsContainer extends React.Component {
     }
 
     render() {
-        const { eventDetails, eventsData, user, locationError, dispatch } = this.props;
+        const { eventDetails, eventsData, locationError, dispatch } = this.props;
         const eventInfo = eventsData.filter(event => event.id === eventDetails)
         var latitude = 32.7157
         if (!!eventInfo[0].venue) {
@@ -270,9 +270,7 @@ class EventDetailsContainer extends React.Component {
                         </View>
                     </Hyperlink>
                 </ScrollView>
-
             )
-
         } else {
             return (
                 <ScrollView style={styles.container}>
