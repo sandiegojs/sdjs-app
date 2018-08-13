@@ -25,22 +25,11 @@ export function question3Entry(text) {
     }
 }
 
-export function allAnswers(answers, navigate) {
+export function allAnswers(answers, id) {
     return {
         type: 'QUESTIONNAIRE_ENTRY',
         payload: axios
-            .put('https://sdjs-app.now.sh/questionnaire', answers)
-            .then(response => {
-                var statusCode = RegExp('442*');
-                QuestionnaireRes = response.data
-                if (statusCode.test(QuestionnaireRes)) {
-                    let error = {error: 'invalid'}
-                    throw error
-                }
-                else{
-                    navigate('Events');
-                    return answers;
-                }
-            })
+            .patch('https://sdjs-app.now.sh/api/users/' + id, answers)
+            .then(response => response.data)
     }
 }

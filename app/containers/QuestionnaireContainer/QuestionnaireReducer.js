@@ -29,28 +29,6 @@ export default function questionnaireReducer(state = defaultState, action) {
                 question3: payload
             }
         }
-        case 'QUESTIONNAIRE_ENTRY_PENDING': {
-            return{
-                ...state,
-            }
-        }
-        case 'QUESTIONNAIRE_ENTRY_FULFILLED': {
-            return {
-                ...state,
-                id: payload.id,
-                answers: {
-                    answer1: payload.answer1,
-                    answer2: payload.answer2,
-                    answer3: payload.answer3,
-
-                }
-            }
-        }
-        case 'QUESTIONNAIRE_ENTRY_REJECTED': {
-            return {
-                ...state,
-            }
-        }
         default: {
             return state;
         }

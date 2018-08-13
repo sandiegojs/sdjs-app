@@ -47,7 +47,7 @@ export function signUpEntry(signUpObj, navigate) {
                 throw error                      
             }
            else {
-            navigate('Events')
+            navigate('Questionnaire')
             let newUserInfo = {
                 first_name: signUpObj.first_name,
                 last_name: signUpObj.last_name,
