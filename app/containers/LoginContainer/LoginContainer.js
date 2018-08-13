@@ -143,7 +143,6 @@ function mapStoreToProps(store) {
 		emailInput: store.userData.emailInput,
 		passwordInput: store.userData.passwordInput,
 		loadingScreen: store.userData.loadingScreen,
-		user: store.userData.user
 	};
 }
 

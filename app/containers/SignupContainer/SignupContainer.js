@@ -157,8 +157,7 @@ function mapStoreToProps(store) {
         firstNameInput: store.userData.firstNameInput,
         lastNameInput: store.userData.lastNameInput,
         emailInput: store.userData.emailInput,
-        passwordInput: store.userData.passwordInput,
-		user: store.userData.user
+        passwordInput: store.userData.passwordInput
     };
 }
 

@@ -97,22 +97,22 @@ export function addAttendeeToEvent(eventObj, userId) {
     }
 }
 
-// export function profileQuery(userId) {
-//     return {
-//         type: 'PROFILE_QUERY',
-//         payload:
-//         axios
-//             .get('https://sdjs-app.now.sh/api/users/' + userId)
-//             .then(response => {
-//                 return response.data
-//             })
-//             .catch(error => {
-//                 console.log(error)
-//             })
-//     }
-// }
+export function profileQuery(userId, token) {
+    return {
+        type: 'PROFILE_QUERY',
+        payload:
+        axios
+            .get('https://sdjs-app.now.sh/api/users/' + userId, {headers: {Authorization: token}})
+            .then(response => {
+                return response.data
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+}
 
-export function removeAttendee(attendeeId) {
+export function removeAttendee(attendeeId, token) {
     return {
         type: 'REMOVE_ATTENDEE',
         payload:
@@ -147,12 +147,12 @@ export function addRSVPToEvent(eventObj, userId) {
     }
 }
 
-export function removeRSVPFromEvent(rsvpEventId) {
+export function removeRSVPFromEvent(rsvpEventId, token) {
     return {
         type: 'REMOVE_RSVP_FROM_EVENT',
         payload:
         axios
-            .delete('https://sdjs-app.now.sh/api/rsvps/' + rsvpEventId)
+            .delete('https://sdjs-app.now.sh/api/rsvps/' + rsvpEventId, {header: {Authorization: token}})
             .then(response => {
                 console.log('deleted data rsvp', response.data)
                 return response.data;
@@ -167,12 +167,12 @@ export function removeRSVPFromEvent(rsvpEventId) {
     }
 }
 
-export function updateRSVPList(user) {
+export function updateRSVPList(user, token) {
     return {
         type: 'UPDATE_RSVP_LIST',
         payload:
         axios
-            .get('https://sdjs-app.now.sh/api/rsvps?filter[where][userId]=' + user)
+            .get('https://sdjs-app.now.sh/api/rsvps?filter[where][userId]=' + user, {headers: {Authorization: token}})
             .then(response => {
 
                 return response.data;

@@ -1,26 +1,34 @@
 import axios from 'axios';
 
-export function profileUpdate(newProfileData, id) {
+export function profileInit(id, token) {
+	return {
+		type: 'PROFILE_INIT',
+		payload: axios
+			.get('https://sdjs-app.now.sh/api/users/' + id, {headers: {Authorization: token}})
+			.then(r => r.data)
+	}
+}
+
+export function profileUpdate(newProfileData, id, token) {
     return {
         type: 'PROFILE_UPDATE',
         payload: axios
-                    .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData)
+                    .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData, {headers: {Authorization: token}})
                     .then(r => r.data)
-
     }
 }
 
-export function firstNameUpdate(first_name) {
+export function firstNameUpdate(firstName) {
     return {
         type: 'FIRST_NAME_UPDATE',
-        payload: first_name
+        payload: firstName
     }
 }
 
-export function lastNameUpdate(last_name) {
+export function lastNameUpdate(lastName) {
     return {
         type: 'LAST_NAME_UPDATE',
-        payload: last_name
+        payload: lastName
     }
 }
 

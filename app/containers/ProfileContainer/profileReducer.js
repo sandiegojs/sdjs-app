@@ -1,28 +1,33 @@
 const defaultState = {
-    // firstName: '',
-    // lastName: '',
-    //email: '',
-    // bio: '',
-    // url: '',
-    // location: '',
-    // company: ''
-}
+    firstName: '',
+    lastName: '',
+    email: '',
+    bio: '',
+    url: '',
+    location: '',
+    company: ''
+};
 
 export default function ProfileReducer(state = defaultState, action) {
     const { type, payload } = action;
 
     switch (type) {
-
+		case 'PROFILE_INIT_FULFILLED': {
+			return {
+				...state,
+				...payload
+			}
+		}
         case 'FIRST_NAME_UPDATE': {
             return {
                 ...state,
-                first_name: payload
+                firstName: payload
             }
         }
         case 'LAST_NAME_UPDATE': {
             return {
                 ...state,
-                last_name: payload
+                lastName: payload
             }
         }
         case 'EMAIL_UPDATE': {

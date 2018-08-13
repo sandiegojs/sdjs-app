@@ -100,9 +100,9 @@ class EventsContainer extends React.Component {
   };
 
   handleUnCheckIn() {
-    const { dispatch, attendeeId } = this.props;
+    const { dispatch, attendeeId, user } = this.props;
     dispatch(checkedInFalse(false));
-    dispatch(removeAttendee(attendeeId));
+    dispatch(removeAttendee(attendeeId, user.token));
   }
 
   //Queries DB with user ID and sends to profile page

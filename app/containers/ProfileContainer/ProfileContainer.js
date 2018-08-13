@@ -16,12 +16,16 @@ class ProfileContainer extends React.Component {
         this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
     }
 
+    componentWillMount() {
+    	const { dispatch, user } = this.props;
+    	dispatch(actions.profileInit(user.id, user.token));
+	}
+
     handleProfileUpdate() {
         const { navigate } = this.props.navigation;
         const { dispatch, user, profileUpdate } = this.props;
-        const newProfileData = { ...user, ...profileUpdate };
-        dispatch(actions.profileUpdate(newProfileData, user.id));
-        navigate('Events');
+        dispatch(actions.profileUpdate(profileUpdate, user.id, user.token));
+		navigate('Events');
     }
 
     handleFirstNameUpdate(firstName) {
@@ -55,7 +59,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        const { firstName, lastName,email, bio, company, url } = this.props.user;
+        const { firstName, lastName, email, bio, company, url } = this.props.profileUpdate;
         return (
             <ScrollView keyboardDismissMode='on-drag'>
                 <View style={styles.container}>
@@ -111,8 +115,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 300
     },
-
-})
+});
 
 function mapStoreToProps(store) {
     return {

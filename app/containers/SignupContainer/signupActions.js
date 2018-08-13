@@ -43,7 +43,10 @@ export function submitSignUp(credentials, navigate) {
 				}
 				else {
 					navigate('Questionnaire');
-					return {...credentials, ...response.data};
+					const {email, password} = credentials;
+					return axios
+						.post('https://sdjs-app.now.sh/api/users/login', {email, password})
+						.then(r => r.data);
 				}
 			})
 			.catch(error => {

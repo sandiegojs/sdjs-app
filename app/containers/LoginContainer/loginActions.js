@@ -31,12 +31,8 @@ export function submitLogin(credentials, navigate) {
 			.post('https://sdjs-app.now.sh/api/users/login', {email, password, ttl})
 			.then(response => {
 				const {id: token, userId: id} = response.data;
-				return axios
-					.get('https://sdjs-app.now.sh/api/users/' + id, {headers: {Authorization: token}})
-					.then(response => {
-						navigate('Events');
-						return {...response.data, id, token};
-					});
+				navigate('Events');
+				return {id, token};
 			})
 			.catch(error => {
 				alert(
