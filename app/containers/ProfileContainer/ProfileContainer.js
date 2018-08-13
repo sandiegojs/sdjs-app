@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { List, ListItem, FormLabel, FormInput, Button } from "react-native-elements";
-import { StackNavigator } from 'react-navigation';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { FormLabel, FormInput, Button } from "react-native-elements";
 import * as actions from './profileActions'
 
 class ProfileContainer extends React.Component {
@@ -16,26 +14,24 @@ class ProfileContainer extends React.Component {
         this.handleBioUpdate = this.handleBioUpdate.bind(this);
         this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
         this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
-        // this.handleLocationUpdate = this.handleLocationUpdate.bind(this);
     }
 
-    handleProfileUpdate(obj) {
+    handleProfileUpdate() {
         const { navigate } = this.props.navigation;
-        const { dispatch, profileData, profileUpdate, id } = this.props;
-        const newProfileData = { ...profileData, ...profileUpdate };
-        dispatch(actions.profileUpdate(newProfileData, id));
+        const { dispatch, user, profileUpdate } = this.props;
+        const newProfileData = { ...user, ...profileUpdate };
+        dispatch(actions.profileUpdate(newProfileData, user.id));
         navigate('Events');
-
     }
 
-    handleFirstNameUpdate(first_name) {
+    handleFirstNameUpdate(firstName) {
         const { dispatch } = this.props;
-        dispatch(actions.firstNameUpdate(first_name))
+        dispatch(actions.firstNameUpdate(firstName))
     }
 
-    handleLastNameUpdate(last_name) {
+    handleLastNameUpdate(lastName) {
         const { dispatch } = this.props;
-        dispatch(actions.lastNameUpdate(last_name))
+        dispatch(actions.lastNameUpdate(lastName))
     }
 
     handleEmailUpdate(email) {
@@ -58,59 +54,41 @@ class ProfileContainer extends React.Component {
         dispatch(actions.urlUpdate(url))
     }
 
-    // handleLocationUpdate(location) {
-    //     const { dispatch } = this.props;
-    //     dispatch(actions.locationUpdate(location))
-    // }
-
     render() {
-        const { profileData } = this.props;
-        const { profileUpdate } = this.props;
+        const { firstName, lastName,email, bio, company, url } = this.props.user;
         return (
-            // <KeyboardAwareScrollView
-            //     style={{ backgroundColor: '#fff' }}
-            //     resetScrollToCoords={{ x: 0, y: 0 }}
-            //     contentContainerStyle={styles.container}
-            //     scrollEnabled={false}
-            // >
             <ScrollView keyboardDismissMode='on-drag'>
                 <View style={styles.container}>
                     <FormLabel>First Name</FormLabel>
                     <FormInput
-                        defaultValue={profileData.first_name}
+                        defaultValue={firstName}
                         onChangeText={this.handleFirstNameUpdate}
                     />
                     <FormLabel>Last Name</FormLabel>
                     <FormInput
-                        defaultValue={profileData.last_name}
+                        defaultValue={lastName}
                         onChangeText={this.handleLastNameUpdate}
                     />
                     <FormLabel>Email</FormLabel>
                     <FormInput
-                        defaultValue={profileData.email}
+                        defaultValue={email}
                         onChangeText={this.handleEmailUpdate}
                     />
                     <FormLabel>Bio</FormLabel>
                     <FormInput
-                        defaultValue={profileData.bio}
+                        defaultValue={bio}
                         onChangeText={this.handleBioUpdate}
                     />
                     <FormLabel>Company</FormLabel>
                     <FormInput
-                        defaultValue={profileData.company}
+                        defaultValue={company}
                         onChangeText={this.handleCompanyUpdate}
                     />
                     <FormLabel>Website</FormLabel>
                     <FormInput
-                        defaultValue={profileData.url}
+                        defaultValue={url}
                         onChangeText={this.handleUrlUpdate}
                     />
-                    {/* <FormLabel>Location</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.location}
-                        onChangeText={this.handleLocationUpdate}
-                        style={styles.bottomInput}
-                    /> */}
                     <Button
                         large
                         backgroundColor='#346abb'
@@ -120,10 +98,8 @@ class ProfileContainer extends React.Component {
                         title="UPDATE" />
                 </View>
             </ScrollView>
-            //</KeyboardAwareScrollView>
         )
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -140,15 +116,7 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        profileData: {
-            first_name: store.signupData.first_name,
-            last_name: store.signupData.last_name,
-            email: store.signupData.email,
-            bio: store.signupData.bio,
-            company: store.signupData.company,
-            url: store.signupData.url  
-        },
-        id: store.signupData.id,
+        user: store.userData.user,
         profileUpdate: store.profileUpdate
     };
 }

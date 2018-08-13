@@ -1,41 +1,38 @@
 import axios from 'axios';
 
-export function firstNameEntry(text) {
-
+export function updateFirstNameInput(text) {
 	return {
-		type: 'FIRST_NAME_ENTRY',
+		type: 'UPDATE_FIRST_NAME',
 		payload: text
 	}
 }
 
-export function lastNameEntry(text) {
-
+export function updateLastNameInput(text) {
 	return {
-		type: 'LAST_NAME_ENTRY',
+		type: 'UPDATE_LAST_NAME',
 		payload: text
 	}
 }
 
-export function emailEntry(text) {
-
+export function updateEmailInput(text) {
 	return {
-		type: 'EMAIL_ENTRY',
+		type: 'UPDATE_EMAIL',
 		payload: text
 	}
 }
 
-export function passwordEntry(text) {
+export function updatePasswordInput(text) {
 	return {
-		type: 'PASSWORD_ENTRY',
+		type: 'UPDATE_PASSWORD',
 		payload: text
 	}
 }
 
-export function signUpEntry(signUpObj, navigate) {
+export function submitSignUp(credentials, navigate) {
 	return {
-		type: 'SIGN_UP_ENTRY',
+		type: 'SIGN_UP',
 		payload: axios
-			.post('https://sdjs-app.now.sh/signup', signUpObj)
+			.post('https://sdjs-app.now.sh/signup', credentials)
 			.then(response => {
 				const statusCode = RegExp('422*');
 				const signUpRes = response.data;
@@ -46,19 +43,12 @@ export function signUpEntry(signUpObj, navigate) {
 				}
 				else {
 					navigate('Questionnaire');
-					return {
-						first_name: signUpObj.first_name,
-						last_name: signUpObj.last_name,
-						email: signUpObj.email,
-						id: response.data.id,
-						token: response.data.token
-					}
+					return {...credentials, ...response.data};
 				}
-
 			})
 			.catch(error => {
 				console.log(error.message);
-				alert('An account exists for this email address. Please try again.')
+				alert('An account exists for this email address. Please try again.');
 			})
 	}
 }
@@ -70,7 +60,7 @@ export function thirdPartyLogin(loginObj) {
 			.post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
 			.then(response => response.data)
 			.catch(error => {
-				console.log("this one", error)
+				console.log("this one", error);
 			})
-	}
+	};
 }

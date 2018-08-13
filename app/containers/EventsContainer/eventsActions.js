@@ -97,27 +97,27 @@ export function addAttendeeToEvent(eventObj, userId) {
     }
 }
 
-export function profileQuery(userId) {
-    return {
-        type: 'PROFILE_QUERY',
-        payload:
-        axios
-            .get('https://sdjs-app.now.sh/api/users/' + userId)
-            .then(response => {
-                return response.data
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-}
+// export function profileQuery(userId) {
+//     return {
+//         type: 'PROFILE_QUERY',
+//         payload:
+//         axios
+//             .get('https://sdjs-app.now.sh/api/users/' + userId)
+//             .then(response => {
+//                 return response.data
+//             })
+//             .catch(error => {
+//                 console.log(error)
+//             })
+//     }
+// }
 
 export function removeAttendee(attendeeId) {
     return {
         type: 'REMOVE_ATTENDEE',
         payload:
         axios
-            .delete('https://sdjs-app.now.sh/api/attendees/' + attendeeId)
+            .delete('https://sdjs-app.now.sh/api/attendees/' + attendeeId, {headers: {Authorization: token}})
             .then(response => {
                 return response.data;
             })

@@ -1,43 +1,41 @@
 import axios from 'axios';
 
-
-export function emailLoginEntry(text) {
+export function updateEmailInput(text) {
     return {
-        type: 'EMAIL_LOGIN_ENTRY',
+        type: 'UPDATE_EMAIL',
         payload: text
     }
 }
 
-export function passwordLoginEntry(text) {
+export function updatePasswordInput(text) {
     return {
-        type: 'PASSWORD_LOGIN_ENTRY',
+        type: 'UPDATE_PASSWORD',
         payload: text
     }
 }
 
 export function loadingScreen() {
     return {
-        type: 'LOADING_SCREEN',
+        type: 'UPDATE_LOADING_SCREEN',
         payload: true
     }
 }
 
-export function loginEntry(loginObj, navigate) {
-	const {email, password} = loginObj;
+export function submitLogin(credentials, navigate) {
+	const {email, password} = credentials;
+	const ttl = 86400;
 
 	return {
-		type: 'LOGIN_ENTRY',
+		type: 'SUBMIT_LOGIN',
 		payload: axios
-			.post('https://sdjs-app.now.sh/api/users/login', {email, password})
+			.post('https://sdjs-app.now.sh/api/users/login', {email, password, ttl})
 			.then(response => {
-				let userId = response.data.userId;
-				let loginResponseObj = response.data;
+				const {id: token, userId: id} = response.data;
 				return axios
-					.get('https://sdjs-app.now.sh/api/users/' + userId)
-					.then(res => {
-						let responseArray = [loginResponseObj, res.data];
+					.get('https://sdjs-app.now.sh/api/users/' + id, {headers: {Authorization: token}})
+					.then(response => {
 						navigate('Events');
-						return responseArray
+						return {...response.data, id, token};
 					});
 			})
 			.catch(error => {

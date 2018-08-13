@@ -4,31 +4,31 @@ import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
 import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
-import {emailLoginEntry, passwordLoginEntry, loginEntry, loadingScreen} from './loginActions';
+import {updateEmailInput, updatePasswordInput, submitLogin, loadingScreen} from './loginActions';
 
 class LoginContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.handleLoginEmailInput = this.handleLoginEmailInput.bind(this);
-		this.handleLoginPasswordInput = this.handleLoginPasswordInput.bind(this);
+		this.handleEmailInput = this.handleEmailInput.bind(this);
+		this.handlePasswordInput = this.handlePasswordInput.bind(this);
 		this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
 	}
 
-	handleLoginEmailInput(text) {
+	handleEmailInput(text) {
 		const {dispatch} = this.props;
-		dispatch(emailLoginEntry(text));
+		dispatch(updateEmailInput(text));
 	}
 
-	handleLoginPasswordInput(text) {
+		handlePasswordInput(text) {
 		const {dispatch} = this.props;
-		dispatch(passwordLoginEntry(text));
+		dispatch(updatePasswordInput(text));
 	}
 
 	handleLoginSubmission() {
-		const {dispatch, email, password} = this.props;
+		const {dispatch, emailInput: email, passwordInput: password} = this.props;
 		const {navigate} = this.props.navigation;
-		dispatch(loginEntry({loginEmail: email, loginPassword: password}, navigate));
+		dispatch(submitLogin({email, password}, navigate));
 	}
 
 	// _authenticateWithGithubAsync = async () => {
@@ -49,7 +49,7 @@ class LoginContainer extends React.Component {
 	// };
 
 	render() {
-		const {user, loadingScreen, email} = this.props;
+		const {loadingScreen, email} = this.props;
 		return (
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 				<View style={styles.container}>
@@ -57,20 +57,23 @@ class LoginContainer extends React.Component {
 						<FormLabel>EMAIL</FormLabel>
 						<FormInput
 							defaultValue={email}
-							onChangeText={this.handleLoginEmailInput}/>
+							onChangeText={this.handleEmailInput}
+						/>
 						<FormLabel>PASSWORD</FormLabel>
 						<FormInput
 							secureTextEntry={true}
-							onChangeText={this.handleLoginPasswordInput}/>
+							onChangeText={this.handlePasswordInput
+							}/>
 					</View>
 					<Button
+						title='LOG IN'
 						style={styles.button}
-						onPress={this.handleLoginSubmission}
-						backgroundColor={'#346abb'}
 						borderRadius={3}
+						backgroundColor={'#346abb'}
+						onPress={this.handleLoginSubmission}
 						large
 						icon={{name: 'sign-in', type: 'font-awesome'}}
-						title='LOG IN'/>
+					/>
 					{/* <View style={styles.socialButtonsContainer}>
                     <Button
                         onPress={this._authenticateWithGithubAsync}
@@ -137,13 +140,11 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
 	return {
-		email: store.loginData.email,
-		password: store.loginData.password,
-		user: store.loginData.user,
-		loadingScreen: store.loginData.loadingScreen,
-		token: store.loginData.token,
-		id: store.loginData.id
+		emailInput: store.userData.emailInput,
+		passwordInput: store.userData.passwordInput,
+		loadingScreen: store.userData.loadingScreen,
+		user: store.userData.user
 	};
 }
 
-export default connect(mapStoreToProps)(LoginContainer)
+export default connect(mapStoreToProps)(LoginContainer);

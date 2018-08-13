@@ -1,58 +1,55 @@
 const defaultState = {
-    email: '',
-    password: '',
-    loadingScreen: false,
-    user: null,
-	token: null,
-	id: null,
-
+	firstNameInput: '',
+	lastNameInput: '',
+	emailInput: '',
+	passwordInput: '',
+	loadingScreen: false,
+	user: {
+		firstName: '',
+		lastName: '',
+		email: '',
+		url: '',
+		bio: '',
+		company: '',
+		id: '',
+		token: ''
+	}
 };
 
-export default function loginReducer (state = defaultState, action){
+export default function loginReducer (state = defaultState, action) {
     const {type, payload} = action;
     switch(type) {
 
-        case 'EMAIL_LOGIN_ENTRY': {
+        case 'UPDATE_EMAIL': {
             return {
                 ...state,
-                email: payload
+                emailInput: payload
             }
         }
 
-        case 'PASSWORD_LOGIN_ENTRY': {
+        case 'UPDATE_PASSWORD': {
             return {
                 ...state,
-                password: payload
+                passwordInput: payload
             }
         }
 
-        case 'LOADING_SCREEN': {
+        case 'UPDATE_LOADING_SCREEN': {
             return {
                 ...state,
                 loadingScreen: payload
             }
         }
 
-		case 'LOGIN_ENTRY_FULFILLED': {
-			const {id: token, userId: id} = payload[0];
-			const {first_name, last_name, email, url, bio, company} = payload[1];
-
+		case 'SUBMIT_LOGIN_FULFILLED': {
 			return {
 				...state,
-				user: payload[0],
-				token,
-				id,
-				first_name,
-				last_name,
-				email,
-				url,
-				bio,
-				company,
+				user: payload,
 				loadingScreen: false,
 			}
 		}
 
-		case 'LOGIN_ENTRY_REJECTED': {
+		case 'SUBMIT_LOGIN_REJECTED': {
 			return {
 				...state,
 				loadingScreen: false

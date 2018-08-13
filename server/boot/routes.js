@@ -1,20 +1,19 @@
 const axios = require('axios');
-const userAuth = null;
 
 module.exports = function (app) {
 
     app.post('/signup', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
-        const { first_name, last_name, email, password } = req.body;
+        const { email, password } = req.body;
         //Create a new user
         axios
-            .post(baseUrl + '/api/users', { first_name, last_name, email, password })
+            .post(baseUrl + '/api/users', req.body)
             .then(response => {
                 //Once user has signed up successfully, log them in, yo
                 axios.post(baseUrl + '/api/users/login', { email, password })
-                    .then(r => res.json({
-                        token: r.data.id,
-                        id: r.data.userId
+                    .then(response => res.json({
+                        token: response.data.id,
+                        id: response.data.userId
                     }))
                     .catch(e => res.send(e.message))
             })
