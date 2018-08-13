@@ -40,6 +40,11 @@
     },
     "photo": {
       "type": "string"
+    },
+    "answers": {
+      "question1": "string",
+      "question2": "string",
+      "question3": "string"
     }
   },
   "validations": [],
