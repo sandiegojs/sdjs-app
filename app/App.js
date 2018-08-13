@@ -46,6 +46,7 @@ componentWillUnmount() {
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
       Password: { screen : PasswordResetScreen},
+      Questionnaire: { screen : QuestionnaireScreen},
       Events: {
         screen: TabNavigator(
           {
@@ -64,9 +65,6 @@ componentWillUnmount() {
             Profile: {
               screen: ProfileScreen,
             },
-            Questionnaire: {
-              screen: QuestionnaireScreen,
-            }
           },
           {
             navigationOptions: ({ navigation }) => ({

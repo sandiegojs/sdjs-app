@@ -41,14 +41,10 @@
     "photo": {
       "type": "string"
     },
-    "question1": {
-      "type": "string"
-    },
-    "question2": {
-      "type": "string"
-    },
-    "question3": {
-      "type": "string"
+    "answers": {
+      "question1": "string",
+      "question2": "string",
+      "question3": "string"
     }
   },
   "validations": [],

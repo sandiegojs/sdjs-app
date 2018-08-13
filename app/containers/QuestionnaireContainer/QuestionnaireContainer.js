@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
-import { FormLabel, Button } from 'react-native-elements';
-import { question1Entry, question2Entry, question3Entry } from './QuestionnaireActions';
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import { FormLabel, Button, FormInput } from 'react-native-elements';
+import { question1Entry, question2Entry, question3Entry, allAnswers} from './QuestionnaireActions';
 
 class QuestionnaireContainer extends React.Component {
     constructor(props) {
@@ -12,6 +12,7 @@ class QuestionnaireContainer extends React.Component {
         this.handleQuestion2Input = this.handleQuestion2Input.bind(this);
         this.handleQuestion3Input = this.handleQuestion3Input.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleSkipButton = this.handleSkipButton.bind(this);
     }
 
     handleQuestion1Input(text) {
@@ -47,31 +48,67 @@ class QuestionnaireContainer extends React.Component {
                 "answer1": question1,
                 "answer2": question1,
                 "answer3": question1,
-                "id": id
             }
-            dispatch(allAnswers(answers, navigate));
+            dispatch(allAnswers(answers, navigate, id));
+            navigate('Events')
         }
     }
+
+    handleSkipButton(){
+        const { navigate } = this.props.navigation;
+        navigate('Events')
+    }
+
+
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <View>
                     <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
-                    <TextInput onChangeText={this.handleQuestion1Input} />
+                    <FormInput onChangeText={this.handleQuestion1Input} />
                     <FormLabel>How did you hear about SDJS?</FormLabel>
-                    <TextInput onChangeText={this.handleQuestion2Input} />
+                    <FormInput onChangeText={this.handleQuestion2Input} />
                     <FormLabel>What would you like to learn?</FormLabel>
-                    <TetInput onChangeText={this.handleQuestion3Input} />
+                    <FormInput onChangeText={this.handleQuestion3Input} />
                 </View>
-                <View>
+                <View style={{margin:10}}>
+                <View style={styles.buttons}>
                     <Button
+                        large
+                        backgroundColor='#346abb'
+                        style={styles.updateButton}
+                        onPress={this.handleProfileUpdate}
                         onPress={this.handleFormSubmit}
+                        title="Submit"
                     />
+                    </View>
+                    <View style={styles.buttons}>
+                    <Button
+                        large
+                        backgroundColor='#346abb'
+                        borderRadius={3}
+                        style={styles.updateButton}
+                        onPress={this.handleProfileUpdate}
+                        onPress={this.handleSkipButton}
+                        title="Skip"
+                    />
+                    </View>
                 </View>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 20,
+        paddingBottom: 300
+    },
+    buttons: {
+    marginVertical: 10
+    }
+})
 
 function mapStoreToProps(store) {
     return {
