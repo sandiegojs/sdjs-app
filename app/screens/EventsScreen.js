@@ -11,19 +11,12 @@ import {
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
 import RootNavigator from '../tabNavigation/MainTabNavigator';
 
-
-
 export default class EventsScreen extends React.Component {
   static navigationOptions = {
     title: 'San Diego JS',
     tabBarLabel:'Events',
-    headerLeft: null
+    headerLeft: null,
   };
-
-
-
-
-
 
   render() {
     const { navigate } = this.props.navigation;

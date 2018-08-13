@@ -6,9 +6,9 @@
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "0.9.0",
     "orientation": "portrait",
-    "icon": "./assets/images/sdjs.png",
+    "icon": "./assets/images/sdjs512x512.png",
     "splash": { 
       "backgroundColor": "#1884c3",
       "resizeMode": "contain",
@@ -23,12 +23,11 @@
       "splash": {       
         "resizeMode": "contain",
         "backgroundColor": "#1884c3",
-        "ldpi": "./assets/images/sandiegojs_ldpi.png",
-        "mdpi": "./assets/images/sandiegojs_mdpi.png",
-        "hdpi": "./assets/images/sandiegojs_hdpi.png",
-        "xhdpi": "./assets/images/sandiegojs_xhdpi.png",
-        "xxhdpi": "./assets/images/sandiegojs_xxhdpi.png",
-        "xxxhdpi": "./assets/images/sandiegojs_xxxhdpi.png"
+        "mdpi": "./assets/images/sdjs_app_mdpi.png",
+        "hdpi": "./assets/images/sdjs_app_hdpi.png",
+        "xhdpi": "./assets/images/sdjs_app_xhdpi.png",
+        "xxhdpi": "./assets/images/sdjs_app_xxhdpi.png",
+        "xxxhdpi": "./assets/images/sdjs_app_xxxhdpi.png"
       },
       "config": {
         "googleMaps": {

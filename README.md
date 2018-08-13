@@ -19,6 +19,11 @@ The main app source code is in `\app` and the local development server is a loop
 * Open an existing app using the `app` folder
 * Click share, and then scan the QR code
 
+## Publishing the app to corresponding stores
+
+* Refer to the android guide: https://clearbridgemobile.com/how-to-submit-an-app-to-the-google-play-store
+* Refer to the ios guide: https://clearbridgemobile.com/how-to-submit-an-app-to-the-app-store
+
 ## TODO
 
 * setup ci

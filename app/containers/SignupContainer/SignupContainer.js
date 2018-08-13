@@ -1,6 +1,7 @@
 import React from 'react';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Linking, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Linking, Alert } from 'react-native';
 import { FormLabel, FormInput, Button, FormValidationMessage, Icon } from 'react-native-elements';
 import {
     firstNameEntry,
@@ -118,7 +119,7 @@ class SignupContainer extends React.Component {
         const { navigate } = this.props.navigation;
 
         return (
-            <ScrollView keyboardDismissMode='on-drag'>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
                     <View style={styles.formContainer}>
                         <FormLabel>FIRST NAME </FormLabel>
@@ -156,7 +157,7 @@ class SignupContainer extends React.Component {
                         title='GOOGLE' />
                 </View> */}
                 </View>
-            </ScrollView>
+                </TouchableWithoutFeedback>
         )
     }
 }

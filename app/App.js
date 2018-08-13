@@ -14,6 +14,7 @@ import PasswordResetScreen from './screens/PasswordResetScreen';
 import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
+import LogoutScreen from './screens/LogoutScreen';
 
 class App extends React.Component {
   
@@ -64,6 +65,9 @@ componentWillUnmount() {
             },
             Profile: {
               screen: ProfileScreen,
+            },
+            Logout: {
+              screen: LogoutScreen,
             },
           },
           {
@@ -117,13 +121,22 @@ componentWillUnmount() {
                       />
                     )
                     break;
+                    case 'Log Out':
+                    return (
+                      <Image
+                        source={require('./assets/images/logout.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                    break;
                 }
               },
             }),
             tabBarComponent: TabBarBottom,
             tabBarPosition: 'bottom',
             animationEnabled: false,
-            swipeEnabled: true,
+            swipeEnabled: false,
             initialRouteName: 'Events',
           }
         )
@@ -141,10 +154,4 @@ componentWillUnmount() {
   }
 };
 
-
-
-
-
 export default App;
-
-
