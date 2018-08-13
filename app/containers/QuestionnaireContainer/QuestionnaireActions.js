@@ -26,6 +26,7 @@ export function question3Entry(text) {
 }
 
 export function allAnswers(answers, id) {
+    
     return {
         type: 'QUESTIONNAIRE_ENTRY',
         payload: axios

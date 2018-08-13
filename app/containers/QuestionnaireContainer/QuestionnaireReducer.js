@@ -1,5 +1,3 @@
-
-
 const defaultState = {
     question1: '',
     question2: '',

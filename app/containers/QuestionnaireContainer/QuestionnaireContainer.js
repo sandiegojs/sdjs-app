@@ -59,7 +59,6 @@ class QuestionnaireContainer extends React.Component {
         navigate('Events')
     }
 
-
     render() {
         return (
             <View style={styles.container}>
