@@ -2,14 +2,14 @@ import axios from 'axios';
 
 export function updateEmailInput(text) {
     return {
-        type: 'UPDATE_EMAIL',
+        type: 'UPDATE_EMAIL_INPUT',
         payload: text
     }
 }
 
 export function updatePasswordInput(text) {
     return {
-        type: 'UPDATE_PASSWORD',
+        type: 'UPDATE_PASSWORD_INPUT',
         payload: text
     }
 }

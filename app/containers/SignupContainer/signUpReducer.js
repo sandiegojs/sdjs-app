@@ -5,12 +5,6 @@ const defaultState = {
     passwordInput: '',
 	loadingScreen: false,
     user: {
-    	firstName: '',
-		lastName: '',
-		email: '',
-		url: '',
-		bio: '',
-		company: '',
 		id: '',
 		token: ''
 	}
@@ -21,51 +15,39 @@ export default function signUpReducer(state = defaultState, action) {
 
     switch (type) {
 
-        case 'UPDATE_FIRST_NAME': {
+        case 'UPDATE_FIRST_NAME_INPUT': {
             return {
                 ...state,
                 firstNameInput: payload
             }
         }
 
-        case 'UPDATE_LAST_NAME': {
+        case 'UPDATE_LAST_NAME_INPUT': {
             return {
                 ...state,
                 lastNameInput: payload
             }
         }
 
-        case 'UPDATE_EMAIL': {
+        case 'UPDATE_EMAIL_INPUT': {
             return {
                 ...state,
                 emailInput: payload
             }
         }
 
-        case 'UPDATE_PASSWORD': {
+        case 'UPDATE_PASSWORD_INPUT': {
             return {
                 ...state,
                 passwordInput: payload
             }
         }
 
-        case 'SIGN_UP_PENDING': {
-            return {
-                ...state,
-            }
-        }
-
-        case 'SIGN_UP_FULFILLED': {
+        case 'SUBMIT_SIGN_UP_FULFILLED': {
             return {
                 ...state,
                 user: payload,
                 loadingScreen: false
-            }
-        }
-
-        case 'SIGN_UP_REJECTED': {
-            return {
-                ...state,
             }
         }
 

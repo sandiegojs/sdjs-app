@@ -5,12 +5,6 @@ const defaultState = {
 	passwordInput: '',
 	loadingScreen: false,
 	user: {
-		firstName: '',
-		lastName: '',
-		email: '',
-		url: '',
-		bio: '',
-		company: '',
 		id: '',
 		token: ''
 	}
@@ -20,14 +14,14 @@ export default function loginReducer (state = defaultState, action) {
     const {type, payload} = action;
     switch(type) {
 
-        case 'UPDATE_EMAIL': {
+        case 'UPDATE_EMAIL_INPUT': {
             return {
                 ...state,
                 emailInput: payload
             }
         }
 
-        case 'UPDATE_PASSWORD': {
+        case 'UPDATE_PASSWORD_INPUT': {
             return {
                 ...state,
                 passwordInput: payload

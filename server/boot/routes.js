@@ -11,9 +11,9 @@ module.exports = function (app) {
             .then(response => {
                 //Once user has signed up successfully, log them in, yo
                 axios.post(baseUrl + '/api/users/login', { email, password })
-                    .then(response => res.json({
-                        token: response.data.id,
-                        id: response.data.userId
+                    .then(r => res.json({
+                        token: r.data.id,
+                        id: r.data.userId
                     }))
                     .catch(e => res.send(e.message))
             })

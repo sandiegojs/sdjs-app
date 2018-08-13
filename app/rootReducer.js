@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import reduceReducer from 'reduce-reducers';
 import EventsReducer from './containers/EventsContainer/eventsReducer';
 import SignUpReducer from './containers/SignupContainer/signUpReducer';
@@ -8,30 +8,24 @@ import PasswordReducer from './containers/PasswordContainer/passwordReducer';
 import DonateReducer from './containers/DonateContainer/donateReducer'
 
 const userDataDefaultState = {
-	firstNameInput: '',
-	lastNameInput: '',
-	emailInput: '',
-	passwordInput: '',
-	loadingScreen: false,
-	user: {
-		firstName: '',
-		lastName: '',
-		email: '',
-		url: '',
-		bio: '',
-		company: '',
-		id: '',
-		token: ''
-	}
+  firstNameInput: '',
+  lastNameInput: '',
+  emailInput: '',
+  passwordInput: '',
+  loadingScreen: false,
+  user: {
+    id: '',
+    token: ''
+  }
 };
 
 const rootReducer = combineReducers({
-    eventsData: EventsReducer,
-    signUpData: SignUpReducer,
-	userData: reduceReducer(SignUpReducer, LoginReducer, userDataDefaultState),
-    profileUpdate: ProfileReducer,
-    donateData: DonateReducer
-    // store: PasswordReducer
+  eventsData: EventsReducer,
+  signUpData: SignUpReducer,
+  userData: reduceReducer(SignUpReducer, LoginReducer, userDataDefaultState),
+  profileUpdate: ProfileReducer,
+  donateData: DonateReducer
+  // store: PasswordReducer
 });
 
 export default rootReducer;
