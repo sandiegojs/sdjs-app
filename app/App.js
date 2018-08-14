@@ -127,7 +127,7 @@ componentWillUnmount() {
                     case 'Logout':
                     return (
                       <Image
-                        source={require('./assets/images/logout2.png')}
+                        source={require('./assets/images/logout.png')}
                         fadeDuration={0}
                         style={{ width: 30, height: 30 }}
                       />
