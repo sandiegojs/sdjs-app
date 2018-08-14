@@ -17,8 +17,8 @@ import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
 class App extends React.Component {
-  
-handleBackButton = () => {               
+
+handleBackButton = () => {
   Alert.alert(
       'Exit The App',
       'Are you sure you want to exit?', [{
@@ -43,7 +43,7 @@ componentWillUnmount() {
 }
   render() {
 
-    const AppRoot = StackNavigator({ 
+    const AppRoot = StackNavigator({
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
       Password: { screen : PasswordResetScreen},
@@ -71,7 +71,7 @@ componentWillUnmount() {
             },
             Logout: {
               screen: LogoutScreen,
-            },
+            }
           },
           {
             navigationOptions: ({ navigation }) => ({
@@ -124,10 +124,10 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                  case 'Logout':
+                    case 'Logout':
                     return (
                       <Image
-                        source={require('./assets/images/logout.png')}
+                        source={require('./assets/images/logout2.png')}
                         fadeDuration={0}
                         style={{ width: 30, height: 30 }}
                       />
