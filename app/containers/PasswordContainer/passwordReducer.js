@@ -13,6 +13,7 @@ export default function PasswordReducer(state = defaultState, action) {
                 userEmail: payload
             }
         }
+<<<<<<< Updated upstream
             case 'RESET_PASSWORD_PENDING': {
                 return {
                     ...state
@@ -34,5 +35,10 @@ export default function PasswordReducer(state = defaultState, action) {
       default: {
             return state; 
         }
+=======
+            default: {
+                return state; 
+            }
+>>>>>>> Stashed changes
     }
 }
