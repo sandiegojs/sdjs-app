@@ -111,7 +111,6 @@ class QuestionnaireContainer extends React.Component {
                             width: 300,
                             height: 55
                         }}
-                        onPress={this.handleProfileUpdate}
                         onPress={this.handleFormSubmit}
                         title="Submit"
                     />
@@ -125,7 +124,6 @@ class QuestionnaireContainer extends React.Component {
                             width: 300,
                             height: 55
                         }}
-                        onPress={this.handleProfileUpdate}
                         onPress={this.handleSkipButton}
                         title="Skip"
                     />

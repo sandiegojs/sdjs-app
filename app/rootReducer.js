@@ -14,6 +14,7 @@ const userDataDefaultState = {
   lastNameInput: '',
   emailInput: '',
   passwordInput: '',
+  loadingScreen: false,
   user: {
     id: '',
     token: ''
