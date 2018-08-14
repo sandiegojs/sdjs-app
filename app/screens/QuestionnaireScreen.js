@@ -4,6 +4,7 @@ import QuestionnaireContainer from '../containers/QuestionnaireContainer/Questio
 export default class QuestionnaireScreen extends React.Component {
     static navigationOptions = {
         title: 'Questionnaire',
+        headerLeft: null,
     };
 
     render() {
