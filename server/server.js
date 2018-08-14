@@ -1,8 +1,15 @@
+
 'use strict';
 var bodyParser = require('body-parser');
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var app = module.exports = loopback();
+var DataSource = require('loopback-datasource-juggler').DataSource;
+var dsSendGrid = new DataSource('loopback-connector-sendgrid', {
+  api_key:'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'
+});
+loopback.Email.attachTo(dsSendGrid);
+
 
 app.use(bodyParser.json());
 

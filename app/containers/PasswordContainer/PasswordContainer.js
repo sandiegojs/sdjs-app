@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, View, Alert } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
+import { emailEntry } from '../SignupContainer/signupActions';
 
 class PasswordContainer extends React.Component {
     constructor(props) {
@@ -17,25 +18,20 @@ class PasswordContainer extends React.Component {
         dispatch(emailResetPasswordEntry(text));
     }
 
-    handleResetPassword(userInfo) {
+    handleResetPassword() {
         //logic needs fixing
         const { dispatch } = this.props;
-        if (userInfo === '')
-            Alert.alert(
-                'An e-mail has been sent',
-                'Please check your e-mail', [{
-                    text: 'OK'
-                }]
-            );
-        dispatch(resetPassword(userInfo));
+        const { userEmail } = this.props;
+        dispatch(resetPassword(userEmail));
     }
 
     render() {
+        const { userEmail } = this.props; 
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>Enter your E-mail</FormLabel>
-                    <FormInput onChangeText={this.handleEmailForPassword} />
+                    <FormInput defaultValue={userEmail} onChangeText={this.handleEmailForPassword} />
                 </View>
                 <Button
                     title='RESET PASSWORD'
@@ -69,7 +65,7 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        email: store.userData.email
+        userEmail: store.userData.userEmail,
     };
 }
 

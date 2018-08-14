@@ -20,6 +20,7 @@
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^4.0.0",
     "loopback-connector-mongodb": "^1.18.1",
+    "loopback-connector-sendgrid": "^2.2.4",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
     "reduce-reducers": "^0.4.3",

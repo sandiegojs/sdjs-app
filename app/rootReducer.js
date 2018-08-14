@@ -29,8 +29,10 @@ const rootReducer = combineReducers({
   userData: reduceReducer(SignupReducer, signoutReducer, userDataDefaultState),
   profileData: ProfileReducer,
   donateData: DonateReducer,
-  questionnaireData: QuestionnaireReducer
+  questionnaireData: QuestionnaireReducer,
+  resetData: PasswordReducer
   // store: PasswordReducer
+
 });
 
 export default rootReducer;
