@@ -5,7 +5,8 @@ import SignupReducer from './containers/SignupContainer/signupReducer';
 import ProfileReducer from './containers/ProfileContainer/profileReducer';
 import LoginReducer from './containers/LoginContainer/loginReducer';
 import PasswordReducer from './containers/PasswordContainer/passwordReducer';
-import DonateReducer from './containers/DonateContainer/donateReducer'
+import DonateReducer from './containers/DonateContainer/donateReducer';
+import QuestionnaireReducer from './containers/QuestionnaireContainer/QuestionnaireReducer';
 
 const userDataDefaultState = {
   firstNameInput: '',
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   signUpData: SignupReducer,
   userData: reduceReducer(SignupReducer, LoginReducer, userDataDefaultState),
   profileData: ProfileReducer,
-  donateData: DonateReducer
+  donateData: DonateReducer,
+  questionnaireData: QuestionnaireReducer
   // store: PasswordReducer
 });
 

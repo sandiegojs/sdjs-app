@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { FormLabel, Button, FormInput } from 'react-native-elements';
 import { question1Entry, question2Entry, question3Entry, allAnswers} from './QuestionnaireActions';
 
 class QuestionnaireContainer extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.handleQuestion1Input = this.handleQuestion1Input.bind(this);
         this.handleQuestion2Input = this.handleQuestion2Input.bind(this);
@@ -31,10 +31,10 @@ class QuestionnaireContainer extends React.Component {
     }
 
     handleFormSubmit() {
-        const { dispatch, question1, question2, question3, id } = this.props;
+        const { dispatch, question1, question2, question3, user } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (question1 == '' || question2 == '' || question3 == '') {
+        if (question1 === '' || question2 === '' || question3 === '') {
             Alert.alert(
                 'Form Error',
                 'Complete all fields to submit', [{
@@ -42,21 +42,17 @@ class QuestionnaireContainer extends React.Component {
                     onPress: null,
                     style: 'cancel'
                 }]
-            )
+            );
         } else {
-            const answers = {
-                "answer1": question1,
-                "answer2": question1,
-                "answer3": question1,
-            }
-            dispatch(allAnswers(answers, navigate, id));
-            navigate('Events')
+            const answers = { question1, question2, question3 };
+            dispatch(allAnswers(answers, user.id, user.token));
+            navigate('Events');
         }
     }
 
     handleSkipButton(){
         const { navigate } = this.props.navigation;
-        navigate('Events')
+        navigate('Events');
     }
 
     render() {
@@ -107,12 +103,15 @@ const styles = StyleSheet.create({
     buttons: {
     marginVertical: 10
     }
-})
+});
 
 function mapStoreToProps(store) {
     return {
-        id: store.signupData.id
-    }
+        user: store.userData.user,
+        question1: store.questionnaireData.question1,
+        question2: store.questionnaireData.question2,
+        question3: store.questionnaireData.question3,
+    };
 }
 
-export default connect(mapStoreToProps)(QuestionnaireContainer)
+export default connect(mapStoreToProps)(QuestionnaireContainer);
