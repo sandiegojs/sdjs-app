@@ -3,7 +3,8 @@ import PasswordContainer from '../containers/PasswordContainer/PasswordContainer
 
 export default class PasswordResetScreen extends React.Component {
  static navigationOptions = {
-     title: 'Reset Password'
+     title: 'Reset Password',
+     headerLeft: null,
  };
 
     render() {

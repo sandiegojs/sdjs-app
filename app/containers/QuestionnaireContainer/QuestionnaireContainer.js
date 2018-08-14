@@ -44,6 +44,14 @@ class QuestionnaireContainer extends React.Component {
                 }]
             );
         } else {
+            Alert.alert(
+                'Success ',
+                'Congratulations! You have Signup successfully!', [{
+                    text: 'OK',
+                    onPress: null,
+                    style: 'cancel'
+                }]
+            )
             const answers = { question1, question2, question3 };
             dispatch(allAnswers(answers, user.id, user.token));
             navigate('Events');
@@ -51,6 +59,14 @@ class QuestionnaireContainer extends React.Component {
     }
 
     handleSkipButton(){
+        Alert.alert(
+            'Success ',
+            'Congratulations! You have Signup successfully!', [{
+                text: 'OK',
+                onPress: null,
+                style: 'cancel'
+            }]
+        )
         const { navigate } = this.props.navigation;
         navigate('Events');
     }
