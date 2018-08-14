@@ -95,7 +95,7 @@ class EventsContainer extends React.Component {
   };
 
   handleUnCheckIn() {
-    const {dispatch, attendeeId, user} = this.props;
+    const { dispatch, attendeeId, user } = this.props;
     dispatch(checkedInFalse(false));
     dispatch(removeAttendee(attendeeId, user.token));
   }

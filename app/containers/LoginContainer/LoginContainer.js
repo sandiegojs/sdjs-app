@@ -1,12 +1,15 @@
 import React from 'react';
-import {ScrollView, Keyboard, View, StyleSheet} from 'react-native';
+import {TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
+import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
-import {updateEmailInput, updatePasswordInput, submitLogin} from './loginActions';
+import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
+import {updateEmailInput, updatePasswordInput, submitLogin, loadingScreen} from './loginActions';
 
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
@@ -32,7 +35,7 @@ class LoginContainer extends React.Component {
     const {email} = this.props;
     return (
       <ScrollView onPress={Keyboard.dismiss} accessible={false}>
-        <View style={styles.container}>
+                      <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>EMAIL</FormLabel>
             <FormInput

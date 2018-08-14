@@ -85,8 +85,8 @@ class EventDetailsContainer extends React.Component {
 
     handleUnCheckIn() {
         const { dispatch, attendeeId, user } = this.props;
-        dispatch(checkedInFalse(false))
-            .then(dispatch(removeAttendee(attendeeId, user.token)));
+        dispatch(checkedInFalse(false));
+        dispatch(removeAttendee(attendeeId, user.token));
     }
 
     _handlePressButtonAsync = async () => {
@@ -97,7 +97,7 @@ class EventDetailsContainer extends React.Component {
     };
 
     handleButtons() {
-        const {eventsData, checkedIn, eventDetails} = this.props;
+        const { eventsData, checkedIn, eventDetails } = this.props;
 
         function addZero(i) {
             if (i < 10) {
@@ -180,7 +180,7 @@ class EventDetailsContainer extends React.Component {
 
         var locationText = null;
         if (!!eventInfo[0].venue) {
-            locationText = 
+            locationText =
             <View>
                 <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
                 <Text style={styles.venueAddress}>{`${eventInfo[0].venue.address_1}`}</Text>
