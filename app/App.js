@@ -68,9 +68,6 @@ componentWillUnmount() {
             },
             Logout: {
               screen: LogoutScreen,
-            },
-            Questionnaire: {
-              screen: QuestionnaireScreen,
             }
           },
           {
@@ -124,7 +121,7 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Log Out':
+                    case 'Logout':
                     return (
                       <Image
                         source={require('./assets/images/logout.png')}

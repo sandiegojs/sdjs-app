@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {StyleSheet, View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {FormLabel, FormInput, Button} from "react-native-elements";
 import * as actions from './profileActions'
 
@@ -61,7 +61,7 @@ class ProfileContainer extends React.Component {
   render() {
     const {firstName, lastName, email, bio, company, url} = this.props.profileData;
     return (
-      <ScrollView keyboardDismissMode='on-drag'>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <FormLabel>First Name</FormLabel>
           <FormInput
@@ -101,7 +101,7 @@ class ProfileContainer extends React.Component {
             onPress={this.handleProfileUpdate}
             title="UPDATE"/>
         </View>
-      </ScrollView>
+        </TouchableWithoutFeedback>
     )
   }
 }
