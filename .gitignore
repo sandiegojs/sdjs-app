@@ -15,6 +15,7 @@
 .project
 .strong-pm
 coverage
+ngrok.exe
 node_modules
 npm-debug.log
 package-lock.json

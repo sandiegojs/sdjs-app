@@ -1,156 +1,127 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { List, ListItem, FormLabel, FormInput, Button } from "react-native-elements";
-import { StackNavigator } from 'react-navigation';
+import {connect} from 'react-redux';
+import {StyleSheet, View, ScrollView} from 'react-native';
+import {FormLabel, FormInput, Button} from "react-native-elements";
 import * as actions from './profileActions'
 
 class ProfileContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleProfileUpdate = this.handleProfileUpdate.bind(this);
-        this.handleFirstNameUpdate = this.handleFirstNameUpdate.bind(this);
-        this.handleLastNameUpdate = this.handleLastNameUpdate.bind(this);
-        this.handleEmailUpdate = this.handleEmailUpdate.bind(this);
-        this.handleBioUpdate = this.handleBioUpdate.bind(this);
-        this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
-        this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
-        // this.handleLocationUpdate = this.handleLocationUpdate.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.handleProfileUpdate = this.handleProfileUpdate.bind(this);
+    this.handleFirstNameUpdate = this.handleFirstNameUpdate.bind(this);
+    this.handleLastNameUpdate = this.handleLastNameUpdate.bind(this);
+    this.handleEmailUpdate = this.handleEmailUpdate.bind(this);
+    this.handleBioUpdate = this.handleBioUpdate.bind(this);
+    this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
+    this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
+  }
 
-    handleProfileUpdate(obj) {
-        const { navigate } = this.props.navigation;
-        const { dispatch, profileData, profileUpdate, id } = this.props;
-        const newProfileData = { ...profileData, ...profileUpdate };
-        dispatch(actions.profileUpdate(newProfileData, id));
-        navigate('Events');
+  componentWillMount() {
+    const {dispatch, user} = this.props;
+    dispatch(actions.profileInit(user.id, user.token));
+  }
 
-    }
+  handleProfileUpdate() {
+    const {navigate} = this.props.navigation;
+    const {dispatch, user, profileData} = this.props;
+    dispatch(actions.profileUpdate(profileData, user.id, user.token));
+    navigate('Events');
+  }
 
-    handleFirstNameUpdate(first_name) {
-        const { dispatch } = this.props;
-        dispatch(actions.firstNameUpdate(first_name))
-    }
+  handleFirstNameUpdate(firstName) {
+    const {dispatch} = this.props;
+    dispatch(actions.firstNameUpdate(firstName))
+  }
 
-    handleLastNameUpdate(last_name) {
-        const { dispatch } = this.props;
-        dispatch(actions.lastNameUpdate(last_name))
-    }
+  handleLastNameUpdate(lastName) {
+    const {dispatch} = this.props;
+    dispatch(actions.lastNameUpdate(lastName))
+  }
 
-    handleEmailUpdate(email) {
-        const { dispatch } = this.props;
-        dispatch(actions.emailUpdate(email))
-    }
+  handleEmailUpdate(email) {
+    const {dispatch} = this.props;
+    dispatch(actions.emailUpdate(email))
+  }
 
-    handleBioUpdate(bio) {
-        const { dispatch } = this.props;
-        dispatch(actions.bioUpdate(bio))
-    }
+  handleBioUpdate(bio) {
+    const {dispatch} = this.props;
+    dispatch(actions.bioUpdate(bio))
+  }
 
-    handleCompanyUpdate(company) {
-        const { dispatch } = this.props;
-        dispatch(actions.companyUpdate(company))
-    }
+  handleCompanyUpdate(company) {
+    const {dispatch} = this.props;
+    dispatch(actions.companyUpdate(company))
+  }
 
-    handleUrlUpdate(url) {
-        const { dispatch } = this.props;
-        dispatch(actions.urlUpdate(url))
-    }
+  handleUrlUpdate(url) {
+    const {dispatch} = this.props;
+    dispatch(actions.urlUpdate(url))
+  }
 
-    // handleLocationUpdate(location) {
-    //     const { dispatch } = this.props;
-    //     dispatch(actions.locationUpdate(location))
-    // }
-
-    render() {
-        const { profileData } = this.props;
-        const { profileUpdate } = this.props;
-        return (
-            // <KeyboardAwareScrollView
-            //     style={{ backgroundColor: '#fff' }}
-            //     resetScrollToCoords={{ x: 0, y: 0 }}
-            //     contentContainerStyle={styles.container}
-            //     scrollEnabled={false}
-            // >
-            <ScrollView keyboardDismissMode='on-drag'>
-                <View style={styles.container}>
-                    <FormLabel>First Name</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.first_name}
-                        onChangeText={this.handleFirstNameUpdate}
-                    />
-                    <FormLabel>Last Name</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.last_name}
-                        onChangeText={this.handleLastNameUpdate}
-                    />
-                    <FormLabel>Email</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.email}
-                        onChangeText={this.handleEmailUpdate}
-                    />
-                    <FormLabel>Bio</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.bio}
-                        onChangeText={this.handleBioUpdate}
-                    />
-                    <FormLabel>Company</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.company}
-                        onChangeText={this.handleCompanyUpdate}
-                    />
-                    <FormLabel>Website</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.url}
-                        onChangeText={this.handleUrlUpdate}
-                    />
-                    {/* <FormLabel>Location</FormLabel>
-                    <FormInput
-                        defaultValue={profileData.location}
-                        onChangeText={this.handleLocationUpdate}
-                        style={styles.bottomInput}
-                    /> */}
-                    <Button
-                        large
-                        backgroundColor='#346abb'
-                        borderRadius={3}
-                        style={styles.updateButton}
-                        onPress={this.handleProfileUpdate}
-                        title="UPDATE" />
-                </View>
-            </ScrollView>
-            //</KeyboardAwareScrollView>
-        )
-    }
-
+  render() {
+    const {firstName, lastName, email, bio, company, url} = this.props.profileData;
+    return (
+      <ScrollView keyboardDismissMode='on-drag'>
+        <View style={styles.container}>
+          <FormLabel>First Name</FormLabel>
+          <FormInput
+            defaultValue={firstName}
+            onChangeText={this.handleFirstNameUpdate}
+          />
+          <FormLabel>Last Name</FormLabel>
+          <FormInput
+            defaultValue={lastName}
+            onChangeText={this.handleLastNameUpdate}
+          />
+          <FormLabel>Email</FormLabel>
+          <FormInput
+            defaultValue={email}
+            onChangeText={this.handleEmailUpdate}
+          />
+          <FormLabel>Bio</FormLabel>
+          <FormInput
+            defaultValue={bio}
+            onChangeText={this.handleBioUpdate}
+          />
+          <FormLabel>Company</FormLabel>
+          <FormInput
+            defaultValue={company}
+            onChangeText={this.handleCompanyUpdate}
+          />
+          <FormLabel>Website</FormLabel>
+          <FormInput
+            defaultValue={url}
+            onChangeText={this.handleUrlUpdate}
+          />
+          <Button
+            large
+            backgroundColor='#346abb'
+            borderRadius={3}
+            style={styles.updateButton}
+            onPress={this.handleProfileUpdate}
+            title="UPDATE"/>
+        </View>
+      </ScrollView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    updateButton: {
-        marginTop: 30
-    },
-    container: {
-        flex: 1,
-        paddingTop: 20,
-        paddingBottom: 300
-    },
-
-})
+  updateButton: {
+    marginTop: 30
+  },
+  container: {
+    flex: 1,
+    paddingTop: 20,
+    paddingBottom: 300
+  },
+});
 
 function mapStoreToProps(store) {
-    return {
-        profileData: {
-            first_name: store.signupData.first_name,
-            last_name: store.signupData.last_name,
-            email: store.signupData.email,
-            bio: store.signupData.bio,
-            company: store.signupData.company,
-            url: store.signupData.url  
-        },
-        id: store.signupData.id,
-        profileUpdate: store.profileUpdate
-    };
+  return {
+    user: store.userData.user,
+    profileData: store.profileData
+  };
 }
 
 export default connect(mapStoreToProps)(ProfileContainer)

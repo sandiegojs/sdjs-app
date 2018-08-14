@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
 
@@ -19,14 +19,14 @@ class PasswordContainer extends React.Component {
 
     handleResetPassword(userInfo) {
         //logic needs fixing
-        const { dispatch, userEmail } = this.props;
-        if (userInfo == '')
+        const { dispatch } = this.props;
+        if (userInfo === '')
             Alert.alert(
                 'An e-mail has been sent',
                 'Please check your e-mail', [{
                     text: 'OK'
                 }]
-            )
+            );
         dispatch(resetPassword(userInfo));
     }
 
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
     return {
-        userEmail: store.signupData.userEmail
+        email: store.userData.email
     };
 }
 
