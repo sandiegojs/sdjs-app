@@ -10,7 +10,7 @@ const defaultState = {
 	}
 };
 
-export default function signUpReducer(state = defaultState, action) {
+export default function signupReducer(state = defaultState, action) {
     const { type, payload } = action;
 
     switch (type) {

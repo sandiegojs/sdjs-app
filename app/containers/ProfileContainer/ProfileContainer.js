@@ -23,8 +23,8 @@ class ProfileContainer extends React.Component {
 
   handleProfileUpdate() {
     const {navigate} = this.props.navigation;
-    const {dispatch, user, profileUpdate} = this.props;
-    dispatch(actions.profileUpdate(profileUpdate, user.id, user.token));
+    const {dispatch, user, profileData} = this.props;
+    dispatch(actions.profileUpdate(profileData, user.id, user.token));
     navigate('Events');
   }
 
@@ -59,7 +59,7 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    const {firstName, lastName, email, bio, company, url} = this.props.profileUpdate;
+    const {firstName, lastName, email, bio, company, url} = this.props.profileData;
     return (
       <ScrollView keyboardDismissMode='on-drag'>
         <View style={styles.container}>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
 function mapStoreToProps(store) {
   return {
     user: store.userData.user,
-    profileUpdate: store.profileUpdate
+    profileData: store.profileData
   };
 }
 
