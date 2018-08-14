@@ -1,31 +1,38 @@
 {
-    "name": "rsvp",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-      "validateUpsert": true
+  "name": "rsvp",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "timestamp": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "events": {
+      "type": "belongsTo",
+      "model": "event",
+      "foreignKey": "eventId"
     },
-    "properties": {
-      "timestamp": {
-        "type": "date",
-        "default": "$now",
-        "required": true
-      }
-    },
-    "validations": [],
-    "relations": {
-      "events": {
-        "type": "belongsTo",
-        "model": "event",
-        "foreignKey": "eventId"
-      },
-      "users": {
-        "type": "belongsTo",
-        "model": "user",
-        "foreignKey": "userId",
-        "required": true
-      }
-    },
-    "acls": [],
-    "methods": {}
-  }
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "required": true
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
