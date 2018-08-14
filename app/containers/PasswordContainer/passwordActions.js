@@ -7,7 +7,6 @@ export function emailResetPasswordEntry(text) {
     }
 }
 
-<<<<<<< Updated upstream
 export function resetPassword(passObj) {
     const email = passObj;
     return {
@@ -38,35 +37,4 @@ export function resetPassword(passObj) {
                 console.log(error);
             })
     }
-<<<<<<< HEAD
 }
-=======
-
-=======
-
-    // return {
-    //     type: 'RESET_PASSWORD',
-    //     payload: axios
-    //     .post('https://sdjs-app.now.sh/users/reset', passObj)
-    //     .then( res => {
-    //         //doesn't work
-    //         alert(
-    //             'An e-mail has been sent, please check your e-mail', 
-    //             [{
-    //                 text: 'OK',
-    //             }]
-    //         )
-    //         // let userInfo = {
-    //         //     userEmail: passObj.email,
-    //         //     id: response.data.id
-    //         // }
-    //         return userInfo
-    //     })
-    //     .catch(error => {
-    //         alert('This account does not exist. Please try again.')
-    //         console.log(error);
-    //     })
-    // }
->>>>>>> Stashed changes
-}
->>>>>>> reset password setup-updated

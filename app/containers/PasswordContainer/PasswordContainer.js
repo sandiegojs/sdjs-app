@@ -2,12 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Alert } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
-<<<<<<< Updated upstream
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
-=======
-import { emailResetPasswordEntry } from './passwordActions';
-import { resetPassword } from './signupActions';
->>>>>>> Stashed changes
 import { emailEntry } from '../SignupContainer/signupActions';
 
 class PasswordContainer extends React.Component {
