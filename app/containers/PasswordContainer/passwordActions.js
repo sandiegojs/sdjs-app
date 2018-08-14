@@ -7,16 +7,15 @@ export function emailResetPasswordEntry(text) {
     }
 }
 
-export function resetPassword(passObj) {
-    const email = passObj;
+export function resetPassword(email) {
     return {
         type: 'RESET_PASSWORD',
         payload: axios
             .post('https://sdjs-app.now.sh/api/users/reset', { email })
             .then(response => {
                 alert('An email has been sent to'+' '+ email+ '.')
-                // return 
-                
+                // return
+
                 // loopback.Email.send({
                 //     to: email,
                 //     from: email,

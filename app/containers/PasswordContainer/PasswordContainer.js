@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
-import { emailEntry } from '../SignupContainer/signupActions';
 
 class PasswordContainer extends React.Component {
     constructor(props) {
@@ -26,7 +25,7 @@ class PasswordContainer extends React.Component {
     }
 
     render() {
-        const { userEmail } = this.props; 
+        const { userEmail } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
@@ -61,11 +60,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 320
     }
-})
+});
 
 function mapStoreToProps(store) {
     return {
-        userEmail: store.userData.userEmail,
+      emailInput: store.passwordData.emailInput
     };
 }
 

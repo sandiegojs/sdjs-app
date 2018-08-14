@@ -30,8 +30,7 @@ const rootReducer = combineReducers({
   profileData: ProfileReducer,
   donateData: DonateReducer,
   questionnaireData: QuestionnaireReducer,
-  resetData: PasswordReducer
-  // store: PasswordReducer
+  passwordData: PasswordReducer
 
 });
 
