@@ -68,9 +68,6 @@ componentWillUnmount() {
             },
             Logout: {
               screen: LogoutScreen,
-            },
-            Questionnaire: {
-              screen: QuestionnaireScreen,
             }
           },
           {
@@ -124,10 +121,10 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Log Out':
+                    case 'Logout':
                     return (
                       <Image
-                        source={require('./assets/images/logout.png')}
+                        source={require('./assets/images/logout2.png')}
                         fadeDuration={0}
                         style={{ width: 30, height: 30 }}
                       />
