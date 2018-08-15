@@ -31,5 +31,6 @@ export function allAnswers(answers, id, token) {
         payload: axios
             .patch('https://sdjs-app.now.sh/api/users/' + id, answers, {headers: {Authorization: token}})
             .then(response => response.data)
+            .catch(err=>console.log(err))
     }
 }
