@@ -97,7 +97,7 @@ class EventDetailsContainer extends React.Component {
     };
 
     handleButtons() {
-        const { eventsData, checkedIn, eventDetails } = this.props;
+        const {eventsData, checkedIn, eventDetails} = this.props;
 
         function addZero(i) {
             if (i < 10) {
@@ -109,12 +109,9 @@ class EventDetailsContainer extends React.Component {
         var d = new Date();
         // below date using moment.js/moment-timezone npm package
         var todaysDate = moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
-
         var nextEvent = eventsData.filter(event => event.id === eventDetails);
-
         var hours = (addZero(d.getHours())).toString();
         var mins = (addZero(d.getMinutes())).toString();
-
         var currentTime = parseInt(hours+mins);
         var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
         var hoursPriorToEvent = eventTime - 100;
@@ -136,9 +133,10 @@ class EventDetailsContainer extends React.Component {
             if (!checkedIn) {
                 nextEventButton = <Button
                     large
-                    backgroundColor={'#346abb'}
-                    borderRadius={3}
-                    style={styles.checkInButton}
+                    buttonStyle={{
+                        backgroundColor: '#346abb',
+                        borderRadius: 7
+                    }}
                     raised
                     icon={{ name: 'check-circle', type: 'font-awesome' }}
                     title=' CHECK-IN'
@@ -151,9 +149,10 @@ class EventDetailsContainer extends React.Component {
 
             nextEventButton = <Button
                 large
-                backgroundColor={'green'}
-                borderRadius={3}
-                style={styles.checkInButton}
+                buttonStyle={{
+                    backgroundColor: '#346abb',
+                    borderRadius: 7
+                  }}
                 raised
                 icon={{ name: 'check-circle', type: 'font-awesome' }}
                 title=' RSVP'
@@ -181,7 +180,8 @@ class EventDetailsContainer extends React.Component {
 
         var locationText = null;
         if (!!eventInfo[0].venue) {
-            locationText = <View>
+            locationText = 
+            <View>
                 <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
                 <Text style={styles.venueAddress}>{`${eventInfo[0].venue.address_1}`}</Text>
                 <Text style={styles.venueAddress}>{`${eventInfo[0].venue.city}, ${eventInfo[0].venue.state}`}</Text>

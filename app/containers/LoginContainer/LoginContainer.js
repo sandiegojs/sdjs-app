@@ -1,7 +1,6 @@
 import React from 'react';
-import {ScrollView, Keyboard} from 'react-native';
+import {ScrollView, Keyboard, View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
 import {updateEmailInput, updatePasswordInput, submitLogin} from './loginActions';
 
@@ -99,8 +98,8 @@ class LoginContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: '#DCDCDC',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: 30
   },

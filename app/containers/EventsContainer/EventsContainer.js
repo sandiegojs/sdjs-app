@@ -12,7 +12,7 @@ import {
   removeAttendee,
   profileQuery
 } from './eventsActions';
-import {FlatList, StyleSheet, View, Text, Alert} from 'react-native';
+import {FlatList, StyleSheet, View, Text, Alert, ScrollView} from 'react-native';
 import {List, ListItem, Button} from "react-native-elements";
 import {
         getDayOfTheWeek,
@@ -95,18 +95,18 @@ class EventsContainer extends React.Component {
   };
 
   handleUnCheckIn() {
-    const { dispatch, attendeeId, user } = this.props;
+    const {dispatch, attendeeId, user} = this.props;
     dispatch(checkedInFalse(false));
     dispatch(removeAttendee(attendeeId, user.token));
   }
 
   _handlePressButtonAsync = async () => {
-    const { eventsData } = this.props;
+    const {eventsData} = this.props;
     let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
   }
 
   handleButtons() {
-    const { eventsData, checkedIn, eventDetails } = this.props;
+    const {eventsData, checkedIn, eventDetails} = this.props;
 
     function addZero(i) {
       if (i < 10) {
@@ -130,9 +130,10 @@ class EventsContainer extends React.Component {
       if (checkedIn) {
         nextEventButton = <Button
                             large
-                            backgroundColor={'#D95351'}
-                            borderRadius={3}
-                            style={styles.checkInButton}
+                            buttonStyle={{
+                              backgroundColor: '#D95351',
+                              borderRadius: 7
+                            }}
                             icon={{ name: 'undo', type: 'font-awesome' }}
                             title=' UNDO CHECK-IN'
                             onPress={this.handleUnCheckIn}
@@ -141,9 +142,10 @@ class EventsContainer extends React.Component {
       if (!checkedIn) {
         nextEventButton = <Button
                             large
-                            backgroundColor={'#346abb'}
-                            borderRadius={3}
-                            style={styles.checkInButton}
+                            buttonStyle={{
+                              backgroundColor: '#346abb',
+                              borderRadius: 7
+                            }}
                             icon={{ name: 'check-circle', type: 'font-awesome' }}
                             title=' CHECK-IN'
                             onPress={this._getLocationAsync}
@@ -179,24 +181,25 @@ class EventsContainer extends React.Component {
     }
     if (!!eventsData) {
       return (
-        <View
-style={styles.listWrapper}>
-          <Text style={{textAlign: 'center', paddingTop: 10, fontWeight: 'bold'}}>Next Event: {eventsData[0].name} </Text>
-          {this.handleButtons()}
-          {locationErrorMessage}
-          <Text style={{textAlign: 'center', paddingTop: 20, marginBottom: 0}}>Upcoming Events</Text>
-          <List>
-            <FlatList
-              data={eventsData}
-              renderItem={({item}) => <ListItem
-                title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)}, ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
-                subtitle={item.name}
-                onPress={() => this.selectionHandler(item.id)}
-              />}
-              keyExtractor={(item, index) => item.id}
-            />
-          </List>
-        </View>
+        <ScrollView>
+          <View style={styles.listWrapper}>
+            <Text style={{textAlign: 'center', paddingTop: 10, fontWeight: 'bold'}}>Next Event: {eventsData[0].name}</Text>
+            {this.handleButtons()}
+            {locationErrorMessage}
+            <Text style={{textAlign: 'center', paddingTop: 20, marginBottom: 0}}>Upcoming Events</Text>
+            <List>
+              <FlatList
+                data={eventsData}
+                renderItem={({item}) => <ListItem
+                  title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)}, ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
+                  subtitle={item.name}
+                  onPress={() => this.selectionHandler(item.id)}
+                />}
+                keyExtractor={(item, index) => item.id}
+              />
+            </List>
+          </View>
+        </ScrollView>
       );
     } else {
       return (
@@ -207,12 +210,6 @@ style={styles.listWrapper}>
 };
 
 const styles = StyleSheet.create({
-  green: {
-    backgroundColor: '#008000'
-  },
-  purple: {
-    backgroundColor: '#551a8b'
-  },
   locationErrorMessage: {
     textAlign: 'center'
   },
