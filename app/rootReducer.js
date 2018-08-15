@@ -7,6 +7,7 @@ import LoginReducer from './containers/LoginContainer/loginReducer';
 import PasswordReducer from './containers/PasswordContainer/passwordReducer';
 import DonateReducer from './containers/DonateContainer/donateReducer';
 import QuestionnaireReducer from './containers/QuestionnaireContainer/QuestionnaireReducer';
+import LogoutReducer from './containers/LogoutContainer/LogoutReducer';
 
 const userDataDefaultState = {
   firstNameInput: '',
@@ -20,10 +21,12 @@ const userDataDefaultState = {
   }
 };
 
+const signoutReducer = reduceReducer(LogoutReducer, LoginReducer, userDataDefaultState);
+
 const rootReducer = combineReducers({
   eventsData: EventsReducer,
   signUpData: SignupReducer,
-  userData: reduceReducer(SignupReducer, LoginReducer, userDataDefaultState),
+  userData: reduceReducer(SignupReducer, signoutReducer, userDataDefaultState),
   profileData: ProfileReducer,
   donateData: DonateReducer,
   questionnaireData: QuestionnaireReducer

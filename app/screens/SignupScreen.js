@@ -6,6 +6,7 @@ import SignupContainer from '../containers/SignupContainer/SignupContainer';
 export default class SignupScreen extends React.Component {
   static navigationOptions = {
     title: 'Sign Up',
+    headerLeft: null,
   };
   
   render() {

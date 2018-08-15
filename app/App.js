@@ -136,7 +136,7 @@ componentWillUnmount() {
             tabBarComponent: TabBarBottom,
             tabBarPosition: 'bottom',
             animationEnabled: false,
-            swipeEnabled: false,
+            swipeEnabled: true,
             initialRouteName: 'Events',
           }
         )
