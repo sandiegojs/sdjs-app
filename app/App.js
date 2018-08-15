@@ -16,6 +16,7 @@ import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
+
 class App extends React.Component {
 
 handleBackButton = () => {
