@@ -25,12 +25,12 @@ class PasswordContainer extends React.Component {
     }
 
     render() {
-        const { userEmail } = this.props;
+        const { emailInput } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>Enter your E-mail</FormLabel>
-                    <FormInput defaultValue={userEmail} onChangeText={this.updateEmailInput} />
+                    <FormInput defaultValue={emailInput} onChangeText={this.updateEmailInput} />
                 </View>
                 <Button
                     title='RESET PASSWORD'
