@@ -3,7 +3,6 @@ const defaultState = {
     lastNameInput: '',
     emailInput: '',
     passwordInput: '',
-	loadingScreen: false,
     user: {
 		id: '',
 		token: ''
@@ -46,8 +45,7 @@ export default function signupReducer(state = defaultState, action) {
         case 'SUBMIT_SIGN_UP_FULFILLED': {
             return {
                 ...state,
-                user: payload,
-                loadingScreen: false
+                user: payload
             }
         }
 

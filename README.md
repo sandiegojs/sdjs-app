@@ -24,7 +24,7 @@ The main app source code is in `\app` and the local development server is a loop
 * download ngrok, extract the .exe into your project's root folder
 * in one terminal, start your mongod instance
 * in another terminal, start your local server ("node ." or "npm start")
-* in a 3rd terminal, run "./ngrok http port" where port is whatever port your server is running on (usually 3000)
+* in a 3rd terminal, run "./ngrok http {port}" where {port} is whatever port your localhost server is running on (usually 3000)
 * ngrok will give you a forwarding url - anytime you hit that url, you will be hitting your localhost instance on your machine
 	* any backends request in your code should be replaced by that forwarding url, followed by the route (e.g. http://ddhjfoi4.ngrok.io/api/login)
 * start Expo XDE on your system, and use it to run your app on your phone

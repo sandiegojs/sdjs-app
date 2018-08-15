@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Alert, Image } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { List, ListItem, FormLabel, FormInput, Button, Icon, Input, ButtonGroup, Card } from 'react-native-elements';
-import { StackNavigator, TabBarBottom } from 'react-navigation';
-import { cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction } from './donateActions'
+import {connect} from 'react-redux';
+import {StyleSheet, View, Alert, Image, ScrollView} from 'react-native';
+import {FormLabel, FormInput, Button} from 'react-native-elements';
+import {cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction} from './donateActions';
 
 class DonateContainer extends React.Component {
   constructor(props) {
@@ -22,39 +20,39 @@ class DonateContainer extends React.Component {
   }
 
   handleCardholderName(text) {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch(cardholderNameEntry(text));
   }
 
   handleCardNumber(text) {
-    const { dispatch } = this.props
+    const {dispatch} = this.props
     dispatch(cardNumberEntry(text))
   }
 
   handleCardExpMonth(text) {
-    const { dispatch } = this.props
+    const {dispatch} = this.props
     dispatch(cardExpMonthEntry(text))
   }
 
   handleCardExpYear(text) {
-    const { dispatch } = this.props
+    const {dispatch} = this.props
     dispatch(cardExpYearEntry(text))
   }
 
   handleCardCvc(text) {
-    const { dispatch } = this.props
+    const {dispatch} = this.props
     dispatch(cardCvcEntry(text))
   }
 
   handleZipCode(text) {
-    const { dispatch } = this.props
+    const {dispatch} = this.props
     dispatch(zipCodeEntry(text))
   }
 
   handleDonationSubmit(number) {
-    const { dispatch, cardholderName, zipCode, cardNumber, expMonth, expYear, cvc } = this.props;
-    const { navigate } = this.props.navigation;
-    let amount = number; 
+    const {dispatch, cardholderName, zipCode, cardNumber, expMonth, expYear, cvc} = this.props;
+    const {navigate} = this.props.navigation;
+    let amount = number;
     if (cardholderName == '' || cardNumber == '' || zipCode == '' || expMonth == '' || expYear == '', cvc == '') {
       Alert.alert(
         'Form Error',
@@ -78,30 +76,24 @@ class DonateContainer extends React.Component {
   }
 
   render() {
-    const { cardholderName, zipCode, cardNumber, expMonth, expYear, cvc  } = this.props;
+    const {cardholderName, zipCode, cardNumber, expMonth, expYear, cvc} = this.props;
     return (
-      <KeyboardAwareScrollView
-        style={styles.container}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={styles.container}
-        scrollEnabled={true}
-      >
+      <ScrollView>
         <View style={styles.imageview}>
           <Image
             source={require('../../assets/images/stripe-payment-logo.png')}
             style={styles.image}
           />
         </View>
-        <View style={styles.form}>
-          {/* <FormLabel>Your donation to San Diego JS supports event etc...</FormLabel> */}
+        <View style={styles.formContainer}>
           <FormLabel>CARDHOLDER NAME</FormLabel>
           <FormInput
             value={cardholderName}
             type='text'
             name='cardholder-name'
             class='field is-empty'
-            placeholder='SDJS'
-            icon={{ name: 'sign-in', type: 'font-awesome' }}
+            placeholder='Name That Appears On Card'
+            icon={{name: 'sign-in', type: 'font-awesome'}}
             onChangeText={this.handleCardholderName}
           />
           <FormLabel>CARD NUMBER</FormLabel>
@@ -109,94 +101,107 @@ class DonateContainer extends React.Component {
             value={cardNumber}
             type='number'
             class='field is-empty'
-            placeholder='1234 1234 1234 1234'
+            placeholder='#### #### #### ####'
             keyboardType='numeric'
             onChangeText={this.handleCardNumber}
           />
-
-          <View style={styles.row}>
             <View style={styles.row}>
+              <View style={styles.row}>
+                <View style={styles.inputWrap}>
+                  <FormLabel>MM</FormLabel>
+                  <FormInput
+                    value={expMonth}
+                    type='number'
+                    class='field is-empty'
+                    maxLength={2}
+                    placeholder="##"
+                    keyboardType='numeric'
+                    onChangeText={this.handleCardExpMonth} />
+                </View>
+                <View style={styles.inputWrap}>
+                  <FormLabel>YY</FormLabel>
+                  <FormInput
+                    value={expYear}
+                    returnKeyType={"next"}
+                    type='number'
+                    class='field is-empty'
+                    maxLength={2}
+                    placeholder="##"
+                    keyboardType='numeric'
+                    onChangeText={this.handleCardExpYear} />
+                </View>
+              </View>
               <View style={styles.inputWrap}>
-                <FormLabel>MM</FormLabel>
+                <FormLabel>CVC</FormLabel>
                 <FormInput
-                  value={expMonth}
+                  value={cvc}
                   type='number'
                   class='field is-empty'
-                  maxLength={2}
-                  placeholder="12"
+                  maxLength={4}
+                  placeholder="###"
                   keyboardType='numeric'
-                  onChangeText={this.handleCardExpMonth} />
-              </View>
-
-              <View style={styles.inputWrap}>
-                <FormLabel>YY</FormLabel>
-                <FormInput
-                  value={expYear}
-                  returnKeyType={"next"}
-                  type='number'
-                  class='field is-empty'
-                  maxLength={2}
-                  placeholder="22"
-                  keyboardType='numeric'
-                  onChangeText={this.handleCardExpYear} />
+                  onChangeText={this.handleCardCvc} />
               </View>
             </View>
-
-            <View style={styles.inputWrap}>
-              <FormLabel>CVC</FormLabel>
-              <FormInput
-                value={cvc}
-                type='number'
-                class='field is-empty'
-                maxLength={4}
-                placeholder="123"
-                keyboardType='numeric'
-                onChangeText={this.handleCardCvc} />
-            </View>
-          </View>
           <FormLabel>ZIP CODE</FormLabel>
           <FormInput
             value={zipCode}
             type="number"
             class='field is-empty'
-            placeholder='92104'
+            placeholder='#####'
             keyboardType='numeric'
             onChangeText={this.handleZipCode}
           />
           <Button
             onPress={() => this.handleDonationSubmit(2500)}
-            borderRadius={3}
-            backgroundColor='#346abb'
-            style={styles.updateButton}
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 21,
+              width: 300,
+              height: 54
+            }}
             title='DONATE $25' />
           <Button
             onPress={() => this.handleDonationSubmit(1000)}
-            borderRadius={3}
-            backgroundColor='#346abb'
-            style={styles.updateButton}
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 15,
+              width: 300,
+              height: 54
+            }}
             value={10}
             title='DONATE $10' />
           <Button
             onPress={() => this.handleDonationSubmit(500)}
-            borderRadius={3}
-            backgroundColor='#346abb'
-            style={styles.updateButton}
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 15,
+              marginBottom: 15,
+              width: 300,
+              height: 54
+            }}
             value={5}
-            title='DONATE $5' />
+            title='DONATE $5'
+          />
         </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff'
+    backgroundColor: '#DCDCDC',
+    padding: 20
   },
-
-  row2: {
-    flex: 2,
-    flexDirection: "row"
+  formContainer: {
+    paddingBottom: 11,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
   },
   row: {
     flex: 1,
@@ -204,15 +209,6 @@ const styles = StyleSheet.create({
   },
   inputWrap: {
     flex: 1,
-  },
-  buttonrow: {
-    flex: 1,
-    flexDirection: "row"
-  },
-  updateButton: {
-    marginTop: 30,
-    marginRight: 5,
-    marginLeft: 5,
   },
   imageview: {
     flexDirection: 'column',

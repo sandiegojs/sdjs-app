@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = User => {
   //send password reset link when requested
   User.on('resetPasswordRequest', info => {
@@ -13,7 +12,6 @@ module.exports = User => {
       html: html,
       text: 'a'
     };
-
     // loopback-connector-sendgrid REQUIRES a text field with a non-empty string, or it will
     // throw an error and fail to send
     User.app.models.Email.send(email, err => {

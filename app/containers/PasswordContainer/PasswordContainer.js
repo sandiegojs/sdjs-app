@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, View } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
-import { emailResetPasswordEntry, resetPassword } from './passwordActions';
+import {connect} from 'react-redux';
+import {StyleSheet, View, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView} from 'react-native';
+import {FormLabel, FormInput, Button} from 'react-native-elements';
+import {emailResetPasswordEntry, resetPassword} from './passwordActions';
 
 class PasswordContainer extends React.Component {
     constructor(props) {
@@ -18,27 +18,43 @@ class PasswordContainer extends React.Component {
     }
 
     submitResetPasswordRequest() {
-        //logic needs fixing
-        const { dispatch, emailInput } = this.props;
-        const { navigate } = this.props.navigation;
+
+        const {dispatch, emailInput} = this.props;
+        const {navigate } = this.props.navigation;
         dispatch(resetPassword(emailInput, navigate));
     }
 
     render() {
         const { emailInput } = this.props;
         return (
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <FormLabel>Enter your E-mail</FormLabel>
-                    <FormInput defaultValue={emailInput} onChangeText={this.updateEmailInput} />
-                </View>
-                <Button
-                    title='RESET PASSWORD'
-                    style={styles.button}
-                    backgroundColor={'#346abb'}
-                    onPress={this.submitResetPasswordRequest}
-                />
-            </View>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                    <View style={styles.container}>
+                        <View style={styles.formContainer}>
+                            <FormLabel>Enter your E-mail</FormLabel>
+                            <FormInput
+                                containerStyle={{
+                                    margin: 5,
+                                    borderBottomColor: 'black'
+                                }}
+                                defaultValue={emailInput}
+                                onChangeText={this.updateEmailInput}
+                            />
+                        </View>
+                        <Button
+                            title='RESET PASSWORD'
+                            buttonStyle={{
+                                backgroundColor: '#346abb',
+                                borderRadius: 7,
+                                marginTop: 7,
+                                marginBottom: 25,
+                                width: 311
+                            }}
+                            onPress={this.submitResetPasswordRequest}
+                        />
+                    </View>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -46,19 +62,15 @@ class PasswordContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#DCDCDC',
         alignItems: 'center',
-        paddingTop: 30,
-        paddingBottom: 50
+        padding: 30
     },
     formContainer: {
         paddingBottom: 20,
-        width: 350
-    },
-    button: {
-        marginTop: 30,
-        marginBottom: 20,
-        width: 320
+        width: 350,
+        margin: 15
     }
 });
 

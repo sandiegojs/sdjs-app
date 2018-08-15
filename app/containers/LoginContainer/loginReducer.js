@@ -3,7 +3,6 @@ const defaultState = {
 	lastNameInput: '',
 	emailInput: '',
 	passwordInput: '',
-	loadingScreen: false,
 	user: {
 		id: '',
 		token: ''
@@ -28,25 +27,16 @@ export default function loginReducer (state = defaultState, action) {
             }
         }
 
-        case 'UPDATE_LOADING_SCREEN': {
-            return {
-                ...state,
-                loadingScreen: payload
-            }
-        }
-
 		case 'SUBMIT_LOGIN_FULFILLED': {
 			return {
 				...state,
-				user: payload,
-				loadingScreen: false,
+				user: payload
 			}
 		}
 
 		case 'SUBMIT_LOGIN_REJECTED': {
 			return {
-				...state,
-				loadingScreen: false
+				...state
 			}
 		}
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './rootStore';
-import { Image,  BackHandler, Alert } from 'react-native';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+import {Image,  BackHandler, Alert} from 'react-native';
+import {StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -106,7 +106,7 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Donate':
+                  case 'Donate':
                     return (
                       <Image
                         source={require('./assets/images/donate.png')}
@@ -124,7 +124,7 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Logout':
+                  case 'Logout':
                     return (
                       <Image
                         source={require('./assets/images/logout.png')}
@@ -141,7 +141,7 @@ componentWillUnmount() {
                         style={{ width: 30, height: 30 }}
                       />
                     )
-                    break;
+                  break;
                 }
               },
             }),
