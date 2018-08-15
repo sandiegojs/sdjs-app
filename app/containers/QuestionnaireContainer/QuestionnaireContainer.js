@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, View, Alert, ScrollView, Keyboard} from 'react-native';
 import {FormLabel, Button, FormInput} from 'react-native-elements';
 import {question1Entry, question2Entry, question3Entry, allAnswers} from './QuestionnaireActions';
 
@@ -73,64 +73,64 @@ class QuestionnaireContainer extends React.Component {
 
     render() {
         return (
-            <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                    <View style={styles.container}>
-                        <View style={styles.formContainer}>
-                            <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
-                            <FormInput
-                                containerStyle={{
-                                    margin: 5,
-                                    borderBottomColor: 'black'
-                                }}
-                                onChangeText={this.handleQuestion1Input}
-                            />
-                            <FormLabel>How did you hear about SDJS?</FormLabel>
-                            <FormInput
-                                containerStyle={{
-                                    margin: 5,
-                                    borderBottomColor: 'black'
-                                }}
-                                onChangeText={this.handleQuestion2Input}
-                            />
-                            <FormLabel>What would you like to learn?</FormLabel>
-                            <FormInput
-                                containerStyle={{
-                                    margin: 5,
-                                    borderBottomColor: 'black'
-                                }}
-                                onChangeText={this.handleQuestion3Input}
-                            />
-                        </View>
-                        <Button
-                            large
-                            buttonStyle={{
-                                backgroundColor: '#346abb',
-                                borderRadius: 7,
-                                marginTop: 7,
-                                marginBottom: 25,
-                                width: 321
+            <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    <View style={styles.formContainer}>
+                        <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
                             }}
-                            onPress={this.handleProfileUpdate}
-                            onPress={this.handleFormSubmit}
-                            title="Submit"
+                            onChangeText={this.handleQuestion1Input}
                         />
-                        <Button
-                            large
-                            buttonStyle={{
-                                backgroundColor: '#346abb',
-                                borderRadius: 7,
-                                marginTop: 7,
-                                marginBottom: 25,
-                                width: 321
+                        <FormLabel>How did you hear about SDJS?</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
                             }}
-                            onPress={this.handleProfileUpdate}
-                            onPress={this.handleSkipButton}
-                            title="Skip"
+                            onChangeText={this.handleQuestion2Input}
+                        />
+                        <FormLabel>What would you like to learn?</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleQuestion3Input}
                         />
                     </View>
-                </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
+                    <Button
+                        large
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
+                        onPress={this.handleProfileUpdate}
+                        onPress={this.handleFormSubmit}
+                        title="Submit"
+                    />
+                    <Button
+                        large
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
+                        onPress={this.handleProfileUpdate}
+                        onPress={this.handleSkipButton}
+                        title="Skip"
+                    />
+                </View>
+            </ScrollView>
         )
     }
 }

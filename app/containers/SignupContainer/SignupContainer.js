@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {ScrollView, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 import {StyleSheet, View, Alert} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
@@ -62,14 +62,14 @@ class SignupContainer extends React.Component {
 				password: passwordInput,
         		firstName: firstNameInput,
 				lastName: lastNameInput
-			};
+            };
             dispatch(submitSignUp(credentials, navigate));
         }
     }
 
     render() {
         return (
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <ScrollView onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
                     <View style={styles.formContainer}>
                         <FormLabel>FIRST NAME</FormLabel>
@@ -113,7 +113,8 @@ class SignupContainer extends React.Component {
                             borderRadius: 7,
                             marginTop: 7,
                             marginBottom: 25,
-                            width: 311
+                            width: 300,
+                            height: 55
                         }}
                         onPress={this.handleSignUpSubmission}
                         large
@@ -121,7 +122,7 @@ class SignupContainer extends React.Component {
                         title='SIGN UP'
                     />
                 </View>
-            </TouchableWithoutFeedback>
+            </ScrollView>
         )
     }
 }

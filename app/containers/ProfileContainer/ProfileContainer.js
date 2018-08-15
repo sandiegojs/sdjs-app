@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, ScrollView, Keyboard, Platform} from 'react-native';
+import {StyleSheet, View, ScrollView, Keyboard} from 'react-native';
 import {FormLabel, FormInput, Button} from "react-native-elements";
-import * as actions from './profileActions'
+import * as actions from './profileActions';
 
 class ProfileContainer extends React.Component {
   constructor(props) {
@@ -117,7 +117,7 @@ class ProfileContainer extends React.Component {
               buttonStyle={{
                 backgroundColor: '#346abb',
                 borderRadius: 7,
-                marginTop: 21,
+                marginTop: 24,
                 width: 300,
                 height: 55
               }}
