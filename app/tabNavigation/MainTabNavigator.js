@@ -84,6 +84,15 @@ export default class RootNavigator extends React.Component {
               case 'Events':
               return(
                 <Image
+                source={require('../assets/images/shopping.png')}
+                fadeDuration={0}
+                style={{ width: 30, height: 30 }}
+              />
+              )
+              break;
+              case 'Events':
+              return(
+                <Image
                 source={require('../assets/images/logout.png')}
                 fadeDuration={0}
                 style={{ width: 30, height: 30 }}
