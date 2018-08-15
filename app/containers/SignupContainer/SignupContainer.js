@@ -68,23 +68,6 @@ class SignupContainer extends React.Component {
         }
     }
 
-    // _authenticateWithGithubAsync = async () => {
-    //     const { dispatch } = this.props;
-    //     try {
-    //         let user = await authenticateWithGithubAsync();
-    //         const githubObj = {
-    //             "first_name": user.name.split(' ')[0],
-    //             "last_name": user.name.substr(user.name.indexOf(' ') + 1),
-    //             "email": user.email,
-    //             "password": user.id.toString()
-    //         };
-    //         dispatch(thirdPartyLogin(githubObj));
-    //         this.setState({ githubToken: result });
-    //     } catch (e) {
-    //         this.setState({ error: JSON.stringify(e) });
-    //     }
-    // };
-
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -108,15 +91,6 @@ class SignupContainer extends React.Component {
                         large
                         icon={{ name: 'sign-in', type: 'font-awesome' }}
                         title='SIGN UP' />
-                    {/* <View style={styles.socialButtonsContainer}>
-                    <Button
-                        onPress={this._authenticateWithGithubAsync}
-                        backgroundColor={'#346abb'}
-                        borderRadius={3}
-                        large
-                        icon={{ name: 'github', type: 'font-awesome' }}
-                        title='GITHUB' />
-                </View> */}
                 </View>
                 </TouchableWithoutFeedback>
         )

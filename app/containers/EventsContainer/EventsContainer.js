@@ -37,7 +37,6 @@ class EventsContainer extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(updateEventsData());
-    // dispatch(profileQuery(user.id)); this line uncommented throws error but may be needed when profile returns
   }
 
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
@@ -105,13 +104,6 @@ class EventsContainer extends React.Component {
     dispatch(removeAttendee(attendeeId, user.token));
   }
 
-  //Queries DB with user ID and sends to profile page
-  // profilePageHandler() {
-  //   const { user, dispatch } = this.props;
-  //   const { navigate } = this.props.navigation;
-  //   dispatch(profileQuery(user.id))
-  // }
-
   _handlePressButtonAsync = async () => {
     const { eventsData } = this.props;
     let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
@@ -153,7 +145,6 @@ class EventsContainer extends React.Component {
                             onPress={this.handleUnCheckIn}
                           />
       }
-      //if(!checkedInStatus) is false
       if (!checkedIn) {
         nextEventButton = <Button
                             large
@@ -232,9 +223,6 @@ const styles = StyleSheet.create({
   },
   locationErrorMessage: {
     textAlign: 'center'
-  },
-  checkInButton: {
-    //marginTop: 25
   },
   mainContainer: {
     paddingTop: 15
