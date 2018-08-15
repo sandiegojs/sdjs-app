@@ -11,7 +11,7 @@ export function resetPassword(passObj) {
     return {
         type: 'RESET_PASSWORD',
         payload: axios
-        .post('http://0787dded.ngrok.io/users/reset')
+        .post('https://sdjs-app.now.sh/users/reset')
         .then( res => {
             //doesn't work
             alert(
