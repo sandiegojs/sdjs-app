@@ -32,7 +32,7 @@ export function submitSignUp(credentials, navigate) {
 	return {
 		type: 'SUBMIT_SIGN_UP',
 		payload: axios
-			.post('https://sdjs-app.now.sh/signup', credentials)
+			.post('https://sdjs-app.now.sh/api/users', credentials)
 			.then(response => {
 				const statusCode = RegExp('422*');
 				const signUpRes = response.data;

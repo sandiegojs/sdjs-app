@@ -28,7 +28,6 @@ class PasswordContainer extends React.Component {
         const { emailInput } = this.props;
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <View style={styles.container}>
                         <View style={styles.formContainer}>
                             <FormLabel>Enter your E-mail</FormLabel>
@@ -53,7 +52,6 @@ class PasswordContainer extends React.Component {
                             onPress={this.submitResetPasswordRequest}
                         />
                     </View>
-                </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
         );
     }
