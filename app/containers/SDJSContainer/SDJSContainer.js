@@ -5,7 +5,7 @@ import { Button } from "react-native-elements";
 import { Constants, WebBrowser } from 'expo';
 
 
-class SDJSContiner extends React.Component {
+class SDJSContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -61,4 +61,4 @@ function mapStoreToProps(store) {
     };
 }
 
-export default connect(mapStoreToProps)(SDJSContiner);
+export default connect(mapStoreToProps)(SDJSContainer);
