@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Alert } from 'react-native';
-import { FormLabel, Button, FormInput } from 'react-native-elements';
-import { question1Entry, question2Entry, question3Entry, allAnswers} from './QuestionnaireActions';
+import {connect} from 'react-redux';
+import {StyleSheet, View, Alert, ScrollView, Keyboard} from 'react-native';
+import {FormLabel, Button, FormInput} from 'react-native-elements';
+import {question1Entry, question2Entry, question3Entry, allAnswers} from './QuestionnaireActions';
 
 class QuestionnaireContainer extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.handleQuestion1Input = this.handleQuestion1Input.bind(this);
         this.handleQuestion2Input = this.handleQuestion2Input.bind(this);
@@ -31,10 +31,10 @@ class QuestionnaireContainer extends React.Component {
     }
 
     handleFormSubmit() {
-        const { dispatch, question1, question2, question3, id } = this.props;
+        const { dispatch, question1, question2, question3, user } = this.props;
         const { navigate } = this.props.navigation;
 
-        if (question1 == '' || question2 == '' || question3 == '') {
+        if (question1 === '' || question2 === '' || question3 === '') {
             Alert.alert(
                 'Form Error',
                 'Complete all fields to submit', [{
@@ -42,58 +42,95 @@ class QuestionnaireContainer extends React.Component {
                     onPress: null,
                     style: 'cancel'
                 }]
-            )
+            );
         } else {
-            const answers = {
-                "answer1": question1,
-                "answer2": question1,
-                "answer3": question1,
-            }
-            dispatch(allAnswers(answers, navigate, id));
-            navigate('Events')
+            Alert.alert(
+                'Success ',
+                'Congratulations! You have signed up successfully!', [{
+                    text: 'OK',
+                    onPress: null,
+                    style: 'cancel'
+                }]
+            )
+            const answers = { question1, question2, question3 };
+            dispatch(allAnswers(answers, user.id, user.token));
+            navigate('Events');
         }
     }
 
     handleSkipButton(){
+        Alert.alert(
+            'Success ',
+            'Congratulations! You have signed up successfully!', [{
+                text: 'OK',
+                onPress: null,
+                style: 'cancel'
+            }]
+        )
         const { navigate } = this.props.navigation;
-        navigate('Events')
+        navigate('Events');
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <View>
-                    <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
-                    <FormInput onChangeText={this.handleQuestion1Input} />
-                    <FormLabel>How did you hear about SDJS?</FormLabel>
-                    <FormInput onChangeText={this.handleQuestion2Input} />
-                    <FormLabel>What would you like to learn?</FormLabel>
-                    <FormInput onChangeText={this.handleQuestion3Input} />
-                </View>
-                <View style={{margin:10}}>
-                <View style={styles.buttons}>
+            <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    <View style={styles.formContainer}>
+                        <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleQuestion1Input}
+                        />
+                        <FormLabel>How did you hear about SDJS?</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleQuestion2Input}
+                        />
+                        <FormLabel>What would you like to learn?</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleQuestion3Input}
+                        />
+                    </View>
                     <Button
                         large
-                        backgroundColor='#346abb'
-                        style={styles.updateButton}
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
                         onPress={this.handleProfileUpdate}
                         onPress={this.handleFormSubmit}
                         title="Submit"
                     />
-                    </View>
-                    <View style={styles.buttons}>
                     <Button
                         large
-                        backgroundColor='#346abb'
-                        borderRadius={3}
-                        style={styles.updateButton}
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
                         onPress={this.handleProfileUpdate}
                         onPress={this.handleSkipButton}
                         title="Skip"
                     />
-                    </View>
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
@@ -101,18 +138,25 @@ class QuestionnaireContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
-        paddingBottom: 300
+        justifyContent: 'center',
+        backgroundColor: '#DCDCDC',
+        alignItems: 'center',
+        padding: 30
     },
-    buttons: {
-    marginVertical: 10
+    formContainer: {
+        paddingBottom: 20,
+        width: 350,
+        margin: 15
     }
-})
+});
 
 function mapStoreToProps(store) {
     return {
-        id: store.signupData.id
-    }
+        user: store.userData.user,
+        question1: store.questionnaireData.question1,
+        question2: store.questionnaireData.question2,
+        question3: store.questionnaireData.question3,
+    };
 }
 
-export default connect(mapStoreToProps)(QuestionnaireContainer)
+export default connect(mapStoreToProps)(QuestionnaireContainer);

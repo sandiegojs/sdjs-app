@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { ImageBackground, Text, View, StyleSheet } from 'react-native';
-import { Button } from "react-native-elements";
-import { Constants, WebBrowser } from 'expo';
+import {connect} from 'react-redux';
+import {ImageBackground, StyleSheet} from 'react-native';
+import {Button} from "react-native-elements";
+import {WebBrowser} from 'expo';
 
-
-class SDJSContiner extends React.Component {
+class SDJSContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,43 +14,46 @@ class SDJSContiner extends React.Component {
 
     _handlePressButtonAsync = async () => {
         let result = await WebBrowser.openBrowserAsync('http://sandiegojs.org/');
-        this.setState({ result });
+        this.setState({result});
     };
-
 
     render() {
 
         return (
-            <ImageBackground style={{
-                flex: 1,
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                alignItems: 'center',
-              }}
-              source={{ uri: 'https://cdn-images-1.medium.com/max/653/1*wMZnVAEei1xbY1v6sAbYxQ.png' }}
+            <ImageBackground
+                style={{
+                    flex: 1,
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+                source={{uri: 'https://cdn-images-1.medium.com/max/653/1*wMZnVAEei1xbY1v6sAbYxQ.png'}}
             >
-            
                 <Button
                     large
-                    backgroundColor={'#346abb'}
-                    borderRadius={3}
-                    style={{width:220, alignItems: 'center', marginTop: 180}}
+                    buttonStyle={{
+                        backgroundColor: '#346abb',
+                        borderRadius: 7,
+                        width: 231,
+                        height: 65
+                    }}
                     title="SAN DIEGO"
                     onPress={this._handlePressButtonAsync}
                 />
             </ImageBackground>
-
         )
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: Constants.statusBarHeight,
-        
+        backgroundColor: '#DCDCDC',
+        alignItems: 'center',
+        padding: 30
     },
 });
 
@@ -61,4 +63,4 @@ function mapStoreToProps(store) {
     };
 }
 
-export default connect(mapStoreToProps)(SDJSContiner);
+export default connect(mapStoreToProps)(SDJSContainer);

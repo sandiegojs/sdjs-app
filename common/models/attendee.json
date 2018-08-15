@@ -8,8 +8,8 @@
   "properties": {
     "timestamp": {
       "type": "date",
-      "default": "$now",
-      "required": true
+      "required": true,
+      "default": "$now"
     }
   },
   "validations": [],
@@ -26,7 +26,13 @@
       "required": true
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }
-

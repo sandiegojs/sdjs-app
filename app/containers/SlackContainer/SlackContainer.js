@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { ImageBackground, Text, View, StyleSheet } from 'react-native';
-import { Button } from "react-native-elements";
-import { Constants, WebBrowser } from 'expo';
+import {connect} from 'react-redux';
+import {ImageBackground, StyleSheet} from 'react-native';
+import {Button} from "react-native-elements";
+import {WebBrowser} from 'expo';
 
-class SlackContiner extends React.Component {
+class SlackContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,26 +19,29 @@ class SlackContiner extends React.Component {
 
     render() {
         return (
-            <ImageBackground style={{
-                flex: 1,
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                alignItems: 'center',
-              }}
-              source={{ uri: 'https://a.slack-edge.com/52353/marketing/img/home/home_illo.png' }}
+            <ImageBackground
+                style={{
+                    flex: 1,
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+                source={{uri: 'https://a.slack-edge.com/52353/marketing/img/home/home_illo.png'}}
             >
-            
                 <Button
                     large
-                    backgroundColor={'#346abb'}
-                    borderRadius={3}
-                    style={{ width:300, alignItems: 'center', marginTop: 180}}
-                    title="SAN DIEGO JS SLACK"
+                    buttonStyle={{
+                        backgroundColor: '#346abb',
+                        borderRadius: 7,
+                        width: 231,
+                        height: 65
+                    }}
+                    title="SDJS SLACK"
                     onPress={this._handlePressButtonAsync}
                 />
             </ImageBackground>
-
         )
     }
 }
@@ -46,17 +49,17 @@ class SlackContiner extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: Constants.statusBarHeight,
-        
+        backgroundColor: '#DCDCDC',
+        alignItems: 'center',
+        padding: 30
     },
 });
 
 function mapStoreToProps(store) {
     return {
-        
+
     };
 }
 
-export default connect(mapStoreToProps)(SlackContiner);
+export default connect(mapStoreToProps)(SlackContainer);

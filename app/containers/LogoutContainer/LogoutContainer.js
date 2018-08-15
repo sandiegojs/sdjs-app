@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import { ImageBackground, Text, View, StyleSheet } from 'react-native';
-import { Button } from "react-native-elements";
-import { connect } from 'react-redux';
-import { Constants, WebBrowser } from 'expo';
+import {Text, View, StyleSheet} from 'react-native';
+import {Button} from "react-native-elements";
+import {connect} from 'react-redux';
+import {submitLogout} from './LogoutActions';
 
 class LogoutContainer extends React.Component {
   constructor(props){
     super(props);
+    this.logout = this.logout.bind(this);
   }
+
+  logout(){
+  const {navigate} = this.props.navigation;
+  const {dispatch} = this.props;
+  dispatch(submitLogout());
+  navigate('Login');
+}
 
   render() {
     return (
@@ -15,23 +23,33 @@ class LogoutContainer extends React.Component {
         <Text style={styles.text}>
           Do you want to log out?
         </Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            backgroundColor={'#346abb'}
-            onPress={() => this.props.navigation.navigate('Login')}
-            title="Yes"
-            large
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            backgroundColor={'#346abb'}
-            onPress={() => this.props.navigation.navigate('Events')}
-            title="No"
-            large
-          />
-        </View>
-        </View>
+        <Button
+          buttonStyle={{
+            backgroundColor: '#346abb',
+            borderRadius: 7,
+            marginTop: 34,
+            marginBottom: 24,
+            width: 313,
+            height: 55
+          }}
+          onPress={this.logout}
+          title="Yes"
+          large
+        />
+        <Button
+          buttonStyle={{
+            backgroundColor: '#346abb',
+            borderRadius: 7,
+            marginTop: 24,
+            marginBottom: 21,
+            width: 313,
+            height: 55
+          }}
+          onPress={() => this.props.navigation.goBack()}
+          title="No"
+          large
+        />
+      </View>
     )
   }
 }
@@ -39,27 +57,19 @@ class LogoutContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     backgroundColor: '#DCDCDC',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-  },
-  buttonContainer: {
-    borderRadius: 8,
-    marginTop: 30,
-    marginBottom: 20,
-    width: 320
+    padding: 30
   },
   text: {
-    marginBottom:10,
-    fontSize: 16,
+    marginBottom: 11,
+    fontSize: 24
   }
 });
 
 function mapStoreToProps(store) {
-  return {
-
-  };
+  return {};
 }
 
 export default connect(mapStoreToProps)(LogoutContainer);

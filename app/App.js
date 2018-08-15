@@ -1,8 +1,8 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './rootStore';
-import { Image,  BackHandler, Alert } from 'react-native';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+import {Image,  BackHandler, Alert} from 'react-native';
+import {StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
 import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -15,7 +15,7 @@ import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
-
+import ShoppingScreen from './screens/ShoppingScreen';
 class App extends React.Component {
   
 handleBackButton = () => {               
@@ -66,12 +66,12 @@ componentWillUnmount() {
             Profile: {
               screen: ProfileScreen,
             },
+            Shopping: {
+              screen: ShoppingScreen,
+            },
             Logout: {
               screen: LogoutScreen,
             },
-            Questionnaire: {
-              screen: QuestionnaireScreen,
-            }
           },
           {
             navigationOptions: ({ navigation }) => ({
@@ -106,7 +106,7 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Donate':
+                  case 'Donate':
                     return (
                       <Image
                         source={require('./assets/images/donate.png')}
@@ -124,7 +124,7 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Log Out':
+                  case 'Logout':
                     return (
                       <Image
                         source={require('./assets/images/logout.png')}
@@ -133,13 +133,22 @@ componentWillUnmount() {
                       />
                     )
                     break;
+                    case 'Shopping':
+                    return (
+                      <Image
+                        source={require('./assets/images/shopping.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                  break;
                 }
               },
             }),
             tabBarComponent: TabBarBottom,
             tabBarPosition: 'bottom',
             animationEnabled: false,
-            swipeEnabled: false,
+            swipeEnabled: true,
             initialRouteName: 'Events',
           }
         )

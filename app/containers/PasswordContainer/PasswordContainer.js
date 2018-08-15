@@ -1,49 +1,60 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Alert } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
-import { emailResetPasswordEntry, resetPassword } from './passwordActions';
+import {connect} from 'react-redux';
+import {StyleSheet, View, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView} from 'react-native';
+import {FormLabel, FormInput, Button} from 'react-native-elements';
+import {emailResetPasswordEntry, resetPassword} from './passwordActions';
 
 class PasswordContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleEmailForPassword = this.handleEmailForPassword.bind(this);
-        this.handleResetPassword = this.handleResetPassword.bind(this);
+        this.updateEmailInput = this.updateEmailInput.bind(this);
+        this.submitResetPasswordRequest = this.submitResetPasswordRequest.bind(this);
     }
 
-    handleEmailForPassword(text) {
+    updateEmailInput(text) {
         const { dispatch } = this.props;
         dispatch(emailResetPasswordEntry(text));
     }
 
-    handleResetPassword(userInfo) {
-        //logic needs fixing
-        const { dispatch, userEmail } = this.props;
-        if (userInfo == '')
-            Alert.alert(
-                'An e-mail has been sent',
-                'Please check your e-mail', [{
-                    text: 'OK'
-                }]
-            )
-        dispatch(resetPassword(userInfo));
+    submitResetPasswordRequest() {
+
+        const {dispatch, emailInput} = this.props;
+        const {navigate } = this.props.navigation;
+        dispatch(resetPassword(emailInput, navigate));
     }
 
     render() {
+        const { emailInput } = this.props;
         return (
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <FormLabel>Enter your E-mail</FormLabel>
-                    <FormInput onChangeText={this.handleEmailForPassword} />
-                </View>
-                <Button
-                    title='RESET PASSWORD'
-                    style={styles.button}
-                    backgroundColor={'#346abb'}
-                    onPress={this.handleResetPassword}
-                />
-            </View>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                    <View style={styles.container}>
+                        <View style={styles.formContainer}>
+                            <FormLabel>Enter your E-mail</FormLabel>
+                            <FormInput
+                                containerStyle={{
+                                    margin: 5,
+                                    borderBottomColor: 'black'
+                                }}
+                                defaultValue={emailInput}
+                                onChangeText={this.updateEmailInput}
+                            />
+                        </View>
+                        <Button
+                            title='RESET PASSWORD'
+                            buttonStyle={{
+                                backgroundColor: '#346abb',
+                                borderRadius: 7,
+                                marginTop: 7,
+                                marginBottom: 25,
+                                width: 311
+                            }}
+                            onPress={this.submitResetPasswordRequest}
+                        />
+                    </View>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -51,25 +62,21 @@ class PasswordContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#DCDCDC',
         alignItems: 'center',
-        paddingTop: 30,
-        paddingBottom: 50
+        padding: 30
     },
     formContainer: {
         paddingBottom: 20,
-        width: 350
-    },
-    button: {
-        marginTop: 30,
-        marginBottom: 20,
-        width: 320
+        width: 350,
+        margin: 15
     }
-})
+});
 
 function mapStoreToProps(store) {
     return {
-        userEmail: store.signupData.userEmail
+      emailInput: store.passwordData.emailInput
     };
 }
 

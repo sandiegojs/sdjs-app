@@ -1,18 +1,16 @@
 import React from 'react';
-import { TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { connect } from 'react-redux';
-import { StyleSheet, Text, View, TextInput, Linking, Alert } from 'react-native';
-import { FormLabel, FormInput, Button, FormValidationMessage, Icon } from 'react-native-elements';
+import {ScrollView, Keyboard} from 'react-native';
+import {connect} from 'react-redux';
+import {StyleSheet, View, Alert} from 'react-native';
+import {FormLabel, FormInput, Button} from 'react-native-elements';
 import {
-    firstNameEntry,
-    lastNameEntry,
-    emailEntry,
-    passwordEntry,
-    signUpEntry,
+    updateFirstNameInput,
+    updateLastNameInput,
+    updateEmailInput,
+    updatePasswordInput,
+    submitSignUp,
     thirdPartyLogin
 } from './signupActions';
-
-import authenticateWithGithubAsync from './authenticateWithGithubAsync';
 
 class SignupContainer extends React.Component {
     constructor(props) {
@@ -26,30 +24,30 @@ class SignupContainer extends React.Component {
     }
 
     handleFirstNameInput(text) {
-        const { dispatch } = this.props;
-        dispatch(firstNameEntry(text));
+        const {dispatch} = this.props;
+        dispatch(updateFirstNameInput(text));
     }
 
     handleLastNameInput(text) {
-        const { dispatch } = this.props;
-        dispatch(lastNameEntry(text));
+        const {dispatch} = this.props;
+        dispatch(updateLastNameInput(text));
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;
-        dispatch(emailEntry(text));
+        const {dispatch} = this.props;
+        dispatch(updateEmailInput(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;
-        dispatch(passwordEntry(text));
+        const {dispatch} = this.props;
+        dispatch(updatePasswordInput(text));
     }
 
     handleSignUpSubmission() {
-        const { dispatch, first_name, last_name, email, password } = this.props;
-        const { navigate } = this.props.navigation;
+        const {dispatch, firstNameInput, lastNameInput, emailInput, passwordInput} = this.props;
+        const {navigate} = this.props.navigation;
 
-        if (first_name == '' || last_name == '' || email == '' || password == '') {
+        if (firstNameInput === '' || lastNameInput === '' || emailInput === '' || passwordInput === '') {
             Alert.alert(
                 'Form Error',
                 'Complete all fields to submit', [{
@@ -59,105 +57,72 @@ class SignupContainer extends React.Component {
                 }]
             )
         } else {
-            const signUpObj = {
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-                "password": password,
-            }
-            dispatch(signUpEntry(signUpObj, navigate));
-        }
-    }
-
-    _authenticateWithGithubAsync = async () => {
-        const { dispatch } = this.props;
-        try {
-            let user = await authenticateWithGithubAsync();
-            const githubObj = {
-                "first_name": user.name.split(' ')[0],
-                "last_name": user.name.substr(user.name.indexOf(' ') + 1),
-                "email": user.email,
-                "password": user.id.toString()
-            }
-            dispatch(thirdPartyLogin(githubObj));
-            this.setState({ githubToken: result });
-        } catch (e) {
-            this.setState({ error: JSON.stringify(e) });
-        }
-    }
-
-    signInWithGoogleAsync = async () => {
-        const { dispatch } = this.props;
-        try {
-            const result = await Expo.Google.logInAsync({
-                androidClientId: '283233290300-1oc4f8ovd34f6gju3p7aktr0bqsi4jhh.apps.googleusercontent.com',
-                iosClientId: '283233290300-rr1pffml6mfnacp9amsrhokemmc5nras.apps.googleusercontent.com',
-                scopes: ['profile', 'email'],
-            });
-
-            if (result.type === 'success') {
-                let googleResult = result
-
-                const googleObj = {
-                    "first_name": googleResult.user.givenName,
-                    "last_name": googleResult.user.familyName,
-                    "email": googleResult.user.email,
-                    "password": googleResult.user.id
-                }
-                dispatch(thirdPartyLogin(googleObj));
-
-            } else {
-                return { cancelled: true };
-            }
-        } catch (e) {
-            return { error: true };
+        	const credentials = {
+				email: emailInput,
+				password: passwordInput,
+        		firstName: firstNameInput,
+				lastName: lastNameInput
+            };
+            dispatch(submitSignUp(credentials, navigate));
         }
     }
 
     render() {
-        const { first_name, last_name, email, password, user } = this.props;
-        const { navigate } = this.props.navigation;
-
         return (
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <ScrollView onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
                     <View style={styles.formContainer}>
-                        <FormLabel>FIRST NAME </FormLabel>
-                        <FormInput onChangeText={this.handleFirstNameInput} />
+                        <FormLabel>FIRST NAME</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleFirstNameInput}
+                        />
                         <FormLabel>LAST NAME</FormLabel>
-                        <FormInput onChangeText={this.handleLastNameInput} />
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleLastNameInput}
+                        />
                         <FormLabel>EMAIL</FormLabel>
-                        <FormInput onChangeText={this.handleEmailInput} />
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleEmailInput}
+                            defaultValue={this.props.emailInput}
+                        />
                         <FormLabel>PASSWORD</FormLabel>
-                        <FormInput secureTextEntry={true} onChangeText={this.handlePasswordInput} />
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handlePasswordInput}
+                            secureTextEntry={true}
+                        />
                     </View>
-                    <View>
-                    </View>
-                    <Button style={styles.button}
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
                         onPress={this.handleSignUpSubmission}
-                        backgroundColor={'#346abb'}
-                        borderRadius={3}
                         large
-                        icon={{ name: 'sign-in', type: 'font-awesome' }}
-                        title='SIGN UP' />
-                    {/* <View style={styles.socialButtonsContainer}>
-                    <Button
-                        onPress={this._authenticateWithGithubAsync}
-                        backgroundColor={'#346abb'}
-                        borderRadius={3}
-                        large
-                        icon={{ name: 'github', type: 'font-awesome' }}
-                        title='GITHUB' />
-                    <Button
-                        onPress={this.signInWithGoogleAsync}
-                        backgroundColor={'#346abb'}
-                        borderRadius={3}
-                        large
-                        icon={{ name: 'google-plus', type: 'font-awesome' }}
-                        title='GOOGLE' />
-                </View> */}
+                        icon={{name: 'sign-in', type: 'font-awesome'}}
+                        title='SIGN UP'
+                    />
                 </View>
-                </TouchableWithoutFeedback>
+            </ScrollView>
         )
     }
 }
@@ -165,40 +130,25 @@ class SignupContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#DCDCDC',
         alignItems: 'center',
-        paddingTop: 30,
-        paddingBottom: 300
-    },
-    button: {
-        marginTop: 55,
-        marginBottom: 20,
-        width: 320
-    },
-    socialButtonsContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: 350,
-        paddingTop: 8,
-        paddingHorizontal: 25
+        padding: 30
     },
     formContainer: {
-        width: 350
-        // padding: 50
-    },
-    switchToLogin: {
+        paddingBottom: 20,
+        width: 350,
+        margin: 15
     }
 });
 
 function mapStoreToProps(store) {
     return {
-        first_name: store.signupData.first_name,
-        last_name: store.signupData.last_name,
-        email: store.signupData.email,
-        password: store.signupData.password,
-        user: store.signupData.user
+        firstNameInput: store.userData.firstNameInput,
+        lastNameInput: store.userData.lastNameInput,
+        emailInput: store.userData.emailInput,
+        passwordInput: store.userData.passwordInput
     };
 }
 
-export default connect(mapStoreToProps)(SignupContainer)
+export default connect(mapStoreToProps)(SignupContainer);

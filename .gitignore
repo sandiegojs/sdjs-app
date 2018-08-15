@@ -11,11 +11,12 @@
 *.tgz
 *.xml
 .DS_Store
+.env
 .idea
 .project
 .strong-pm
 coverage
+ngrok.exe
 node_modules
 npm-debug.log
 package-lock.json
-.env
