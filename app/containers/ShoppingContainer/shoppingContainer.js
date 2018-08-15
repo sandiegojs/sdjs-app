@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { ImageBackground, Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from "react-native-elements";
 import { Constants, WebBrowser } from 'expo';
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
+=======
+import FitImage from 'react-native-fit-image';
+>>>>>>> changes and updates style in shopping store
 
 >>>>>>> Shopping app changes
 class ShoppingContainer extends React.Component {
@@ -63,12 +67,17 @@ class ShoppingContainer extends React.Component {
                     width: '100%',
                     height: '100%',
 <<<<<<< HEAD
+<<<<<<< HEAD
                     backgroundColor: '#fff',
                 }}
 =======
                 }}
                 source={require('../../assets/images/shoppingBackground.png')}
 >>>>>>> Shopping app changes
+=======
+                    backgroundColor: '#fff',
+                }}
+>>>>>>> changes and updates style in shopping store
             >
                 <View style={styles.container}>
                     <View style={styles.Item}>
@@ -88,10 +97,14 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
                             title="ORDER"
                             onPress={this.handlePressButtonAsync}
 =======
                             title="SHOP"
+=======
+                            title="ORDER"
+>>>>>>> changes and updates style in shopping store
                             onPress={this._handlePressButtonAsync}
 >>>>>>> Shopping app changes
                         />
@@ -101,6 +114,7 @@ class ShoppingContainer extends React.Component {
                             source={require('../../assets/images/capImage.png')}
                             style={{
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 height: '100%',
                                 width: '100%',
                                 borderColor: '#fff',
@@ -109,11 +123,19 @@ class ShoppingContainer extends React.Component {
                                 backgroundColor: '#fff',
 =======
                                 width: '100%',
+=======
+>>>>>>> changes and updates style in shopping store
                                 height: '100%',
+                                width: '100%',
                                 borderColor: '#fff',
                                 borderWidth: 3,
+<<<<<<< HEAD
                                 marginBottom: -10
 >>>>>>> Shopping app changes
+=======
+                                marginBottom: -10,
+                                backgroundColor: '#fff',
+>>>>>>> changes and updates style in shopping store
                             }}
                         /><Button
                             medium
@@ -121,10 +143,14 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
                             title="ORDER"
                             onPress={this.handlePressButtonAsyncForCap}
 =======
                             title="SHOP"
+=======
+                            title="ORDER"
+>>>>>>> changes and updates style in shopping store
                             onPress={this._handlePressButtonAsyncForCap}
 >>>>>>> Shopping app changes
                         />
@@ -145,10 +171,14 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
                             title="ORDER"
                             onPress={this.handlePressButtonAsyncForLightBlue}
 =======
                             title="SHOP"
+=======
+                            title="ORDER"
+>>>>>>> changes and updates style in shopping store
                             onPress={this._handlePressButtonAsyncForLightBlue}
 >>>>>>> Shopping app changes
                         />
@@ -169,10 +199,14 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
                             title="ORDER"
                             onPress={this.handlePressButtonAsyncForBlack}
 =======
                             title="SHOP"
+=======
+                            title="ORDER"
+>>>>>>> changes and updates style in shopping store
                             onPress={this._handlePressButtonAsyncForBlack}
 >>>>>>> Shopping app changes
                         />
