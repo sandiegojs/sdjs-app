@@ -8,7 +8,7 @@ import { submitLogout } from './LogoutActions';
 class LogoutContainer extends React.Component {
   constructor(props){
     super(props);
-    this._logout = this._logout.bind(this);
+    this.logout = this._logout.bind(this);
   }
 
   logout(){

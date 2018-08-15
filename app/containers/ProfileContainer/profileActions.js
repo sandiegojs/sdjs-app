@@ -4,7 +4,7 @@ export function profileInit(id, token) {
   return {
     type: 'PROFILE_INIT',
     payload: axios
-      .get('https://sdjs-app.now.sh/api/users/' + id, {headers: {Authorization: token}})
+      .get('http://0787dded.ngrok.io/api/users/' + id, {headers: {Authorization: token}})
       .then(r => r.data)
   }
 }
@@ -13,7 +13,7 @@ export function profileUpdate(newProfileData, id, token) {
   return {
     type: 'PROFILE_UPDATE',
     payload: axios
-      .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData, {headers: {Authorization: token}})
+      .patch('http://0787dded.ngrok.io/api/users/' + id, newProfileData, {headers: {Authorization: token}})
       .then(r => r.data)
   }
 }
