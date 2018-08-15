@@ -38,7 +38,7 @@ class SlackContainer extends React.Component {
                         width: 231,
                         height: 65
                     }}
-                    title="SAN DIEGO JS SLACK"
+                    title="SDJS SLACK"
                     onPress={this._handlePressButtonAsync}
                 />
             </ImageBackground>

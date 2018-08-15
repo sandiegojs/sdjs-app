@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Keyboard} from 'react-native';
+import {TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
@@ -32,7 +32,7 @@ class LoginContainer extends React.Component {
   render() {
     const {email} = this.props;
     return (
-      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>EMAIL</FormLabel>
@@ -91,7 +91,7 @@ class LoginContainer extends React.Component {
             onPress={() => this.props.navigation.navigate('Password')}
           />
         </View>
-      </ScrollView>
+      </TouchableWithoutFeedback>
     )
   }
 }
