@@ -20,6 +20,8 @@
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^4.0.0",
     "loopback-connector-mongodb": "^1.18.1",
+    "loopback-connector-sendgrid": "^2.2.4",
+    "loopback-datasource-juggler": "^3.23.0",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
     "reduce-reducers": "^0.4.3",
@@ -27,6 +29,7 @@
     "strong-error-handler": "^2.0.0"
   },
   "devDependencies": {
+    "dotenv": "^6.0.0",
     "eslint": "^3.17.1",
     "eslint-config-loopback": "^8.0.0",
     "nsp": "^2.1.0"

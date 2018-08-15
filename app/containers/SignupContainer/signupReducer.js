@@ -57,7 +57,6 @@ export default function signupReducer(state = defaultState, action) {
                 user: payload,
             }
         }
-
         default: {
             return state;
         }
