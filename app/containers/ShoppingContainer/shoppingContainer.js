@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ImageBackground, Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from "react-native-elements";
 import { Constants, WebBrowser } from 'expo';
-
+import FitImage from 'react-native-fit-image';
 
 class ShoppingContainer extends React.Component {
     constructor(props) {
@@ -39,8 +39,8 @@ class ShoppingContainer extends React.Component {
                     flex: 1,
                     width: '100%',
                     height: '100%',
+                    backgroundColor: '#fff',
                 }}
-                source={require('../../assets/images/shoppingBackground.png')}
             >
                 <View style={styles.container}>
                     <View style={styles.Item}>
@@ -59,7 +59,7 @@ class ShoppingContainer extends React.Component {
                             backgroundColor={'#346abb'}
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
-                            title="SHOP"
+                            title="ORDER"
                             onPress={this._handlePressButtonAsync}
                         />
                     </View>
@@ -67,18 +67,19 @@ class ShoppingContainer extends React.Component {
                         <Image
                             source={require('../../assets/images/capImage.png')}
                             style={{
-                                width: '100%',
                                 height: '100%',
+                                width: '100%',
                                 borderColor: '#fff',
                                 borderWidth: 3,
-                                marginBottom: -10
+                                marginBottom: -10,
+                                backgroundColor: '#fff',
                             }}
                         /><Button
                             medium
                             backgroundColor={'#346abb'}
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
-                            title="SHOP"
+                            title="ORDER"
                             onPress={this._handlePressButtonAsyncForCap}
                         />
                     </View>
@@ -97,7 +98,7 @@ class ShoppingContainer extends React.Component {
                             backgroundColor={'#346abb'}
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
-                            title="SHOP"
+                            title="ORDER"
                             onPress={this._handlePressButtonAsyncForLightBlue}
                         />
                     </View>
@@ -116,7 +117,7 @@ class ShoppingContainer extends React.Component {
                             backgroundColor={'#346abb'}
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
-                            title="SHOP"
+                            title="ORDER"
                             onPress={this._handlePressButtonAsyncForBlack}
                         />
                     </View>
