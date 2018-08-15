@@ -4,7 +4,7 @@ import { ImageBackground, Text, View, StyleSheet } from 'react-native';
 import { Button } from "react-native-elements";
 import { Constants, WebBrowser } from 'expo';
 
-class SlackContiner extends React.Component {
+class SlackContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,4 +59,4 @@ function mapStoreToProps(store) {
     };
 }
 
-export default connect(mapStoreToProps)(SlackContiner);
+export default connect(mapStoreToProps)(SlackContainer);

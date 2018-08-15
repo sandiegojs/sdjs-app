@@ -15,7 +15,7 @@ import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
-
+import ShoppingScreen from './screens/ShoppingScreen';
 class App extends React.Component {
   
 handleBackButton = () => {               
@@ -66,9 +66,12 @@ componentWillUnmount() {
             Profile: {
               screen: ProfileScreen,
             },
+            Shopping: {
+              screen: ShoppingScreen,
+            },
             Logout: {
               screen: LogoutScreen,
-            }
+            },
           },
           {
             navigationOptions: ({ navigation }) => ({
@@ -125,6 +128,15 @@ componentWillUnmount() {
                     return (
                       <Image
                         source={require('./assets/images/logout.png')}
+                        fadeDuration={0}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    )
+                    break;
+                    case 'Shopping':
+                    return (
+                      <Image
+                        source={require('./assets/images/shopping.png')}
                         fadeDuration={0}
                         style={{ width: 30, height: 30 }}
                       />
