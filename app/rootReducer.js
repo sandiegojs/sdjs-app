@@ -31,7 +31,6 @@ const rootReducer = combineReducers({
   donateData: DonateReducer,
   questionnaireData: QuestionnaireReducer,
   passwordData: PasswordReducer
-
 });
 
 export default rootReducer;

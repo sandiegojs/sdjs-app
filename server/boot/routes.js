@@ -63,6 +63,7 @@ module.exports = function (app) {
       })
       .catch(error => console.log(error))
   });
+
   // Below route from original authors. Doesn't seem to be used. All done in actions.
   // the url path seems to be wrong.
   // should hit /api/attendees with attendeeId to delete attendee
@@ -155,17 +156,15 @@ module.exports = function (app) {
       .catch(e => res.send(e.message))
   });
 
-  //send an email with instructions to reset an existing user's password
-  app.post('/request-password-reset', function (req, res, next) {
-    User.resetPassword({
-      email: req.body.email
-    }, function (err) {
-      if (err) return res.status(401).send(err);
+  //show password reset form
+  app.get('/reset-password/', function(req, res, next) {
+    const { access_token: token } = req.query;
 
-      res.status(200).json({
-        title: 'Password reset requested',
-        content: 'Check your email for further instructions',
-      });
+    if (!token)
+      return res.sendStatus(401);
+
+    res.render('password-reset', {
+      redirectUrl: '/api/users/reset-password?access_token='+ token
     });
   });
 };

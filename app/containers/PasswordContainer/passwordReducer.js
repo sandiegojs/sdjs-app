@@ -14,13 +14,6 @@ export default function PasswordReducer(state = defaultState, action) {
       }
     }
 
-    case 'RESET_PASSWORD_FULFILLED': {
-      return {
-        ...state,
-        userEmail: payload
-      }
-    }
-
     default: {
       return state;
     }
