@@ -1,10 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-<<<<<<< HEAD
 import {StyleSheet, View, ScrollView, Keyboard} from 'react-native';
-=======
-import {StyleSheet, View, Scrollview, Keyboard} from 'react-native';
->>>>>>> adds css and removes unneeded code
 import {FormLabel, FormInput, Button} from "react-native-elements";
 import * as actions from './profileActions'
 
@@ -65,105 +61,88 @@ class ProfileContainer extends React.Component {
   render() {
     const {firstName, lastName, email, bio, company, url} = this.props.profileData;
     return (
-<<<<<<< HEAD
-        <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <FormLabel>First Name</FormLabel>
           <FormInput
+            containerStyle={{
+              margin: 5,
+              borderBottomColor: 'black'
+            }}
             defaultValue={firstName}
             onChangeText={this.handleFirstNameUpdate}
           />
           <FormLabel>Last Name</FormLabel>
           <FormInput
+            containerStyle={{
+              margin: 5,
+              borderBottomColor: 'black'
+            }}
             defaultValue={lastName}
             onChangeText={this.handleLastNameUpdate}
           />
           <FormLabel>Email</FormLabel>
           <FormInput
+            containerStyle={{
+              margin: 5,
+              borderBottomColor: 'black'
+            }}
             defaultValue={email}
             onChangeText={this.handleEmailUpdate}
           />
           <FormLabel>Bio</FormLabel>
           <FormInput
+            containerStyle={{
+              margin: 5,
+              borderBottomColor: 'black'
+            }}
             defaultValue={bio}
             onChangeText={this.handleBioUpdate}
           />
           <FormLabel>Company</FormLabel>
           <FormInput
+            containerStyle={{
+              margin: 5,
+              borderBottomColor: 'black'
+            }}
             defaultValue={company}
             onChangeText={this.handleCompanyUpdate}
           />
           <FormLabel>Website</FormLabel>
           <FormInput
+            containerStyle={{
+              margin: 5,
+              borderBottomColor: 'black'
+            }}
             defaultValue={url}
             onChangeText={this.handleUrlUpdate}
           />
           <Button
             large
-            backgroundColor='#346abb'
-            borderRadius={3}
-            style={styles.updateButton}
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 7,
+              marginBottom: 25,
+              width: 321
+            }}
             onPress={this.handleProfileUpdate}
-            title="UPDATE"/>
+            title="UPDATE"
+          />
         </View>
-        </ScrollView>
-=======
-        <Scrollview onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.container}>
-            <FormLabel>First Name</FormLabel>
-            <FormInput
-              defaultValue={firstName}
-              onChangeText={this.handleFirstNameUpdate}
-            />
-            <FormLabel>Last Name</FormLabel>
-            <FormInput
-              defaultValue={lastName}
-              onChangeText={this.handleLastNameUpdate}
-            />
-            <FormLabel>Email</FormLabel>
-            <FormInput
-              defaultValue={email}
-              onChangeText={this.handleEmailUpdate}
-            />
-            <FormLabel>Bio</FormLabel>
-            <FormInput
-              defaultValue={bio}
-              onChangeText={this.handleBioUpdate}
-            />
-            <FormLabel>Company</FormLabel>
-            <FormInput
-              defaultValue={company}
-              onChangeText={this.handleCompanyUpdate}
-            />
-            <FormLabel>Website</FormLabel>
-            <FormInput
-              defaultValue={url}
-              onChangeText={this.handleUrlUpdate}
-            />
-            <Button
-              large
-              backgroundColor='#346abb'
-              borderRadius={3}
-              style={styles.updateButton}
-              onPress={this.handleProfileUpdate}
-              title="UPDATE"
-            />
-          </View>
-        </Scrollview>
->>>>>>> adds css and removes unneeded code
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  updateButton: {
-    marginTop: 30
-  },
   container: {
     flex: 1,
-    paddingTop: 20,
-    paddingBottom: 300
-  },
+    justifyContent: 'center',
+    backgroundColor: '#DCDCDC',
+    alignItems: 'center',
+    padding: 30
+  }
 });
 
 function mapStoreToProps(store) {

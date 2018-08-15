@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Button } from "react-native-elements";
-import { connect } from 'react-redux';
-import { Constants } from 'expo';
-import { submitLogout } from './LogoutActions';
+import {Text, View, StyleSheet} from 'react-native';
+import {Button} from "react-native-elements";
+import {connect} from 'react-redux';
+import {submitLogout} from './LogoutActions';
 
 class LogoutContainer extends React.Component {
   constructor(props){
@@ -12,8 +11,8 @@ class LogoutContainer extends React.Component {
   }
 
   logout(){
-  const { navigate } = this.props.navigation;
-  const { dispatch } = this.props;
+  const {navigate} = this.props.navigation;
+  const {dispatch} = this.props;
   dispatch(submitLogout());
   navigate('Login');
 }
