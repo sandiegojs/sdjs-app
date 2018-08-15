@@ -32,7 +32,7 @@ export function submitSignUp(credentials, navigate) {
 	return {
 		type: 'SUBMIT_SIGN_UP',
 		payload: axios
-			.post('https://7f29f798.ngrok.io/api/users', credentials)
+			.post('https://sdjs-app.now.sh/api/users', credentials)
 			.then(response => {
 				const statusCode = RegExp('422*');
 				const signUpRes = response.data;
@@ -45,7 +45,7 @@ export function submitSignUp(credentials, navigate) {
 					navigate('Questionnaire');
 					const {email, password} = credentials;
 					return axios
-						.post('https://7f29f798.ngrok.io/api/users/login', {email, password})
+						.post('https://sdjs-app.now.sh/api/users/login', {email, password})
 						.then(r => r.data);
 				}
 			})
@@ -60,7 +60,7 @@ export function thirdPartyLogin(loginObj) {
 	return {
 		type: 'THIRD_PARTY_LOGIN',
 		payload: axios
-			.post('https://7f29f798.ngrok.io/loginthirdparty', loginObj)
+			.post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
 			.then(response => response.data)
 			.catch(error => {
 				console.log("this one", error);

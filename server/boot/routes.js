@@ -127,14 +127,12 @@ module.exports = function (app) {
               axios
                 .post(baseUrl + '/api/rsvps', rsvpObj)
                 .then(response => {
-                    console.log("post rsvp data if statement from server", response.data);
                     res.send(response.data.id)
                 })
                 .catch(error => console.log("error on post attendee", error))
             })
             .catch(error => console.log("error on post event/attendee", error))
         } else {
-            console.log('Matching Event found');
             const rsvpObj = {
             'eventId': response.data[0].id,
             'userId': userId,
@@ -143,7 +141,6 @@ module.exports = function (app) {
         axios
             .post(baseUrl + '/api/rsvps', rsvpObj)
             .then(response => {
-                console.log("post rsvp data else", response.data);
                 res.send(response.data.id)
             })
             .catch(error => console.log("error on post attendee", error))
