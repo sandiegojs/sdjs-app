@@ -46,7 +46,7 @@ class QuestionnaireContainer extends React.Component {
         } else {
             Alert.alert(
                 'Success ',
-                'Congratulations! You have Signup successfully!', [{
+                'Congratulations! You have signed up successfully!', [{
                     text: 'OK',
                     onPress: null,
                     style: 'cancel'
@@ -61,7 +61,7 @@ class QuestionnaireContainer extends React.Component {
     handleSkipButton(){
         Alert.alert(
             'Success ',
-            'Congratulations! You have Signup successfully!', [{
+            'Congratulations! You have signed up successfully!', [{
                 text: 'OK',
                 onPress: null,
                 style: 'cancel'
