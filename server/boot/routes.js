@@ -107,16 +107,12 @@ module.exports = function (app) {
     app.post('/rsvp', (req, res) => {
         let baseUrl = app.get('url').replace(/\/$/, '');
         const { eventObj, userId } = req.body;
-
-        console.log("eventObj", eventObj);
-        console.log("userId", userId);
         //Create a new user
         axios
             .get(baseUrl + '/api/events?filter[where][meetup_id]=' + eventObj.meetup_id)
             .then(response => {
                 //if no event exist create event through api/events
                 if (!!response.data && !response.data.length) {
-                    console.log("inside if statement in post rsvp");
                     axios
                         .post(baseUrl + '/api/events', eventObj)
                         .then(response => {
@@ -125,11 +121,9 @@ module.exports = function (app) {
                                 'userId': userId,
                                 'meetup_id': response.data.meetup_id
                             };
-                            console.log("rsvpObj in if statement server", rsvpObj);
                             axios
                                 .post(baseUrl + '/api/rsvps', rsvpObj)
                                 .then(response => {
-                                    console.log("post rsvp data if statement from server", response.data);
                                     res.send(response.data.id)
                                 })
                                 .catch(error => console.log("error on post attendee", error))
@@ -137,7 +131,6 @@ module.exports = function (app) {
                         .catch(error => console.log("error on post event/attendee", error))
                     //else create attendee
                 } else {
-                    console.log('Matching Event found');
                     const rsvpObj = {
                         'eventId': response.data[0].id,
                         'userId': userId,
@@ -146,14 +139,12 @@ module.exports = function (app) {
                     axios
                         .post(baseUrl + '/api/rsvps', rsvpObj)
                         .then(response => {
-                            console.log("post rsvp data else", response.data);
                             res.send(response.data.id)
                         })
-                        .catch(error => console.log("error on post attendee", error))
+                        .catch(error => console.log('error on post attendee', error));
                 }
                 return response.data;
             })
             .catch(e => res.send(e.message))
     });
-
 };

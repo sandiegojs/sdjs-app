@@ -3,7 +3,6 @@ import {TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
-import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
 import {updateEmailInput, updatePasswordInput, submitLogin, loadingScreen} from './loginActions';
 
 class LoginContainer extends React.Component {
@@ -31,23 +30,6 @@ class LoginContainer extends React.Component {
     dispatch(submitLogin({email, password}, navigate));
   }
 
-  // _authenticateWithGithubAsync = async () => {
-  //     const { dispatch } = this.props;
-  //     try {
-  //         let user = await authenticateWithGithubAsync();
-  //         const githubObj = {
-  //             "first_name": user.name.split(' ')[0],
-  //             "last_name": user.name.substr(user.name.indexOf(' ') + 1),
-  //             "email": user.email,
-  //             "password": user.id.toString()
-  //         };
-  //         dispatch(thirdPartyLogin(githubObj));
-  //         this.setState({ githubToken: result });
-  //     } catch (e) {
-  //         this.setState({ error: JSON.stringify(e) });
-  //     }
-  // };
-
   render() {
     const {loadingScreen, email} = this.props;
     return (
@@ -74,15 +56,6 @@ class LoginContainer extends React.Component {
             large
             icon={{name: 'sign-in', type: 'font-awesome'}}
           />
-          {/* <View style={styles.socialButtonsContainer}>
-                    <Button
-                        onPress={this._authenticateWithGithubAsync}
-                        backgroundColor={'#346abb'}
-                        borderRadius={3}
-                        large
-                        icon={{ name: 'github', type: 'font-awesome' }}
-                        title='GITHUB' />
-                </View> */}
           <View style={{paddingTop: 30}}>
             <Button
               title='CREATE ACCOUNT'

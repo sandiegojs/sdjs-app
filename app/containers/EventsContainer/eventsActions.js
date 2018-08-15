@@ -154,7 +154,6 @@ export function removeRSVPFromEvent(rsvpEventId, token) {
         axios
             .delete('https://sdjs-app.now.sh/api/rsvps/' + rsvpEventId, {header: {Authorization: token}})
             .then(response => {
-                console.log('deleted data rsvp', response.data)
                 return response.data;
             })
             .catch(error => {

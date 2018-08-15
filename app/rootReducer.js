@@ -30,7 +30,6 @@ const rootReducer = combineReducers({
   profileData: ProfileReducer,
   donateData: DonateReducer,
   questionnaireData: QuestionnaireReducer
-  // store: PasswordReducer
 });
 
 export default rootReducer;
