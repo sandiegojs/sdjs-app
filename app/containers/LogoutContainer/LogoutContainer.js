@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Alert, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { Button } from "react-native-elements";
 import { connect } from 'react-redux';
 import { Constants } from 'expo';
-import {updateEmailInput, updatePasswordInput, submitLogout} from './LogoutActions';
+import { submitLogout } from './LogoutActions';
 
 class LogoutContainer extends React.Component {
   constructor(props){
@@ -11,7 +11,7 @@ class LogoutContainer extends React.Component {
     this._logout = this._logout.bind(this);
   }
 
-_logout(){
+  logout(){
   const { navigate } = this.props.navigation;
   const { dispatch } = this.props;
   dispatch(submitLogout());
@@ -26,8 +26,7 @@ _logout(){
         <View style={styles.buttonContainer}>
           <Button
             backgroundColor={'#346abb'}
-            onPress={
-            this._logout}
+            onPress={this.logout}
             title="Yes"
             large
           />
