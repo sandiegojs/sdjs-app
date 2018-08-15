@@ -33,11 +33,13 @@
     "company": {
       "type": "string"
     },
-	"answers": {
-	  "question1": "string",
-	  "question2": "string",
-	  "question3": "string"
-	}
+    "answers": {
+      "type": {
+        "question1": "string",
+        "question2": "string",
+        "question3": "string"
+      }
+    }
   },
   "validations": [],
   "relations": {
@@ -56,5 +58,20 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "emailAll": {
+      "accepts": [
+        {"arg": "req", "type": "object", "http": { "source": "req" }},
+        {"arg": "res", "type": "object", "http": { "source": "res" }}
+      ],
+      "returns": [],
+      "description": "test",
+      "http": [
+        {
+          "path": "/email-all",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }
