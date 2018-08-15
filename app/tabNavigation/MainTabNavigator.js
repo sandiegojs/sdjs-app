@@ -1,13 +1,7 @@
 import React from 'react';
-import { Platform, Image, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-// import Colors from '../constants/Colors';
 import EventsScreen from './screens/EventsScreen';
-
-// 1. get /event (filter by meetup_id)
-    // IF TRUE - get event id, post to /attendees = {userId, eventId}
-    // ELSE - post /user/{id}/events = { "event_title": "string", "meetup_id": "string", "url": "string", "location": {} }
-
 
 export default class RootNavigator extends React.Component {
   
@@ -34,7 +28,6 @@ export default class RootNavigator extends React.Component {
         navigationOptions: ({ navigation }) => ({
           tabBarIcon: ({ focused }) => {
             const { routeName } = navigation.state;
-            let iconName;
             switch (routeName) {
               case 'Events':
               return(
@@ -114,5 +107,4 @@ export default class RootNavigator extends React.Component {
   </View>
     )
    }
- 
  }

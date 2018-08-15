@@ -14,13 +14,6 @@ export function updatePasswordInput(text) {
     }
 }
 
-export function loadingScreen() {
-    return {
-        type: 'UPDATE_LOADING_SCREEN',
-        payload: true
-    }
-}
-
 export function submitLogin(credentials, navigate) {
 	const {email, password} = credentials;
 	const ttl = 86400;

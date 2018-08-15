@@ -1,14 +1,12 @@
 import React from 'react';
-import {TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {ScrollView, Keyboard, View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
-import {updateEmailInput, updatePasswordInput, submitLogin, loadingScreen} from './loginActions';
+import {updateEmailInput, updatePasswordInput, submitLogin} from './loginActions';
 
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
@@ -31,50 +29,68 @@ class LoginContainer extends React.Component {
   }
 
   render() {
-    const {loadingScreen, email} = this.props;
+    const {email} = this.props;
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>EMAIL</FormLabel>
             <FormInput
+              containerStyle={{
+                margin: 5,
+                borderBottomColor: 'black'
+              }}
               defaultValue={email}
               onChangeText={this.handleEmailInput}
             />
             <FormLabel>PASSWORD</FormLabel>
             <FormInput
+              containerStyle={{
+                margin: 5,
+                borderBottomColor: 'black'
+              }}
               secureTextEntry={true}
-              onChangeText={this.handlePasswordInput
-              }/>
+              onChangeText={this.handlePasswordInput}
+            />
           </View>
           <Button
             title='LOG IN'
-            style={styles.button}
-            borderRadius={3}
-            backgroundColor={'#346abb'}
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 7,
+              marginBottom: 25,
+              width: 321
+            }}
             onPress={this.handleLoginSubmission}
             large
             icon={{name: 'sign-in', type: 'font-awesome'}}
           />
-          <View style={{paddingTop: 30}}>
-            <Button
-              title='CREATE ACCOUNT'
-              style={styles.button}
-              borderRadius={3}
-              backgroundColor={'#346abb'}
-              onPress={() => this.props.navigation.navigate('Signup')}
-            />
-          </View>
-          <View>
-            <Button
-              title='FORGOT PASSWORD?'
-              style={styles.button}
-              backgroundColor={'#346abb'}
-              onPress={() => this.props.navigation.navigate('Password')}
-            />
-          </View>
+          <Button
+            title='CREATE ACCOUNT'
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 21,
+              marginBottom: 11,
+              width: 300,
+              height: 54
+            }}
+            onPress={() => this.props.navigation.navigate('Signup')}
+          />
+          <Button
+            title='FORGOT PASSWORD?'
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 15,
+              width: 300,
+              height: 54
+            }}
+            onPress={() => this.props.navigation.navigate('Password')}
+          />
         </View>
-      </TouchableWithoutFeedback>
+      </ScrollView>
     )
   }
 }
@@ -83,39 +99,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#DCDCDC',
-    alignItems: 'center',
-    paddingTop: 30,
-    paddingBottom: 300
-  },
-  button: {
-    borderRadius: 8,
-    marginTop: 30,
-    marginBottom: 20,
-    width: 320
-  },
-  socialButtonsContainer: {
-    flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
-    width: 350,
-    paddingTop: 8,
-    paddingHorizontal: 25
+    alignItems: 'center',
+    padding: 30
   },
   formContainer: {
     paddingBottom: 20,
-    width: 350
-  },
-  formMessage: {
-    height: 200,
-    width: 200
+    width: 350,
+    margin: 15
   }
 });
 
 function mapStoreToProps(store) {
   return {
     emailInput: store.userData.emailInput,
-    passwordInput: store.userData.passwordInput,
-    loadingScreen: store.userData.loadingScreen,
+    passwordInput: store.userData.passwordInput
   };
 }
 

@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "dotenv": "^6.0.0",
     "expo": "^25.1.2",
     "loopback-connector-sendgrid": "^2.2.4",
     "moment": "^2.22.2",
