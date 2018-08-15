@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-
   app.post('/signup', (req, res) => {
 
     let baseUrl = app.get('url').replace(/\/$/, '');
@@ -128,14 +127,13 @@ module.exports = function (app) {
                 .catch(error => console.log("error on post attendee", error))
             })
             .catch(error => console.log("error on post event/attendee", error))
-          //else create attendee
         } else {
           const rsvpObj = {
             'eventId': response.data[0].id,
             'userId': userId,
             'meetup_id': response.data[0].meetup_id
-          };
-          axios
+        };
+        axios
             .post(baseUrl + '/api/rsvps', rsvpObj)
             .then(response => {
               res.send(response.data.id)
@@ -143,8 +141,8 @@ module.exports = function (app) {
             .catch(error => console.log('error on post attendee', error));
         }
         return response.data;
-      })
-      .catch(e => res.send(e.message))
+    })
+    .catch(e => res.send(e.message))
   });
 
   app.get('/reset-password/', function(req, res, next) {

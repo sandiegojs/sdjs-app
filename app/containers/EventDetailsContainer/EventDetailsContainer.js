@@ -97,7 +97,7 @@ class EventDetailsContainer extends React.Component {
     };
 
     handleButtons() {
-        const { eventsData, checkedIn, eventDetails } = this.props;
+        const {eventsData, checkedIn, eventDetails} = this.props;
 
         function addZero(i) {
             if (i < 10) {

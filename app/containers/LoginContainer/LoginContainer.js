@@ -1,9 +1,9 @@
 import React from 'react';
-import {TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {ScrollView, Keyboard, View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
-import {updateEmailInput, updatePasswordInput, submitLogin, loadingScreen} from './loginActions';
+import {updateEmailInput, updatePasswordInput, submitLogin} from './loginActions';
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class LoginContainer extends React.Component {
     const {email} = this.props;
     return (
       <ScrollView onPress={Keyboard.dismiss} accessible={false}>
-                      <View style={styles.container}>
+        <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>EMAIL</FormLabel>
             <FormInput

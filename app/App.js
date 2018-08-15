@@ -125,7 +125,7 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Logout':
+                  case 'Logout':
                     return (
                       <Image
                         source={require('./assets/images/logout.png')}

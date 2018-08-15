@@ -31,7 +31,6 @@ class SDJSContainer extends React.Component {
         }}
         source={{uri: 'https://cdn-images-1.medium.com/max/653/1*wMZnVAEei1xbY1v6sAbYxQ.png'}}
       >
-
         <Button
           large
           buttonStyle={{
@@ -47,16 +46,6 @@ class SDJSContainer extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#DCDCDC',
-    alignItems: 'center',
-    padding: 30
-  },
-});
 
 function mapStoreToProps(store) {
   return {};
