@@ -1,11 +1,10 @@
-import { bindActionCreators } from 'redux';
 import axios from 'axios';
 
 export function question1Entry(text) {
 
     return {
         type: "QUESTION_1_ENTRY",
-        patload: text
+        payload: text
     }
 }
 
@@ -25,12 +24,13 @@ export function question3Entry(text) {
     }
 }
 
-export function allAnswers(answers, id) {
-    
+export function allAnswers(answers, id, token) {
+
     return {
         type: 'QUESTIONNAIRE_ENTRY',
         payload: axios
-            .patch('https://sdjs-app.now.sh/api/users/' + id, answers)
+            .patch('https://sdjs-app.now.sh/api/users/' + id, answers, {headers: {Authorization: token}})
             .then(response => response.data)
+            .catch(err=>console.log(err))
     }
 }

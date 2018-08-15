@@ -12,13 +12,13 @@ import {
     addAttendeeToEvent,
     removeAttendee,
 } from '../EventsContainer/eventsActions';
-import { 
-        getDayOfTheWeek, 
-        getMonthString, 
-        getMonthAbr, 
-        getDateString, 
-        getYearString, 
-        standardTime 
+import {
+        getDayOfTheWeek,
+        getMonthString,
+        getMonthAbr,
+        getDateString,
+        getYearString,
+        standardTime
     } from '../EventsContainer/eventsDateAndTime';
 import Hyperlink from 'react-native-hyperlink';
 const moment = require('moment-timezone');
@@ -34,7 +34,7 @@ class EventDetailsContainer extends React.Component {
 
     _getLocationAsync = async () => {
 
-        const { dispatch, eventsData, user, id } = this.props;
+        const { dispatch, eventsData, user } = this.props;
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
         if (status !== 'granted') {
@@ -69,24 +69,24 @@ class EventDetailsContainer extends React.Component {
                     }], {
                         cancelable: false
                     }
-                ) 
+                )
             } else {
                 eventObj = {
-                    "event_title": eventsData[0].name,
-                    "meetup_id": eventsData[0].id,
-                    "url": eventsData[0].group.urlname + ".org",
-                    "location": startPoint
-                }
+                    event_title: eventsData[0].name,
+                    meetup_id: eventsData[0].id,
+                    url: eventsData[0].group.urlname + ".org",
+                    location: startPoint
+                };
                 dispatch(checkedInTrue(true));
-                dispatch(addAttendeeToEvent(eventObj, id));
+                dispatch(addAttendeeToEvent(eventObj, user.id));
             }
         }
     };
 
     handleUnCheckIn() {
-        const { dispatch, attendeeId } = this.props;
-        dispatch(checkedInFalse(false));
-        dispatch(removeAttendee(attendeeId));
+        const { dispatch, attendeeId, user } = this.props;
+        dispatch(checkedInFalse(false))
+            .then(dispatch(removeAttendee(attendeeId, user.token)));
     }
 
     _handlePressButtonAsync = async () => {
@@ -120,7 +120,7 @@ class EventDetailsContainer extends React.Component {
         var hoursPriorToEvent = eventTime - 100;
         var hoursAfterEventStart = eventTime + 400;
 
-        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate == nextEvent[0].local_date) {
+        if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate === nextEvent[0].local_date) {
             if (checkedIn) {
                 nextEventButton = <Button
                     large
@@ -147,7 +147,7 @@ class EventDetailsContainer extends React.Component {
             }
         }
 
-        if (currentTime < hoursPriorToEvent || todaysDate != nextEvent[0].local_date) {
+        if (currentTime < hoursPriorToEvent || todaysDate !== nextEvent[0].local_date) {
 
             nextEventButton = <Button
                 large
@@ -160,7 +160,7 @@ class EventDetailsContainer extends React.Component {
                 onPress={this._handlePressButtonAsync}
             />
         }
-        if (currentTime > hoursAfterEventStart && todaysDate == nextEvent[0].local_date) {
+        if (currentTime > hoursAfterEventStart && todaysDate === nextEvent[0].local_date) {
             nextEventButton = null;
         }
         return nextEventButton;
@@ -318,8 +318,7 @@ function mapStoreToProps(store) {
     return {
         eventDetails: store.eventsData.selectedEvent,
         eventsData: store.eventsData.eventsData,
-        id: store.signupData.id,
-        user: store.signupData.user,
+        user: store.userData.user,
         locationError: store.eventsData.locationError,
         checkedIn: store.eventsData.checkedIn,
         attendeeId: store.eventsData.attendeeId,
@@ -382,6 +381,6 @@ const styles = StyleSheet.create({
     locationErrorMessage: {
         textAlign: 'center'
     },
-})
+});
 
 export default connect(mapStoreToProps)(EventDetailsContainer);

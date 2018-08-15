@@ -15,13 +15,13 @@ import {
 import { FlatList, StyleSheet, View, Text, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from "react-native-elements";
-import { 
-        getDayOfTheWeek, 
-        getMonthString, 
-        getMonthAbr, 
-        getDateString, 
-        getYearString, 
-        standardTime 
+import {
+        getDayOfTheWeek,
+        getMonthString,
+        getMonthAbr,
+        getDateString,
+        getYearString,
+        standardTime
       } from './eventsDateAndTime';
 const moment = require('moment-timezone');
 
@@ -35,9 +35,8 @@ class EventsContainer extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch, user } = this.props
+    const { dispatch } = this.props;
     dispatch(updateEventsData());
-    // dispatch(profileQuery(user.id)); this line uncommented throws error but may be needed when profile returns
   }
 
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
@@ -50,7 +49,7 @@ class EventsContainer extends React.Component {
 
   _getLocationAsync = async () => {
 
-    const { dispatch, eventsData, user, id } = this.props;
+    const { dispatch, eventsData, user } = this.props;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== 'granted') {
@@ -64,12 +63,12 @@ class EventsContainer extends React.Component {
           latitude: location.coords.latitude.toFixed(6),
           longitude: location.coords.longitude.toFixed(6)
         }
-      ]
+      ];
 
       var startPoint = { //venue lat lon
         latitude: eventsData[0].venue.lat,
         longitude: eventsData[0].venue.lon
-      }
+      };
 
       var maxDistanceInKM = 0.5; // 500m distance
       // startPoint - center of perimeter
@@ -85,7 +84,7 @@ class EventsContainer extends React.Component {
           }], {
               cancelable: false
           }
-       ) 
+        )
       } else {
         eventObj = {
           "event_title": eventsData[0].name,
@@ -94,23 +93,16 @@ class EventsContainer extends React.Component {
           "location": startPoint
         };
         dispatch(checkedInTrue(true));
-        dispatch(addAttendeeToEvent(eventObj, id));
+        dispatch(addAttendeeToEvent(eventObj, user.id));
       }
     }
   };
 
   handleUnCheckIn() {
-    const { dispatch, attendeeId } = this.props;
+    const { dispatch, attendeeId, user } = this.props;
     dispatch(checkedInFalse(false));
-    dispatch(removeAttendee(attendeeId));
+    dispatch(removeAttendee(attendeeId, user.token));
   }
-
-  //Queries DB with user ID and sends to profile page
-  // profilePageHandler() {
-  //   const { user, dispatch } = this.props;
-  //   const { navigate } = this.props.navigation;
-  //   dispatch(profileQuery(user.id))
-  // }
 
   _handlePressButtonAsync = async () => {
     const { eventsData } = this.props;
@@ -153,7 +145,6 @@ class EventsContainer extends React.Component {
                             onPress={this.handleUnCheckIn}
                           />
       }
-      //if(!checkedInStatus) is false
       if (!checkedIn) {
         nextEventButton = <Button
                             large
@@ -187,7 +178,7 @@ class EventsContainer extends React.Component {
   }
 
   render() {
-    const { eventsData, locationError, user, dispatch } = this.props;
+    const { eventsData, locationError } = this.props;
     let locationErrorMessage = null;
     if (!!locationError) {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
@@ -233,9 +224,6 @@ const styles = StyleSheet.create({
   locationErrorMessage: {
     textAlign: 'center'
   },
-  checkInButton: {
-    //marginTop: 25
-  },
   mainContainer: {
     paddingTop: 15
   },
@@ -248,11 +236,7 @@ function mapStoreToProps(store) {
   return {
     eventDetails: store.eventsData.selectedEvent,
     eventsData: store.eventsData.eventsData,
-    id: store.signupData.id,
-    user: store.signupData.user,
-    first_name: store.signupData.first_name,
-    last_name: store.signupData.last_name,
-    email: store.signupData.email,
+    user: store.userData.user,
     locationError: store.eventsData.locationError,
     checkedIn: store.eventsData.checkedIn,
     attendeeId: store.eventsData.attendeeId,

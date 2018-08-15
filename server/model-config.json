@@ -13,6 +13,10 @@
       "./mixins"
     ]
   },
+  "Email": {
+    "dataSource": "sendgrid",
+    "public": false
+  },
   "event": {
     "dataSource": "MongoDB",
     "public": true
@@ -33,5 +37,9 @@
     "dataSource": "MongoDB",
     "public": false,
     "strict": true
+  },
+  "ACL": {
+    "dataSource": "MongoDB",
+    "public": false
   }
 }

@@ -5,7 +5,7 @@ import LogoutContainer from '../containers/LogoutContainer/LogoutContainer';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
-    title: 'Log Out',
+    title: 'Logout',
     headerLeft: null,
   };
   

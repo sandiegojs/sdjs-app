@@ -9,11 +9,11 @@
     "username": {
       "type": "string"
     },
-    "first_name": {
+    "firstName": {
       "type": "string",
       "required": true
     },
-    "last_name": {
+    "lastName": {
       "type": "string",
       "required": true
     },
@@ -33,18 +33,12 @@
     "company": {
       "type": "string"
     },
-    "tokens": {
-      "type": [
-        "string"
-      ]
-    },
-    "photo": {
-      "type": "string"
-    },
     "answers": {
-      "question1": "string",
-      "question2": "string",
-      "question3": "string"
+      "type": {
+        "question1": "string",
+        "question2": "string",
+        "question3": "string"
+      }
     }
   },
   "validations": [],
@@ -56,6 +50,28 @@
       "through": "attendee"
     }
   },
-  "acls": [],
-  "methods": {}
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {
+    "emailAll": {
+      "accepts": [
+        {"arg": "req", "type": "object", "http": { "source": "req" }},
+        {"arg": "res", "type": "object", "http": { "source": "res" }}
+      ],
+      "returns": [],
+      "description": "test",
+      "http": [
+        {
+          "path": "/email-all",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

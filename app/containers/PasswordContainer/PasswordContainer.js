@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
 
@@ -8,40 +8,35 @@ class PasswordContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleEmailForPassword = this.handleEmailForPassword.bind(this);
-        this.handleResetPassword = this.handleResetPassword.bind(this);
+        this.updateEmailInput = this.updateEmailInput.bind(this);
+        this.submitResetPasswordRequest = this.submitResetPasswordRequest.bind(this);
     }
 
-    handleEmailForPassword(text) {
+    updateEmailInput(text) {
         const { dispatch } = this.props;
         dispatch(emailResetPasswordEntry(text));
     }
 
-    handleResetPassword(userInfo) {
+    submitResetPasswordRequest() {
         //logic needs fixing
-        const { dispatch, userEmail } = this.props;
-        if (userInfo == '')
-            Alert.alert(
-                'An e-mail has been sent',
-                'Please check your e-mail', [{
-                    text: 'OK'
-                }]
-            )
-        dispatch(resetPassword(userInfo));
+        const { dispatch, emailInput } = this.props;
+        const { navigate } = this.props.navigation;
+        dispatch(resetPassword(emailInput, navigate));
     }
 
     render() {
+        const { emailInput } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>Enter your E-mail</FormLabel>
-                    <FormInput onChangeText={this.handleEmailForPassword} />
+                    <FormInput defaultValue={emailInput} onChangeText={this.updateEmailInput} />
                 </View>
                 <Button
                     title='RESET PASSWORD'
                     style={styles.button}
                     backgroundColor={'#346abb'}
-                    onPress={this.handleResetPassword}
+                    onPress={this.submitResetPasswordRequest}
                 />
             </View>
         );
@@ -65,11 +60,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 320
     }
-})
+});
 
 function mapStoreToProps(store) {
     return {
-        userEmail: store.signupData.userEmail
+      emailInput: store.passwordData.emailInput
     };
 }
 
