@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ImageBackground, Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from "react-native-elements";
 import { Constants, WebBrowser } from 'expo';
-import FitImage from 'react-native-fit-image';
 
 class ShoppingContainer extends React.Component {
     constructor(props) {
@@ -13,27 +12,25 @@ class ShoppingContainer extends React.Component {
         };
     }
 
-    _handlePressButtonAsync = async () => {
+    handlePressButtonAsync = async () => {
         let result = await WebBrowser.openBrowserAsync('https://teespring.com/sdjs-winter-2017#pid=212&cid=5832&sid=front');
         this.setState({ result });
     };
 
-    _handlePressButtonAsyncForCap = async () => {
+    handlePressButtonAsyncForCap = async () => {
         let result = await WebBrowser.openBrowserAsync('https://teespring.com/sdjs-winter-2017#pid=522&cid=101870&sid=front');
         this.setState({ result });
     };
-    _handlePressButtonAsyncForLightBlue = async () => {
+    handlePressButtonAsyncForLightBlue = async () => {
         let result = await WebBrowser.openBrowserAsync('https://teespring.com/shop/sandiego-js?tsmac=recently_viewed&tsmic=recently_viewed#pid=369&cid=6524&sid=front');
         this.setState({ result });
     };
-    _handlePressButtonAsyncForBlack = async () => {
+    handlePressButtonAsyncForBlack = async () => {
         let result = await WebBrowser.openBrowserAsync('https://teespring.com/shop/sdjs-sun-on-black?tsmac=recently_viewed&tsmic=recently_viewed#pid=211&cid=5288&sid=front');
         this.setState({ result });
     };
     render() {
-
         return (
-
             <ImageBackground
                 style={{
                     flex: 1,
@@ -60,7 +57,7 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
                             title="ORDER"
-                            onPress={this._handlePressButtonAsync}
+                            onPress={this.handlePressButtonAsync}
                         />
                     </View>
                     <View style={styles.Item}>
@@ -80,7 +77,7 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
                             title="ORDER"
-                            onPress={this._handlePressButtonAsyncForCap}
+                            onPress={this.handlePressButtonAsyncForCap}
                         />
                     </View>
                     <View style={styles.Item}>
@@ -99,7 +96,7 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
                             title="ORDER"
-                            onPress={this._handlePressButtonAsyncForLightBlue}
+                            onPress={this.handlePressButtonAsyncForLightBlue}
                         />
                     </View>
                     <View style={styles.Item}>
@@ -118,7 +115,7 @@ class ShoppingContainer extends React.Component {
                             borderRadius={3}
                             style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
                             title="ORDER"
-                            onPress={this._handlePressButtonAsyncForBlack}
+                            onPress={this.handlePressButtonAsyncForBlack}
                         />
                     </View>
                 </View>
@@ -143,9 +140,7 @@ const styles = StyleSheet.create({
     }
 })
 function mapStoreToProps(store) {
-    return {
-
-    };
+    return {};
 }
 
 export default connect(mapStoreToProps)(ShoppingContainer);
