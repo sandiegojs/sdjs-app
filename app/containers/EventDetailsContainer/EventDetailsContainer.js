@@ -85,8 +85,8 @@ class EventDetailsContainer extends React.Component {
 
     handleUnCheckIn() {
         const { dispatch, attendeeId, user } = this.props;
-        dispatch(checkedInFalse(false));
-        dispatch(removeAttendee(attendeeId, user.token));
+        dispatch(checkedInFalse(false))
+            .then(dispatch(removeAttendee(attendeeId, user.token)));
     }
 
     _handlePressButtonAsync = async () => {

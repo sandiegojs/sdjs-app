@@ -3,7 +3,6 @@ import {TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
-import authenticateWithGithubAsync from '../SignupContainer/authenticateWithGithubAsync';
 import {updateEmailInput, updatePasswordInput, submitLogin, loadingScreen} from './loginActions';
 
 class LoginContainer extends React.Component {
