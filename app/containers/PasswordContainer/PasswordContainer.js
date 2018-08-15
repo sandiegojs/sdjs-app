@@ -8,19 +8,20 @@ class PasswordContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleEmailForPassword = this.handleEmailForPassword.bind(this);
-        this.handleResetPassword = this.handleResetPassword.bind(this);
+        this.updateEmailInput = this.updateEmailInput.bind(this);
+        this.submitResetPasswordRequest = this.submitResetPasswordRequest.bind(this);
     }
 
-    handleEmailForPassword(text) {
+    updateEmailInput(text) {
         const { dispatch } = this.props;
         dispatch(emailResetPasswordEntry(text));
     }
 
-    handleResetPassword() {
+    submitResetPasswordRequest() {
         //logic needs fixing
         const { dispatch, emailInput } = this.props;
-        dispatch(resetPassword(emailInput));
+        const { navigate } = this.props.navigation;
+        dispatch(resetPassword(emailInput, navigate));
     }
 
     render() {
@@ -29,13 +30,13 @@ class PasswordContainer extends React.Component {
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <FormLabel>Enter your E-mail</FormLabel>
-                    <FormInput defaultValue={userEmail} onChangeText={this.handleEmailForPassword} />
+                    <FormInput defaultValue={userEmail} onChangeText={this.updateEmailInput} />
                 </View>
                 <Button
                     title='RESET PASSWORD'
                     style={styles.button}
                     backgroundColor={'#346abb'}
-                    onPress={this.handleResetPassword}
+                    onPress={this.submitResetPasswordRequest}
                 />
             </View>
         );
