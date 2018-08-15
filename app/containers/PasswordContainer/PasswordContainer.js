@@ -19,9 +19,8 @@ class PasswordContainer extends React.Component {
 
     handleResetPassword() {
         //logic needs fixing
-        const { dispatch } = this.props;
-        const { userEmail } = this.props;
-        dispatch(resetPassword(userEmail));
+        const { dispatch, emailInput } = this.props;
+        dispatch(resetPassword(emailInput));
     }
 
     render() {
