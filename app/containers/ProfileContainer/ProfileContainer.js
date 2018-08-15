@@ -1,6 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+<<<<<<< HEAD
 import {StyleSheet, View, ScrollView, Keyboard} from 'react-native';
+=======
+import {StyleSheet, View, Scrollview, Keyboard} from 'react-native';
+>>>>>>> adds css and removes unneeded code
 import {FormLabel, FormInput, Button} from "react-native-elements";
 import * as actions from './profileActions'
 
@@ -61,6 +65,7 @@ class ProfileContainer extends React.Component {
   render() {
     const {firstName, lastName, email, bio, company, url} = this.props.profileData;
     return (
+<<<<<<< HEAD
         <ScrollView onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <FormLabel>First Name</FormLabel>
@@ -102,6 +107,50 @@ class ProfileContainer extends React.Component {
             title="UPDATE"/>
         </View>
         </ScrollView>
+=======
+        <Scrollview onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.container}>
+            <FormLabel>First Name</FormLabel>
+            <FormInput
+              defaultValue={firstName}
+              onChangeText={this.handleFirstNameUpdate}
+            />
+            <FormLabel>Last Name</FormLabel>
+            <FormInput
+              defaultValue={lastName}
+              onChangeText={this.handleLastNameUpdate}
+            />
+            <FormLabel>Email</FormLabel>
+            <FormInput
+              defaultValue={email}
+              onChangeText={this.handleEmailUpdate}
+            />
+            <FormLabel>Bio</FormLabel>
+            <FormInput
+              defaultValue={bio}
+              onChangeText={this.handleBioUpdate}
+            />
+            <FormLabel>Company</FormLabel>
+            <FormInput
+              defaultValue={company}
+              onChangeText={this.handleCompanyUpdate}
+            />
+            <FormLabel>Website</FormLabel>
+            <FormInput
+              defaultValue={url}
+              onChangeText={this.handleUrlUpdate}
+            />
+            <Button
+              large
+              backgroundColor='#346abb'
+              borderRadius={3}
+              style={styles.updateButton}
+              onPress={this.handleProfileUpdate}
+              title="UPDATE"
+            />
+          </View>
+        </Scrollview>
+>>>>>>> adds css and removes unneeded code
     )
   }
 }

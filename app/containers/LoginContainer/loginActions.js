@@ -14,13 +14,6 @@ export function updatePasswordInput(text) {
     }
 }
 
-export function loadingScreen() {
-    return {
-        type: 'UPDATE_LOADING_SCREEN',
-        payload: true
-    }
-}
-
 export function submitLogin(credentials, navigate) {
 	const {email, password} = credentials;
 	const ttl = 86400;
@@ -28,7 +21,7 @@ export function submitLogin(credentials, navigate) {
 	return {
 		type: 'SUBMIT_LOGIN',
 		payload: axios
-			.post('https://19b63d74.ngrok.io/api/users/login', {email, password, ttl})
+			.post('https://7f29f798.ngrok.io/api/users/login', {email, password, ttl})
 			.then(response => {
 				const {id: token, userId: id} = response.data;
 				navigate('Events');

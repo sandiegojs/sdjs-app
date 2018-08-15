@@ -1,5 +1,4 @@
-import { AuthSession, Constants } from 'expo';
-import qs from 'qs';
+import {AuthSession} from 'expo';
 import credentials from '../../credentials';
 
 const CLIENT_ID = credentials.github.clientId;

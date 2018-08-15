@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { connect } from 'react-redux';
-import { StyleSheet, View, Alert } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
-import authenticateWithGithubAsync from './authenticateWithGithubAsync';
+import {TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {connect} from 'react-redux';
+import {StyleSheet, View, Alert} from 'react-native';
+import {FormLabel, FormInput, Button} from 'react-native-elements';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import {
     updateFirstNameInput,
     updateLastNameInput,
@@ -25,28 +25,28 @@ class SignupContainer extends React.Component {
     }
 
     handleFirstNameInput(text) {
-        const { dispatch } = this.props;
+        const {dispatch} = this.props;
         dispatch(updateFirstNameInput(text));
     }
 
     handleLastNameInput(text) {
-        const { dispatch } = this.props;
+        const {dispatch} = this.props;
         dispatch(updateLastNameInput(text));
     }
 
     handleEmailInput(text) {
-        const { dispatch } = this.props;
+        const {dispatch} = this.props;
         dispatch(updateEmailInput(text));
     }
 
     handlePasswordInput(text) {
-        const { dispatch } = this.props;
+        const {dispatch} = this.props;
         dispatch(updatePasswordInput(text));
     }
 
     handleSignUpSubmission() {
-        const { dispatch, firstNameInput, lastNameInput, emailInput, passwordInput } = this.props;
-        const { navigate } = this.props.navigation;
+        const {dispatch, firstNameInput, lastNameInput, emailInput, passwordInput} = this.props;
+        const {navigate} = this.props.navigation;
 
         if (firstNameInput === '' || lastNameInput === '' || emailInput === '' || passwordInput === '') {
             Alert.alert(
@@ -73,26 +73,56 @@ class SignupContainer extends React.Component {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
                     <View style={styles.formContainer}>
-                        <FormLabel>FIRST NAME </FormLabel>
-                        <FormInput onChangeText={this.handleFirstNameInput} />
+                        <FormLabel>FIRST NAME</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleFirstNameInput}
+                        />
                         <FormLabel>LAST NAME</FormLabel>
-                        <FormInput onChangeText={this.handleLastNameInput} />
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleLastNameInput}
+                        />
                         <FormLabel>EMAIL</FormLabel>
-                        <FormInput onChangeText={this.handleEmailInput} defaultValue={this.props.emailInput} />
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleEmailInput}
+                            defaultValue={this.props.emailInput}
+                        />
                         <FormLabel>PASSWORD</FormLabel>
-                        <FormInput onChangeText={this.handlePasswordInput} secureTextEntry={true} />
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handlePasswordInput}
+                            secureTextEntry={true}
+                        />
                     </View>
-                    <View>
-                    </View>
-                    <Button style={styles.button}
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 311
+                        }}
                         onPress={this.handleSignUpSubmission}
-                        backgroundColor={'#346abb'}
-                        borderRadius={3}
                         large
-                        icon={{ name: 'sign-in', type: 'font-awesome' }}
-                        title='SIGN UP' />
+                        icon={{name: 'sign-in', type: 'font-awesome'}}
+                        title='SIGN UP'
+                    />
                 </View>
-                </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
         )
     }
 }
@@ -100,29 +130,15 @@ class SignupContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#DCDCDC',
         alignItems: 'center',
-        paddingTop: 30,
-        paddingBottom: 300
-    },
-    button: {
-        marginTop: 55,
-        marginBottom: 20,
-        width: 320
-    },
-    socialButtonsContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: 350,
-        paddingTop: 8,
-        paddingHorizontal: 25
+        padding: 30
     },
     formContainer: {
-        width: 350
-        // padding: 50
-    },
-    switchToLogin: {
+        paddingBottom: 20,
+        width: 350,
+        margin: 15
     }
 });
 

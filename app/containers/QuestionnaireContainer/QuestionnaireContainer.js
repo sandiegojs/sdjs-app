@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, View, Alert } from 'react-native';
-import { FormLabel, Button, FormInput } from 'react-native-elements';
-import { question1Entry, question2Entry, question3Entry, allAnswers} from './QuestionnaireActions';
+import {connect} from 'react-redux';
+import {StyleSheet, View, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView} from 'react-native';
+import {FormLabel, Button, FormInput} from 'react-native-elements';
+import {question1Entry, question2Entry, question3Entry, allAnswers} from './QuestionnaireActions';
 
 class QuestionnaireContainer extends React.Component {
     constructor(props) {
@@ -73,39 +73,64 @@ class QuestionnaireContainer extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View>
-                    <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
-                    <FormInput onChangeText={this.handleQuestion1Input} />
-                    <FormLabel>How did you hear about SDJS?</FormLabel>
-                    <FormInput onChangeText={this.handleQuestion2Input} />
-                    <FormLabel>What would you like to learn?</FormLabel>
-                    <FormInput onChangeText={this.handleQuestion3Input} />
-                </View>
-                <View style={{margin:10}}>
-                <View style={styles.buttons}>
-                    <Button
-                        large
-                        backgroundColor='#346abb'
-                        style={styles.updateButton}
-                        onPress={this.handleProfileUpdate}
-                        onPress={this.handleFormSubmit}
-                        title="Submit"
-                    />
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                    <View style={styles.container}>
+                        <View style={styles.formContainer}>
+                            <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
+                            <FormInput
+                                containerStyle={{
+                                    margin: 5,
+                                    borderBottomColor: 'black'
+                                }}
+                                onChangeText={this.handleQuestion1Input}
+                            />
+                            <FormLabel>How did you hear about SDJS?</FormLabel>
+                            <FormInput
+                                containerStyle={{
+                                    margin: 5,
+                                    borderBottomColor: 'black'
+                                }}
+                                onChangeText={this.handleQuestion2Input}
+                            />
+                            <FormLabel>What would you like to learn?</FormLabel>
+                            <FormInput
+                                containerStyle={{
+                                    margin: 5,
+                                    borderBottomColor: 'black'
+                                }}
+                                onChangeText={this.handleQuestion3Input}
+                            />
+                        </View>
+                        <Button
+                            large
+                            buttonStyle={{
+                                backgroundColor: '#346abb',
+                                borderRadius: 7,
+                                marginTop: 7,
+                                marginBottom: 25,
+                                width: 321
+                            }}
+                            onPress={this.handleProfileUpdate}
+                            onPress={this.handleFormSubmit}
+                            title="Submit"
+                        />
+                        <Button
+                            large
+                            buttonStyle={{
+                                backgroundColor: '#346abb',
+                                borderRadius: 7,
+                                marginTop: 7,
+                                marginBottom: 25,
+                                width: 321
+                            }}
+                            onPress={this.handleProfileUpdate}
+                            onPress={this.handleSkipButton}
+                            title="Skip"
+                        />
                     </View>
-                    <View style={styles.buttons}>
-                    <Button
-                        large
-                        backgroundColor='#346abb'
-                        borderRadius={3}
-                        style={styles.updateButton}
-                        onPress={this.handleProfileUpdate}
-                        onPress={this.handleSkipButton}
-                        title="Skip"
-                    />
-                    </View>
-                </View>
-            </View>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -113,11 +138,15 @@ class QuestionnaireContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
-        paddingBottom: 300
+        justifyContent: 'center',
+        backgroundColor: '#DCDCDC',
+        alignItems: 'center',
+        padding: 30
     },
-    buttons: {
-    marginVertical: 10
+    formContainer: {
+        paddingBottom: 20,
+        width: 350,
+        margin: 15
     }
 });
 

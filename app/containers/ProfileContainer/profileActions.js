@@ -4,7 +4,7 @@ export function profileInit(id, token) {
   return {
     type: 'PROFILE_INIT',
     payload: axios
-      .get('https://19b63d74.ngrok.io/api/users/' + id, {headers: {Authorization: token}})
+      .get('https://7f29f798.ngrok.io/api/users/' + id, {headers: {Authorization: token}})
       .then(r => r.data)
   }
 }
@@ -13,7 +13,7 @@ export function profileUpdate(newProfileData, id, token) {
   return {
     type: 'PROFILE_UPDATE',
     payload: axios
-      .patch('https://19b63d74.ngrok.io/api/users/' + id, newProfileData, {headers: {Authorization: token}})
+      .patch('https://7f29f798.ngrok.io/api/users/' + id, newProfileData, {headers: {Authorization: token}})
       .then(r => r.data)
   }
 }
