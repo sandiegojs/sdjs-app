@@ -56,7 +56,7 @@ class PasswordContainer extends React.Component {
                         <TouchableOpacity 
                          onPress={() => this.props.navigation.navigate('Login')}
                         >
-                        <Text style={styles.textButton}>{'<<Back'}</Text>
+                        <Text style={styles.textButton}>{'Return to Login'}</Text>
                         </TouchableOpacity>
                     </View>
                     </View>
@@ -81,12 +81,12 @@ const styles = StyleSheet.create({
     loginTextCont:{
         alignItems:'center',
         justifyContent:'flex-end',
-        marginVertical: 16,
+        marginVertical: 25,
         flexDirection: 'row',
     },
     textButton:{
         fontSize: 16,
-        fontWeight: '300'
+        fontWeight: '500'
     }
 });
 

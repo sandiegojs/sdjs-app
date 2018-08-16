@@ -122,11 +122,11 @@ class SignupContainer extends React.Component {
                         title='SIGN UP'
                     />
                     <View style={styles.loginTextCont}>
-                        <Text style={styles.text}>Already have an account?</Text>
+                        <Text style={styles.text}>{'Already have an account?'}</Text>
                         <TouchableOpacity 
                          onPress={() => this.props.navigation.navigate('Login')}
                         >
-                        <Text style={styles.textButton}> Login</Text>
+                        <Text style={styles.textButton}>{' Login'}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
