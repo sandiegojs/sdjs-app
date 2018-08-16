@@ -66,3 +66,22 @@ export function locationUpdate(location) {
     payload: location
   }
 }
+
+export function notificationNumber(phone) {
+  return {
+      type: 'NUMBER_UPDATE',
+      payload: phone
+  }
+}
+
+export function SMSNotifications(phone, id, token) {
+  return {
+      type:'PHONE_ENTRY',
+      payload: axios
+          .patch('https://sdjs-app.now.sh/api/users/' + id, {phone}, {headers: {Authorization: token}})
+          .then(response => console.log(response.data))
+          .catch((err) => {
+            alert(err)
+           })
+  }
+}
