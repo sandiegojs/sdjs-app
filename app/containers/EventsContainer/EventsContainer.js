@@ -181,13 +181,13 @@ class EventsContainer extends React.Component {
     }
     if (!!eventsData) {
       return (
-        <ScrollView>
           <View style={styles.listWrapper}>
             <Text style={{textAlign: 'center', paddingTop: 10, fontWeight: 'bold'}}>Next Event: {eventsData[0].name}</Text>
             {this.handleButtons()}
             {locationErrorMessage}
             <Text style={{textAlign: 'center', paddingTop: 20, marginBottom: 0}}>Upcoming Events</Text>
-            <List>
+            <List containerStyle={{marginBottom: 15,marginTop:15}}>
+            <ScrollView>
               <FlatList
                 data={eventsData}
                 renderItem={({item}) => <ListItem
@@ -197,9 +197,9 @@ class EventsContainer extends React.Component {
                 />}
                 keyExtractor={(item, index) => item.id}
               />
+              </ScrollView>
             </List>
           </View>
-        </ScrollView>
       );
     } else {
       return (
