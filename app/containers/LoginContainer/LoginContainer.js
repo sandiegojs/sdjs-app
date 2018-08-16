@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Keyboard, View, StyleSheet} from 'react-native';
+import {ScrollView, Keyboard, View, StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
@@ -33,7 +33,7 @@ class LoginContainer extends React.Component {
   render() {
     const {email} = this.props;
     return (
-      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+      <ScrollView >
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>EMAIL</FormLabel>
@@ -68,29 +68,21 @@ class LoginContainer extends React.Component {
             large
             icon={{name: 'sign-in', type: 'font-awesome'}}
           />
-          <Button
-            title='CREATE ACCOUNT'
-            buttonStyle={{
-              backgroundColor: '#346abb',
-              borderRadius: 7,
-              marginTop: 21,
-              marginBottom: 11,
-              width: 300,
-              height: 54
-            }}
-            onPress={() => this.props.navigation.navigate('Signup')}
-          />
-          <Button
-            title='FORGOT PASSWORD?'
-            buttonStyle={{
-              backgroundColor: '#346abb',
-              borderRadius: 7,
-              marginTop: 15,
-              width: 300,
-              height: 54
-            }}
+          <View style={styles.resetTextCont}>
+          <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Password')}
-          />
+          >
+          <Text style={styles.resetTextButton}>{'Forgot Password?'}</Text>
+          </TouchableOpacity>
+          </View>
+          <View style={styles.signupTextCont}>
+          <Text style={styles.signupText}>{'Don\'t have an account?'}</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Signup')}
+          >
+          <Text style={styles.signupTextButton}>{' Signup'}</Text>
+          </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     )
@@ -100,7 +92,7 @@ class LoginContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#ecf0f1',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 30
@@ -109,7 +101,41 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     width: 350,
     margin: 15
-  }
+  },
+  resetTextCont:{
+    flexDirection: 'row',
+    alignSelf:'center',
+    marginLeft: 18,
+    marginBottom: 15,
+    marginTop: 20
+  },
+  resetTextButton:{
+    fontSize: 16,
+    fontWeight:'500'
+},
+signupTextCont:{
+  flex:1,
+  alignItems:'center',
+  justifyContent:'flex-end',
+  marginVertical: 16,
+  flexDirection: 'row',
+  ...Platform.select({
+    ios:{
+      height: 350,
+    },
+    android:{
+      height: 150,
+    }
+  }),
+  
+},
+signupText:{
+  fontSize: 16
+},
+signupTextButton:{
+  fontSize: 16,
+  fontWeight:'500'
+}
 });
 
 function mapStoreToProps(store) {

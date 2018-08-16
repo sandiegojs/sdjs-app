@@ -194,7 +194,7 @@ class DonateContainer extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#ecf0f1',
     padding: 20
   },
   formContainer: {
