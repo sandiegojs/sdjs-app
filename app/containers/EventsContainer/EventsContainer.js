@@ -200,7 +200,6 @@ class EventsContainer extends React.Component {
               </ScrollView>
             </List>
           </View>
-        
       );
     } else {
       return (
