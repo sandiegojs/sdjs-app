@@ -56,7 +56,10 @@ module.exports = User => {
   };
 
   User.sendSMSNotification = (body, cb) => {
-    sendSMSNotification(body)
+    User.find()
+    .then(userArray => {
+      sendSMSNotification(body, userArray)
+    })
     .then(() => cb(null))
   }
 
