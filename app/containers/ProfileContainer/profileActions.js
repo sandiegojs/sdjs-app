@@ -4,7 +4,7 @@ export function profileInit(id, token) {
   return {
     type: 'PROFILE_INIT',
     payload: axios
-      .get('http://f5f990cc.ngrok.io/api/users/' + id, {headers: {Authorization: token}})
+      .get('https://sdjs-app.now.sh/api/users/' + id, {headers: {Authorization: token}})
       .then(r => r.data)
   }
 }
@@ -13,7 +13,7 @@ export function profileUpdate(newProfileData, id, token) {
   return {
     type: 'PROFILE_UPDATE',
     payload: axios
-      .patch('http://f5f990cc.ngrok.io/api/users/' + id, newProfileData, {headers: {Authorization: token}})
+      .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData, {headers: {Authorization: token}})
       .then(r => r.data)
   }
 }
@@ -78,7 +78,7 @@ export function SMSNotifications(phone, id, token) {
   return {
       type:'PHONE_ENTRY',
       payload: axios
-          .patch('http://f5f990cc.ngrok.io/api/users/' + id, {phone}, {headers: {Authorization: token}})
+          .patch('https://sdjs-app.now.sh/api/users/' + id, {phone}, {headers: {Authorization: token}})
           .then(response => console.log(response.data))
           .catch((err) => {
             alert(err)

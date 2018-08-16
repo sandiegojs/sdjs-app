@@ -7,7 +7,7 @@ const service = twilio.notify.services(process.env.TWILIO_NOTIFY_SERVICE_SID);
 
 
 module.exports = function(body) {
-    return axios.get('http://f5f990cc.ngrok.io/api/users', { header: { authorzation: 'I2Ai4PEIJjqk7Mz4u7HbgrRrXNZ3Do8P1HFJVvBa7z5ouKMEx1vaGPgUGdKzvORM' } })
+    return axios.get('https://sdjs-app.now.sh/api/users', { header: { authorzation: 'I2Ai4PEIJjqk7Mz4u7HbgrRrXNZ3Do8P1HFJVvBa7z5ouKMEx1vaGPgUGdKzvORM' } })
         .then(response => {
             const binding = response.data.map((element) => {
                 return JSON.stringify({
