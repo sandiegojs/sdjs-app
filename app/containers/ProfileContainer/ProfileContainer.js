@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {StyleSheet, View, ScrollView, Keyboard} from 'react-native';
-import {FormLabel, FormInput, Button} from "react-native-elements";
+import { connect } from 'react-redux';
+import { StyleSheet, View, ScrollView, Keyboard } from 'react-native';
+import { FormLabel, FormInput, Button } from "react-native-elements";
 import * as actions from './profileActions';
 
 class ProfileContainer extends React.Component {
@@ -19,60 +19,60 @@ class ProfileContainer extends React.Component {
   }
 
   componentWillMount() {
-    const {dispatch, user} = this.props;
+    const { dispatch, user } = this.props;
     dispatch(actions.profileInit(user.id, user.token));
   }
 
   handleProfileUpdate() {
-    const {navigate} = this.props.navigation;
-    const {dispatch, user, profileData} = this.props;
+    const { navigate } = this.props.navigation;
+    const { dispatch, user, profileData } = this.props;
     dispatch(actions.profileUpdate(profileData, user.id, user.token));
     navigate('Events');
   }
 
   handleFirstNameUpdate(firstName) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(actions.firstNameUpdate(firstName))
   }
 
   handleLastNameUpdate(lastName) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(actions.lastNameUpdate(lastName))
   }
 
   handleEmailUpdate(email) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(actions.emailUpdate(email))
   }
 
   handleBioUpdate(bio) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(actions.bioUpdate(bio))
   }
 
   handleCompanyUpdate(company) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(actions.companyUpdate(company))
   }
 
   handleUrlUpdate(url) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(actions.urlUpdate(url))
   }
-  
+
   handleSMSNumber(phone) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(actions.notificationNumber(phone))
   }
 
   handleSMS() {
-    const {dispatch, user, profileData} = this.props;
+    const { dispatch, user, profileData } = this.props;
     console.log(profileData.phone)
     dispatch(actions.SMSNotifications(profileData.phone, user.id, user.token))
   }
 
   render() {
-    const {firstName, lastName, email, bio, company, url} = this.props.profileData;
+    const { firstName, lastName, email, bio, company, url } = this.props.profileData;
     return (
       <ScrollView onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
@@ -139,14 +139,26 @@ class ProfileContainer extends React.Component {
             />
           </View>
         </View>
-        <View>
+        <View style={styles.container}>
+          <View style={styles.formContainer}>
             <FormLabel>Would you like to recieve text notifications from SDJS?</FormLabel>
             <FormInput
-            placeholder='please enter your phone number'
-            onChangeText={this.handleSMSNumber}/>
-            <Button onPress={this.handleSMS}/>
+              placeholder='please enter your phone number'
+              onChangeText={this.handleSMSNumber} />
+            <Button
+              large
+              buttonStyle={{
+                backgroundColor: '#346abb',
+                borderRadius: 7,
+                marginTop: 24,
+                width: 300,
+                height: 55
+              }}
+              onPress={this.handleSMS}
+              title="Sign Up" />
+          </View>
         </View>
-        </ScrollView>
+      </ScrollView>
     )
   }
 }
@@ -161,7 +173,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: 333
-}
+  }
 });
 
 function mapStoreToProps(store) {

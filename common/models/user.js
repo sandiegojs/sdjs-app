@@ -54,13 +54,15 @@ module.exports = User => {
       .catch(err => console.log(err));
     callback(null);
   };
-  User.sendSMSNotification = (body) => {
+
+  User.sendSMSNotification = (body, cb) => {
     sendSMSNotification(body)
+    .then(() => cb(null))
   }
 
-  User.remoteMethod('sendSMSNotifications', {
+  User.remoteMethod('sendSMSNotification', {
     description: [
-      'Sends sms message to all useres who signed up'
+      'Sends sms message to all users who signed up'
     ],
     http: {path: '/sendSMSNotification', verb: 'post'},
     accepts: {arg: 'body', type: 'string'}
