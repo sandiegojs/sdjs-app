@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ImageBackground, Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from "react-native-elements";
-import { Constants, WebBrowser } from 'expo';
+import { WebBrowser } from 'expo';
 
 class ShoppingContainer extends React.Component {
     constructor(props) {
