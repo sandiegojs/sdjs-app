@@ -5,7 +5,8 @@ const defaultState = {
   bio: '',
   url: '',
   location: '',
-  company: ''
+  company: '',
+  phone: ''
 };
 
 export default function ProfileReducer(state = defaultState, action) {
@@ -60,6 +61,12 @@ export default function ProfileReducer(state = defaultState, action) {
         location: payload
       }
     }
+    case 'NUMBER_UPDATE': {
+      return {
+          ...state,
+          phone: payload
+      }
+  }
     default: {
       return state;
     }

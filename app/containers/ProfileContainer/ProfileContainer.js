@@ -14,6 +14,8 @@ class ProfileContainer extends React.Component {
     this.handleBioUpdate = this.handleBioUpdate.bind(this);
     this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
     this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
+    this.handleSMSNumber = this.handleSMSNumber.bind(this);
+    this.handleSMS = this.handleSMS.bind(this);
   }
 
   componentWillMount() {
@@ -56,6 +58,17 @@ class ProfileContainer extends React.Component {
   handleUrlUpdate(url) {
     const {dispatch} = this.props;
     dispatch(actions.urlUpdate(url))
+  }
+  
+  handleSMSNumber(phone) {
+    const {dispatch} = this.props;
+    dispatch(actions.notificationNumber(phone))
+  }
+
+  handleSMS() {
+    const {dispatch, user, profileData} = this.props;
+    console.log(profileData.phone)
+    dispatch(actions.SMSNotifications(profileData.phone, user.id, user.token))
   }
 
   render() {
@@ -126,7 +139,14 @@ class ProfileContainer extends React.Component {
             />
           </View>
         </View>
-      </ScrollView>
+        <View>
+            <FormLabel>Would you like to recieve text notifications from SDJS?</FormLabel>
+            <FormInput
+            placeholder='please enter your phone number'
+            onChangeText={this.handleSMSNumber}/>
+            <Button onPress={this.handleSMS}/>
+        </View>
+        </ScrollView>
     )
   }
 }
