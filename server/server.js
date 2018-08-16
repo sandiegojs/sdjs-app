@@ -15,13 +15,7 @@ loopback.Email.attachTo(dsSendGrid);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json());
-app.get('/', (req, res) => {
-  
-  const data = {
-    redirectUrl:'' 
-  }
-  res.render('password-reset', data);
-})
+
 app.start = function () {
 
   return app.listen(function () {
