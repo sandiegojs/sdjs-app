@@ -1,4 +1,6 @@
 'use strict';
+const sendSMSNotification = require('../../server/sendSMSNotifications')
+
 module.exports = User => {
   //send password reset link when requested
   User.on('resetPasswordRequest', info => {
@@ -52,4 +54,15 @@ module.exports = User => {
       .catch(err => console.log(err));
     callback(null);
   };
+  User.sendSMSNotification = (body) => {
+    sendSMSNotification(body)
+  }
+
+  User.remoteMethod('sendSMSNotifications', {
+    description: [
+      'Sends sms message to all useres who signed up'
+    ],
+    http: {path: '/sendSMSNotification', verb: 'post'},
+    accepts: {arg: 'body', type: 'string'}
+  })
 };

@@ -33,6 +33,9 @@
     "company": {
       "type": "string"
     },
+    "phone": {
+      "type": "string"
+    },
     "answers": {
       "type": {
         "question1": "string",
