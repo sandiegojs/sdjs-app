@@ -4,10 +4,6 @@ import {ImageBackground, StyleSheet} from 'react-native';
 import {Button} from "react-native-elements";
 import {WebBrowser} from 'expo';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Shopping app changes
 class SDJSContainer extends React.Component {
     constructor(props) {
         super(props);
