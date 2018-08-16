@@ -154,7 +154,6 @@ componentWillUnmount() {
           }
         )
       },
-     // Profile: { screen: ProfileScreen },
       EventDetails: { screen: EventDetailsScreen },
       Donate: { screen: DonateScreen },
       ThankYou: { screen: ThankyouScreen }
