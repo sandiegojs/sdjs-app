@@ -67,7 +67,6 @@ class ProfileContainer extends React.Component {
 
   handleSMS() {
     const { dispatch, user, profileData } = this.props;
-    console.log(profileData.phone)
     dispatch(actions.SMSNotifications(profileData.phone, user.id, user.token))
   }
 
