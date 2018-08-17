@@ -1,52 +1,55 @@
-'use strict';
-const sendSMSNotification = require('../../server/sendSMSNotifications')
 
-module.exports = User => {
-  //send password reset link when requested
-  User.on('resetPasswordRequest', info => {
-    const url = User.app.get('url').replace(/\/$/, '') + '/reset-password';
-    const html = 'Click <a href="' + url + '?access_token=' +
-      info.accessToken.id + '">here</a> to reset your password';
+const sendSMSNotification = require('../../server/sendSMSNotifications');
+
+module.exports = (User) => {
+  // send password reset link when requested
+  User.on('resetPasswordRequest', (info) => {
+    const url = `${User.app.get('url').replace(/\/$/, '')}/reset-password`;
+    const html = `Click <a href="${url}?access_token=${
+      info.accessToken.id}">here</a> to reset your password`;
     const email = {
       to: info.email,
       from: 'noreply@sdjs.com',
       subject: 'SDJS App Password Reset',
-      html: html,
+      html,
       text: 'a'
     };
     // loopback-connector-sendgrid REQUIRES a text field with a non-empty string, or it will
     // throw an error and fail to send
-    User.app.models.Email.send(email, err => {
+    User.app.models.Email.send(email, (err) => {
       if (err) return console.log(err.response.body.errors);
     });
   });
 
-  //render UI page after successful password reset
-  User.afterRemote('setPassword', function (context) {
+  // render UI page after successful password reset
+  User.afterRemote('setPassword', function(context) {
     context.res.render('response', {
       title: 'Password reset success',
       content: 'Your password has been reset successfully'
     });
   });
 
-  User.emailAll = function (req, res, callback) {
-    if (!req.body)
+  User.emailAll = function(req, res, callback) {
+    if (!req.body) {
       res.status(400).json({
         error: 'Invalid request.'
       });
+    }
 
-    const {from, subject, html, text} = req.body;
-    User.find().then(users => {
-      users.map(user => user.email).forEach(email => {
+    const {
+      from, subject, html, text
+    } = req.body;
+    User.find().then((users) => {
+      users.map(user => user.email).forEach((email) => {
         const msg = {
           to: email,
           from: from || 'noreply@sdjs.com',
           subject: subject || 'No Subject',
-          html: html,
+          html,
           text: text || 'a'
         };
 
-        User.app.models.Email.send(msg, err => {
+        User.app.models.Email.send(msg, (err) => {
           if (err) return console.log(err.response.body.errors);
         });
       });
@@ -57,17 +60,17 @@ module.exports = User => {
 
   User.sendSMSNotification = (body, cb) => {
     User.find()
-    .then(userArray => {
-      sendSMSNotification(body, userArray)
-    })
-    .then(() => cb(null))
-  }
+      .then((userArray) => {
+        sendSMSNotification(body, userArray);
+      })
+      .then(() => cb(null));
+  };
 
   User.remoteMethod('sendSMSNotification', {
     description: [
       'Sends sms message to all users who signed up'
     ],
-    http: {path: '/sendSMSNotification', verb: 'post'},
-    accepts: {arg: 'body', type: 'string'}
-  })
+    http: { path: '/sendSMSNotification', verb: 'post' },
+    accepts: { arg: 'body', type: 'string' }
+  });
 };

@@ -6,67 +6,67 @@ const defaultState = {
   url: '',
   location: '',
   company: '',
-  phone: ''
+  phone: '',
 };
 
 export default function ProfileReducer(state = defaultState, action) {
-  const {type, payload} = action;
+  const { type, payload } = action;
 
   switch (type) {
     case 'PROFILE_INIT_FULFILLED': {
       return {
         ...state,
-        ...payload
-      }
+        ...payload,
+      };
     }
     case 'FIRST_NAME_UPDATE': {
       return {
         ...state,
-        firstName: payload
-      }
+        firstName: payload,
+      };
     }
     case 'LAST_NAME_UPDATE': {
       return {
         ...state,
-        lastName: payload
-      }
+        lastName: payload,
+      };
     }
     case 'EMAIL_UPDATE': {
       return {
         ...state,
-        email: payload
-      }
+        email: payload,
+      };
     }
     case 'BIO_UPDATE': {
       return {
         ...state,
-        bio: payload
-      }
+        bio: payload,
+      };
     }
     case 'COMPANY_UPDATE': {
       return {
         ...state,
-        company: payload
-      }
+        company: payload,
+      };
     }
     case 'URL_UPDATE': {
       return {
         ...state,
-        url: payload
-      }
+        url: payload,
+      };
     }
     case 'LOCATION_UPDATE': {
       return {
         ...state,
-        location: payload
-      }
+        location: payload,
+      };
     }
     case 'NUMBER_UPDATE': {
       return {
-          ...state,
-          phone: payload
-      }
-  }
+        ...state,
+        phone: payload,
+      };
+    }
     default: {
       return state;
     }

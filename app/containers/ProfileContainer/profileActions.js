@@ -4,84 +4,84 @@ export function profileInit(id, token) {
   return {
     type: 'PROFILE_INIT',
     payload: axios
-      .get('https://sdjs-app.now.sh/api/users/' + id, {headers: {Authorization: token}})
-      .then(r => r.data)
-  }
+      .get(`https://sdjs-app.now.sh/api/users/${id}`, { headers: { Authorization: token } })
+      .then(r => r.data),
+  };
 }
 
 export function profileUpdate(newProfileData, id, token) {
   return {
     type: 'PROFILE_UPDATE',
     payload: axios
-      .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData, {headers: {Authorization: token}})
-      .then(r => r.data)
-  }
+      .patch(`https://sdjs-app.now.sh/api/users/${id}`, newProfileData, { headers: { Authorization: token } })
+      .then(r => r.data),
+  };
 }
 
 export function firstNameUpdate(firstName) {
   return {
     type: 'FIRST_NAME_UPDATE',
-    payload: firstName
-  }
+    payload: firstName,
+  };
 }
 
 export function lastNameUpdate(lastName) {
   return {
     type: 'LAST_NAME_UPDATE',
-    payload: lastName
-  }
+    payload: lastName,
+  };
 }
 
 export function emailUpdate(email) {
   return {
     type: 'EMAIL_UPDATE',
-    payload: email
-  }
+    payload: email,
+  };
 }
 
 export function bioUpdate(bio) {
   return {
     type: 'BIO_UPDATE',
-    payload: bio
-  }
+    payload: bio,
+  };
 }
 
 export function companyUpdate(company) {
   return {
     type: 'COMPANY_UPDATE',
-    payload: company
-  }
+    payload: company,
+  };
 }
 
 export function urlUpdate(url) {
   return {
     type: 'URL_UPDATE',
-    payload: url
-  }
+    payload: url,
+  };
 }
 
 export function locationUpdate(location) {
   return {
     type: 'LOCATION_UPDATE',
-    payload: location
-  }
+    payload: location,
+  };
 }
 
 export function notificationNumber(phone) {
   return {
-      type: 'NUMBER_UPDATE',
-      payload: phone
-  }
+    type: 'NUMBER_UPDATE',
+    payload: phone,
+  };
 }
 
 export function SMSNotifications(phone, id, token) {
   return {
-      type:'PHONE_ENTRY',
-      payload: axios
-          .patch('https://sdjs-app.now.sh/api/users/' + id, {phone}, {headers: {Authorization: token}})
-          .then(response => console.log(response.data))
-          .catch((err) => {
-            alert(err)
-           })
-  }
+    type: 'PHONE_ENTRY',
+    payload: axios
+      .patch(`https://sdjs-app.now.sh/api/users/${id}`, { phone }, { headers: { Authorization: token } })
+      .then(response => console.log(response.data))
+      .catch((err) => {
+        alert(err);
+      }),
+  };
 }

@@ -1,3 +1,16 @@
 {
-  "extends": "loopback"
+  "extends": "loopback",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "rules": {
+    "no-unused-vars" : 2,
+    "react-native/no-unused-styles": 2,
+    "object-curly-spacing": [1, "always"],
+    "comma-dangle": ["error", "never"]
+  }
 }

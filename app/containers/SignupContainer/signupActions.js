@@ -1,31 +1,31 @@
 import axios from 'axios';
 
 export function updateFirstNameInput(text) {
-	return {
-		type: 'UPDATE_FIRST_NAME_INPUT',
-		payload: text
-	}
+  return {
+    type: 'UPDATE_FIRST_NAME_INPUT',
+    payload: text,
+  };
 }
 
 export function updateLastNameInput(text) {
-	return {
-		type: 'UPDATE_LAST_NAME_INPUT',
-		payload: text
-	}
+  return {
+    type: 'UPDATE_LAST_NAME_INPUT',
+    payload: text,
+  };
 }
 
 export function updateEmailInput(text) {
-	return {
-		type: 'UPDATE_EMAIL_INPUT',
-		payload: text
-	}
+  return {
+    type: 'UPDATE_EMAIL_INPUT',
+    payload: text,
+  };
 }
 
 export function updatePasswordInput(text) {
-	return {
-		type: 'UPDATE_PASSWORD_INPUT',
-		payload: text
-	}
+  return {
+    type: 'UPDATE_PASSWORD_INPUT',
+    payload: text,
+  };
 }
 
 export function submitSignUp(credentials, navigate) {
@@ -60,13 +60,13 @@ export function submitSignUp(credentials, navigate) {
 }
 
 export function thirdPartyLogin(loginObj) {
-	return {
-		type: 'THIRD_PARTY_LOGIN',
-		payload: axios
-			.post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
-			.then(response => response.data)
-			.catch(error => {
-				console.log("this one", error);
-			})
-	};
+  return {
+    type: 'THIRD_PARTY_LOGIN',
+    payload: axios
+      .post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
+      .then(response => response.data)
+      .catch((error) => {
+        console.log('this one', error);
+      }),
+  };
 }
