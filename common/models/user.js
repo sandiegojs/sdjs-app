@@ -23,7 +23,6 @@ module.exports = User => {
 
   //render UI page after successful password reset
   User.afterRemote('setPassword', function (context) {
-    console.log('test');
     context.res.render('response', {
       title: 'Password reset success',
       content: 'Your password has been reset successfully'
