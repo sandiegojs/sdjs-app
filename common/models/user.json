@@ -9,6 +9,10 @@
     "username": {
       "type": "string"
     },
+    "Email": {
+      "dataSource": "sendgrid",
+      "public": false
+    },
     "firstName": {
       "type": "string",
       "required": true
@@ -33,15 +37,10 @@
     "company": {
       "type": "string"
     },
-    "phone": {
-      "type": "string"
-    },
     "answers": {
-      "type": {
-        "question1": "string",
-        "question2": "string",
-        "question3": "string"
-      }
+      "question1": "string",
+      "question2": "string",
+      "question3": "string"
     }
   },
   "validations": [],
@@ -51,6 +50,14 @@
       "model": "event",
       "foreignKey": "userId",
       "through": "attendee"
+    },
+    "AccessTokens": {
+      "type": "hasMany",
+      "model": "AccessToken",
+      "foreignKey": "userId",
+      "options": {
+        "disableInclude": true
+      }
     }
   },
   "acls": [
@@ -59,41 +66,7 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "sendSMSNotification"
     }
   ],
-  "methods": {
-    "emailAll": {
-      "accepts": [
-        {
-          "arg": "req",
-          "type": "object",
-          "http": {
-            "source": "req"
-          }
-        },
-        {
-          "arg": "res",
-          "type": "object",
-          "http": {
-            "source": "res"
-          }
-        }
-      ],
-      "returns": [],
-      "description": "test",
-      "http": [
-        {
-          "path": "/email-all",
-          "verb": "post"
-        }
-      ]
-    }
-  }
+  "methods": {}
 }

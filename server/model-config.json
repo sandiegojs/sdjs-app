@@ -1,6 +1,7 @@
 {
   "_meta": {
     "sources": [
+      "./node_modules/loopback-component-passport/lib/models",
       "loopback/common/models",
       "loopback/server/models",
       "../common/models",
@@ -12,10 +13,6 @@
       "../common/mixins",
       "./mixins"
     ]
-  },
-  "Email": {
-    "dataSource": "sendgrid",
-    "public": false
   },
   "event": {
     "dataSource": "MongoDB",
@@ -33,10 +30,24 @@
     "dataSource": "MongoDB",
     "public": true
   },
+  "UserCredential": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "UserIdentity": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
   "AccessToken": {
     "dataSource": "MongoDB",
     "public": false,
-    "strict": true
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "userId"
+      }
+    }
   },
   "ACL": {
     "dataSource": "MongoDB",
