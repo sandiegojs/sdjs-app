@@ -1,7 +1,6 @@
 import React from 'react';
-import {ScrollView, Keyboard, View, StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
+import {ScrollView, View, StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
 import {connect} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
 import {updateEmailInput, updatePasswordInput, submitLogin} from './loginActions';
 
@@ -113,29 +112,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight:'500'
 },
-signupTextCont:{
-  flex:1,
-  alignItems:'center',
-  justifyContent:'flex-end',
-  marginVertical: 16,
-  flexDirection: 'row',
-  ...Platform.select({
-    ios:{
-      height: 350,
-    },
-    android:{
-      height: 150,
-    }
-  }),
-  
-},
-signupText:{
-  fontSize: 16
-},
-signupTextButton:{
-  fontSize: 16,
-  fontWeight:'500'
-}
+  signupTextCont: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginVertical: 16,
+    flexDirection: 'row',
+    ...Platform.select({
+      ios: {
+        height: 350,
+      },
+      android: {
+        height: 150,
+      }
+    }),
+
+  },
+  signupText: {
+    fontSize: 16
+  },
+  signupTextButton: {
+    fontSize: 16,
+    fontWeight: '500'
+  }
 });
 
 function mapStoreToProps(store) {

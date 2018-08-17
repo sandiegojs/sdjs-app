@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
 import {emailResetPasswordEntry, resetPassword} from './passwordActions';
 

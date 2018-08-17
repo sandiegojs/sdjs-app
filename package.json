@@ -26,7 +26,8 @@
     "moment-timezone": "^0.5.21",
     "reduce-reducers": "^0.4.3",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^2.0.0"
+    "strong-error-handler": "^2.0.0",
+    "twilio": "^3.19.1"
   },
   "devDependencies": {
     "dotenv": "^6.0.0",

@@ -66,7 +66,7 @@ class QuestionnaireContainer extends React.Component {
                 onPress: null,
                 style: 'cancel'
             }]
-        )
+        );
         const { navigate } = this.props.navigation;
         navigate('Events');
     }
