@@ -88,6 +88,23 @@ class SignupContainer extends React.Component {
             })
     }
 
+    meetupSignup() {
+        //const credentials = {
+            
+        //}
+        axios
+            .post('http://900b625c.ngrok.io/auth/meetup', credentials)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                alert('Invalid Login');
+                console.log(error);
+                console.log('invalid login');
+                return Promise.resolve(error);
+            })
+    }
+
     render() {
         return (
             <ScrollView onPress={Keyboard.dismiss} accessible={false}>
