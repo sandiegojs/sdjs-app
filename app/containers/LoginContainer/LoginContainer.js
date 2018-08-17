@@ -33,8 +33,10 @@ class LoginContainer extends React.Component {
 
   meetupLogin() {
     axios
-      .post('http://900b625c.ngrok.io/auth/meetup')
-      .then(response => console.log(response))
+      .get('http://900b625c.ngrok.io/auth/meetup')
+      .then(response => {
+        console.log(response)
+      })
       .catch(error => {
         alert('Invalid Login');
         console.log(error);

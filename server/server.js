@@ -30,9 +30,6 @@ try {
   process.exit(1); // fatal
 }
 
-// -- Add your pre-processing middleware here --
-
-// Setup the view engine (jade)
 var path = require('path');
 app.set('views', path.join(__dirname, '../app/screens'));
 app.set('view engine', 'jsx');
@@ -53,9 +50,8 @@ app.middleware('auth', loopback.token({
   model: app.models.accessToken,
 }));
 
-//app.middleware('session:before', cookieParser(app.get('secret')));
 app.middleware('session:before', cookieParser('kll6k6vit4k8cjf8d5i48shqpj'));
-//kll6k6vit4k8cjf8d5i48shqpj
+
 app.middleware('session', session({
   secret: 'kitty',
   saveUninitialized: true,
@@ -120,7 +116,7 @@ app.post('/signup', function (req, res, next) {
   });
 });
 
-app.get('/login', function (req, res, next) {
+app.get('login', function (req, res, next) {
   res.render('LogInScreen', {
     user: req.user,
     url: req.url,
