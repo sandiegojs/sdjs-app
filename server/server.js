@@ -1,13 +1,14 @@
-'use strict';
 
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const loopback = require('loopback');
 const boot = require('loopback-boot');
 const path = require('path');
+
 const app = module.exports = loopback();
 
 const DataSource = require('loopback-datasource-juggler').DataSource;
+
 const dsSendGrid = new DataSource('loopback-connector-sendgrid', {
   api_key: process.env.SENDGRID_API_KEY
 });
@@ -17,10 +18,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json());
 
-app.start = function () {
-
-  return app.listen(function () {
-
+app.start = function() {
+  return app.listen(() => {
     app.emit('started');
     const baseUrl = app.get('url').replace(/\/$/, '');
     if (app.get('loopback-component-explorer')) {
@@ -31,11 +30,9 @@ app.start = function () {
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
-boot(app, __dirname, function (err) {
-
+boot(app, __dirname, (err) => {
   if (err) throw err;
 
   // start the server if `$ node server.js`
-  if (require.main === module)
-    app.start();
+  if (require.main === module) { app.start(); }
 });

@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {Button} from "react-native-elements";
-import {connect} from 'react-redux';
-import {submitLogout} from './LogoutActions';
+import { Text, View, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { submitLogout } from './LogoutActions';
 
 class LogoutContainer extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
   }
 
-  logout(){
-  const {navigate} = this.props.navigation;
-  const {dispatch} = this.props;
-  dispatch(submitLogout());
-  navigate('Login');
-}
+  logout() {
+    const { navigate } = this.props.navigation;
+    const { dispatch } = this.props;
+    dispatch(submitLogout());
+    navigate('Login');
+  }
 
   render() {
     return (
@@ -30,7 +30,7 @@ class LogoutContainer extends React.Component {
             marginTop: 34,
             marginBottom: 24,
             width: 313,
-            height: 55
+            height: 55,
           }}
           onPress={this.logout}
           title="Yes"
@@ -43,14 +43,14 @@ class LogoutContainer extends React.Component {
             marginTop: 24,
             marginBottom: 21,
             width: 313,
-            height: 55
+            height: 55,
           }}
           onPress={() => this.props.navigation.goBack()}
           title="No"
           large
         />
       </View>
-    )
+    );
   }
 }
 
@@ -60,12 +60,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#DCDCDC',
     alignItems: 'center',
-    padding: 30
+    padding: 30,
   },
   text: {
     marginBottom: 11,
-    fontSize: 24
-  }
+    fontSize: 24,
+  },
 });
 
 function mapStoreToProps(store) {

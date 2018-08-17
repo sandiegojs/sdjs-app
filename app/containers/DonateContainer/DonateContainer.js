@@ -1,13 +1,17 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {StyleSheet, View, Alert, Image, ScrollView} from 'react-native';
-import {FormLabel, FormInput, Button} from 'react-native-elements';
-import {cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction} from './donateActions';
+import { connect } from 'react-redux';
+import {
+  StyleSheet, View, Alert, Image, ScrollView,
+} from 'react-native';
+import { FormLabel, FormInput, Button } from 'react-native-elements';
+import {
+  cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction,
+} from './donateActions';
 
 class DonateContainer extends React.Component {
   constructor(props) {
-    super(props); 
-      this.state = {
+    super(props);
+    this.state = {
     };
 
     this.handleCardholderName = this.handleCardholderName.bind(this);
@@ -20,63 +24,67 @@ class DonateContainer extends React.Component {
   }
 
   handleCardholderName(text) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(cardholderNameEntry(text));
   }
 
   handleCardNumber(text) {
-    const {dispatch} = this.props
-    dispatch(cardNumberEntry(text))
+    const { dispatch } = this.props;
+    dispatch(cardNumberEntry(text));
   }
 
   handleCardExpMonth(text) {
-    const {dispatch} = this.props
-    dispatch(cardExpMonthEntry(text))
+    const { dispatch } = this.props;
+    dispatch(cardExpMonthEntry(text));
   }
 
   handleCardExpYear(text) {
-    const {dispatch} = this.props
-    dispatch(cardExpYearEntry(text))
+    const { dispatch } = this.props;
+    dispatch(cardExpYearEntry(text));
   }
 
   handleCardCvc(text) {
-    const {dispatch} = this.props
-    dispatch(cardCvcEntry(text))
+    const { dispatch } = this.props;
+    dispatch(cardCvcEntry(text));
   }
 
   handleZipCode(text) {
-    const {dispatch} = this.props
-    dispatch(zipCodeEntry(text))
+    const { dispatch } = this.props;
+    dispatch(zipCodeEntry(text));
   }
 
   handleDonationSubmit(number) {
-    const {dispatch, cardholderName, zipCode, cardNumber, expMonth, expYear, cvc} = this.props;
-    const {navigate} = this.props.navigation;
-    let amount = number;
+    const {
+      dispatch, cardholderName, zipCode, cardNumber, expMonth, expYear, cvc,
+    } = this.props;
+    const { navigate } = this.props.navigation;
+    const amount = number;
     if (cardholderName == '' || cardNumber == '' || zipCode == '' || expMonth == '' || expYear == '', cvc == '') {
       Alert.alert(
         'Form Error',
         'Complete all fields to submit', [{
           text: 'OK',
           onPress: null,
-          style: 'cancel'
-        }]
-      )
+          style: 'cancel',
+        }],
+      );
     } else {
-      var cardDetails = {
-        "card[name]": cardholderName,
-        "card[number]": cardNumber,
-        "card[exp_month]": expMonth,
-        "card[exp_year]": expYear,
-        "card[cvc]": cvc,
-        "card[address_zip]": zipCode,
+      const cardDetails = {
+        'card[name]': cardholderName,
+        'card[number]': cardNumber,
+        'card[exp_month]': expMonth,
+        'card[exp_year]': expYear,
+        'card[cvc]': cvc,
+        'card[address_zip]': zipCode,
       };
       dispatch(handleTransaction(cardDetails, amount, navigate));
     }
   }
 
   render() {
-    const {cardholderName, zipCode, cardNumber, expMonth, expYear, cvc} = this.props;
+    const {
+      cardholderName, zipCode, cardNumber, expMonth, expYear, cvc,
+    } = this.props;
     return (
       <ScrollView>
         <View style={styles.imageview}>
@@ -165,9 +173,10 @@ class DonateContainer extends React.Component {
               borderRadius: 7,
               marginTop: 21,
               width: 300,
-              height: 54
+              height: 54,
             }}
-            title='DONATE $25' />
+            title="DONATE $25"
+          />
           <Button
             onPress={() => this.handleDonationSubmit(1000)}
             buttonStyle={{
@@ -175,10 +184,11 @@ class DonateContainer extends React.Component {
               borderRadius: 7,
               marginTop: 15,
               width: 300,
-              height: 54
+              height: 54,
             }}
             value={10}
-            title='DONATE $10' />
+            title="DONATE $10"
+          />
           <Button
             onPress={() => this.handleDonationSubmit(500)}
             buttonStyle={{
@@ -187,31 +197,31 @@ class DonateContainer extends React.Component {
               marginTop: 15,
               marginBottom: 15,
               width: 300,
-              height: 54
+              height: 54,
             }}
             value={5}
-            title='DONATE $5'
+            title="DONATE $5"
           />
         </View>
       </ScrollView>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ecf0f1',
-    padding: 20
+    padding: 20,
   },
   formContainer: {
     paddingBottom: 11,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20
+    padding: 20,
   },
   row: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   inputWrap: {
     flex: 1,
@@ -220,14 +230,14 @@ const styles = StyleSheet.create({
   imageview: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
-    resizeMode: "center",
+    resizeMode: 'center',
     width: 100,
     height: 50,
-  }
-})
+  },
+});
 
 function mapStoreToProps(store) {
   return {
@@ -240,4 +250,4 @@ function mapStoreToProps(store) {
   };
 }
 
-export default connect(mapStoreToProps)(DonateContainer)
+export default connect(mapStoreToProps)(DonateContainer);
