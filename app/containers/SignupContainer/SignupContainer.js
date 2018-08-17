@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScrollView, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
-import {StyleSheet, View, Alert} from 'react-native';
+import {StyleSheet, View, Alert, Text, TouchableOpacity} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
 import {
     updateFirstNameInput,
@@ -121,6 +121,14 @@ class SignupContainer extends React.Component {
                         icon={{name: 'sign-in', type: 'font-awesome'}}
                         title='SIGN UP'
                     />
+                    <View style={styles.loginTextCont}>
+                        <Text style={styles.text}>{'Already have an account?'}</Text>
+                        <TouchableOpacity 
+                         onPress={() => this.props.navigation.navigate('Login')}
+                        >
+                        <Text style={styles.textButton}>{' Login'}</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ScrollView>
         )
@@ -131,7 +139,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#DCDCDC',
+        backgroundColor: '#ecf0f1',
         alignItems: 'center',
         padding: 30
     },
@@ -139,6 +147,19 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         width: 350,
         margin: 15
+    },
+    loginTextCont:{
+        alignItems:'center',
+        justifyContent:'flex-end',
+        marginVertical: 16,
+        flexDirection: 'row',
+    },
+    text:{
+        fontSize: 16
+    },
+    textButton:{
+        fontSize: 16,
+        fontWeight:'500'
     }
 });
 

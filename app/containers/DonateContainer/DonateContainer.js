@@ -94,6 +94,7 @@ class DonateContainer extends React.Component {
             class='field is-empty'
             placeholder='Name That Appears On Card'
             icon={{name: 'sign-in', type: 'font-awesome'}}
+            containerStyle={{ width: "80%" }}
             onChangeText={this.handleCardholderName}
           />
           <FormLabel>CARD NUMBER</FormLabel>
@@ -103,6 +104,7 @@ class DonateContainer extends React.Component {
             class='field is-empty'
             placeholder='#### #### #### ####'
             keyboardType='numeric'
+            containerStyle={{ width: "80%" }}
             onChangeText={this.handleCardNumber}
           />
             <View style={styles.row}>
@@ -116,6 +118,7 @@ class DonateContainer extends React.Component {
                     maxLength={2}
                     placeholder="##"
                     keyboardType='numeric'
+                    containerStyle={{ width: "50%" }}
                     onChangeText={this.handleCardExpMonth} />
                 </View>
                 <View style={styles.inputWrap}>
@@ -128,6 +131,7 @@ class DonateContainer extends React.Component {
                     maxLength={2}
                     placeholder="##"
                     keyboardType='numeric'
+                    containerStyle={{ width: "50%" }}
                     onChangeText={this.handleCardExpYear} />
                 </View>
               </View>
@@ -140,6 +144,7 @@ class DonateContainer extends React.Component {
                   maxLength={4}
                   placeholder="###"
                   keyboardType='numeric'
+                  containerStyle={{ width: "70%" }}
                   onChangeText={this.handleCardCvc} />
               </View>
             </View>
@@ -150,6 +155,7 @@ class DonateContainer extends React.Component {
             class='field is-empty'
             placeholder='#####'
             keyboardType='numeric'
+            containerStyle={{ width: "80%" }}
             onChangeText={this.handleZipCode}
           />
           <Button
@@ -194,7 +200,7 @@ class DonateContainer extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#ecf0f1',
     padding: 20
   },
   formContainer: {
@@ -209,6 +215,7 @@ const styles = StyleSheet.create({
   },
   inputWrap: {
     flex: 1,
+    marginLeft: 20
   },
   imageview: {
     flexDirection: 'column',

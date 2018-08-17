@@ -16,9 +16,10 @@ import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
+
 class App extends React.Component {
-  
-handleBackButton = () => {               
+
+handleBackButton = () => {
   Alert.alert(
       'Exit The App',
       'Are you sure you want to exit?', [{
@@ -43,7 +44,7 @@ componentWillUnmount() {
 }
   render() {
 
-    const AppRoot = StackNavigator({ 
+    const AppRoot = StackNavigator({
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
       Password: { screen : PasswordResetScreen},
@@ -71,7 +72,7 @@ componentWillUnmount() {
             },
             Logout: {
               screen: LogoutScreen,
-            },
+            }
           },
           {
             navigationOptions: ({ navigation }) => ({
@@ -153,7 +154,6 @@ componentWillUnmount() {
           }
         )
       },
-     // Profile: { screen: ProfileScreen },
       EventDetails: { screen: EventDetailsScreen },
       Donate: { screen: DonateScreen },
       ThankYou: { screen: ThankyouScreen }

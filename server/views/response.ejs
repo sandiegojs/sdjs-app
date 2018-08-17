@@ -1,4 +1,31 @@
-<h1><%= title %></h1>
-<% if (typeof content !== 'undefined') { %>
-  <p><%= content %></p>
-<% } %>
+<html>
+
+<head>
+  <title>Password reset form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container" style="width: 100%;">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <div class="card" style="width: 32rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= title %>
+            </h5>
+            <% if (typeof content !== 'undefined') { %>
+              <p class="card-text">
+                <%= content %>
+              </p>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -180,7 +180,7 @@ class EventDetailsContainer extends React.Component {
 
         var locationText = null;
         if (!!eventInfo[0].venue) {
-            locationText = 
+            locationText =
             <View>
                 <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
                 <Text style={styles.venueAddress}>{`${eventInfo[0].venue.address_1}`}</Text>

@@ -33,6 +33,9 @@
     "company": {
       "type": "string"
     },
+    "phone": {
+      "type": "string"
+    },
     "answers": {
       "type": {
         "question1": "string",
@@ -56,13 +59,32 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendSMSNotification"
     }
   ],
   "methods": {
     "emailAll": {
       "accepts": [
-        {"arg": "req", "type": "object", "http": { "source": "req" }},
-        {"arg": "res", "type": "object", "http": { "source": "res" }}
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        }
       ],
       "returns": [],
       "description": "test",

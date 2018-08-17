@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import {FormLabel, FormInput, Button} from 'react-native-elements';
 import {emailResetPasswordEntry, resetPassword} from './passwordActions';
 
@@ -28,7 +28,6 @@ class PasswordContainer extends React.Component {
         const { emailInput } = this.props;
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <View style={styles.container}>
                         <View style={styles.formContainer}>
                             <FormLabel>Enter your E-mail</FormLabel>
@@ -52,8 +51,14 @@ class PasswordContainer extends React.Component {
                             }}
                             onPress={this.submitResetPasswordRequest}
                         />
+                        <View style={styles.loginTextCont}>
+                        <TouchableOpacity
+                         onPress={() => this.props.navigation.navigate('Login')}
+                        >
+                        <Text style={styles.textButton}>{'Return to Login'}</Text>
+                        </TouchableOpacity>
                     </View>
-                </TouchableWithoutFeedback>
+                    </View>
             </KeyboardAvoidingView>
         );
     }
@@ -62,8 +67,7 @@ class PasswordContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#DCDCDC',
+        backgroundColor: '#ecf0f1',
         alignItems: 'center',
         padding: 30
     },
@@ -71,6 +75,16 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         width: 350,
         margin: 15
+    },
+    loginTextCont:{
+        alignItems:'center',
+        justifyContent:'flex-end',
+        marginVertical: 25,
+        flexDirection: 'row',
+    },
+    textButton:{
+        fontSize: 16,
+        fontWeight: '500'
     }
 });
 

@@ -1,4 +1,5 @@
 'use strict';
+
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const loopback = require('loopback');
@@ -33,6 +34,8 @@ app.start = function () {
 boot(app, __dirname, function (err) {
 
   if (err) throw err;
+
+  // start the server if `$ node server.js`
   if (require.main === module)
     app.start();
 });
