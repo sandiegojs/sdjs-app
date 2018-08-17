@@ -27,25 +27,30 @@ class SignupContainer extends React.Component {
     this.handleChecked = this.handleChecked.bind(this);
   }
 
-  handleFirstNameInput(text) {
-    const { dispatch } = this.props;
-    dispatch(updateFirstNameInput(text));
-  }
+    handleFirstNameInput(text) {
+        const { dispatch } = this.props;
+        dispatch(updateFirstNameInput(text));
+    }
 
-  handleLastNameInput(text) {
-    const { dispatch } = this.props;
-    dispatch(updateLastNameInput(text));
-  }
+    handleLastNameInput(text) {
+        const { dispatch } = this.props;
+        dispatch(updateLastNameInput(text));
+    }
 
-  handleEmailInput(text) {
-    const { dispatch } = this.props;
-    dispatch(updateEmailInput(text));
-  }
+    handleEmailInput(text) {
+        const { dispatch } = this.props;
+        dispatch(updateEmailInput(text));
+    }
 
-  handlePasswordInput(text) {
-    const { dispatch } = this.props;
-    dispatch(updatePasswordInput(text));
-  }
+    handlePasswordInput(text) {
+        const { dispatch } = this.props;
+        dispatch(updatePasswordInput(text));
+    }
+
+    handlePressButtonAsync = async () => {
+        let result = await WebBrowser.openBrowserAsync('https://teespring.com/sdjs-winter-2017#pid=212&cid=5832&sid=front');
+        this.setState({ result });
+    };
 
   handleChecked(checked) {
     this.setState(checked);
