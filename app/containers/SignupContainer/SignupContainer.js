@@ -71,85 +71,102 @@ class SignupContainer extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
-        <View style={styles.container}>
-          <View style={styles.formContainer}>
-            <FormLabel>
-FIRST NAME
-            </FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black',
-              }}
-              onChangeText={this.handleFirstNameInput}
-            />
-            <FormLabel>
-LAST NAME
-            </FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black',
-              }}
-              onChangeText={this.handleLastNameInput}
-            />
-            <FormLabel>
-EMAIL
-            </FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black',
-              }}
-              onChangeText={this.handleEmailInput}
-              defaultValue={this.props.emailInput}
-            />
-            <FormLabel>
-PASSWORD
-            </FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black',
-              }}
-              onChangeText={this.handlePasswordInput}
-              secureTextEntry
-            />
-          </View>
-          <Button
-            buttonStyle={{
-              backgroundColor: '#346abb',
-              borderRadius: 7,
-              marginTop: 7,
-              marginBottom: 25,
-              width: 300,
-              height: 55,
-            }}
-            onPress={this.handleSignUpSubmission}
-            large
-            icon={{ name: 'sign-in', type: 'font-awesome' }}
-            title="SIGN UP"
-          />
-          <View style={styles.loginTextCont}>
-            <Text style={styles.text}>
-Already have an account?
-            </Text>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Login')}
-            >
-              <Text style={styles.textButton}>
-                {' '}
-Login
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-    );
-  }
+    meetupSignup() {
+        //const credentials = {
+            
+        //}
+        axios
+            .post('http://900b625c.ngrok.io/auth/meetup', credentials)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                alert('Invalid Login');
+                console.log(error);
+                console.log('invalid login');
+                return Promise.resolve(error);
+            })
+    }
+
+    render() {
+        return (
+            <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    <View style={styles.formContainer}>
+                        <FormLabel>FIRST NAME</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleFirstNameInput}
+                        />
+                        <FormLabel>LAST NAME</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleLastNameInput}
+                        />
+                        <FormLabel>EMAIL</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handleEmailInput}
+                            defaultValue={this.props.emailInput}
+                        />
+                        <FormLabel>PASSWORD</FormLabel>
+                        <FormInput
+                            containerStyle={{
+                                margin: 5,
+                                borderBottomColor: 'black'
+                            }}
+                            onChangeText={this.handlePasswordInput}
+                            secureTextEntry={true}
+                        />
+                    </View>
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
+                        onPress={this.handleSignUpSubmission}
+                        large
+                        icon={{name: 'sign-in', type: 'font-awesome'}}
+                        title='SIGN UP'
+                    />
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
+                        onPress={this.meetupSignup}
+                        large 
+                        icon={{name: 'meetup', type: 'font-awesome'}}
+                    />
+                    <View style={styles.loginTextCont}>
+                        <Text style={styles.text}>{'Already have an account?'}</Text>
+                        <TouchableOpacity 
+                         onPress={() => this.props.navigation.navigate('Login')}
+                        >
+                        <Text style={styles.textButton}>{' Login'}</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </ScrollView>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
