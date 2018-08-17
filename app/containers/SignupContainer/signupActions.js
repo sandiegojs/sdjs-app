@@ -56,14 +56,3 @@ export function submitSignUp(credentials, navigate) {
 	}
 }
 
-export function thirdPartyLogin(loginObj) {
-	return {
-		type: 'THIRD_PARTY_LOGIN',
-		payload: axios
-			.post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
-			.then(response => response.data)
-			.catch(error => {
-				console.log("this one", error);
-			})
-	};
-}

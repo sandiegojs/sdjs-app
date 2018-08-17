@@ -67,6 +67,23 @@ class SignupContainer extends React.Component {
         }
     }
 
+    meetupSignup() {
+        //const credentials = {
+            
+        //}
+        axios
+            .post('http://900b625c.ngrok.io/auth/meetup', credentials)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                alert('Invalid Login');
+                console.log(error);
+                console.log('invalid login');
+                return Promise.resolve(error);
+            })
+    }
+
     render() {
         return (
             <ScrollView onPress={Keyboard.dismiss} accessible={false}>
@@ -120,6 +137,19 @@ class SignupContainer extends React.Component {
                         large
                         icon={{name: 'sign-in', type: 'font-awesome'}}
                         title='SIGN UP'
+                    />
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: '#346abb',
+                            borderRadius: 7,
+                            marginTop: 7,
+                            marginBottom: 25,
+                            width: 300,
+                            height: 55
+                        }}
+                        onPress={this.meetupSignup}
+                        large 
+                        icon={{name: 'meetup', type: 'font-awesome'}}
                     />
                     <View style={styles.loginTextCont}>
                         <Text style={styles.text}>{'Already have an account?'}</Text>
