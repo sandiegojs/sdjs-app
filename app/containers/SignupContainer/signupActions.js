@@ -46,7 +46,10 @@ export function submitSignUp(credentials, navigate) {
 					const {email, password} = credentials;
 					return axios
 						.post('https://sdjs-app.now.sh/api/users/login', {email, password})
-						.then(r => r.data);
+						.then(r => {
+						  const { id: token, userId: id } = r.data;
+						  return { id, token };
+						});
 				}
 			})
 			.catch(error => {
