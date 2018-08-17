@@ -11,6 +11,14 @@ import {
 class DonateContainer extends React.Component {
   constructor(props) {
     super(props);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    this.state = {
+    };
+=======
+>>>>>>> adds css
+>>>>>>> adds css
 
     this.handleCardholderName = this.handleCardholderName.bind(this);
     this.handleZipCode = this.handleZipCode.bind(this);
