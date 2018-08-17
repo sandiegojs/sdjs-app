@@ -1,10 +1,9 @@
 import React from 'react';
-import {
-  ScrollView, View, StyleSheet, Text, TouchableOpacity, Platform,
-} from 'react-native';
-import { connect } from 'react-redux';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
-import { updateEmailInput, updatePasswordInput, submitLogin } from './loginActions';
+import axios from 'axios';
+import {ScrollView, View, StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
+import {connect} from 'react-redux';
+import {FormLabel, FormInput, Button} from 'react-native-elements';
+import {updateEmailInput, updatePasswordInput, submitLogin} from './loginActions';
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -13,6 +12,7 @@ class LoginContainer extends React.Component {
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleLoginSubmission = this.handleLoginSubmission.bind(this);
+    this.meetupLogin = this.meetupLogin.bind(this);
   }
 
   handleEmailInput(text) {
@@ -29,6 +29,18 @@ class LoginContainer extends React.Component {
     const { dispatch, emailInput: email, passwordInput: password } = this.props;
     const { navigate } = this.props.navigation;
     dispatch(submitLogin({ email, password }, navigate));
+  }
+
+  meetupLogin() {
+    axios
+      .post('http://900b625c.ngrok.io/auth/meetup')
+      .then(response => console.log(response))
+      .catch(error => {
+        alert('Invalid Login');
+        console.log(error);
+        console.log('invalid login');
+        return Promise.resolve(error);
+      })
   }
 
   render() {
@@ -72,6 +84,19 @@ class LoginContainer extends React.Component {
             onPress={this.handleLoginSubmission}
             large
             icon={{ name: 'sign-in', type: 'font-awesome' }}
+          />
+          <Button
+          title="MEETUP"
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 7,
+              marginBottom: 25,
+              width: 321
+            }}
+            onPress={this.meetupLogin}
+            large
+            icon={{name: 'meetup', type: 'font-awesome'}}
           />
           <View style={styles.resetTextCont}>
             <TouchableOpacity

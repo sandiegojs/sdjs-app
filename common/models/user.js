@@ -1,3 +1,5 @@
+'use strict';
+
 const sendSMSNotification = require('../../server/sendSMSNotifications');
 
 module.exports = (User) => {
@@ -57,19 +59,19 @@ module.exports = (User) => {
     callback(null);
   };
 
-  User.sendSMSNotification = (body, cb) => {
-    User.find()
-      .then((userArray) => {
-        sendSMSNotification(body, userArray);
-      })
-      .then(() => cb(null));
-  };
+//   User.sendSMSNotification = (body, cb) => {
+//     User.find()
+//     .then(userArray => {
+//       sendSMSNotification(body, userArray)
+//     })
+//     .then(() => cb(null))
+//   }
 
-  User.remoteMethod('sendSMSNotification', {
-    description: [
-      'Sends sms message to all users who signed up'
-    ],
-    http: { path: '/sendSMSNotification', verb: 'post' },
-    accepts: { arg: 'body', type: 'string' }
-  });
-};
+//   User.remoteMethod('sendSMSNotification', {
+//     description: [
+//       'Sends sms message to all users who signed up'
+//     ],
+//     http: {path: '/sendSMSNotification', verb: 'post'},
+//     accepts: {arg: 'body', type: 'string'}
+//   })
+ };

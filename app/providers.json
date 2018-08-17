@@ -1,19 +1,27 @@
 {
-  "google-login": {
-    "provider": "google",
-    "module": "passport-google-oauth",
-    "strategy": "OAuth2Strategy",
-    "clientID": "283233290300-kahiigb8238ct28of5pi38cn9vn9rcfk.apps.googleusercontent.com",
-    "clientSecret": "KSx-fO82swZMYXEJEILpFdu5",
-    "callbackURL": "/auth/google/callback",
-    "authPath": "/auth/google",
-    "callbackPath": "/auth/google/callback",
-    "successRedirect": "/auth/account",
-    "failureRedirect": "/login",
-    "scope": [
-      "email",
-      "profile"
-    ],
-    "failureFlash": true
-  }
+    "meetup-login": {
+        "provider": "meetup",
+        "module": "passport-oauth2-meetup",
+        "clientID": "9i4tnbg04o1gff2ajhg88ocfpm",
+        "clientSecret": "kll6k6vit4k8cjf8d5i48shqpj",
+        "callbackURL": "/auth/meetup/callback",
+        "authPath": "/auth/meetup",
+        "callbackPath": "/auth/meetup/callback",
+        "successRedirect": "/auth/account",
+        "failureRedirect": "/login",
+        "failureFlash": true
+    },
+    "meetup-link": {
+        "provider": "meetup",
+        "module": "passport-oauth2-meetup",
+        "clientID": "9i4tnbg04o1gff2ajhg88ocfpm",
+        "clientSecret": "kll6k6vit4k8cjf8d5i48shqpj",
+        "callbackURL": "/link/meetup/callback",
+        "authPath": "/link/meetup",
+        "callbackPath": "/link/meetup/callback",
+        "successRedirect": "/auth/account",
+        "failureRedirect": "/login",
+        "link": true,
+        "failureFlash": true
+    }
 }
