@@ -11,12 +11,8 @@ export default class SignupScreen extends React.Component {
       headerLeft: null,
      },
       android:{
-      headerLeft:'',
-      alignSelf: 'center'
-     },
-     titleStyle: {
-      alignSelf: 'center'
-    },
+      headerLeft:''
+     }
      })
   };
   
