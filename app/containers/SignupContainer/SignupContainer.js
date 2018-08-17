@@ -142,7 +142,12 @@ class SignupContainer extends React.Component {
                             return result
                         }}
                     >
-                        <Text>
+                        <Text
+                            style={{
+                                fontSize: 16,
+                                fontWeight: '500'
+                            }}
+                        >
                             {'Privacy Policy'}
                         </Text>
                     </TouchableOpacity>

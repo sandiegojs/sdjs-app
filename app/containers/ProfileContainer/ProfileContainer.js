@@ -150,20 +150,21 @@ Website
               title="UPDATE"
             />
           </View>
-            <View style={{
+          <View
+            style={{
+              width: 333,
+              flex: 1,
               justifyContent: 'center',
               alignItems: 'center',
-              width: 333}}
-            >
-            <FormLabel
-              style= {{alignItems: 'start'}}
-            >
-              Recieve text notifications from SDJS?
-            </FormLabel>
+              padding: 10
+            }}
+          >
+            <FormLabel>Recieve Text Notifications From SDJS?</FormLabel>
             <FormInput
               placeholder=' Phone Number'
               onChangeText={this.handleSMSNumber}
               containerStyle={{
+                width: 300,
                 borderBottomColor: 'black'
               }}
               defaultValue={phone}
@@ -174,27 +175,30 @@ Website
                 backgroundColor: '#346abb',
                 borderRadius: 7,
                 marginTop: 24,
-                marginBottom: 21,
-                width: 255,
+                marginBottom: 24,
+                width: 145,
                 height: 50
               }}
               onPress={this.handleSMS}
-              title="Sure"
+              title="Yes"
             />
           </View>
           <TouchableOpacity
             onPress={async () => {
-                let result = await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
-                return result
+              let result = await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
+              return result
             }}
           >
             <Text 
               style={{
-              marginBottom: 11
-              }}>
-                {'Privacy Policy'}
+                marginBottom: 11,
+                fontSize: 16,
+                fontWeight: '500'
+              }}
+            >
+              {'Privacy Policy'}
             </Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );
@@ -205,8 +209,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
     alignItems: 'center',
+    backgroundColor: '#ecf0f1',
     padding: 10
   },
   formContainer: {
