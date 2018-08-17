@@ -7,15 +7,7 @@ import {WebBrowser} from 'expo';
 class SDJSContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      result: null,
-    };
   }
-
-  _handlePressButtonAsync = async () => {
-    let result = await WebBrowser.openBrowserAsync('http://sandiegojs.org/');
-    this.setState({result});
-  };
 
   render() {
 
@@ -40,7 +32,10 @@ class SDJSContainer extends React.Component {
             height: 65
           }}
           title="SAN DIEGO"
-          onPress={this._handlePressButtonAsync}
+          onPress={async () => {
+            let result = await WebBrowser.openBrowserAsync('http://sandiegojs.org/');
+            return result
+        }}
         />
       </ImageBackground>
     )

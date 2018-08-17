@@ -7,15 +7,7 @@ import {WebBrowser} from 'expo';
 class SlackContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            result: null,
-        };
     }
-
-    _handlePressButtonAsync = async () => {
-        let result = await WebBrowser.openBrowserAsync('http://sandiegojs.herokuapp.com/');
-        this.setState({ result });
-    };
 
     render() {
         return (
@@ -39,7 +31,10 @@ class SlackContainer extends React.Component {
                         height: 65
                     }}
                     title="SDJS SLACK"
-                    onPress={this._handlePressButtonAsync}
+                    onPress={async () => {
+                        let result = await WebBrowser.openBrowserAsync('http://sandiegojs.herokuapp.com/');
+                        return result
+                    }}
                 />
             </ImageBackground>
         )

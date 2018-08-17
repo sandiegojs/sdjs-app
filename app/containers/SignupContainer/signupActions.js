@@ -32,7 +32,7 @@ export function submitSignUp(credentials, navigate) {
 	return {
 		type: 'SUBMIT_SIGN_UP',
 		payload: axios
-			.post('https://sdjs-app.now.sh/api/users', credentials)
+			.post('https://3fa73acb.ngrok.io/api/users', credentials)
 			.then(response => {
 				const statusCode = RegExp('422*');
 				const signUpRes = response.data;
@@ -57,16 +57,4 @@ export function submitSignUp(credentials, navigate) {
 				alert('An account exists for this email address. Please try again.');
 			})
 	}
-}
-
-export function thirdPartyLogin(loginObj) {
-  return {
-    type: 'THIRD_PARTY_LOGIN',
-    payload: axios
-      .post('https://sdjs-app.now.sh/loginthirdparty', loginObj)
-      .then(response => response.data)
-      .catch((error) => {
-        console.log('this one', error);
-      }),
-  };
 }

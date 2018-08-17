@@ -11,7 +11,7 @@ export function resetPassword(email, navigate) {
   return {
     type: 'RESET_PASSWORD',
     payload: axios
-      .post('https://sdjs-app.now.sh/api/users/reset', { email })
+      .post('https://3fa73acb.ngrok.io/api/users/reset', {email})
       .then(() => {
         alert(`${'An email has been sent to' + ' '}${email}.`);
         navigate('Login');
