@@ -116,7 +116,7 @@ app.post('/signup', function (req, res, next) {
   });
 });
 
-app.get('/login', function (req, res, next) {
+app.get('login', function (req, res, next) {
   res.render('LogInScreen', {
     user: req.user,
     url: req.url,
