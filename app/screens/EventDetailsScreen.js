@@ -1,25 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, BackHandler } from 'react-native';
+import { BackHandler } from 'react-native';
 import EventDetailsContainer from '../containers/EventDetailsContainer/EventDetailsContainer';
 
 export default class EventDetailsScreen extends React.Component {
   constructor(props) {
     super(props)
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-}
+  }
 
-componentDidMount() {
+  componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-}
+  }
 
-componentWillUnmount() {
+  componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-}
+  }
 
-handleBackButtonClick() {
+  handleBackButtonClick() {
     this.props.navigation.goBack(null);
     return true;
-}
+  }
   static navigationOptions = {
     title: 'Event Details',
   };
@@ -30,12 +30,3 @@ handleBackButtonClick() {
     );
   }
 };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

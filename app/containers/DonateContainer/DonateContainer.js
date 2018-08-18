@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import {
   StyleSheet, View, Alert, Image, ScrollView,
 } from 'react-native';
@@ -8,20 +7,10 @@ import { FormLabel, FormInput, Button } from 'react-native-elements';
 import {
   cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction,
 } from './donateActions';
-=======
-import { StyleSheet, View, Alert, Image, ScrollView } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
-import { cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction } from './donateActions';
->>>>>>> adds css
 
 class DonateContainer extends React.Component {
   constructor(props) {
     super(props);
-<<<<<<< HEAD
-    this.state = {
-    };
-=======
->>>>>>> adds css
 
     this.handleCardholderName = this.handleCardholderName.bind(this);
     this.handleZipCode = this.handleZipCode.bind(this);

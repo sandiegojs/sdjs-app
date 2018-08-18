@@ -78,7 +78,7 @@ class ProfileContainer extends React.Component {
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-First Name
+              First Name
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -88,7 +88,7 @@ First Name
               onChangeText={this.handleFirstNameUpdate}
             />
             <FormLabel>
-Last Name
+              Last Name
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -98,7 +98,7 @@ Last Name
               onChangeText={this.handleLastNameUpdate}
             />
             <FormLabel>
-Email
+              Email
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -108,7 +108,7 @@ Email
               onChangeText={this.handleEmailUpdate}
             />
             <FormLabel>
-Bio
+              Bio
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -118,7 +118,7 @@ Bio
               onChangeText={this.handleBioUpdate}
             />
             <FormLabel>
-Company
+              Company
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -128,7 +128,7 @@ Company
               onChangeText={this.handleCompanyUpdate}
             />
             <FormLabel>
-Website
+              Website
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -189,7 +189,7 @@ Website
               return result
             }}
           >
-            <Text 
+            <Text
               style={{
                 marginBottom: 11,
                 fontSize: 16,

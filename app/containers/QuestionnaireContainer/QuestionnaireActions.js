@@ -23,11 +23,11 @@ export function question3Entry(text) {
 
 export function allAnswers(answers, id, token) {
 
-    return {
-        type: 'QUESTIONNAIRE_ENTRY',
-        payload: axios
-            .patch('https://3fa73acb.ngrok.io/api/users/' + id, answers, {headers: {Authorization: token}})
-            .then(response => response.data)
-            .catch(err=>console.log(err))
-    }
+  return {
+    type: 'QUESTIONNAIRE_ENTRY',
+    payload: axios
+      .patch('https://sdjs-app.now.sh/api/users/' + id, answers, { headers: { Authorization: token } })
+      .then(response => response.data)
+      .catch(err => console.log(err))
+  }
 }

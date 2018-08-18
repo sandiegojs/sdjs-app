@@ -38,7 +38,7 @@ class LoginContainer extends React.Component {
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-EMAIL
+              EMAIL
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -49,7 +49,7 @@ EMAIL
               onChangeText={this.handleEmailInput}
             />
             <FormLabel>
-PASSWORD
+              PASSWORD
             </FormLabel>
             <FormInput
               containerStyle={{

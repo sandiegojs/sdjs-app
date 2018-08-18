@@ -48,9 +48,8 @@ export default function signupReducer(state = defaultState, action) {
       };
     }
 
-        default: {
-            return state;
-        }
+    default: {
+      return state;
     }
   }
 }
