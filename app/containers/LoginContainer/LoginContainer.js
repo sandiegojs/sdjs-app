@@ -45,6 +45,20 @@ class LoginContainer extends React.Component {
       })
   }
 
+  meetupLogin() {
+    axios
+      .get('http://900b625c.ngrok.io/auth/meetup')
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        alert('Invalid Login');
+        console.log(error);
+        console.log('invalid login');
+        return Promise.resolve(error);
+      })
+  }
+
   render() {
     const { email } = this.props;
     return (
@@ -86,6 +100,19 @@ class LoginContainer extends React.Component {
             onPress={this.handleLoginSubmission}
             large
             icon={{ name: 'sign-in', type: 'font-awesome' }}
+          />
+          <Button
+          title="MEETUP"
+            buttonStyle={{
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 7,
+              marginBottom: 25,
+              width: 321
+            }}
+            onPress={this.meetupLogin}
+            large
+            icon={{name: 'meetup', type: 'font-awesome'}}
           />
           <Button
           title="MEETUP"
