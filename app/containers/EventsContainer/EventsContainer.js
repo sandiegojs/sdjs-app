@@ -1,7 +1,7 @@
 import React from 'react';
 import Geofence from 'react-native-expo-geofence';
-import {connect} from 'react-redux';
-import {Location, Permissions, WebBrowser} from 'expo';
+import { connect } from 'react-redux';
+import { Location, Permissions, WebBrowser } from 'expo';
 import {
   updateEventsData,
   updateSelectedEvent,
@@ -12,16 +12,16 @@ import {
   removeAttendee,
   profileQuery
 } from './eventsActions';
-import {FlatList, StyleSheet, View, Text, Alert, ScrollView} from 'react-native';
-import {List, ListItem, Button} from "react-native-elements";
+import { FlatList, StyleSheet, View, Text, Alert, ScrollView } from 'react-native';
+import { List, ListItem, Button } from "react-native-elements";
 import {
-        getDayOfTheWeek,
-        getMonthString,
-        getMonthAbr,
-        getDateString,
-        getYearString,
-        standardTime
-      } from './eventsDateAndTime';
+  getDayOfTheWeek,
+  getMonthString,
+  getMonthAbr,
+  getDateString,
+  getYearString,
+  standardTime
+} from './eventsDateAndTime';
 const moment = require('moment-timezone');
 
 class EventsContainer extends React.Component {
@@ -34,13 +34,13 @@ class EventsContainer extends React.Component {
   }
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(updateEventsData());
   }
 
   selectionHandler(id, rsvpEventDetails, rsvpEventId) {
-    const {navigate} = this.props.navigation;
-    const {dispatch} = this.props;
+    const { navigate } = this.props.navigation;
+    const { dispatch } = this.props;
     selectedEventId = id;
     dispatch(updateSelectedEvent(selectedEventId));
     navigate('EventDetails')
@@ -48,8 +48,8 @@ class EventsContainer extends React.Component {
 
   _getLocationAsync = async () => {
 
-    const {dispatch, eventsData, user} = this.props;
-    let {status} = await Permissions.askAsync(Permissions.LOCATION);
+    const { dispatch, eventsData, user } = this.props;
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== 'granted') {
       let errorMessage = 'Permission to access location was denied';
@@ -76,9 +76,9 @@ class EventsContainer extends React.Component {
         Alert.alert(
           'Unable to Check In',
           'You need to be within 500 meters of the event location to check in', [{
-              text: 'OK',
+            text: 'OK',
           }], {
-              cancelable: false
+            cancelable: false
           }
         )
       } else {
@@ -95,18 +95,18 @@ class EventsContainer extends React.Component {
   };
 
   handleUnCheckIn() {
-    const {dispatch, attendeeId, user} = this.props;
+    const { dispatch, attendeeId, user } = this.props;
     dispatch(checkedInFalse(false));
     dispatch(removeAttendee(attendeeId, user.token));
   }
 
   _handlePressButtonAsync = async () => {
-    const {eventsData} = this.props;
+    const { eventsData } = this.props;
     let result = await WebBrowser.openBrowserAsync(eventsData[0].link);
   }
 
   handleButtons() {
-    const {eventsData, checkedIn, eventDetails} = this.props;
+    const { eventsData, checkedIn, eventDetails } = this.props;
 
     function addZero(i) {
       if (i < 10) {
@@ -116,12 +116,12 @@ class EventsContainer extends React.Component {
     }
 
     var d = new Date();
-     // below date using moment.js/moment-timezone npm package
+    // below date using moment.js/moment-timezone npm package
     var todaysDate = moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
     var nextEvent = eventsData[0];
     var hours = addZero(d.getHours()).toString();
     var mins = addZero(d.getMinutes()).toString();
-    var currentTime = parseInt(hours+mins);
+    var currentTime = parseInt(hours + mins);
     var eventTime = parseInt(nextEvent.local_time.replace(':', ''));
     var hoursPriorToEvent = eventTime - 100;
     var hoursAfterEventStart = eventTime + 400;
@@ -129,42 +129,42 @@ class EventsContainer extends React.Component {
     if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate == nextEvent.local_date) {
       if (checkedIn) {
         nextEventButton = <Button
-                            large
-                            buttonStyle={{
-                              backgroundColor: '#D95351',
-                              borderRadius: 7
-                            }}
-                            icon={{ name: 'undo', type: 'font-awesome' }}
-                            title=' UNDO CHECK-IN'
-                            onPress={this.handleUnCheckIn}
-                          />
+          large
+          buttonStyle={{
+            backgroundColor: '#D95351',
+            borderRadius: 7
+          }}
+          icon={{ name: 'undo', type: 'font-awesome' }}
+          title=' UNDO CHECK-IN'
+          onPress={this.handleUnCheckIn}
+        />
       }
       if (!checkedIn) {
         nextEventButton = <Button
-                            large
-                            buttonStyle={{
-                              backgroundColor: '#346abb',
-                              borderRadius: 7
-                            }}
-                            icon={{ name: 'check-circle', type: 'font-awesome' }}
-                            title=' CHECK-IN'
-                            onPress={this._getLocationAsync}
-                          />
+          large
+          buttonStyle={{
+            backgroundColor: '#346abb',
+            borderRadius: 7
+          }}
+          icon={{ name: 'check-circle', type: 'font-awesome' }}
+          title=' CHECK-IN'
+          onPress={this._getLocationAsync}
+        />
       }
     }
 
     if (currentTime < hoursPriorToEvent || todaysDate != nextEvent.local_date) {
       nextEventButton = <Button
-                          large
-                          buttonStyle={{
-                            backgroundColor: '#346abb',
-                            borderRadius: 7
-                          }}
-                          raised
-                          icon={{ name: 'check-circle', type: 'font-awesome' }}
-                          title=' RSVP'
-                          onPress={this._handlePressButtonAsync}
-                        />
+        large
+        buttonStyle={{
+          backgroundColor: '#346abb',
+          borderRadius: 7
+        }}
+        raised
+        icon={{ name: 'check-circle', type: 'font-awesome' }}
+        title=' RSVP'
+        onPress={this._handlePressButtonAsync}
+      />
     }
     if (currentTime > hoursAfterEventStart && todaysDate == nextEvent.local_date) {
       nextEventButton = null;
@@ -174,32 +174,32 @@ class EventsContainer extends React.Component {
   }
 
   render() {
-    const {eventsData, locationError} = this.props;
+    const { eventsData, locationError } = this.props;
     let locationErrorMessage = null;
     if (!!locationError) {
       locationErrorMessage = <Text style={styles.locationErrorMessage}>{locationError}</Text>
     }
     if (!!eventsData) {
       return (
-          <View style={styles.listWrapper}>
-            <Text style={{textAlign: 'center', paddingTop: 10, fontWeight: 'bold'}}>Next Event: {eventsData[0].name}</Text>
-            {this.handleButtons()}
-            {locationErrorMessage}
-            <Text style={{textAlign: 'center', paddingTop: 20, marginBottom: 0}}>Upcoming Events</Text>
-            <List containerStyle={{marginBottom: 15,marginTop:15}}>
+        <View style={styles.listWrapper}>
+          <Text style={{ textAlign: 'center', paddingTop: 10, fontWeight: 'bold' }}>Next Event: {eventsData[0].name}</Text>
+          {this.handleButtons()}
+          {locationErrorMessage}
+          <Text style={{ textAlign: 'center', paddingTop: 20, marginBottom: 0 }}>Upcoming Events</Text>
+          <List containerStyle={{ marginBottom: 15, marginTop: 15 }}>
             <ScrollView>
               <FlatList
                 data={eventsData}
-                renderItem={({item}) => <ListItem
+                renderItem={({ item }) => <ListItem
                   title={`${getDayOfTheWeek(item.local_date)}, ${getMonthString(item.local_date)}, ${getDateString(item.local_date)}, ${getYearString(item.local_date)}, ${standardTime(item.local_time)}`}
                   subtitle={item.name}
                   onPress={() => this.selectionHandler(item.id)}
                 />}
                 keyExtractor={(item, index) => item.id}
               />
-              </ScrollView>
-            </List>
-          </View>
+            </ScrollView>
+          </List>
+        </View>
       );
     } else {
       return (

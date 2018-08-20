@@ -5,11 +5,14 @@
     "slug": "sdjs",
     "privacy": "public",
     "sdkVersion": "25.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "0.9.0",
     "orientation": "portrait",
     "icon": "./assets/images/sdjs512x512.png",
-    "splash": { 
+    "splash": {
       "backgroundColor": "#1884c3",
       "resizeMode": "contain",
       "image": "./assets/images/sandiegojs.png"
@@ -20,7 +23,7 @@
     },
     "android": {
       "package": "com.sdjs.SDJSapp",
-      "splash": {       
+      "splash": {
         "resizeMode": "contain",
         "backgroundColor": "#1884c3",
         "mdpi": "./assets/images/sdjs_app_mdpi.png",
@@ -31,7 +34,7 @@
       },
       "config": {
         "googleMaps": {
-        "apiKey": "AIzaSyAFqc0V6I1nMu_-OC1UL_9wIYdo_D2ev0k"
+          "apiKey": "AIzaSyAFqc0V6I1nMu_-OC1UL_9wIYdo_D2ev0k"
         }
       }
     }

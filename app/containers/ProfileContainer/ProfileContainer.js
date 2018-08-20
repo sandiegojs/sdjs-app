@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  StyleSheet, View, ScrollView, Keyboard,
-} from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { WebBrowser } from 'expo';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { FormLabel, FormInput, Button } from "react-native-elements";
 import * as actions from './profileActions';
 
 class ProfileContainer extends React.Component {
@@ -73,15 +72,13 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    const {
-      firstName, lastName, email, bio, company, url,
-    } = this.props.profileData;
+    const { firstName, lastName, email, bio, company, url, phone } = this.props.profileData;
     return (
-      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+      <ScrollView>
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-First Name
+              First Name
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -91,7 +88,7 @@ First Name
               onChangeText={this.handleFirstNameUpdate}
             />
             <FormLabel>
-Last Name
+              Last Name
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -101,7 +98,7 @@ Last Name
               onChangeText={this.handleLastNameUpdate}
             />
             <FormLabel>
-Email
+              Email
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -111,7 +108,7 @@ Email
               onChangeText={this.handleEmailUpdate}
             />
             <FormLabel>
-Bio
+              Bio
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -121,7 +118,7 @@ Bio
               onChangeText={this.handleBioUpdate}
             />
             <FormLabel>
-Company
+              Company
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -131,7 +128,7 @@ Company
               onChangeText={this.handleCompanyUpdate}
             />
             <FormLabel>
-Website
+              Website
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -153,15 +150,24 @@ Website
               title="UPDATE"
             />
           </View>
-        </View>
-        <View style={styles.container}>
-          <View style={styles.formContainer}>
-            <FormLabel>
-Would you like to recieve text notifications from SDJS?
-            </FormLabel>
+          <View
+            style={{
+              width: 333,
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 10
+            }}
+          >
+            <FormLabel>Recieve Text Notifications From SDJS?</FormLabel>
             <FormInput
-              placeholder="please enter your phone number"
+              placeholder=' Phone Number'
               onChangeText={this.handleSMSNumber}
+              containerStyle={{
+                width: 300,
+                borderBottomColor: 'black'
+              }}
+              defaultValue={phone}
             />
             <Button
               large
@@ -169,13 +175,30 @@ Would you like to recieve text notifications from SDJS?
                 backgroundColor: '#346abb',
                 borderRadius: 7,
                 marginTop: 24,
-                width: 300,
-                height: 55,
+                marginBottom: 24,
+                width: 145,
+                height: 50
               }}
               onPress={this.handleSMS}
-              title="Sign Up"
+              title="Yes"
             />
           </View>
+          <TouchableOpacity
+            onPress={async () => {
+              let result = await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
+              return result
+            }}
+          >
+            <Text
+              style={{
+                marginBottom: 11,
+                fontSize: 16,
+                fontWeight: '500'
+              }}
+            >
+              {'Privacy Policy'}
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );
@@ -186,9 +209,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    padding: 30,
+    backgroundColor: '#ecf0f1',
+    padding: 10
   },
   formContainer: {
     width: 333,

@@ -2,7 +2,7 @@
 
 const axios = require('axios');
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.post('/signup', (req, res) => {
     const baseUrl = app.get('url').replace(/\/$/, '');
     const { email, password } = req.body;

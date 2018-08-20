@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json());
 
-app.start = function() {
+app.start = function () {
   return app.listen(() => {
     app.emit('started');
     const baseUrl = app.get('url').replace(/\/$/, '');

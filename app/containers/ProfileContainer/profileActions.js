@@ -4,18 +4,18 @@ export function profileInit(id, token) {
   return {
     type: 'PROFILE_INIT',
     payload: axios
-      .get(`https://sdjs-app.now.sh/api/users/${id}`, { headers: { Authorization: token } })
-      .then(r => r.data),
-  };
+      .get('https://sdjs-app.now.sh/api/users/' + id, { headers: { Authorization: token } })
+      .then(r => r.data)
+  }
 }
 
 export function profileUpdate(newProfileData, id, token) {
   return {
     type: 'PROFILE_UPDATE',
     payload: axios
-      .patch(`https://sdjs-app.now.sh/api/users/${id}`, newProfileData, { headers: { Authorization: token } })
-      .then(r => r.data),
-  };
+      .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData, { headers: { Authorization: token } })
+      .then(r => r.data)
+  }
 }
 
 export function firstNameUpdate(firstName) {
@@ -78,10 +78,10 @@ export function SMSNotifications(phone, id, token) {
   return {
     type: 'PHONE_ENTRY',
     payload: axios
-      .patch(`https://sdjs-app.now.sh/api/users/${id}`, { phone }, { headers: { Authorization: token } })
+      .patch('https://sdjs-app.now.sh/api/users/' + id, { phone }, { headers: { Authorization: token } })
       .then(response => console.log(response.data))
       .catch((err) => {
-        alert(err);
-      }),
-  };
+        alert(err)
+      })
+  }
 }
