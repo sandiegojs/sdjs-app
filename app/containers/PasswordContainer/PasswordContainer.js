@@ -32,7 +32,7 @@ class PasswordContainer extends React.Component {
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-Enter your E-mail
+              Enter your E-mail
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -59,7 +59,7 @@ Enter your E-mail
               onPress={() => this.props.navigation.navigate('Login')}
             >
               <Text style={styles.textButton}>
-Return to Login
+                Return to Login
               </Text>
             </TouchableOpacity>
           </View>

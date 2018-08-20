@@ -1,21 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Platform } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { Platform } from 'react-native';
 import SignupContainer from '../containers/SignupContainer/SignupContainer';
 
 export default class SignupScreen extends React.Component {
   static navigationOptions = {
     title: 'Sign Up',
     ...Platform.select({
-      ios:{
-      headerLeft: null,
-     },
-      android:{
-      headerLeft:''
-     }
-     })
+      ios: {
+        headerLeft: null,
+      },
+      android: {
+        headerLeft: ''
+      }
+    })
   };
-  
+
   render() {
     const { navigate } = this.props.navigation;
     return (

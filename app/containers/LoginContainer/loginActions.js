@@ -22,7 +22,7 @@ export function submitLogin(credentials, navigate) {
     type: 'SUBMIT_LOGIN',
     payload: axios
       .post('https://sdjs-app.now.sh/api/users/login', { email, password, ttl })
-      .then((response) => {
+      .then(response => {
         const { id: token, userId: id } = response.data;
         navigate('Events');
         return { id, token };

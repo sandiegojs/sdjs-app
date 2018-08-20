@@ -8,6 +8,6 @@
     "name": "MongoDB",
     "user": "",
     "connector": "loopback-connector-mongodb",
-    "file":"db.json"
+    "file": "db.json"
   }
 }

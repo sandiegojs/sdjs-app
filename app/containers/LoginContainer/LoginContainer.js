@@ -38,7 +38,7 @@ class LoginContainer extends React.Component {
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-EMAIL
+              EMAIL
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -49,7 +49,7 @@ EMAIL
               onChangeText={this.handleEmailInput}
             />
             <FormLabel>
-PASSWORD
+              PASSWORD
             </FormLabel>
             <FormInput
               containerStyle={{
@@ -77,22 +77,15 @@ PASSWORD
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Password')}
             >
-              <Text style={styles.resetTextButton}>
-Forgot Password?
-              </Text>
+              <Text style={styles.resetTextButton}>{'Forgot Password?'}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.signupTextCont}>
-            <Text style={styles.signupText}>
-              {'Don\'t have an account?'}
-            </Text>
+            <Text style={styles.signupText}>{'Don\'t have an account?'}</Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Signup')}
             >
-              <Text style={styles.signupTextButton}>
-                {' '}
-Signup
-              </Text>
+              <Text style={styles.signupTextButton}>{' Signup'}</Text>
             </TouchableOpacity>
           </View>
         </View>

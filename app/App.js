@@ -1,8 +1,8 @@
 import React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './rootStore';
-import {Image,  BackHandler, Alert} from 'react-native';
-import {StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
+import { Image, BackHandler, Alert } from 'react-native';
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -19,36 +19,36 @@ import ShoppingScreen from './screens/ShoppingScreen';
 
 class App extends React.Component {
 
-handleBackButton = () => {
-  Alert.alert(
+  handleBackButton = () => {
+    Alert.alert(
       'Exit The App',
       'Are you sure you want to exit?', [{
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel'
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel'
       }, {
-          text: 'OK',
-          onPress: () => BackHandler.exitApp()
-      }, ], {
-          cancelable: false
+        text: 'OK',
+        onPress: () => BackHandler.exitApp()
+      },], {
+        cancelable: false
       }
-   )
-   return true;
- }
- componentDidMount() {
-  BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-}
+    )
+    return true;
+  }
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
 
-componentWillUnmount() {
-  BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-}
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
   render() {
 
     const AppRoot = StackNavigator({
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
-      Password: { screen : PasswordResetScreen},
-      Questionnaire: { screen : QuestionnaireScreen},
+      Password: { screen: PasswordResetScreen },
+      Questionnaire: { screen: QuestionnaireScreen },
       Events: {
         screen: TabNavigator(
           {
@@ -134,7 +134,7 @@ componentWillUnmount() {
                       />
                     )
                     break;
-                    case 'Shopping':
+                  case 'Shopping':
                     return (
                       <Image
                         source={require('./assets/images/shopping.png')}
@@ -142,7 +142,7 @@ componentWillUnmount() {
                         style={{ width: 30, height: 30 }}
                       />
                     )
-                  break;
+                    break;
                 }
               },
             }),
