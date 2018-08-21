@@ -181,6 +181,7 @@ class ProfileContainer extends React.Component {
               defaultValue={url}
               autoCorrect={false}
               autoCapitalize='none'
+              keyboardType='email-address'
               onChangeText={this.handleUrlUpdate}
             />
             <Text style={{

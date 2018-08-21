@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet, Image, TouchableHighlight, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
 import { WebBrowser } from 'expo';
 import Pin from '../../components/Pin';
 
@@ -74,8 +74,8 @@ class ShoppingContainer extends React.Component {
   };
   render() {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.pincontainer}>
+      <ScrollView style={styles.container}>
+        <View>
           <TouchableHighlight onPress={() => this.handlePressButtonAsyncHoodie()}>
             <Pin pinsource={this.state.pin.hoodie} columns={this.state.columns} />
           </TouchableHighlight>
@@ -83,7 +83,7 @@ class ShoppingContainer extends React.Component {
             <Pin pinsource={this.state.pin.mug} columns={this.state.columns} />
           </TouchableHighlight>
         </View>
-        <View style={styles.pincontainer}>
+        <View>
           <TouchableHighlight onPress={() => this.handlePressButtonAsyncForSun()}>
             <Pin pinsource={this.state.pin.funcSunshine} columns={this.state.columns} />
           </TouchableHighlight>
@@ -91,7 +91,7 @@ class ShoppingContainer extends React.Component {
             <Pin pinsource={this.state.pin.funcSunshine2} columns={this.state.columns} />
           </TouchableHighlight>
         </View>
-        <View style={styles.pincontainer}>
+        <View>
           <TouchableHighlight onPress={() => this.handlePressButtonAsyncForBlueSdjs()}>
             <Pin pinsource={this.state.pin.blueSdjs} columns={this.state.columns} />
           </TouchableHighlight>
