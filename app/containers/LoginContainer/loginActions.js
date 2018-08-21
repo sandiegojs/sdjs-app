@@ -21,7 +21,7 @@ export function submitLogin(credentials, navigate) {
   return {
     type: 'SUBMIT_LOGIN',
     payload: axios
-      .post('https://a7e99c18.ngrok.io/api/users/login', { email, password, ttl })
+      .post('https://sdjs-app.now.sh/api/users/login', { email, password, ttl })
       .then(response => {
         const { id: token, userId: id } = response.data;
         navigate('Events');

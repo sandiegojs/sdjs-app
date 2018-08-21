@@ -43,8 +43,7 @@ class LoginContainer extends React.Component {
             <FormInput
               containerStyle={{
                 margin: 5,
-                borderBottomColor: 'black',
-
+                borderBottomColor: 'black'
               }}
               inputStyle={{ paddingLeft: 4 }}
               autoCapitalize='none'
