@@ -26,7 +26,7 @@ export function allAnswers(answers, id, token) {
   return {
     type: 'QUESTIONNAIRE_ENTRY',
     payload: axios
-      .patch('https://027f8caa.ngrok.io/api/users/' + id, answers, { headers: { Authorization: token } })
+      .patch('https://sdjs-app.now.sh/api/users/' + id, answers, { headers: { Authorization: token } })
       .then(response => response.data)
       .catch(err => console.log(err))
   }
