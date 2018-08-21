@@ -100,6 +100,7 @@ class DonateContainer extends React.Component {
             placeholder=' Name That Appears On Card'
             icon={{ name: 'sign-in', type: 'font-awesome' }}
             containerStyle={{ width: "80%" }}
+            inputStyle={{ paddingLeft: 4 }}
             onChangeText={this.handleCardholderName}
           />
           <FormLabel>CARD NUMBER</FormLabel>
@@ -111,6 +112,7 @@ class DonateContainer extends React.Component {
             placeholder=' #### #### #### ####'
             keyboardType='numeric'
             containerStyle={{ width: "45%" }}
+            inputStyle={{ paddingLeft: 4 }}
             onChangeText={this.handleCardNumber}
           />
           <View style={styles.row}>
@@ -124,6 +126,7 @@ class DonateContainer extends React.Component {
                 placeholder=" ##"
                 keyboardType='numeric'
                 containerStyle={{ width: "28%" }}
+                inputStyle={{ paddingLeft: 4 }}
                 onChangeText={this.handleCardExpMonth} />
             </View>
             <View style={styles.inputWrap}>
@@ -137,6 +140,7 @@ class DonateContainer extends React.Component {
                 placeholder=" ##"
                 keyboardType='numeric'
                 containerStyle={{ width: "28%", }}
+                inputStyle={{ paddingLeft: 4 }}
                 onChangeText={this.handleCardExpYear} />
             </View>
             <View style={styles.inputWrap}>
@@ -149,6 +153,7 @@ class DonateContainer extends React.Component {
                 placeholder=" ###"
                 keyboardType='numeric'
                 containerStyle={{ width: "36%" }}
+                inputStyle={{ paddingLeft: 4 }}
                 onChangeText={this.handleCardCvc} />
             </View>
           </View>
@@ -162,9 +167,8 @@ class DonateContainer extends React.Component {
                 class='field is-empty'
                 placeholder=' #####'
                 keyboardType='numeric'
-                containerStyle={{
-                  width: "15%"
-                }}
+                containerStyle={{ width: "15%" }}
+                inputStyle={{ paddingLeft: 4 }}
                 onChangeText={this.handleZipCode}
               />
             </View>

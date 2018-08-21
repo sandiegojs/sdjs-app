@@ -44,8 +44,13 @@ class LoginContainer extends React.Component {
               containerStyle={{
                 margin: 5,
                 borderBottomColor: 'black',
+
               }}
-              defaultValue={email}
+              inputStyle={{ paddingLeft: 4 }}
+              autoCapitalize='none'
+              keyboardType='email-address'
+              autoCorrect={false}
+              returnKeyType={"next"}
               onChangeText={this.handleEmailInput}
             />
             <FormLabel>
@@ -56,8 +61,12 @@ class LoginContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black',
               }}
+              inputStyle={{ paddingLeft: 4 }}
+              autoCapitalize='none'
+              autoCorrect={false}
               secureTextEntry
               onChangeText={this.handlePasswordInput}
+              returnKeyType={"done"}
             />
           </View>
           <Button
@@ -100,7 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 30,
+    padding: 20,
   },
   formContainer: {
     paddingBottom: 20,

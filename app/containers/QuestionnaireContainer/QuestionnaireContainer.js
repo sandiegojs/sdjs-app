@@ -88,6 +88,7 @@ class QuestionnaireContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleQuestion1Input}
             />
             <FormLabel>How did you hear about SDJS?</FormLabel>
@@ -96,6 +97,7 @@ class QuestionnaireContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleQuestion2Input}
             />
             <FormLabel>What would you like to learn?</FormLabel>
@@ -104,6 +106,7 @@ class QuestionnaireContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleQuestion3Input}
             />
           </View>

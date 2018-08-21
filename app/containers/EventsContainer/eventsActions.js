@@ -85,7 +85,7 @@ export function addAttendeeToEvent(eventObj, userId) {
     type: 'ADD_ATTENDEE_TO_EVENT',
     payload:
       axios
-        .post('https://sdjs-app.now.sh/checkin', { eventObj, userId })
+        .post('https://a7e99c18.ngrok.io/checkin', { eventObj, userId })
         .then(response => {
           return response.data;
         })
@@ -98,7 +98,7 @@ export function profileQuery(userId, token) {
     type: 'PROFILE_QUERY',
     payload:
       axios
-        .get('https://sdjs-app.now.sh/api/users/' + userId, { headers: { Authorization: token } })
+        .get('https://a7e99c18.ngrok.io/api/users/' + userId, { headers: { Authorization: token } })
         .then(response => {
           return response.data
         })
@@ -113,7 +113,7 @@ export function removeAttendee(attendeeId, token) {
     type: 'REMOVE_ATTENDEE',
     payload:
       axios
-        .delete('https://sdjs-app.now.sh/api/attendees/' + attendeeId, { headers: { Authorization: token } })
+        .delete('https://a7e99c18.ngrok.io/api/attendees/' + attendeeId, { headers: { Authorization: token } })
         .then(response => {
           return response.data;
         })
@@ -128,7 +128,7 @@ export function addRSVPToEvent(eventObj, userId) {
     type: 'ADD_RSVP_TO_EVENT',
     payload:
       axios
-        .post('https://sdjs-app.now.sh/rsvp', { eventObj, userId })
+        .post('https://a7e99c18.ngrok.io/rsvp', { eventObj, userId })
         .then(response => {
           console.log('returned data', response.data)
           return response.data;
@@ -148,7 +148,7 @@ export function removeRSVPFromEvent(rsvpEventId, token) {
     type: 'REMOVE_RSVP_FROM_EVENT',
     payload:
       axios
-        .delete('https://sdjs-app.now.sh/api/rsvps/' + rsvpEventId, { header: { Authorization: token } })
+        .delete('https://a7e99c18.ngrok.io/api/rsvps/' + rsvpEventId, { header: { Authorization: token } })
         .then(response => {
           return response.data;
         })
@@ -167,7 +167,7 @@ export function updateRSVPList(user, token) {
     type: 'UPDATE_RSVP_LIST',
     payload:
       axios
-        .get('https://sdjs-app.now.sh/api/rsvps?filter[where][userId]=' + user, { headers: { Authorization: token } })
+        .get('https://a7e99c18.ngrok.io/api/rsvps?filter[where][userId]=' + user, { headers: { Authorization: token } })
         .then(response => {
 
           return response.data;
