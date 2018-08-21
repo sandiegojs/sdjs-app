@@ -20,6 +20,7 @@ class ProfileContainer extends React.Component {
     this.handleBioUpdate = this.handleBioUpdate.bind(this);
     this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
     this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
+    this.handleNumberUpdate = this.handleNumberUpdate.bind(this);
     this.handleEmailChecked = this.handleEmailChecked.bind(this);
     this.handlePhoneChecked = this.handlePhoneChecked.bind(this);
   }
