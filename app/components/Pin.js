@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import LocalImage from './LocalImage'
 
 let windowWidth = Dimensions.get('window').width;
@@ -12,7 +12,7 @@ export default class Pin extends Component{
           <View style={styles.PinHeader}>
           </View>
         <View style={styles.PinContent}>
-          <LocalImage 
+          <LocalImage
           source={this.props.pinsource.imagesource}
           originalWidth={this.props.pinsource.originalWidth}
           originalHeight={this.props.pinsource.originalHeight}

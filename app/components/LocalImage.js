@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Image, Dimensions } from 'react-native'
 
 const LocalImage = ({source, originalWidth, originalHeight, columns}) => {
