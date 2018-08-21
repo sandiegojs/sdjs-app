@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, Dimensions } from 'react-native';
-import UtilityNavButton from './UtilityNavButton';
-import Button from './Button';
 import LocalImage from './LocalImage'
 
 let windowWidth = Dimensions.get('window').width;
