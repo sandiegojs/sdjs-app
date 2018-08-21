@@ -1,13 +1,46 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet, Image, TouchableHighlight, ScrollView } from 'react-native';
+import { View, StyleSheet, Image, TouchableHighlight, ScrollView, Text } from 'react-native';
 import { WebBrowser } from 'expo';
+import Pin from '../../components/Pin';
 
 class ShoppingContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       result: null,
+      pin: {
+        hoodie: {
+          imagesource: require('../../assets/images/hoodie.png'),
+          originalWidth: 480,
+          originalHeight: 522,
+        },
+        mug: {
+          imagesource: require('../../assets/images/mug.png'),
+          originalWidth: 480,
+          originalHeight: 365,
+        },
+        funcSunshine: {
+          imagesource: require('../../assets/images/funcSunshine.png'),
+          originalWidth: 470,
+          originalHeight: 560,
+        },
+        funcSunshine2: {
+          imagesource: require('../../assets/images/funcSunshine2.png'),
+          originalWidth: 470,
+          originalHeight: 560,
+        },
+        blueSdjs: {
+          imagesource: require('../../assets/images/blueSdjs.png'),
+          originalWidth: 470,
+          originalHeight: 560,
+        },
+        darkSdjs: {
+          imagesource: require('../../assets/images/darkSdjs.png'),
+          originalWidth: 470,
+          originalHeight: 560,
+        }
+      }
     };
   }
 
@@ -41,130 +74,43 @@ class ShoppingContainer extends React.Component {
   };
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <View style={[styles.boxContainer, styles.boxOne]}>
-            <TouchableHighlight
-              onPress={() => this.handlePressButtonAsyncHoodie()}>
-              <Image
-                source={require('../../assets/images/hoodie.png')}
-                style={{
-                  width: 198,
-                  height: 208,
-                  marginRight: -2,
-                  borderWidth: 1,
-                  borderColor: '#bdc3c7',
-                  backgroundColor: '#ecf0f1'
-                }}
-              />
-            </TouchableHighlight>
-            <TouchableHighlight
-              onPress={() => this.handlePressButtonAsyncForMug()}>
-              <Image
-                source={require('../../assets/images/mug.png')}
-                style={{
-                  width: 198,
-                  height: 208,
-                  marginLeft: -7,
-                  borderWidth: 1,
-                  borderColor: '#bdc3c7',
-                  backgroundColor: '#ecf0f1'
-                }}
-              />
-            </TouchableHighlight>
-          </View>
-          <View style={[styles.boxContainer, styles.boxTwo]}>
-            <TouchableHighlight
-              onPress={() => this.handlePressButtonAsyncForSun()}>
-              <Image
-                source={require('../../assets/images/funcSunshine.png')}
-                style={{
-                  width: 198,
-                  height: 208,
-                  marginRight: -2,
-                  borderWidth: 1,
-                  borderColor: '#bdc3c7',
-                  backgroundColor: '#ecf0f1'
-                }}
-              />
-            </TouchableHighlight>
-            <TouchableHighlight
-              onPress={() => this.handlePressButtonAsyncForSun2()}>
-              <Image
-                source={require('../../assets/images/funcSunshine2.png')}
-                style={{
-                  width: 198,
-                  height: 208,
-                  marginLeft: -7,
-                  borderWidth: 1,
-                  borderColor: '#bdc3c7',
-                  backgroundColor: '#ecf0f1'
-                }}
-              />
-            </TouchableHighlight>
-          </View>
-          <View style={[styles.boxContainer, styles.boxThree]}>
-            <TouchableHighlight
-              onPress={() => this.handlePressButtonAsyncForBlueSdjs()}>
-              <Image
-                source={require('../../assets/images/blueSdjs.png')}
-                style={{
-                  width: 198,
-                  height: 208,
-                  marginRight: -2,
-                  borderWidth: 1,
-                  borderColor: '#bdc3c7',
-                  backgroundColor: '#ecf0f1'
-                }}
-              />
-            </TouchableHighlight>
-            <TouchableHighlight
-              onPress={() => this.handlePressButtonAsyncForDarkSdjs()}>
-              <Image
-                source={require('../../assets/images/darkSdjs.png')}
-                style={{
-                  width: 198,
-                  height: 208,
-                  marginLeft: -7,
-                  borderWidth: 1,
-                  borderColor: '#bdc3c7',
-                  backgroundColor: '#ecf0f1'
-                }}
-              />
-            </TouchableHighlight>
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.pincontainer}>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncHoodie()}>
+            <Pin pinsource={this.state.pin.hoodie} columns={this.state.columns} />
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForMug()}>
+            <Pin pinsource={this.state.pin.mug} columns={this.state.columns} />
+          </TouchableHighlight>
+        </View>
+        <View style={styles.pincontainer}>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForSun()}>
+            <Pin pinsource={this.state.pin.funcSunshine} columns={this.state.columns} />
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForSun2()}>
+            <Pin pinsource={this.state.pin.funcSunshine2} columns={this.state.columns} />
+          </TouchableHighlight>
+        </View>
+        <View style={styles.pincontainer}>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForBlueSdjs()}>
+            <Pin pinsource={this.state.pin.blueSdjs} columns={this.state.columns} />
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForDarkSdjs()}>
+            <Pin pinsource={this.state.pin.darkSdjs} columns={this.state.columns} />
+          </TouchableHighlight>
+        </View>
+      </ScrollView>
     )
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    height: 500,
-    width: 400
-  },
-  boxContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 10,
-    marginRight: 10
-  },
-  boxOne: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  boxTwo: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  boxThree: {
-    flex: 1,
-    flexDirection: 'row',
+    backgroundColor: '#fff',
   }
-})
+});
+
 function mapStoreToProps(store) {
   return {};
 }

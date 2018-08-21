@@ -1,3 +1,3 @@
-module.exports = function (Attendee) {
+module.exports = function(Attendee) {
 
 };
