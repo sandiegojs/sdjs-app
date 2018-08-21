@@ -83,7 +83,7 @@ class ProfileContainer extends React.Component {
   render() {
     const { firstName, lastName, email, bio, company, url, phone } = this.props.profileData;
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>

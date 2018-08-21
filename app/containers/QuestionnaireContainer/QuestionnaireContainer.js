@@ -79,7 +79,7 @@ class QuestionnaireContainer extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>

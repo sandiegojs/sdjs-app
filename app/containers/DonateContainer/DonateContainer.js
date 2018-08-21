@@ -83,7 +83,7 @@ class DonateContainer extends React.Component {
       cardholderName, zipCode, cardNumber, expMonth, expYear, cvc,
     } = this.props;
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.imageview}>
           <Image
             source={require('../../assets/images/stripe-payment-logo.png')}

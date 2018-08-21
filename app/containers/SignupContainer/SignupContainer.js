@@ -88,7 +88,7 @@ class SignupContainer extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>FIRST NAME</FormLabel>
