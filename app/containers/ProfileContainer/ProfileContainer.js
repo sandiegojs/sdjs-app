@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  StyleSheet, View, ScrollView, Keyboard,
-} from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { WebBrowser } from 'expo';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { FormLabel, FormInput, Button } from "react-native-elements";
+import SwitchToggle from 'react-native-switch-toggle';
 import * as actions from './profileActions';
 
 class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      checkedEmail: false,
+      checkedPhone: false
+    };
     this.handleProfileUpdate = this.handleProfileUpdate.bind(this);
     this.handleFirstNameUpdate = this.handleFirstNameUpdate.bind(this);
     this.handleLastNameUpdate = this.handleLastNameUpdate.bind(this);
@@ -16,8 +20,9 @@ class ProfileContainer extends React.Component {
     this.handleBioUpdate = this.handleBioUpdate.bind(this);
     this.handleCompanyUpdate = this.handleCompanyUpdate.bind(this);
     this.handleUrlUpdate = this.handleUrlUpdate.bind(this);
-    this.handleSMSNumber = this.handleSMSNumber.bind(this);
-    this.handleSMS = this.handleSMS.bind(this);
+    this.handleNumberUpdate = this.handleNumberUpdate.bind(this);
+    this.handleEmailChecked = this.handleEmailChecked.bind(this);
+    this.handlePhoneChecked = this.handlePhoneChecked.bind(this);
   }
 
   componentWillMount() {
@@ -62,90 +67,189 @@ class ProfileContainer extends React.Component {
     dispatch(actions.urlUpdate(url));
   }
 
-  handleSMSNumber(phone) {
+  handleNumberUpdate(phone) {
     const { dispatch } = this.props;
-    dispatch(actions.notificationNumber(phone));
+    dispatch(actions.numberUpdate(phone));
   }
 
-  handleSMS() {
-    const { dispatch, user, profileData } = this.props;
-    dispatch(actions.SMSNotifications(profileData.phone, user.id, user.token));
-  }
+  handleEmailChecked(checkedEmail) {
+    this.setState(checkedEmail);
+  };
+
+  handlePhoneChecked(checkedPhone) {
+    this.setState(checkedPhone);
+  };
 
   render() {
-    const {
-      firstName, lastName, email, bio, company, url,
-    } = this.props.profileData;
+    const { firstName, lastName, email, bio, company, url, phone } = this.props.profileData;
     return (
-      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-First Name
+              First Name
             </FormLabel>
             <FormInput
               containerStyle={{
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={firstName}
+              autoCorrect={false}
+              returnKeyType={"next"}
               onChangeText={this.handleFirstNameUpdate}
             />
             <FormLabel>
-Last Name
+              Last Name
             </FormLabel>
             <FormInput
               containerStyle={{
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={lastName}
+              autoCorrect={false}
+              returnKeyType={"next"}
               onChangeText={this.handleLastNameUpdate}
             />
             <FormLabel>
-Email
+              Email
             </FormLabel>
             <FormInput
               containerStyle={{
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={email}
+              autoCorrect={false}
+              returnKeyType={"next"}
+              autoCapitalize='none'
+              keyboardType='email-address'
               onChangeText={this.handleEmailUpdate}
             />
             <FormLabel>
-Bio
+              Phone Number
             </FormLabel>
             <FormInput
               containerStyle={{
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
+              defaultValue={phone}
+              autoCorrect={false}
+              maxLength={10}
+              type="number"
+              keyboardType='numeric'
+              returnKeyType={"next"}
+              onChangeText={this.handleNumberUpdate}
+            />
+            <FormLabel>
+              Bio
+            </FormLabel>
+            <FormInput
+              containerStyle={{
+                borderBottomColor: 'black'
+              }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={bio}
+              autoCorrect={false}
+              returnKeyType={"next"}
               onChangeText={this.handleBioUpdate}
             />
             <FormLabel>
-Company
+              Company
             </FormLabel>
             <FormInput
               containerStyle={{
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={company}
+              autoCorrect={false}
+              returnKeyType={"next"}
               onChangeText={this.handleCompanyUpdate}
             />
             <FormLabel>
-Website
+              Website
             </FormLabel>
             <FormInput
               containerStyle={{
                 borderBottomColor: 'black',
+                marginBottom: 25,
               }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={url}
+              autoCorrect={false}
+              autoCapitalize='none'
+              keyboardType='email-address'
               onChangeText={this.handleUrlUpdate}
             />
+            <Text style={{
+              textAlign: 'center',
+              fontSize: 15,
+              fontWeight: '500',
+              marginBottom: 21
+              }}
+            >
+              I Want To Recieve SDJS Notifications
+            </Text>
+              <View style={styles.row}>
+                <View style={styles.inputWrap}>
+                  <Text>Phone Notifications</Text>
+                  <SwitchToggle
+                    containerStyle={{
+                      marginBottom: 16,
+                      width: 55,
+                      height: 26,
+                      borderRadius: 18,
+                      padding: 5,
+                    }}
+                    backgroundColorOn='#346abb'
+                    backgroundColorOff='#e5e1e0'
+                    circleColorOff='white'
+                    circleColorOn='white'
+                    circleStyle={{
+                      width: 15,
+                      height: 15,
+                      borderRadius: 7
+                    }}
+                    duration={200}
+                    switchOn={this.state.checkedPhone}
+                    onPress={() => this.handlePhoneChecked({ checkedPhone: !this.state.checkedPhone })}
+                  />
+                </View>
+                <View style={styles.inputWrap}>
+                  <Text>Email Notifications</Text>
+                  <SwitchToggle
+                    containerStyle={{
+                      marginBottom: 16,
+                      width: 55,
+                      height: 26,
+                      borderRadius: 18,
+                      padding: 5,
+                    }}
+                    backgroundColorOn='#346abb'
+                    backgroundColorOff='#e5e1e0'
+                    circleColorOff='white'
+                    circleColorOn='white'
+                    circleStyle={{
+                      width: 15,
+                      height: 15,
+                      borderRadius: 7
+                    }}
+                    duration={200}
+                    switchOn={this.state.checkedEmail}
+                    onPress={() => this.handleEmailChecked({ checkedEmail: !this.state.checkedEmail })}
+                  />
+                </View>
+              </View>
             <Button
               large
               buttonStyle={{
                 backgroundColor: '#346abb',
                 borderRadius: 7,
-                marginTop: 24,
+                marginTop: 25,
+                marginBottom: 21,
                 width: 300,
                 height: 55,
               }}
@@ -153,29 +257,22 @@ Website
               title="UPDATE"
             />
           </View>
-        </View>
-        <View style={styles.container}>
-          <View style={styles.formContainer}>
-            <FormLabel>
-Would you like to recieve text notifications from SDJS?
-            </FormLabel>
-            <FormInput
-              placeholder="please enter your phone number"
-              onChangeText={this.handleSMSNumber}
-            />
-            <Button
-              large
-              buttonStyle={{
-                backgroundColor: '#346abb',
-                borderRadius: 7,
-                marginTop: 24,
-                width: 300,
-                height: 55,
+          <TouchableOpacity
+            onPress={async () => {
+              let result = await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
+              return result
+            }}
+          >
+            <Text
+              style={{
+                marginBottom: 11,
+                fontSize: 16,
+                fontWeight: '500'
               }}
-              onPress={this.handleSMS}
-              title="Sign Up"
-            />
-          </View>
+            >
+              {'Privacy Policy'}
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );
@@ -186,12 +283,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    padding: 30,
+    backgroundColor: '#ecf0f1',
+    padding: 10
   },
   formContainer: {
-    width: 333,
+    width: 333
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  inputWrap: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 

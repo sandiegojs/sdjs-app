@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image } from 'react-native';
 import { Text } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class ThankyouContainer extends React.Component {
@@ -19,10 +18,10 @@ class ThankyouContainer extends React.Component {
       >
         <View style={styles.view}>
           <Text h3 style={styles.text}>
-Thank you
+            Thank you
           </Text>
           <Text h3 style={styles.text2}>
-for your donation!
+            for your donation!
           </Text>
         </View>
         <View style={styles.imageview}>

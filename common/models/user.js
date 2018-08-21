@@ -1,4 +1,3 @@
-
 const sendSMSNotification = require('../../server/sendSMSNotifications');
 
 module.exports = (User) => {

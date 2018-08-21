@@ -34,30 +34,38 @@ class LoginContainer extends React.Component {
   render() {
     const { email } = this.props;
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-EMAIL
+              EMAIL
             </FormLabel>
             <FormInput
               containerStyle={{
                 margin: 5,
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
-              defaultValue={email}
+              inputStyle={{ paddingLeft: 4 }}
+              autoCapitalize='none'
+              keyboardType='email-address'
+              autoCorrect={false}
+              returnKeyType={"next"}
               onChangeText={this.handleEmailInput}
             />
             <FormLabel>
-PASSWORD
+              PASSWORD
             </FormLabel>
             <FormInput
               containerStyle={{
                 margin: 5,
                 borderBottomColor: 'black',
               }}
+              inputStyle={{ paddingLeft: 4 }}
+              autoCapitalize='none'
+              autoCorrect={false}
               secureTextEntry
               onChangeText={this.handlePasswordInput}
+              returnKeyType={"done"}
             />
           </View>
           <Button
@@ -77,22 +85,15 @@ PASSWORD
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Password')}
             >
-              <Text style={styles.resetTextButton}>
-Forgot Password?
-              </Text>
+              <Text style={styles.resetTextButton}>{'Forgot Password?'}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.signupTextCont}>
-            <Text style={styles.signupText}>
-              {'Don\'t have an account?'}
-            </Text>
+            <Text style={styles.signupText}>{'Don\'t have an account?'}</Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Signup')}
             >
-              <Text style={styles.signupTextButton}>
-                {' '}
-Signup
-              </Text>
+              <Text style={styles.signupTextButton}>{' Signup'}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 30,
+    padding: 20,
   },
   formContainer: {
     paddingBottom: 20,

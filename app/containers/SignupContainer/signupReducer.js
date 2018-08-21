@@ -48,12 +48,6 @@ export default function signupReducer(state = defaultState, action) {
       };
     }
 
-    case 'THIRD_PARTY_LOGIN_FULFILLED': {
-      return {
-        ...state,
-        user: payload,
-      };
-    }
     default: {
       return state;
     }

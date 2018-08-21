@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity,
+  StyleSheet, Text, View, ScrollView, TouchableOpacity,
 } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
@@ -28,18 +28,20 @@ class PasswordContainer extends React.Component {
   render() {
     const { emailInput } = this.props;
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
-Enter your E-mail
+              Enter your E-mail
             </FormLabel>
             <FormInput
               containerStyle={{
                 margin: 5,
                 borderBottomColor: 'black',
               }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={emailInput}
+              autoCapitalize='none'
               onChangeText={this.updateEmailInput}
             />
           </View>
@@ -59,12 +61,12 @@ Enter your E-mail
               onPress={() => this.props.navigation.navigate('Login')}
             >
               <Text style={styles.textButton}>
-Return to Login
+                Return to Login
               </Text>
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }

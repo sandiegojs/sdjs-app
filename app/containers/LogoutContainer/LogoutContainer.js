@@ -21,7 +21,7 @@ class LogoutContainer extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          Do you want to log out?
+          You Want To Log Out?
         </Text>
         <Button
           buttonStyle={{

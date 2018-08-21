@@ -1,28 +1,30 @@
 import React from 'react';
-import { ScrollView, Keyboard } from 'react-native';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  StyleSheet, View, Alert, Text, TouchableOpacity,
-} from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { WebBrowser } from 'expo';
+import { StyleSheet, View, Alert, Text, TouchableOpacity } from 'react-native';
+import { FormLabel, FormInput, Button, CheckBox } from 'react-native-elements';
 import {
   updateFirstNameInput,
   updateLastNameInput,
   updateEmailInput,
   updatePasswordInput,
-  submitSignUp,
-  thirdPartyLogin,
+  submitSignUp
 } from './signupActions';
 
 class SignupContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      checked: false
+    };
 
     this.handleFirstNameInput = this.handleFirstNameInput.bind(this);
     this.handleLastNameInput = this.handleLastNameInput.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleSignUpSubmission = this.handleSignUpSubmission.bind(this);
+    this.handleChecked = this.handleChecked.bind(this);
   }
 
   handleFirstNameInput(text) {
@@ -45,80 +47,120 @@ class SignupContainer extends React.Component {
     dispatch(updatePasswordInput(text));
   }
 
+  handleChecked(checked) {
+    this.setState(checked);
+  };
+
   handleSignUpSubmission() {
-    const {
-      dispatch, firstNameInput, lastNameInput, emailInput, passwordInput,
-    } = this.props;
+    const { dispatch, firstNameInput, lastNameInput, emailInput, passwordInput } = this.props;
     const { navigate } = this.props.navigation;
 
-    if (firstNameInput === '' || lastNameInput === '' || emailInput === '' || passwordInput === '') {
+    if (this.state.checked === false) {
       Alert.alert(
         'Form Error',
-        'Complete all fields to submit', [{
+        "Please check that you've read the Privacy Policy", [{
           text: 'OK',
           onPress: null,
-          style: 'cancel',
-        }],
-      );
+          style: 'cancel'
+        }]
+      )
     } else {
-        	const credentials = {
-        email: emailInput,
-        password: passwordInput,
-        		firstName: firstNameInput,
-        lastName: lastNameInput,
-      };
-      dispatch(submitSignUp(credentials, navigate));
+      if (firstNameInput === '' || lastNameInput === '' || emailInput === '' || passwordInput === '') {
+        Alert.alert(
+          'Form Error',
+          'Complete all fields to submit', [{
+            text: 'OK',
+            onPress: null,
+            style: 'cancel'
+          }]
+        )
+      } else {
+        const credentials = {
+          email: emailInput,
+          password: passwordInput,
+          firstName: firstNameInput,
+          lastName: lastNameInput
+        };
+        dispatch(submitSignUp(credentials, navigate));
+      }
     }
   }
 
   render() {
     return (
-      <ScrollView onPress={Keyboard.dismiss} accessible={false}>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
-            <FormLabel>
-FIRST NAME
-            </FormLabel>
+            <FormLabel>FIRST NAME</FormLabel>
             <FormInput
               containerStyle={{
                 margin: 5,
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleFirstNameInput}
+              autoCorrect={false}
             />
-            <FormLabel>
-LAST NAME
-            </FormLabel>
+            <FormLabel>LAST NAME</FormLabel>
             <FormInput
               containerStyle={{
                 margin: 5,
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleLastNameInput}
+              autoCorrect={false}
             />
-            <FormLabel>
-EMAIL
-            </FormLabel>
+            <FormLabel>EMAIL</FormLabel>
             <FormInput
               containerStyle={{
                 margin: 5,
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleEmailInput}
-              defaultValue={this.props.emailInput}
+              keyboardType='email-address'
+              autoCapitalize='none'
+              autoCorrect={false}
             />
-            <FormLabel>
-PASSWORD
-            </FormLabel>
+            <FormLabel>PASSWORD</FormLabel>
             <FormInput
               containerStyle={{
                 margin: 5,
-                borderBottomColor: 'black',
+                borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handlePasswordInput}
-              secureTextEntry
+              autoCapitalize='none'
+              secureTextEntry={true}
+              autoCorrect={false}
             />
           </View>
+          <TouchableOpacity
+            onPress={async () => {
+              let result = await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
+              return result
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '500'
+              }}
+            >
+              {'Privacy Policy'}
+            </Text>
+          </TouchableOpacity>
+          <CheckBox
+            containerStyle={{
+              backgroundColor: '#ecf0f1'
+            }}
+            center
+            title="I Agree I've Read the Privacy Policy"
+            checkedColor='#346abb'
+            onPress={() => this.handleChecked({ checked: !this.state.checked })}
+            checked={this.state.checked}
+          />
           <Button
             buttonStyle={{
               backgroundColor: '#346abb',
@@ -126,29 +168,24 @@ PASSWORD
               marginTop: 7,
               marginBottom: 25,
               width: 300,
-              height: 55,
+              height: 55
             }}
             onPress={this.handleSignUpSubmission}
             large
             icon={{ name: 'sign-in', type: 'font-awesome' }}
-            title="SIGN UP"
+            title='SIGN UP'
           />
           <View style={styles.loginTextCont}>
-            <Text style={styles.text}>
-Already have an account?
-            </Text>
+            <Text style={styles.text}>{'Already have an account?'}</Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Login')}
             >
-              <Text style={styles.textButton}>
-                {' '}
-Login
-              </Text>
+              <Text style={styles.textButton}> {'Login'}</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
-    );
+    )
   }
 }
 
@@ -158,12 +195,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    padding: 30,
+    padding: 10
   },
   formContainer: {
     paddingBottom: 20,
     width: 350,
-    margin: 15,
+    margin: 15
   },
   loginTextCont: {
     alignItems: 'center',
@@ -172,12 +209,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   text: {
-    fontSize: 16,
+    fontSize: 16
   },
   textButton: {
     fontSize: 16,
-    fontWeight: '500',
-  },
+    fontWeight: '500'
+  }
 });
 
 function mapStoreToProps(store) {
