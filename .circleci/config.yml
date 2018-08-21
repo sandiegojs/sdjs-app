@@ -28,7 +28,7 @@ jobs:
           command: sudo npm install --global --unsafe-perm now
       - run:
           name: Deploy using Now
-          command: now -t ${NOW_TOKEN} && alias
+          command: now -t ${NOW_TOKEN} && alias -y
 workflows:
   version: 2
   build:

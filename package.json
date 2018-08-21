@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "start": "node .",
-    "posttest": "npm run lint && nsp check",
+    "posttest": " ",
     "test": " "
   },
   "dependencies": {
