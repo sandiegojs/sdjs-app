@@ -9,6 +9,7 @@
   ],
   "rules": {
     "no-unused-vars": 2,
+    "strict": "off",
     "react-native/no-unused-styles": 2,
     "object-curly-spacing": [
       1,
