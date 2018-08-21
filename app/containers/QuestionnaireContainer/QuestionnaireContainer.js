@@ -79,7 +79,7 @@ class QuestionnaireContainer extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#ecf0f1',
     alignItems: 'center',
     padding: 30,
   },

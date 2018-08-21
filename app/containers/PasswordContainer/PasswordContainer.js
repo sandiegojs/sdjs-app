@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity,
+  StyleSheet, Text, View, ScrollView, TouchableOpacity,
 } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
@@ -28,7 +28,7 @@ class PasswordContainer extends React.Component {
   render() {
     const { emailInput } = this.props;
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
@@ -66,7 +66,7 @@ class PasswordContainer extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }

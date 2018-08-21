@@ -83,7 +83,7 @@ class ProfileContainer extends React.Component {
   render() {
     const { firstName, lastName, email, bio, company, url, phone } = this.props.profileData;
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
@@ -181,6 +181,7 @@ class ProfileContainer extends React.Component {
               defaultValue={url}
               autoCorrect={false}
               autoCapitalize='none'
+              keyboardType='email-address'
               onChangeText={this.handleUrlUpdate}
             />
             <Text style={{
