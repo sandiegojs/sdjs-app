@@ -39,7 +39,9 @@ class PasswordContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black',
               }}
+              inputStyle={{ paddingLeft: 4 }}
               defaultValue={emailInput}
+              autoCapitalize='none'
               onChangeText={this.updateEmailInput}
             />
           </View>

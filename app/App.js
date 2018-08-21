@@ -11,7 +11,7 @@ import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
-import DonateScreen from './screens/DonateScreen';
+// import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
@@ -61,9 +61,9 @@ class App extends React.Component {
             Events: {
               screen: EventsScreen,
             },
-            Donate: {
-              screen: DonateScreen,
-            },
+            // Donate: {
+            //   screen: DonateScreen,
+            // },
             Profile: {
               screen: ProfileScreen,
             },
@@ -107,15 +107,15 @@ class App extends React.Component {
                       />
                     )
                     break;
-                  case 'Donate':
-                    return (
-                      <Image
-                        source={require('./assets/images/donate.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                  // case 'Donate':
+                  //   return (
+                  //     <Image
+                  //       source={require('./assets/images/donate.png')}
+                  //       fadeDuration={0}
+                  //       style={{ width: 30, height: 30 }}
+                  //     />
+                  //   )
+                  //   break;
                   case 'Profile':
                     return (
                       <Image
@@ -155,7 +155,7 @@ class App extends React.Component {
         )
       },
       EventDetails: { screen: EventDetailsScreen },
-      Donate: { screen: DonateScreen },
+      // Donate: { screen: DonateScreen },
       ThankYou: { screen: ThankyouScreen }
     });
     return (

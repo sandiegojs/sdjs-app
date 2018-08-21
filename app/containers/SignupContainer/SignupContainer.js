@@ -97,6 +97,7 @@ class SignupContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleFirstNameInput}
               autoCorrect={false}
             />
@@ -106,6 +107,7 @@ class SignupContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleLastNameInput}
               autoCorrect={false}
             />
@@ -115,7 +117,10 @@ class SignupContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleEmailInput}
+              keyboardType='email-address'
+              autoCapitalize='none'
               autoCorrect={false}
             />
             <FormLabel>PASSWORD</FormLabel>
@@ -124,7 +129,9 @@ class SignupContainer extends React.Component {
                 margin: 5,
                 borderBottomColor: 'black'
               }}
+              inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handlePasswordInput}
+              autoCapitalize='none'
               secureTextEntry={true}
               autoCorrect={false}
             />
