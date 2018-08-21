@@ -75,7 +75,6 @@ export function handleTransaction(cardDetails, amount, navigate, dispatch) {
   };
 }
 
-
 function performTransaction(cardToken, amount) {
   const charge = {
     amount,
