@@ -21,14 +21,14 @@ module.exports = (User) => {
   });
 
   // render UI page after successful password reset
-  User.afterRemote('setPassword', function (context) {
+  User.afterRemote('setPassword', function(context) {
     context.res.render('response', {
       title: 'Password reset success',
       content: 'Your password has been reset successfully'
     });
   });
 
-  User.emailAll = function (req, res, callback) {
+  User.emailAll = function(req, res, callback) {
     if (!req.body) {
       res.status(400).json({
         error: 'Invalid request.'

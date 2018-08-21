@@ -1,3 +1,3 @@
-module.exports = function (Event) {
+module.exports = function(Event) {
 
 };

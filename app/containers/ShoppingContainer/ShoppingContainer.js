@@ -9,40 +9,38 @@ class ShoppingContainer extends React.Component {
     super(props);
     this.state = {
       result: null,
-      //columns: 2,
       pin: {
         hoodie: {
           imagesource: require('../../assets/images/hoodie.png'),
           originalWidth: 480,
           originalHeight: 522,
         },
-        mug:{
+        mug: {
           imagesource: require('../../assets/images/mug.png'),
           originalWidth: 480,
           originalHeight: 365,
         },
-        funcSunshine:{
+        funcSunshine: {
           imagesource: require('../../assets/images/funcSunshine.png'),
           originalWidth: 470,
           originalHeight: 560,
         },
-        funcSunshine2:{
+        funcSunshine2: {
           imagesource: require('../../assets/images/funcSunshine2.png'),
           originalWidth: 470,
           originalHeight: 560,
         },
-        blueSdjs:{
+        blueSdjs: {
           imagesource: require('../../assets/images/blueSdjs.png'),
           originalWidth: 470,
           originalHeight: 560,
         },
-        darkSdjs:{
+        darkSdjs: {
           imagesource: require('../../assets/images/darkSdjs.png'),
           originalWidth: 470,
           originalHeight: 560,
         }
-    }
-
+      }
     };
   }
 
@@ -77,30 +75,30 @@ class ShoppingContainer extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <View style={styles.pincontainer}>
-        <TouchableHighlight onPress={() => this.handlePressButtonAsyncHoodie()}>
-        <Pin pinsource={this.state.pin.hoodie} columns={this.state.columns}/>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => this.handlePressButtonAsyncForMug()}>
-        <Pin pinsource={this.state.pin.mug} columns={this.state.columns}/>
-        </TouchableHighlight>
-      </View>
-      <View style={styles.pincontainer}>
-        <TouchableHighlight onPress={() => this.handlePressButtonAsyncForSun()}>
-        <Pin pinsource={this.state.pin.funcSunshine} columns={this.state.columns}/>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => this.handlePressButtonAsyncForSun2()}>
-        <Pin pinsource={this.state.pin.funcSunshine2} columns={this.state.columns}/>
-        </TouchableHighlight>
-      </View>
-      <View style={styles.pincontainer}>
-        <TouchableHighlight onPress={() => this.handlePressButtonAsyncForBlueSdjs()}>
-        <Pin pinsource={this.state.pin.blueSdjs} columns={this.state.columns}/>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => this.handlePressButtonAsyncForDarkSdjs()}>
-        <Pin pinsource={this.state.pin.darkSdjs} columns={this.state.columns}/>
-        </TouchableHighlight>
-      </View>
+        <View style={styles.pincontainer}>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncHoodie()}>
+            <Pin pinsource={this.state.pin.hoodie} columns={this.state.columns} />
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForMug()}>
+            <Pin pinsource={this.state.pin.mug} columns={this.state.columns} />
+          </TouchableHighlight>
+        </View>
+        <View style={styles.pincontainer}>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForSun()}>
+            <Pin pinsource={this.state.pin.funcSunshine} columns={this.state.columns} />
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForSun2()}>
+            <Pin pinsource={this.state.pin.funcSunshine2} columns={this.state.columns} />
+          </TouchableHighlight>
+        </View>
+        <View style={styles.pincontainer}>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForBlueSdjs()}>
+            <Pin pinsource={this.state.pin.blueSdjs} columns={this.state.columns} />
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => this.handlePressButtonAsyncForDarkSdjs()}>
+            <Pin pinsource={this.state.pin.darkSdjs} columns={this.state.columns} />
+          </TouchableHighlight>
+        </View>
       </ScrollView>
     )
   }

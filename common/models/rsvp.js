@@ -1,3 +1,3 @@
-module.exports = function (Rsvp) {
+module.exports = function(Rsvp) {
 
 };
