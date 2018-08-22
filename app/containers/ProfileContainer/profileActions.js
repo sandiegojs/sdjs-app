@@ -60,16 +60,31 @@ export function urlUpdate(url) {
   };
 }
 
-export function locationUpdate(location) {
-  return {
-    type: 'LOCATION_UPDATE',
-    payload: location,
-  };
-}
-
 export function numberUpdate(phone) {
   return {
     type: 'NUMBER_UPDATE',
     payload: phone,
+  };
+}
+
+export function profileWipe() {
+  return {
+    type: 'PROFILE_WIPE',
+    payload: ''
+  };
+}
+
+export function toggleEmails(flag) {
+  console.log(flag);
+  return {
+    type: 'TOGGLE_EMAILS',
+    payload: flag
+  };
+}
+
+export function toggleSMS(flag) {
+  return {
+    type: 'TOGGLE_SMS',
+    payload: flag
   };
 }
