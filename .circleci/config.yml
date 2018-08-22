@@ -28,7 +28,7 @@ jobs:
           command: sudo npm install --global --unsafe-perm now
       - run:
           name: Deploy using Now
-          command: now -t ${NOW_TOKEN} -T origin && alias -y
+          command: now -e SENDGRID_API_KEY -e TWILIO_ACCOUNT_SID -e TWILIO_AUTH_TOKEN -e TWILIO_NUMBER -e TWILIO_MESSAGING_SERVICE_SID -e TWILIO_NOTIFY_SERVICE_SID -e NODE_ENV=production -e MONGO_URI -t ${NOW_TOKEN} -T origin && alias
 workflows:
   version: 2
   build:
