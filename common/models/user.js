@@ -39,19 +39,21 @@ module.exports = (User) => {
       from, subject, html, text
     } = req.body;
     User.find().then((users) => {
-      users.map(user => user.email).forEach((email) => {
-        const msg = {
-          to: email,
-          from: from || 'noreply@sdjs.com',
-          subject: subject || 'No Subject',
-          html,
-          text: text || 'a'
-        };
+      users
+        .filter((user) => user.allowEmails)
+        .forEach((user) => {
+          const msg = {
+            to: user.email,
+            from: from || 'noreply@sdjs.com',
+            subject: subject || 'No Subject',
+            html,
+            text: text || 'a'
+          };
 
-        User.app.models.Email.send(msg, (err) => {
-          if (err) return console.log(err.response.body.errors);
+          User.app.models.Email.send(msg, (err) => {
+            if (err) return console.log(err.response.body.errors);
+          });
         });
-      });
     })
       .catch(err => console.log(err));
     callback(null);
@@ -60,7 +62,7 @@ module.exports = (User) => {
   User.sendSMSNotification = (body, cb) => {
     User.find()
       .then((userArray) => {
-        sendSMSNotification(body, userArray);
+        sendSMSNotification(body, userArray.filter(user => user.allowSMS));
       })
       .then(() => cb(null));
   };

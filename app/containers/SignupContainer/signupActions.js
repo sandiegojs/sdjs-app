@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { profileInit } from '../ProfileContainer/profileActions';
 
 export function updateFirstNameInput(text) {
   return {
@@ -28,7 +29,7 @@ export function updatePasswordInput(text) {
   };
 }
 
-export function submitSignUp(credentials, navigate) {
+export function submitSignUp(credentials, navigate, dispatch) {
   return {
     type: 'SUBMIT_SIGN_UP',
     payload: axios
@@ -48,6 +49,7 @@ export function submitSignUp(credentials, navigate) {
             .post('https://sdjs-app.now.sh/api/users/login', { email, password })
             .then(r => {
               const { id: token, userId: id } = r.data;
+              dispatch(profileInit(id, token));
               return { id, token };
             });
         }
