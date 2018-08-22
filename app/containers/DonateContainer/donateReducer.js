@@ -1,11 +1,4 @@
-const defaultState = {
-  cardholderName: '',
-  cardNumber: '',
-  expMonth: '',
-  expYear: '',
-  cvc: '',
-  zipCode: '',
-};
+import { donateData as defaultState } from '../../DefaultStates';
 
 export default function donateReducer(state = defaultState, action) {
   const { type, payload } = action;

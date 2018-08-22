@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { WebBrowser } from 'expo';
-import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
-import { FormLabel, FormInput, Button } from "react-native-elements";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { Button, FormInput, FormLabel } from 'react-native-elements';
 import SwitchToggle from 'react-native-switch-toggle';
 import * as actions from './profileActions';
 
 class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      checkedEmail: false,
-      checkedPhone: false
-    };
+
     this.handleProfileUpdate = this.handleProfileUpdate.bind(this);
     this.handleFirstNameUpdate = this.handleFirstNameUpdate.bind(this);
     this.handleLastNameUpdate = this.handleLastNameUpdate.bind(this);
@@ -72,16 +75,18 @@ class ProfileContainer extends React.Component {
     dispatch(actions.numberUpdate(phone));
   }
 
-  handleEmailChecked(checkedEmail) {
-    this.setState(checkedEmail);
+  handleEmailChecked(allowEmails) {
+    const { dispatch } = this.props;
+    dispatch(actions.toggleEmails(allowEmails));
   };
 
-  handlePhoneChecked(checkedPhone) {
-    this.setState(checkedPhone);
+  handlePhoneChecked(allowSMS) {
+    const { dispatch } = this.props;
+    dispatch(actions.toggleSMS(allowSMS));
   };
 
   render() {
-    const { firstName, lastName, email, bio, company, url, phone } = this.props.profileData;
+    const { firstName, lastName, email, bio, company, url, phone, allowEmails, allowSMS } = this.props.profileData;
     return (
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
@@ -214,8 +219,8 @@ class ProfileContainer extends React.Component {
                       borderRadius: 7
                     }}
                     duration={200}
-                    switchOn={this.state.checkedPhone}
-                    onPress={() => this.handlePhoneChecked({ checkedPhone: !this.state.checkedPhone })}
+                    switchOn={allowSMS}
+                    onPress={() => this.handlePhoneChecked(!allowSMS)}
                   />
                 </View>
                 <View style={styles.inputWrap}>
@@ -238,8 +243,8 @@ class ProfileContainer extends React.Component {
                       borderRadius: 7
                     }}
                     duration={200}
-                    switchOn={this.state.checkedEmail}
-                    onPress={() => this.handleEmailChecked({ checkedEmail: !this.state.checkedEmail })}
+                    switchOn={allowEmails}
+                    onPress={() => this.handleEmailChecked(!allowEmails)}
                   />
                 </View>
               </View>
@@ -259,8 +264,7 @@ class ProfileContainer extends React.Component {
           </View>
           <TouchableOpacity
             onPress={async () => {
-              let result = await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
-              return result
+              return await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5')
             }}
           >
             <Text
@@ -304,7 +308,7 @@ const styles = StyleSheet.create({
 function mapStoreToProps(store) {
   return {
     user: store.userData.user,
-    profileData: store.profileData,
+    profileData: store.profileData
   };
 }
 

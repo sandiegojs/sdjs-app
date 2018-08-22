@@ -1,13 +1,4 @@
-const defaultState = {
-  firstNameInput: '',
-  lastNameInput: '',
-  emailInput: '',
-  passwordInput: '',
-  user: {
-    id: '',
-    token: '',
-  },
-};
+import {userData as defaultState} from '../../DefaultStates';
 
 export default function loginReducer(state = defaultState, action) {
   const { type, payload } = action;

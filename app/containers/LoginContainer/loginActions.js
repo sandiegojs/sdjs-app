@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { profileInit } from '../ProfileContainer/profileActions';
 
 export function updateEmailInput(text) {
   return {
@@ -14,7 +15,7 @@ export function updatePasswordInput(text) {
   };
 }
 
-export function submitLogin(credentials, navigate) {
+export function submitLogin(credentials, navigate, dispatch) {
   const { email, password } = credentials;
   const ttl = 86400;
 
@@ -24,6 +25,7 @@ export function submitLogin(credentials, navigate) {
       .post('https://sdjs-app.now.sh/api/users/login', { email, password, ttl })
       .then(response => {
         const { id: token, userId: id } = response.data;
+        dispatch(profileInit(id, token));
         navigate('Events');
         return { id, token };
       })
