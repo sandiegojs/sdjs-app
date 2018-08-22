@@ -32,7 +32,6 @@ class LoginContainer extends React.Component {
   }
 
   render() {
-    const { email } = this.props;
     return (
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
