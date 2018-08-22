@@ -28,7 +28,7 @@ class LoginContainer extends React.Component {
   handleLoginSubmission() {
     const { dispatch, emailInput: email, passwordInput: password } = this.props;
     const { navigate } = this.props.navigation;
-    dispatch(submitLogin({ email, password }, navigate));
+    dispatch(submitLogin({ email, password }, navigate, dispatch));
   }
 
   render() {

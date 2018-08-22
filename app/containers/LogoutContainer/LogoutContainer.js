@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { submitLogout } from './LogoutActions';
+import { profileWipe } from '../ProfileContainer/profileActions';
 
 class LogoutContainer extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class LogoutContainer extends React.Component {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
     dispatch(submitLogout());
+    dispatch(profileWipe());
     navigate('Login');
   }
 
