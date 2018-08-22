@@ -1,13 +1,4 @@
-const defaultState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  bio: '',
-  url: '',
-  location: '',
-  company: '',
-  phone: '',
-};
+import {profileData as defaultState} from '../../DefaultStates';
 
 export default function ProfileReducer(state = defaultState, action) {
   const { type, payload } = action;
@@ -66,6 +57,21 @@ export default function ProfileReducer(state = defaultState, action) {
         ...state,
         phone: payload,
       };
+    }
+    case 'PROFILE_WIPE': {
+      return defaultState;
+    }
+    case 'TOGGLE_EMAIL': {
+      return {
+        ...state,
+        allowEmails: payload
+      };
+    }
+    case 'TOGGLE_SMS': {
+      return {
+        ...state,
+        allowSMS: payload
+      }
     }
     default: {
       return state;

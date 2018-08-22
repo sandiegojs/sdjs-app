@@ -81,7 +81,7 @@ class SignupContainer extends React.Component {
           firstName: firstNameInput,
           lastName: lastNameInput
         };
-        dispatch(submitSignUp(credentials, navigate));
+        dispatch(submitSignUp(credentials, navigate, dispatch));
       }
     }
   }

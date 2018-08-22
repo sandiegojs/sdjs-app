@@ -42,6 +42,12 @@
         "question2": "string",
         "question3": "string"
       }
+    },
+    "allowEmails": {
+      "type": "boolean"
+    },
+    "allowSMS": {
+      "type": "boolean"
     }
   },
   "validations": [],
