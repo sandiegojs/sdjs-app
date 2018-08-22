@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
