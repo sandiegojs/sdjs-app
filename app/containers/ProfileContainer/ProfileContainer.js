@@ -75,12 +75,12 @@ class ProfileContainer extends React.Component {
     dispatch(actions.numberUpdate(phone));
   }
 
-  handleEmailChecked(allowEmails) {
+  handleEmailToggle(allowEmails) {
     const { dispatch } = this.props;
     dispatch(actions.toggleEmails(allowEmails));
   };
 
-  handlePhoneChecked(allowSMS) {
+  handlePhoneToggle(allowSMS) {
     const { dispatch } = this.props;
     dispatch(actions.toggleSMS(allowSMS));
   };
@@ -220,7 +220,7 @@ class ProfileContainer extends React.Component {
                     }}
                     duration={200}
                     switchOn={allowSMS}
-                    onPress={() => this.handlePhoneChecked(!allowSMS)}
+                    onPress={() => this.handlePhoneToggle(!allowSMS)}
                   />
                 </View>
                 <View style={styles.inputWrap}>
@@ -244,7 +244,7 @@ class ProfileContainer extends React.Component {
                     }}
                     duration={200}
                     switchOn={allowEmails}
-                    onPress={() => this.handleEmailChecked(!allowEmails)}
+                    onPress={() => this.handleEmailToggle(!allowEmails)}
                   />
                 </View>
               </View>
