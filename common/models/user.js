@@ -40,10 +40,10 @@ module.exports = (User) => {
     } = req.body;
     User.find().then((users) => {
       users
-        .filter((user) => user.allowEmails)
-        .forEach((user) => {
+        .filter(user => user.allowEmails)
+        .map(user => user.email).forEach((email) => {
           const msg = {
-            to: user.email,
+            to: email,
             from: from || 'noreply@sdjs.com',
             subject: subject || 'No Subject',
             html,
