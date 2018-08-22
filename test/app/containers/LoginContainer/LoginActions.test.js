@@ -12,7 +12,7 @@ describe('Login Actions', () => {
     it('should take users password', () => {
         expect(LoginActions.updatePasswordInput).to.exist;
     });
-    it('should take users password', () => {
+    it('should take users login submit', () => {
         expect(LoginActions.submitLogin).to.exist;
     });
 })
