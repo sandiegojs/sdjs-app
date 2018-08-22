@@ -3,7 +3,7 @@ require('dotenv').config()
 const loopback = require('loopback');
 const boot = require('loopback-boot');
 const path = require('path');
-
+import Linking from ('react-native');
 const app = module.exports = loopback();
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -30,7 +30,6 @@ try {
   process.exit(1); // fatal
 }
 
-var path = require('path');
 app.set('views', path.join(__dirname, '../app/screens'));
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine())
@@ -74,15 +73,11 @@ for (var s in config) {
 }
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-app.get('/auth/account', ensureLoggedIn('/login'), function (req, res, next) {
-  res.render('ProfileScreen', {
-    user: req.user,
-    url: req.url,
-  });
-});
+app.get('/auth/account', function (req, res, next) {
+  Linking.addEventListener('url', callback)});
 
 app.get('/signup', function (req, res, next) {
-  res.render('SignupScreen', {
+  res.navigate('SignupScreen', {
     user: req.user,
     url: req.url,
   });
