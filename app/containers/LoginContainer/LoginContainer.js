@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  TextInput, View, StyleSheet, Text, TouchableOpacity, Platform,
+  TextInput, View, StyleSheet, Text, TouchableOpacity, Platform
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux';
-import { FormLabel} from 'react-native-elements';
+import { FormLabel, Button } from 'react-native-elements';
 import { updateEmailInput, updatePasswordInput, submitLogin } from './loginActions';
 
 class LoginContainer extends React.Component {

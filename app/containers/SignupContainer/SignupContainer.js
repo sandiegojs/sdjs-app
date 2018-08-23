@@ -90,7 +90,7 @@ class SignupContainer extends React.Component {
     return (
       <KeyboardAwareScrollView enableOnAndroid={true}
         enableAutoAutomaticScroll={(Platform.OS === 'ios')}
-        extraHeight={130} extraScrollHeight={130}
+        extraHeight={130} extraScrollHeight={100}
         >
         <View style={styles.container}>
         <View style={styles.formContainer}>
@@ -187,13 +187,14 @@ class SignupContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
+    justifyContent: 'center',
     backgroundColor: '#ecf0f1',
-    // alignItems: 'center',
+    alignItems: 'center',
     padding: 10
   },
   formContainer: {
     paddingBottom: 20,
+    backgroundColor: '#ecf0f1',
     width: 350,
     margin: 15
   },
