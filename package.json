@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "start": "node .",
-    "test": "jest"
+    "test": ""
   },
   "dependencies": {
     "axios": "^0.17.1",
