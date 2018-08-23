@@ -44,6 +44,7 @@ class LoginContainer extends React.Component {
               EMAIL
             </FormLabel>
             <TextInput
+              accessibilityLabel='emailInput'
               style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
@@ -56,6 +57,7 @@ class LoginContainer extends React.Component {
               PASSWORD
             </FormLabel>
             <TextInput
+              accessibilityLabel={ 'passwordInput' }
               style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'

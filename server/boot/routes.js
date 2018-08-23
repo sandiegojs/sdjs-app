@@ -4,23 +4,6 @@
 const axios = require('axios');
 
 module.exports = function(app) {
-  app.post('/signup', (req, res) => {
-    const baseUrl = app.get('url').replace(/\/$/, '');
-    const { email, password } = req.body;
-    axios
-      .post(`${baseUrl}/api/users`, req.body)
-      .then(() => {
-        axios
-          .post(`${baseUrl}/api/users/login`, { email, password })
-          .then(r => res.json({
-            token: r.data.id,
-            id: r.data.userId
-          }))
-          .catch(e => res.send(e.message));
-      })
-      .catch(error => res.send(error.message));
-  });
-
   app.post('/checkin', (req, res) => {
     const baseUrl = app.get('url').replace(/\/$/, '');
     const { eventObj, userId } = req.body;
@@ -63,19 +46,6 @@ module.exports = function(app) {
         }
       })
       .catch(error => console.log(error));
-  });
-  // Below route from original authors. Doesn't seem to be used. All done in actions.
-  // the url path seems to be wrong.
-  // should hit /api/attendees with attendeeId to delete attendee
-  app.delete('/deleteattendee', (req, res) => {
-    const baseUrl = app.get('url').replace(/\/$/, '');
-    const { attendeeId } = req.body;
-    axios
-      .delete(`${baseUrl}/api/users`, { attendeeId })
-      .then((response) => {
-        res.send(response.data);
-      })
-      .catch(error => res.send(error.message));
   });
 
   app.post('/rsvp', (req, res) => {
@@ -123,9 +93,7 @@ module.exports = function(app) {
 
   app.get('/reset-password/', (req, res) => {
     const { access_token: token } = req.query;
-    if (!token) {
-      return res.sendStatus(401);
-    }
+    if (!token) { return res.sendStatus(401); }
     res.render('password-reset', {
       redirectUrl: `/api/users/reset-password?access_token=${token}`
     });
