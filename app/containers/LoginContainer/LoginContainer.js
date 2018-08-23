@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  ScrollView, View, StyleSheet, Text, TouchableOpacity, Platform,
+  ScrollView, View, StyleSheet, Text, TouchableOpacity, Platform, Button
 } from 'react-native';
 import { connect } from 'react-redux';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { FormLabel, FormInput } from 'react-native-elements';
 import { updateEmailInput, updatePasswordInput, submitLogin } from './loginActions';
 
 class LoginContainer extends React.Component {
