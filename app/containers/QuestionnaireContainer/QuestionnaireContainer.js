@@ -60,7 +60,7 @@ class QuestionnaireContainer extends React.Component {
       );
       const answers = { question1, question2, question3 };
       dispatch(allAnswers(answers, user.id, user.token));
-      navigate('Events');
+      navigate('Splash');
     }
   }
 
@@ -74,7 +74,7 @@ class QuestionnaireContainer extends React.Component {
       }],
     );
     const { navigate } = this.props.navigation;
-    navigate('Events');
+    navigate('Splash');
   }
 
   render() {
