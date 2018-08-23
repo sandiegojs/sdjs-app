@@ -1,7 +1,5 @@
-import 'babel-polyfill'
-
 const expect = require('chai').expect;
-const SignupActions = require ('../../../../app/containers/SignupContainer/SignupActions')
+const SignupActions = require('../../../../app/containers/SignupContainer/SignupActions')
 
 describe('Signup Actions', () => {
     it('should update users first name', () => {

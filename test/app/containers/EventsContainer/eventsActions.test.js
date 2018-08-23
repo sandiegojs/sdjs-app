@@ -1,8 +1,5 @@
-import 'babel-polyfill'
-
 const expect = require('chai').expect;
-const EventsActions = require ('../../../../app/containers/EventsContainer/eventsActions')
-
+const EventsActions = require('../../../../app/containers/EventsContainer/eventsActions')
 
 describe('Events Actions', () => {
     it('Sets location error', () => {

@@ -1,11 +1,7 @@
-import 'babel-polyfill'
-
 const expect = require('chai').expect;
-const LoginActions = require ('../../../../app/containers/LoginContainer/LoginActions')
-
+const LoginActions = require('../../../../app/containers/LoginContainer/LoginActions');
 
 describe('Login Actions', () => {
-   console.log(LoginActions);
     it('should take users email address', () => {
         expect(LoginActions.updateEmailInput).to.exist;
     });
