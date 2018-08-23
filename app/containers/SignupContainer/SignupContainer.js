@@ -1,9 +1,9 @@
-import React from 'react';
-import { ScrollView } from 'react-native';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { WebBrowser } from 'expo';
-import { StyleSheet, View, Alert, Text, TouchableOpacity } from 'react-native';
-import { FormLabel, FormInput, Button, CheckBox } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StyleSheet, View, Alert, Text, TouchableOpacity, TextInput, Platform } from 'react-native';
+import { FormLabel, Button, CheckBox } from 'react-native-elements';
 import {
   updateFirstNameInput,
   updateLastNameInput,
@@ -88,54 +88,46 @@ class SignupContainer extends React.Component {
 
   render() {
     return (
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView enableOnAndroid={true}
+        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
+        extraHeight={130} extraScrollHeight={130}
+        >
         <View style={styles.container}>
-          <View style={styles.formContainer}>
-            <FormLabel>FIRST NAME</FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              onChangeText={this.handleFirstNameInput}
-              autoCorrect={false}
-            />
-            <FormLabel>LAST NAME</FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              onChangeText={this.handleLastNameInput}
-              autoCorrect={false}
-            />
-            <FormLabel>EMAIL</FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              onChangeText={this.handleEmailInput}
-              keyboardType='email-address'
-              autoCapitalize='none'
-              autoCorrect={false}
-            />
-            <FormLabel>PASSWORD</FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              onChangeText={this.handlePasswordInput}
-              autoCapitalize='none'
-              secureTextEntry={true}
-              autoCorrect={false}
-            />
-          </View>
+        <View style={styles.formContainer}>
+          <FormLabel>FIRST NAME</FormLabel>
+          <TextInput
+            style={styles.input}
+            underlineColorAndroid='#ecf0f1'
+            textContentType='name'
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChangeText={this.handleFirstNameInput}
+          />
+          <FormLabel>LAST NAME</FormLabel>
+          <TextInput
+            style={styles.input}
+            textContentType='name'
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChangeText={this.handleLastNameInput}
+          />
+          <FormLabel>EMAIL</FormLabel>
+          <TextInput
+            style={styles.input}
+            textContentType='name'
+            autoCapitalize='none'
+            keyboardType='email-address'
+            autoCorrect={false}
+            onChangeText={this.handleEmailInput}
+          />
+          <FormLabel>PASSWORD</FormLabel>
+          <TextInput
+            style={styles.input}
+            textContentType='name'
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChangeText={this.handlePasswordInput}
+          />
           <TouchableOpacity
             onPress={async () => {
               let result = await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
@@ -145,9 +137,10 @@ class SignupContainer extends React.Component {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: '500'
-              }}
-            >
+                fontWeight: '500',
+                textAlign: 'center'
+                }}
+              >
               {'Privacy Policy'}
             </Text>
           </TouchableOpacity>
@@ -167,6 +160,7 @@ class SignupContainer extends React.Component {
               borderRadius: 7,
               marginTop: 7,
               marginBottom: 25,
+              alignSelf: 'center',
               width: 300,
               height: 55
             }}
@@ -184,7 +178,8 @@ class SignupContainer extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+        </View>
+      </KeyboardAwareScrollView>
     )
   }
 }
@@ -192,9 +187,9 @@ class SignupContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     backgroundColor: '#ecf0f1',
-    alignItems: 'center',
+    // alignItems: 'center',
     padding: 10
   },
   formContainer: {
@@ -204,7 +199,7 @@ const styles = StyleSheet.create({
   },
   loginTextCont: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     marginVertical: 16,
     flexDirection: 'row',
   },
@@ -214,6 +209,14 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 16,
     fontWeight: '500'
+  },
+  input: {
+    margin: 15,
+    borderColor: '#ecf0f1',
+    borderWidth: 1,
+    paddingLeft: 4,
+    borderBottomColor: '#7f8c8d',
+    fontSize: 18
   }
 });
 

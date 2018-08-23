@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  ScrollView, View, StyleSheet, Text, TouchableOpacity, Platform, Button
+  TextInput, View, StyleSheet, Text, TouchableOpacity, Platform,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux';
 import { FormLabel, FormInput } from 'react-native-elements';
 import { updateEmailInput, updatePasswordInput, submitLogin } from './loginActions';
@@ -33,38 +34,36 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView enableOnAndroid={true}
+        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
+        extraHeight={130} extraScrollHeight={130}
+        >
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
               EMAIL
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
+              autoCapitalize='none'
+              autoCorrect={false}
               inputStyle={{ paddingLeft: 4 }}
               autoCapitalize='none'
               keyboardType='email-address'
-              autoCorrect={false}
-              returnKeyType={"next"}
               onChangeText={this.handleEmailInput}
             />
             <FormLabel>
               PASSWORD
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black',
-              }}
-              inputStyle={{ paddingLeft: 4 }}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
+              autoCorrect={false}
               autoCorrect={false}
               secureTextEntry
               onChangeText={this.handlePasswordInput}
-              returnKeyType={"done"}
             />
           </View>
           <Button
@@ -96,7 +95,7 @@ class LoginContainer extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+        </KeyboardAwareScrollView>
     );
   }
 }
@@ -148,6 +147,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  input: {
+    margin: 15,
+    borderColor: '#ecf0f1',
+    borderWidth: 1,
+    paddingLeft: 4,
+    borderBottomColor: '#7f8c8d',
+    fontSize: 18
+  }
 });
 
 function mapStoreToProps(store) {
