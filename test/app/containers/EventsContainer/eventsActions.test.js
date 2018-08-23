@@ -2,13 +2,13 @@ const expect = require('chai').expect;
 const EventsActions = require('../../../../app/containers/EventsContainer/eventsActions')
 
 describe('Events Actions', () => {
-    it('Sets location error', () => {
+    it(' checks for existance location error', () => {
         expect(EventsActions.setLocationError).to.exist;
     });
-    it('it checks if input is true', () => {
+    it('checks for existance of checked-true', () => {
         expect(EventsActions.checkedInTrue).to.exist;
     });
-    it('it checks if input is false', () => {
+    it('checks for existance of checked-false', () => {
         expect(EventsActions.checkedInFalse).to.exist;
     });
 })

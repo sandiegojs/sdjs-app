@@ -2,19 +2,19 @@ const expect = require('chai').expect;
 const SignupActions = require('../../../../app/containers/SignupContainer/SignupActions')
 
 describe('Signup Actions', () => {
-    it('should update users first name', () => {
+    it('checks for existance of first name input', () => {
         expect(SignupActions.updateFirstNameInput).to.exist;
     });
-    it('should update users last name', () => {
+    it('checks for existance of last name input', () => {
         expect(SignupActions.updateLastNameInput).to.exist;
     });
-    it('should update user email input', () => {
+    it('checks for existance of emai input', () => {
         expect(SignupActions.updateEmailInput).to.exist;
     });
-    it('should update users password', () => {
+    it('checks for existance of password input', () => {
         expect(SignupActions.updatePasswordInput).to.exist;
     });
-    it('should submit user signup', () => {
+    it('checks for existance of signup', () => {
         expect(SignupActions.submitSignUp).to.exist;
     });
 })
