@@ -49,7 +49,6 @@ class LoginContainer extends React.Component {
               autoCapitalize='none'
               autoCorrect={false}
               inputStyle={{ paddingLeft: 4 }}
-              autoCapitalize='none'
               keyboardType='email-address'
               onChangeText={this.handleEmailInput}
             />
@@ -60,7 +59,6 @@ class LoginContainer extends React.Component {
               style={styles.input}
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
               autoCorrect={false}
               secureTextEntry
               onChangeText={this.handlePasswordInput}
