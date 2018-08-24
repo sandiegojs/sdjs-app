@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  StyleSheet, View, Alert, Image, ScrollView,
-} from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StyleSheet, View, Alert, Image, TextInput, Platform } from 'react-native';
+import { FormLabel, Button } from 'react-native-elements';
 import {
   cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction,
 } from './donateActions';
@@ -83,7 +82,10 @@ class DonateContainer extends React.Component {
       cardholderName, zipCode, cardNumber, expMonth, expYear, cvc,
     } = this.props;
     return (
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView enableOnAndroid={true}
+        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
+        extraHeight={130} extraScrollHeight={100}
+        >
         <View style={styles.imageview}>
           <Image
             source={require('../../assets/images/stripe-payment-logo.png')}
@@ -92,7 +94,7 @@ class DonateContainer extends React.Component {
         </View>
         <View style={styles.formContainer}>
           <FormLabel>CARDHOLDER NAME</FormLabel>
-          <FormInput
+          <TextInput
             value={cardholderName}
             type='text'
             name='cardholder-name'
@@ -104,7 +106,7 @@ class DonateContainer extends React.Component {
             onChangeText={this.handleCardholderName}
           />
           <FormLabel>CARD NUMBER</FormLabel>
-          <FormInput
+          <TextInput
             value={cardNumber}
             type='number'
             class='field is-empty'
@@ -118,7 +120,7 @@ class DonateContainer extends React.Component {
           <View style={styles.row}>
             <View style={styles.inputWrap}>
               <FormLabel>MM</FormLabel>
-              <FormInput
+              <TextInput
                 value={expMonth}
                 type='number'
                 class='field is-empty'
@@ -131,7 +133,7 @@ class DonateContainer extends React.Component {
             </View>
             <View style={styles.inputWrap}>
               <FormLabel>YY</FormLabel>
-              <FormInput
+              <TextInput
                 value={expYear}
                 returnKeyType={"next"}
                 type='number'
@@ -145,7 +147,7 @@ class DonateContainer extends React.Component {
             </View>
             <View style={styles.inputWrap}>
               <FormLabel>CVC</FormLabel>
-              <FormInput
+              <TextInput
                 value={cvc}
                 type='number'
                 class='field is-empty'
@@ -160,7 +162,7 @@ class DonateContainer extends React.Component {
           <View style={styles.row}>
             <View style={styles.inputWrap}>
               <FormLabel>ZIP CODE</FormLabel>
-              <FormInput
+              <TextInput
                 value={zipCode}
                 type="number"
                 maxLength={5}
@@ -213,7 +215,7 @@ class DonateContainer extends React.Component {
             title="DONATE $5"
           />
         </View>
-      </ScrollView>
+        </KeyboardAwareScrollView>
     );
   }
 }

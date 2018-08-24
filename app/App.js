@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './rootStore';
-import { Image, BackHandler, Alert } from 'react-native';
+import { BackHandler, Alert } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
@@ -11,12 +11,13 @@ import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
-// import DonateScreen from './screens/DonateScreen';
+import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
 import SplashScreen from './screens/SplashScreen';
+import Ionicons from 'react-native-vector-icons/FontAwesome'
 
 class App extends React.Component {
 
@@ -63,9 +64,9 @@ class App extends React.Component {
             Events: {
               screen: EventsScreen,
             },
-            // Donate: {
-            //   screen: DonateScreen,
-            // },
+            Donate: {
+              screen: DonateScreen,
+            },
             Profile: {
               screen: ProfileScreen,
             },
@@ -78,74 +79,45 @@ class App extends React.Component {
           },
           {
             navigationOptions: ({ navigation }) => ({
-              tabBarIcon: ({ focused }) => {
+              tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
-                let iconName;
-                switch (routeName) {
-                  case 'SanDiegoJS':
-                    return (
-                      <Image
-                        source={require('./assets/images/sdjs.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
-                  case 'Slack':
-                    return (
-                      <Image
-                        source={require('./assets/images/slack.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
-                  case 'Events':
-                    return (
-                      <Image
-                        source={require('./assets/images/calendar.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
-                  // case 'Donate':
-                  //   return (
-                  //     <Image
-                  //       source={require('./assets/images/donate.png')}
-                  //       fadeDuration={0}
-                  //       style={{ width: 30, height: 30 }}
-                  //     />
-                  //   )
-                  //   break;
-                  case 'Profile':
-                    return (
-                      <Image
-                        source={require('./assets/images/survey.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
-                  case 'Logout':
-                    return (
-                      <Image
-                        source={require('./assets/images/logout.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
-                  case 'Shopping':
-                    return (
-                      <Image
-                        source={require('./assets/images/shopping.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                let iconName, iconSize;
+                if (routeName === 'SanDiegoJS'){
+                  iconName =`home${focused ? '' : '-outline'}`;
+                  iconName ='home';
+                  iconSize=31;
                 }
+                else if (routeName === 'Slack'){
+                  iconName =`slack${focused ? '' : '-outline'}`;
+                  iconName ='slack';
+                  iconSize=25;
+                }
+                else if (routeName === 'Events'){
+                  iconName =`calendar${focused ? '' : '-outline'}`;
+                  iconName ='calendar';
+                  iconSize=23;
+                }
+                else if (routeName === 'Donate'){
+                  iconName =`gift${focused ? '' : '-outline'}`;
+                  iconName ='gift';
+                  iconSize=30;
+                }
+                else if (routeName === 'Shopping'){
+                  iconName =`shopping-cart${focused ? '' : '-outline'}`;
+                  iconName ='shopping-cart';
+                  iconSize=28;
+                }
+                else if (routeName === 'Profile'){
+                  iconName =`user${focused ? '' : '-outline'}`;
+                  iconName ='user';
+                  iconSize=27.5;
+                }
+                else if (routeName === 'Logout'){
+                  iconName =`arrow-left${focused ? '' : '-outline'}`;
+                  iconName ='arrow-left';
+                  iconSize=27;
+                }
+                return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
               },
             }),
             tabBarComponent: TabBarBottom,
@@ -157,7 +129,7 @@ class App extends React.Component {
         )
       },
       EventDetails: { screen: EventDetailsScreen },
-      // Donate: { screen: DonateScreen },
+      Donate: { screen: DonateScreen },
       ThankYou: { screen: ThankyouScreen }
     });
     return (

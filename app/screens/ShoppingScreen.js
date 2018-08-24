@@ -4,7 +4,7 @@ import ShoppingContainer from '../containers/ShoppingContainer/ShoppingContainer
 export default class ShoppingScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Shop',
-    headerTitle: 'Shop online',
+    headerTitle: 'Shop',
     headerLeft: null,
   };
 
