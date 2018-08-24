@@ -88,19 +88,16 @@ class App extends React.Component {
                     iconName ='home';
                     iconSize=31;
                     return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
-                    break;
                   case 'Slack':
                     iconName =`slack${focused ? '' : '-outline'}`;
                     iconName ='slack';
                     iconSize=25;
                     return  <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
-                    break;
                   case 'Events':
                     iconName =`calendar${focused ? '' : '-outline'}`;
                     iconName ='calendar';
                     iconSize=23;
                     return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
-                    break;
                   // case 'Donate':
                   //   return (
                   //     <Image
@@ -109,25 +106,21 @@ class App extends React.Component {
                   //       style={{ width: 30, height: 30 }}
                   //     />
                   //   )
-                  //   break;
                   case 'Profile':
                     iconName =`user${focused ? '' : '-outline'}`;
                     iconName ='user';
                     iconSize=27.5;
                     return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
-                    break;
                   case 'Logout':
                     iconName =`arrow-left${focused ? '' : '-outline'}`;
                     iconName ='arrow-left';
                     iconSize=27;
                     return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
-                    break;
                   case 'Shopping':
                     iconName =`shopping-cart${focused ? '' : '-outline'}`;
                     iconName ='shopping-cart';
                     iconSize=28;
                     return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
-                    break;
                 }
               },
             }),
