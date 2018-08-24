@@ -26,7 +26,7 @@ export function submitLogin(credentials, navigate, dispatch) {
       .then(response => {
         const { id: token, userId: id } = response.data;
         dispatch(profileInit(id, token));
-        navigate('Events');
+        navigate('Splash');
         return { id, token };
       })
       .catch((error) => {
