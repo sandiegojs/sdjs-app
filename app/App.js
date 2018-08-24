@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './rootStore';
-import { Image, BackHandler, Alert } from 'react-native';
+import { BackHandler, Alert } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import EventDetailsScreen from './screens/EventDetailsScreen';
 import EventsScreen from './screens/EventsScreen';
@@ -17,6 +17,7 @@ import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
 import SplashScreen from './screens/SplashScreen';
+import Ionicons from 'react-native-vector-icons/FontAwesome'
 
 class App extends React.Component {
 
@@ -78,37 +79,25 @@ class App extends React.Component {
           },
           {
             navigationOptions: ({ navigation }) => ({
-              tabBarIcon: ({ focused }) => {
+              tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
-                let iconName;
+                let iconName, iconSize;
                 switch (routeName) {
                   case 'SanDiegoJS':
-                    return (
-                      <Image
-                        source={require('./assets/images/sdjs.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                    iconName =`home${focused ? '' : '-outline'}`;
+                    iconName ='home';
+                    iconSize=31;
+                    return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                   case 'Slack':
-                    return (
-                      <Image
-                        source={require('./assets/images/slack.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                    iconName =`slack${focused ? '' : '-outline'}`;
+                    iconName ='slack';
+                    iconSize=25;
+                    return  <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                   case 'Events':
-                    return (
-                      <Image
-                        source={require('./assets/images/calendar.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                    iconName =`calendar${focused ? '' : '-outline'}`;
+                    iconName ='calendar';
+                    iconSize=23;
+                    return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                   // case 'Donate':
                   //   return (
                   //     <Image
@@ -117,34 +106,21 @@ class App extends React.Component {
                   //       style={{ width: 30, height: 30 }}
                   //     />
                   //   )
-                  //   break;
                   case 'Profile':
-                    return (
-                      <Image
-                        source={require('./assets/images/survey.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                    iconName =`user${focused ? '' : '-outline'}`;
+                    iconName ='user';
+                    iconSize=27.5;
+                    return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                   case 'Logout':
-                    return (
-                      <Image
-                        source={require('./assets/images/logout.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                    iconName =`arrow-left${focused ? '' : '-outline'}`;
+                    iconName ='arrow-left';
+                    iconSize=27;
+                    return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                   case 'Shopping':
-                    return (
-                      <Image
-                        source={require('./assets/images/shopping.png')}
-                        fadeDuration={0}
-                        style={{ width: 30, height: 30 }}
-                      />
-                    )
-                    break;
+                    iconName =`shopping-cart${focused ? '' : '-outline'}`;
+                    iconName ='shopping-cart';
+                    iconSize=28;
+                    return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                 }
               },
             }),
