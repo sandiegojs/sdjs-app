@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   StyleSheet, View, Alert, Platform, TextInput
 } from 'react-native';
@@ -85,7 +85,7 @@ class QuestionnaireContainer extends React.Component {
         enableAutoAutomaticScroll={(Platform.OS === 'ios')}
         extraHeight={130}
         extraScrollHeight={100}
-        >
+      >
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
@@ -137,7 +137,7 @@ class QuestionnaireContainer extends React.Component {
             title="Skip"
           />
         </View>
-        </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
     )
   }
 }

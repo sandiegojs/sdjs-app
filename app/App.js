@@ -11,7 +11,7 @@ import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
-// import DonateScreen from './screens/DonateScreen';
+import DonateScreen from './screens/DonateScreen';
 import ThankyouScreen from './screens/ThankyouScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
@@ -64,9 +64,9 @@ class App extends React.Component {
             Events: {
               screen: EventsScreen,
             },
-            // Donate: {
-            //   screen: DonateScreen,
-            // },
+            Donate: {
+              screen: DonateScreen,
+            },
             Profile: {
               screen: ProfileScreen,
             },
@@ -122,6 +122,7 @@ class App extends React.Component {
                     iconSize=28;
                     return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                 }
+                return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
               },
             }),
             tabBarComponent: TabBarBottom,
@@ -133,7 +134,7 @@ class App extends React.Component {
         )
       },
       EventDetails: { screen: EventDetailsScreen },
-      // Donate: { screen: DonateScreen },
+      Donate: { screen: DonateScreen },
       ThankYou: { screen: ThankyouScreen }
     });
     return (

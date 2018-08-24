@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { StyleSheet, View, Alert, Image, TextInput, Platform } from 'react-native';
 import { FormLabel, Button } from 'react-native-elements';
 import {
@@ -87,7 +87,7 @@ class DonateContainer extends React.Component {
         enableAutoAutomaticScroll={(Platform.OS === 'ios')}
         extraHeight={130}
         extraScrollHeight={100}
-        >
+      >
         <View style={styles.imageview}>
           <Image
             source={require('../../assets/images/stripe-payment-logo.png')}
@@ -217,7 +217,7 @@ class DonateContainer extends React.Component {
             title="DONATE $5"
           />
         </View>
-        </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
