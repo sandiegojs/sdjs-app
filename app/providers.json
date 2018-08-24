@@ -2,8 +2,8 @@
     "meetup-login": {
         "provider": "meetup",
         "module": "passport-oauth2-meetup",
-        "clientID": "gt8abn7flbn78o8vn104kv5956",
-        "clientSecret": "gcolbjfr7muqigjoeqkd088kr7",
+        "clientID": "9i4tnbg04o1gff2ajhg88ocfpm",
+        "clientSecret": "kll6k6vit4k8cjf8d5i48shqpj",
         "callbackURL": "/auth/meetup/callback",
         "authPath": "/auth/meetup",
         "callbackPath": "/auth/meetup/callback",
@@ -14,8 +14,8 @@
     "meetup-link": {
         "provider": "meetup",
         "module": "passport-oauth2-meetup",
-        "clientID": "gt8abn7flbn78o8vn104kv5956",
-        "clientSecret": "gcolbjfr7muqigjoeqkd088kr7",
+        "clientID": "9i4tnbg04o1gff2ajhg88ocfpm",
+        "clientSecret": "kll6k6vit4k8cjf8d5i48shqpj",
         "callbackURL": "/link/meetup/callback",
         "authPath": "/link/meetup",
         "callbackPath": "/link/meetup/callback",

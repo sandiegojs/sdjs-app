@@ -3,11 +3,10 @@ require('dotenv').config()
 const loopback = require('loopback');
 const boot = require('loopback-boot');
 const path = require('path');
-import Linking from ('react-native');
+const bodyParser = require('body-parser');
 const app = module.exports = loopback();
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const bodyParser = require('body-parser');
 const flash = require('express-flash');
 
 var DataSource = require('loopback-datasource-juggler').DataSource;
@@ -74,7 +73,7 @@ for (var s in config) {
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 app.get('/auth/account', function (req, res, next) {
-  Linking.addEventListener('url', callback)});
+  console.log(req.accessToken);});
 
 app.get('/signup', function (req, res, next) {
   res.navigate('SignupScreen', {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { WebBrowser } from 'expo';
 
 export function updateEmailInput(text) {
   return {
@@ -39,4 +40,19 @@ export function submitLogin(credentials, navigate) {
         return Promise.resolve(error);
       }),
   };
+}
+
+export function thirdPartyLogin(navigate) {
+ // const { result } = credentials;
+  return { 
+    type: 'THIRD_PARTY_LIGIN',
+    payload: axios
+    .get(async () => {
+      let result = await WebBrowser.openBrowserAsync('http://a98a967b.ngrok.io/auth/meetup');
+      return result
+    })
+    //axios
+    //.get()
+    //WebBrowser.openBrowserAsync('http://a98a967b.ngrok.io/auth/meetup')
+  }
 }
