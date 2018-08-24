@@ -82,9 +82,11 @@ class DonateContainer extends React.Component {
       cardholderName, zipCode, cardNumber, expMonth, expYear, cvc,
     } = this.props;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}
+      <KeyboardAwareScrollView
+        enableOnAndroid={true}
         enableAutoAutomaticScroll={(Platform.OS === 'ios')}
-        extraHeight={130} extraScrollHeight={100}
+        extraHeight={130}
+        extraScrollHeight={100}
         >
         <View style={styles.imageview}>
           <Image
