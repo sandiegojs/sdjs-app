@@ -4,7 +4,7 @@ import EventDetailsContainer from '../containers/EventDetailsContainer/EventDeta
 
 export default class EventDetailsScreen extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
@@ -21,10 +21,9 @@ export default class EventDetailsScreen extends React.Component {
     return true;
   }
   static navigationOptions = {
-    title: 'Event Details',
+    title: 'Event Details'
   };
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <EventDetailsContainer />
     );

@@ -19,8 +19,7 @@ import ShoppingScreen from './screens/ShoppingScreen';
 import SplashScreen from './screens/SplashScreen';
 import Ionicons from 'react-native-vector-icons/FontAwesome'
 
-class App extends React.Component {
-
+export default class App extends React.Component {
   handleBackButton = () => {
     Alert.alert(
       'Exit The App',
@@ -31,12 +30,13 @@ class App extends React.Component {
       }, {
         text: 'OK',
         onPress: () => BackHandler.exitApp()
-      },], {
+      }], {
         cancelable: false
       }
-    )
+    );
     return true;
-  }
+  };
+
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
@@ -45,7 +45,6 @@ class App extends React.Component {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
   render() {
-
     const AppRoot = StackNavigator({
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
@@ -56,25 +55,25 @@ class App extends React.Component {
         screen: TabNavigator(
           {
             SanDiegoJS: {
-              screen: SDJSScreen,
+              screen: SDJSScreen
             },
             Slack: {
-              screen: SlackScreen,
+              screen: SlackScreen
             },
             Events: {
-              screen: EventsScreen,
+              screen: EventsScreen
             },
             // Donate: {
             //   screen: DonateScreen,
             // },
             Profile: {
-              screen: ProfileScreen,
+              screen: ProfileScreen
             },
             Shopping: {
-              screen: ShoppingScreen,
+              screen: ShoppingScreen
             },
             Logout: {
-              screen: LogoutScreen,
+              screen: LogoutScreen
             }
           },
           {
@@ -122,13 +121,13 @@ class App extends React.Component {
                     iconSize=28;
                     return <Ionicons name={iconName}  size={iconSize} color={tintColor}/>
                 }
-              },
+              }
             }),
             tabBarComponent: TabBarBottom,
             tabBarPosition: 'bottom',
             animationEnabled: false,
             swipeEnabled: true,
-            initialRouteName: 'Events',
+            initialRouteName: 'Events'
           }
         )
       },
@@ -137,11 +136,9 @@ class App extends React.Component {
       ThankYou: { screen: ThankyouScreen }
     });
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <AppRoot />
       </Provider>
     );
   }
-};
-
-export default App;
+}

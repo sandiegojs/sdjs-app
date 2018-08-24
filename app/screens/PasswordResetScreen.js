@@ -7,17 +7,17 @@ export default class PasswordResetScreen extends React.Component {
     title: 'Reset Password',
     ...Platform.select({
       ios: {
-        headerLeft: null,
+        headerLeft: null
       },
       android: {
-        headerLeft: '',
-      },
+        headerLeft: ''
+      }
     })
   };
 
   render() {
     return (
-      <PasswordContainer navigation={this.props.navigation} />
+      <PasswordContainer navigation={ this.props.navigation } />
     );
   }
 };

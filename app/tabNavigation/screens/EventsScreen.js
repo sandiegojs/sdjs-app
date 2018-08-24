@@ -10,12 +10,12 @@ export default class EventsScreen extends React.Component {
     title: 'tabBAR',
     tabBarIcon: () => (
       <Image
-        source={require('../../assets/images/sdjs.png')}
-        fadeDuration={0}
-        style={{ width: 30, height: 30 }}
-        onPress={() => this.props.navigation.navigate('Profile')}
+        source={ require('../../assets/images/sdjs.png') }
+        fadeDuration={ 0 }
+        style={ { width: 30, height: 30 } }
+        onPress={ () => this.props.navigation.navigate('Profile') }
       />
-    ),
+    )
   };
 
   render() {
@@ -25,7 +25,7 @@ export default class EventsScreen extends React.Component {
       <View>
         <Button
           title="Go to Profile Screen"
-          onPress={() =>
+          onPress={ () =>
             navigate('Profile')
           }
         />

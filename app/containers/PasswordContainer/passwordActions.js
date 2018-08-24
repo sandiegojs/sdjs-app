@@ -3,7 +3,7 @@ import axios from 'axios';
 export function emailResetPasswordEntry(text) {
   return {
     type: 'EMAIL_RESET_PASSWORD_ENTRY',
-    payload: text,
+    payload: text
   };
 }
 
@@ -19,6 +19,6 @@ export function resetPassword(email, navigate) {
       .catch((error) => {
         alert('This account does not exist. Please try again.');
         console.log(error);
-      }),
+      })
   };
 }

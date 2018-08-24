@@ -29,8 +29,8 @@ class PasswordContainer extends React.Component {
     const { emailInput } = this.props;
     return (
       <ScrollView keyboardShouldPersistTaps="handled">
-        <View style={styles.container}>
-          <View style={styles.formContainer}>
+        <View style={ styles.container }>
+          <View style={ styles.formContainer }>
             <FormLabel>
               Enter your E-mail
             </FormLabel>
@@ -45,20 +45,20 @@ class PasswordContainer extends React.Component {
           </View>
           <Button
             title="RESET PASSWORD"
-            buttonStyle={{
+            buttonStyle={ {
               backgroundColor: '#346abb',
               borderRadius: 7,
               marginTop: 7,
               marginBottom: 25,
-              width: 311,
-            }}
-            onPress={this.submitResetPasswordRequest}
+              width: 311
+            } }
+            onPress={ this.submitResetPasswordRequest }
           />
-          <View style={styles.loginTextCont}>
+          <View style={ styles.loginTextCont }>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Login')}
+              onPress={ () => this.props.navigation.navigate('Login') }
             >
-              <Text style={styles.textButton}>
+              <Text style={ styles.textButton }>
                 Return to Login
               </Text>
             </TouchableOpacity>
@@ -74,18 +74,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    padding: 30,
+    padding: 30
   },
   formContainer: {
     paddingBottom: 20,
     width: 350,
-    margin: 15,
+    margin: 15
   },
   loginTextCont: {
     alignItems: 'center',
     justifyContent: 'flex-end',
     marginVertical: 25,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   textButton: {
     fontSize: 16,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 
 function mapStoreToProps(store) {
   return {
-    emailInput: store.passwordData.emailInput,
+    emailInput: store.passwordData.emailInput
   };
 }
 

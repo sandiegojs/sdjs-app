@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 'use strict';
 
 const axios = require('axios');
@@ -8,8 +9,9 @@ module.exports = function(app) {
     const { email, password } = req.body;
     axios
       .post(`${baseUrl}/api/users`, req.body)
-      .then((response) => {
-        axios.post(`${baseUrl}/api/users/login`, { email, password })
+      .then(() => {
+        axios
+          .post(`${baseUrl}/api/users/login`, { email, password })
           .then(r => res.json({
             token: r.data.id,
             id: r.data.userId
@@ -76,34 +78,6 @@ module.exports = function(app) {
       .catch(error => res.send(error.message));
   });
 
-  app.post('/loginthirdparty', (req, res) => {
-    const baseUrl = app.get('url').replace(/\/$/, '');
-    const {
-      email, password, first_name, last_name
-    } = req.body;
-
-    axios.get(`${baseUrl}/api/users?filter[where][email]=${email}`)
-      .then((r) => {
-        if (!!r.data && !r.data.length) {
-          axios.post(`${baseUrl}/signup`, {
-            first_name, last_name, email, password
-          })
-            .then(r => res.json({
-              token: r.data.token,
-              id: r.data.id
-            }))
-            .catch(e => res.send(e.message));
-        } else {
-          axios.post(`${baseUrl}/login`, { email, password })
-            .then(r => res.json({
-              token: r.data.token,
-              id: r.data.id
-            }))
-            .catch(e => res.send(e.message));
-        }
-      })
-      .catch(e => res.send(e.message));
-  });
   app.post('/rsvp', (req, res) => {
     const baseUrl = app.get('url').replace(/\/$/, '');
     const { eventObj, userId } = req.body;
@@ -147,9 +121,11 @@ module.exports = function(app) {
       .catch(e => res.send(e.message));
   });
 
-  app.get('/reset-password/', (req, res, next) => {
+  app.get('/reset-password/', (req, res) => {
     const { access_token: token } = req.query;
-    if (!token) { return res.sendStatus(401); }
+    if (!token) {
+      return res.sendStatus(401);
+    }
     res.render('password-reset', {
       redirectUrl: `/api/users/reset-password?access_token=${token}`
     });

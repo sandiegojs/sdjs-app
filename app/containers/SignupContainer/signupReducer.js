@@ -1,4 +1,4 @@
-import {userData as defaultState} from '../../DefaultStates';
+import { userData as defaultState } from '../../DefaultStates';
 
 export default function signupReducer(state = defaultState, action) {
   const { type, payload } = action;
@@ -7,28 +7,28 @@ export default function signupReducer(state = defaultState, action) {
     case 'UPDATE_FIRST_NAME_INPUT': {
       return {
         ...state,
-        firstNameInput: payload,
+        firstNameInput: payload
       };
     }
 
     case 'UPDATE_LAST_NAME_INPUT': {
       return {
         ...state,
-        lastNameInput: payload,
+        lastNameInput: payload
       };
     }
 
     case 'UPDATE_EMAIL_INPUT': {
       return {
         ...state,
-        emailInput: payload,
+        emailInput: payload
       };
     }
 
     case 'UPDATE_PASSWORD_INPUT': {
       return {
         ...state,
-        passwordInput: payload,
+        passwordInput: payload
       };
     }
 
@@ -42,7 +42,7 @@ export default function signupReducer(state = defaultState, action) {
     case 'SUBMIT_SIGN_UP_FULFILLED': {
       return {
         ...state,
-        user: payload,
+        user: payload
       };
     }
 

@@ -7,43 +7,43 @@ export default function donateReducer(state = defaultState, action) {
     case 'CARD_NAME_ENTRY': {
       return {
         ...state,
-        cardholderName: payload,
+        cardholderName: payload
       };
     }
     case 'PHONE_NUM_ENTRY': {
       return {
         ...state,
-        phoneNumber: payload,
+        phoneNumber: payload
       };
     }
     case 'ZIP_CODE_ENTRY': {
       return {
         ...state,
-        zipCode: payload,
+        zipCode: payload
       };
     }
     case 'CARD_NUM_ENTRY': {
       return {
         ...state,
-        cardNumber: payload,
+        cardNumber: payload
       };
     }
     case 'CARD_EXPMONTH_ENTRY': {
       return {
         ...state,
-        expMonth: payload,
+        expMonth: payload
       };
     }
     case 'CARD_EXPYEAR_ENTRY': {
       return {
         ...state,
-        expYear: payload,
+        expYear: payload
       };
     }
     case 'CARD_CVC_ENTRY': {
       return {
         ...state,
-        cvc: payload,
+        cvc: payload
       };
     }
     case 'HANDLE_TRANSACTION_FULFILLED': {
@@ -54,7 +54,7 @@ export default function donateReducer(state = defaultState, action) {
           cardNumber: '',
           expMonth: '',
           expYear: '',
-          cvc: '',
+          cvc: ''
         };
       }
       return {
@@ -64,7 +64,7 @@ export default function donateReducer(state = defaultState, action) {
         expMonth: '',
         expYear: '',
         cvc: '',
-        zipCode: '',
+        zipCode: ''
       };
     }
     default: {

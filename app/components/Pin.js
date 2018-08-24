@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import LocalImage from './LocalImage'
+import LocalImage from './LocalImage';
 
 let windowWidth = Dimensions.get('window').width;
 
 export default class Pin extends Component {
-
   render() {
     return (
-      <View style={[styles.PinContainer, { width: windowWidth / this.props.columns }]}>
-        <View style={styles.PinHeader}>
+      <View
+        style={ [
+          styles.PinContainer,
+          { width: windowWidth / this.props.columns }
+        ] }
+      >
+        <View style={ styles.PinHeader }>
         </View>
-        <View style={styles.PinContent}>
+        <View style={ styles.PinContent }>
           <LocalImage
-            source={this.props.pinsource.imagesource}
-            originalWidth={this.props.pinsource.originalWidth}
-            originalHeight={this.props.pinsource.originalHeight}
-            columns={this.props.columns}
+            source={ this.props.pinsource.imagesource }
+            originalWidth={ this.props.pinsource.originalWidth }
+            originalHeight={ this.props.pinsource.originalHeight }
+            columns={ this.props.columns }
           />
         </View>
-        <View style={styles.PinMeta}>
-          <View style={styles.PinMetaTextContainer}>
-          </View>
+        <View style={ styles.PinMeta }>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 8,
-    paddingRight: 8,
+    paddingRight: 8
   },
   PinMeta: {
     flex: 1,
@@ -54,6 +56,6 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingRight: 8,
     paddingBottom: 8,
-    paddingLeft: 8,
+    paddingLeft: 8
   }
-})
+});

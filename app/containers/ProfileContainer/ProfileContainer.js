@@ -128,7 +128,7 @@ class ProfileContainer extends React.Component {
               autoCorrect={false}
               defaultValue={email}
               keyboardType='email-address'
-              onChangeText={this.handleEmailUpdate}
+              onChangeText={ this.handleEmailUpdate }
             />
             <FormLabel>
               Phone Number
@@ -178,94 +178,94 @@ class ProfileContainer extends React.Component {
               autoCorrect={false}
               defaultValue={url}
               keyboardType='email-address'
-              onChangeText={this.handleUrlUpdate}
+              onChangeText={ this.handleUrlUpdate }
             />
-            <Text style={{
+            <Text style={ {
               textAlign: 'center',
               fontSize: 15,
               fontWeight: '500',
               marginBottom: 21
-              }}
+            } }
             >
               I Want To Recieve SDJS Notifications
             </Text>
-              <View style={styles.row}>
-                <View style={styles.inputWrap}>
-                  <Text>Phone Notifications</Text>
-                  <SwitchToggle
-                    containerStyle={{
-                      marginBottom: 16,
-                      width: 55,
-                      height: 26,
-                      borderRadius: 18,
-                      padding: 5,
-                    }}
-                    backgroundColorOn='#346abb'
-                    backgroundColorOff='#e5e1e0'
-                    circleColorOff='white'
-                    circleColorOn='white'
-                    circleStyle={{
-                      width: 15,
-                      height: 15,
-                      borderRadius: 7
-                    }}
-                    duration={200}
-                    switchOn={allowSMS}
-                    onPress={() => this.handlePhoneToggle(!allowSMS)}
-                  />
-                </View>
-                <View style={styles.inputWrap}>
-                  <Text>Email Notifications</Text>
-                  <SwitchToggle
-                    containerStyle={{
-                      marginBottom: 16,
-                      width: 55,
-                      height: 26,
-                      borderRadius: 18,
-                      padding: 5,
-                    }}
-                    backgroundColorOn='#346abb'
-                    backgroundColorOff='#e5e1e0'
-                    circleColorOff='white'
-                    circleColorOn='white'
-                    circleStyle={{
-                      width: 15,
-                      height: 15,
-                      borderRadius: 7
-                    }}
-                    duration={200}
-                    switchOn={allowEmails}
-                    onPress={() => this.handleEmailToggle(!allowEmails)}
-                  />
-                </View>
+            <View style={ styles.row }>
+              <View style={ styles.inputWrap }>
+                <Text>Phone Notifications</Text>
+                <SwitchToggle
+                  containerStyle={ {
+                    marginBottom: 16,
+                    width: 55,
+                    height: 26,
+                    borderRadius: 18,
+                    padding: 5
+                  } }
+                  backgroundColorOn='#346abb'
+                  backgroundColorOff='#e5e1e0'
+                  circleColorOff='white'
+                  circleColorOn='white'
+                  circleStyle={ {
+                    width: 15,
+                    height: 15,
+                    borderRadius: 7
+                  } }
+                  duration={ 200 }
+                  switchOn={ allowSMS }
+                  onPress={ () => this.handlePhoneToggle(!allowSMS) }
+                />
               </View>
+              <View style={ styles.inputWrap }>
+                <Text>Email Notifications</Text>
+                <SwitchToggle
+                  containerStyle={ {
+                    marginBottom: 16,
+                    width: 55,
+                    height: 26,
+                    borderRadius: 18,
+                    padding: 5
+                  } }
+                  backgroundColorOn='#346abb'
+                  backgroundColorOff='#e5e1e0'
+                  circleColorOff='white'
+                  circleColorOn='white'
+                  circleStyle={ {
+                    width: 15,
+                    height: 15,
+                    borderRadius: 7
+                  } }
+                  duration={ 200 }
+                  switchOn={ allowEmails }
+                  onPress={ () => this.handleEmailToggle(!allowEmails) }
+                />
+              </View>
+            </View>
             <Button
               large
-              buttonStyle={{
+              buttonStyle={ {
                 backgroundColor: '#346abb',
                 borderRadius: 7,
                 marginTop: 25,
                 marginBottom: 21,
                 width: 300,
-                height: 55,
-              }}
-              onPress={this.handleProfileUpdate}
+                height: 55
+              } }
+              onPress={ this.handleProfileUpdate }
               title="UPDATE"
             />
           </View>
           <TouchableOpacity
-            onPress={async () => {
-              return await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5')
-            }}
+            onPress={ async() => {
+              return await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
+            } }
           >
             <Text
-              style={{
+              style={ {
                 marginBottom: 11,
                 fontSize: 16,
                 fontWeight: '500'
-              }}
+              } }
             >
-              {'Privacy Policy'}
+              { 'Privacy Policy' }
             </Text>
           </TouchableOpacity>
         </View>
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   inputWrap: {
     flex: 2,

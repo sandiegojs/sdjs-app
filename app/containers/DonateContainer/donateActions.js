@@ -1,44 +1,42 @@
-import axios from 'axios';
-
 export function cardholderNameEntry(text) {
   return {
     type: 'CARD_NAME_ENTRY',
-    payload: text,
+    payload: text
   };
 }
 
 export function zipCodeEntry(number) {
   return {
     type: 'ZIP_CODE_ENTRY',
-    payload: number,
+    payload: number
   };
 }
 
 export function cardNumberEntry(number) {
   return {
     type: 'CARD_NUM_ENTRY',
-    payload: number,
+    payload: number
   };
 }
 
 export function cardExpMonthEntry(number) {
   return {
     type: 'CARD_EXPMONTH_ENTRY',
-    payload: number,
+    payload: number
   };
 }
 
 export function cardExpYearEntry(number) {
   return {
     type: 'CARD_EXPYEAR_ENTRY',
-    payload: number,
+    payload: number
   };
 }
 
 export function cardCvcEntry(number) {
   return {
     type: 'CARD_CVC_ENTRY',
-    payload: number,
+    payload: number
   };
 }
 
@@ -58,9 +56,9 @@ export function handleTransaction(cardDetails, amount, navigate, dispatch) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + 'sk_test_mKN6tShrC00GTyAn8onN7aAg',
+        Authorization: 'Bearer ' + 'sk_test_mKN6tShrC00GTyAn8onN7aAg'
       },
-      body: formBody,
+      body: formBody
     }).then((response) => {
       response.json().then(solved => cardToken = solved.id).then(cardToken => (performTransaction(cardToken, amount)));
       {
@@ -71,7 +69,7 @@ export function handleTransaction(cardDetails, amount, navigate, dispatch) {
         alert('Your transaction did not go through, please check your credit card information.');
         return null;
       }
-    }),
+    })
   };
 }
 
@@ -81,7 +79,7 @@ function performTransaction(cardToken, amount) {
     currency: 'usd',
     description: 'SDJS donation',
     source: cardToken,
-    statement_descriptor: 'Donation to SD JS',
+    statement_descriptor: 'Donation to SD JS'
   };
   let formBody = [];
   for (const property in charge) {
@@ -95,9 +93,9 @@ function performTransaction(cardToken, amount) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: 'Bearer ' + 'sk_test_mKN6tShrC00GTyAn8onN7aAg',
+      Authorization: 'Bearer ' + 'sk_test_mKN6tShrC00GTyAn8onN7aAg'
     },
-    body: formBody,
+    body: formBody
   })
     .then((response) => {
       response.json().then(solved => solved.status);

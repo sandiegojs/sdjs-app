@@ -9,7 +9,6 @@ export default class SlackScreen extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <SlackContainer />
     );

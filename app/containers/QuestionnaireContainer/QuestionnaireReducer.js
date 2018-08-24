@@ -7,19 +7,19 @@ export default function questionnaireReducer(state = defaultState, action) {
     case 'QUESTION_1_ENTRY': {
       return {
         ...state,
-        question1: payload,
+        question1: payload
       };
     }
     case 'QUESTION_2_ENTRY': {
       return {
         ...state,
-        question2: payload,
+        question2: payload
       };
     }
     case 'QUESTION_3_ENTRY': {
       return {
         ...state,
-        question3: payload,
+        question3: payload
       };
     }
     default: {

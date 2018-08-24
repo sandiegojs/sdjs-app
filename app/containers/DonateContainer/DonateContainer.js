@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { StyleSheet, View, Alert, Image, TextInput, Platform } from 'react-native';
 import { FormLabel, Button } from 'react-native-elements';
 import {
-  cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction,
+  cardholderNameEntry, zipCodeEntry, cardNumberEntry, cardExpMonthEntry, cardExpYearEntry, cardCvcEntry, handleTransaction
 } from './donateActions';
 
 class DonateContainer extends React.Component {
@@ -51,7 +51,7 @@ class DonateContainer extends React.Component {
 
   handleDonationSubmit(number) {
     const {
-      dispatch, cardholderName, zipCode, cardNumber, expMonth, expYear, cvc,
+      dispatch, cardholderName, zipCode, cardNumber, expMonth, expYear, cvc
     } = this.props;
     const { navigate } = this.props.navigation;
     const amount = number;
@@ -61,7 +61,7 @@ class DonateContainer extends React.Component {
         'Complete all fields to submit', [{
           text: 'OK',
           onPress: null,
-          style: 'cancel',
+          style: 'cancel'
         }],
       );
     } else {
@@ -71,7 +71,7 @@ class DonateContainer extends React.Component {
         'card[exp_month]': expMonth,
         'card[exp_year]': expYear,
         'card[cvc]': cvc,
-        'card[address_zip]': zipCode,
+        'card[address_zip]': zipCode
       };
       dispatch(handleTransaction(cardDetails, amount, navigate));
     }
@@ -79,7 +79,7 @@ class DonateContainer extends React.Component {
 
   render() {
     const {
-      cardholderName, zipCode, cardNumber, expMonth, expYear, cvc,
+      cardholderName, zipCode, cardNumber, expMonth, expYear, cvc
     } = this.props;
     return (
       <KeyboardAwareScrollView
@@ -87,14 +87,14 @@ class DonateContainer extends React.Component {
         enableAutoAutomaticScroll={(Platform.OS === 'ios')}
         extraHeight={130}
         extraScrollHeight={100}
-        >
+      >
         <View style={styles.imageview}>
           <Image
-            source={require('../../assets/images/stripe-payment-logo.png')}
-            style={styles.image}
+            source={ require('../../assets/images/stripe-payment-logo.png') }
+            style={ styles.image }
           />
         </View>
-        <View style={styles.formContainer}>
+        <View style={ styles.formContainer }>
           <FormLabel>CARDHOLDER NAME</FormLabel>
           <TextInput
             value={cardholderName}
@@ -102,122 +102,122 @@ class DonateContainer extends React.Component {
             name='cardholder-name'
             class='field is-empty'
             placeholder=' Name That Appears On Card'
-            icon={{ name: 'sign-in', type: 'font-awesome' }}
-            containerStyle={{ width: "80%" }}
-            inputStyle={{ paddingLeft: 4 }}
-            onChangeText={this.handleCardholderName}
+            icon={ { name: 'sign-in', type: 'font-awesome' } }
+            containerStyle={ { width: '80%' } }
+            inputStyle={ { paddingLeft: 4 } }
+            onChangeText={ this.handleCardholderName }
           />
           <FormLabel>CARD NUMBER</FormLabel>
           <TextInput
             value={cardNumber}
             type='number'
             class='field is-empty'
-            maxLength={16}
+            maxLength={ 16 }
             placeholder=' #### #### #### ####'
             keyboardType='numeric'
-            containerStyle={{ width: "45%" }}
-            inputStyle={{ paddingLeft: 4 }}
-            onChangeText={this.handleCardNumber}
+            containerStyle={ { width: '45%' } }
+            inputStyle={ { paddingLeft: 4 } }
+            onChangeText={ this.handleCardNumber }
           />
-          <View style={styles.row}>
-            <View style={styles.inputWrap}>
+          <View style={ styles.row }>
+            <View style={ styles.inputWrap }>
               <FormLabel>MM</FormLabel>
               <TextInput
                 value={expMonth}
                 type='number'
                 class='field is-empty'
-                maxLength={2}
+                maxLength={ 2 }
                 placeholder=" ##"
                 keyboardType='numeric'
-                containerStyle={{ width: "28%" }}
-                inputStyle={{ paddingLeft: 4 }}
-                onChangeText={this.handleCardExpMonth} />
+                containerStyle={ { width: '28%' } }
+                inputStyle={ { paddingLeft: 4 } }
+                onChangeText={ this.handleCardExpMonth } />
             </View>
-            <View style={styles.inputWrap}>
+            <View style={ styles.inputWrap }>
               <FormLabel>YY</FormLabel>
               <TextInput
                 value={expYear}
                 returnKeyType={"next"}
                 type='number'
                 class='field is-empty'
-                maxLength={2}
+                maxLength={ 2 }
                 placeholder=" ##"
                 keyboardType='numeric'
-                containerStyle={{ width: "28%", }}
-                inputStyle={{ paddingLeft: 4 }}
-                onChangeText={this.handleCardExpYear} />
+                containerStyle={ { width: '28%' } }
+                inputStyle={ { paddingLeft: 4 } }
+                onChangeText={ this.handleCardExpYear } />
             </View>
-            <View style={styles.inputWrap}>
+            <View style={ styles.inputWrap }>
               <FormLabel>CVC</FormLabel>
               <TextInput
                 value={cvc}
                 type='number'
                 class='field is-empty'
-                maxLength={3}
+                maxLength={ 3 }
                 placeholder=" ###"
                 keyboardType='numeric'
-                containerStyle={{ width: "36%" }}
-                inputStyle={{ paddingLeft: 4 }}
-                onChangeText={this.handleCardCvc} />
+                containerStyle={ { width: '36%' } }
+                inputStyle={ { paddingLeft: 4 } }
+                onChangeText={ this.handleCardCvc } />
             </View>
           </View>
-          <View style={styles.row}>
-            <View style={styles.inputWrap}>
+          <View style={ styles.row }>
+            <View style={ styles.inputWrap }>
               <FormLabel>ZIP CODE</FormLabel>
               <TextInput
                 value={zipCode}
                 type="number"
-                maxLength={5}
+                maxLength={ 5 }
                 class='field is-empty'
                 placeholder=' #####'
                 keyboardType='numeric'
-                containerStyle={{ width: "15%" }}
-                inputStyle={{ paddingLeft: 4 }}
-                onChangeText={this.handleZipCode}
+                containerStyle={ { width: '15%' } }
+                inputStyle={ { paddingLeft: 4 } }
+                onChangeText={ this.handleZipCode }
               />
             </View>
           </View>
           <Button
-            onPress={() => this.handleDonationSubmit(2500)}
-            buttonStyle={{
+            onPress={ () => this.handleDonationSubmit(2500) }
+            buttonStyle={ {
               backgroundColor: '#346abb',
               borderRadius: 7,
               marginTop: 24,
               marginBottom: 7,
               width: 300,
-              height: 54,
-            }}
-            value={25}
+              height: 54
+            } }
+            value={ 25 }
             title='DONATE $25'
           />
           <Button
-            onPress={() => this.handleDonationSubmit(1000)}
-            buttonStyle={{
+            onPress={ () => this.handleDonationSubmit(1000) }
+            buttonStyle={ {
               backgroundColor: '#346abb',
               borderRadius: 7,
               marginTop: 15,
               marginBottom: 7,
               width: 300,
-              height: 54,
-            }}
-            value={10}
+              height: 54
+            } }
+            value={ 10 }
             title="DONATE $10"
           />
           <Button
-            onPress={() => this.handleDonationSubmit(500)}
-            buttonStyle={{
+            onPress={ () => this.handleDonationSubmit(500) }
+            buttonStyle={ {
               backgroundColor: '#346abb',
               borderRadius: 7,
               marginTop: 15,
               marginBottom: 15,
               width: 300,
-              height: 54,
-            }}
-            value={5}
+              height: 54
+            } }
+            value={ 5 }
             title="DONATE $5"
           />
         </View>
-        </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
@@ -225,18 +225,18 @@ class DonateContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ecf0f1',
-    padding: 20,
+    padding: 20
   },
   formContainer: {
     flex: 1,
     paddingBottom: 11,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 20
   },
   row: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   inputWrap: {
     flex: 1,
@@ -246,13 +246,13 @@ const styles = StyleSheet.create({
   imageview: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   image: {
     resizeMode: 'center',
     width: 100,
     height: 50
-  },
+  }
 });
 
 function mapStoreToProps(store) {
@@ -262,7 +262,7 @@ function mapStoreToProps(store) {
     zipCode: store.donateData.zipCode,
     expMonth: store.donateData.expMonth,
     expYear: store.donateData.expYear,
-    cvc: store.donateData.cvc,
+    cvc: store.donateData.cvc
   };
 }
 

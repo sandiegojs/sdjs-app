@@ -12,22 +12,22 @@ class ThankyouContainer extends React.Component {
   render() {
     return (
       <KeyboardAwareScrollView
-        style={styles.container}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={styles.container}
+        style={ styles.container }
+        resetScrollToCoords={ { x: 0, y: 0 } }
+        contentContainerStyle={ styles.container }
       >
-        <View style={styles.view}>
-          <Text h3 style={styles.text}>
+        <View style={ styles.view }>
+          <Text h3 style={ styles.text }>
             Thank you
           </Text>
-          <Text h3 style={styles.text2}>
+          <Text h3 style={ styles.text2 }>
             for your donation!
           </Text>
         </View>
-        <View style={styles.imageview}>
+        <View style={ styles.imageview }>
           <Image
-            source={require('../../assets/images/sdjs-transparent.png')}
-            style={styles.image}
+            source={ require('../../assets/images/sdjs-transparent.png') }
+            style={ styles.image }
           />
         </View>
       </KeyboardAwareScrollView>
@@ -38,32 +38,32 @@ class ThankyouContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1884c3',
-    paddingTop: 20,
+    paddingTop: 20
   },
   view: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   text: {
     marginTop: 30,
     color: '#DCDCDC',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   text2: {
     color: '#DCDCDC',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   imageview: {
     marginTop: 50,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   image: {
     resizeMode: 'center',
     width: 240,
-    height: 200,
-  },
+    height: 200
+  }
 });
 
 function mapStoreToProps(store) {
