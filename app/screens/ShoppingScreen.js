@@ -9,8 +9,6 @@ export default class ShoppingScreen extends React.Component {
   };
 
   render() {
-    return (
-      <ShoppingContainer />
-    );
+    return <ShoppingContainer />;
   }
 };

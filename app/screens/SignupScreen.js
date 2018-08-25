@@ -16,8 +16,6 @@ export default class SignupScreen extends React.Component {
   };
 
   render() {
-    return (
-      <SignupContainer navigation={ this.props.navigation } />
-    );
+    return <SignupContainer navigation={ this.props.navigation } />;
   }
 };

@@ -5,12 +5,10 @@ export default class SlackScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Slack',
     headerTitle: 'Join us on Slack',
-    headerLeft: null,
+    headerLeft: null
   };
 
   render() {
-    return (
-      <SlackContainer />
-    );
+    return <SlackContainer />;
   }
 };

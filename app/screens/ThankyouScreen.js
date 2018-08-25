@@ -11,8 +11,6 @@ export default class DonateScreen extends React.Component {
     };
   };
   render() {
-    return (
-      <ThankyouContainer />
-    );
+    return <ThankyouContainer />;
   }
 };

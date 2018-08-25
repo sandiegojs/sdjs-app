@@ -10,7 +10,7 @@ import {
   TextInput
 } from 'react-native';
 import { Button, FormLabel } from 'react-native-elements';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SwitchToggle from 'react-native-switch-toggle';
 import * as actions from './profileActions';
 
@@ -90,43 +90,43 @@ class ProfileContainer extends React.Component {
   render() {
     const { firstName, lastName, email, bio, company, url, phone, allowEmails, allowSMS } = this.props.profileData;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}
-        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
-        extraHeight={130} extraScrollHeight={130}
+      <KeyboardAwareScrollView enableOnAndroid={ true }
+        enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
+        extraHeight={ 130 } extraScrollHeight={ 130 }
       >
-        <View style={styles.container}>
-          <View style={styles.formContainer}>
+        <View style={ styles.container }>
+          <View style={ styles.formContainer }>
             <FormLabel>
               First Name
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={firstName}
-              onChangeText={this.handleFirstNameUpdate}
+              autoCorrect={ false }
+              defaultValue={ firstName }
+              onChangeText={ this.handleFirstNameUpdate }
             />
             <FormLabel>
               Last Name
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={lastName}
-              onChangeText={this.handleLastNameUpdate}
+              autoCorrect={ false }
+              defaultValue={ lastName }
+              onChangeText={ this.handleLastNameUpdate }
             />
             <FormLabel>
               Email
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={email}
+              autoCorrect={ false }
+              defaultValue={ email }
               keyboardType='email-address'
               onChangeText={ this.handleEmailUpdate }
             />
@@ -134,49 +134,49 @@ class ProfileContainer extends React.Component {
               Phone Number
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={phone}
-              maxLength={10}
+              autoCorrect={ false }
+              defaultValue={ phone }
+              maxLength={ 10 }
               type="number"
               keyboardType='numeric'
-              onChangeText={this.handleNumberUpdate}
+              onChangeText={ this.handleNumberUpdate }
             />
             <FormLabel>
               Bio
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={bio}
-              onChangeText={this.handleBioUpdate}
+              autoCorrect={ false }
+              defaultValue={ bio }
+              onChangeText={ this.handleBioUpdate }
             />
             <FormLabel>
               Company
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               textContentType='name'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={company}
-              onChangeText={this.handleCompanyUpdate}
+              autoCorrect={ false }
+              defaultValue={ company }
+              onChangeText={ this.handleCompanyUpdate }
             />
             <FormLabel>
               Website
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               textContentType='name'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={url}
+              autoCorrect={ false }
+              defaultValue={ url }
               keyboardType='email-address'
               onChangeText={ this.handleUrlUpdate }
             />

@@ -9,9 +9,6 @@ export default class SplashScreen extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <SplashContainer navigation={this.props.navigation} />
-    );
+    return <SplashContainer navigation={ this.props.navigation } />;
   }
 };
