@@ -117,6 +117,7 @@ class SignupContainer extends React.Component {
       <KeyboardAwareScrollView enableOnAndroid={ true }
         enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
         extraHeight={ 130 } extraScrollHeight={ 100 }
+        keyboardShouldPersistTaps={ 'handled' }
       >
         <View style={ styles.container }>
           <View style={ styles.formContainer }>

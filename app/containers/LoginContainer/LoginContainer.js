@@ -5,14 +5,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Platform,
-  KeyboardAvoidingView,
-  ScrollView
+  Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 import { FormLabel, Button } from 'react-native-elements';
-import { Header } from 'react-navigation';
 import { updateEmailInput, updatePasswordInput, submitLogin } from './loginActions';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -41,68 +39,66 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        keyboardVerticalOffset = { Header.HEIGHT + 50 }
-        style = { { flex: 1 } }
-        behavior = "padding"
+      <KeyboardAwareScrollView enableOnAndroid={ true }
+        enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
+        extraHeight={ 130 } extraScrollHeight={ 130 }
+        keyboardShouldPersistTaps={ 'handled' }
       >
-        <ScrollView keyboardShouldPersistTaps={ 'handled' } >
-          <View style={ styles.container }>
-            <View style={ styles.formContainer }>
-              <FormLabel>
+        <View style={ styles.container }>
+          <View style={ styles.formContainer }>
+            <FormLabel>
               EMAIL
-              </FormLabel>
-              <TextInput
-                accessibilityLabel='emailInput'
-                style={ styles.input }
-                underlineColorAndroid='#ecf0f1'
-                autoCapitalize='none'
-                autoCorrect={ false }
-                inputStyle={ { paddingLeft: 4 } }
-                keyboardType='email-address'
-                onChangeText={ this.handleEmailInput }
-              />
-              <FormLabel>
-              PASSWORD
-              </FormLabel>
-              <TextInput
-                accessibilityLabel={ 'passwordInput' }
-                style={ styles.input }
-                underlineColorAndroid='#ecf0f1'
-                autoCapitalize='none'
-                autoCorrect={ false }
-                secureTextEntry
-                onChangeText={ this.handlePasswordInput }
-              />
-            </View>
-            <Button
-              accessibilityLabel='loginButton'
-              title="LOG IN"
-              buttonStyle={ {
-                backgroundColor: '#346abb',
-                borderRadius: 7,
-                marginTop: 7,
-                marginBottom: 25,
-                width: 321
-              } }
-              onPress={ this.handleLoginSubmission }
-              large
-              icon={ { name: 'sign-in', type: 'font-awesome' } }
+            </FormLabel>
+            <TextInput
+              accessibilityLabel='emailInput'
+              style={ styles.input }
+              underlineColorAndroid='#ecf0f1'
+              autoCapitalize='none'
+              autoCorrect={ false }
+              inputStyle={ { paddingLeft: 4 } }
+              keyboardType='email-address'
+              onChangeText={ this.handleEmailInput }
             />
-            <View style={ styles.resetTextCont }>
-              <TouchableOpacity onPress={ () => this.props.navigation.navigate('Password') }>
-                <Text style={ styles.resetTextButton }>{ 'Forgot Password?' }</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={ styles.signupTextCont }>
-              <Text style={ styles.signupText }>{ 'Don\'t have an account?' }</Text>
-              <TouchableOpacity onPress={ () => this.props.navigation.navigate('Signup') }>
-                <Text style={ styles.signupTextButton }>{ ' Signup' }</Text>
-              </TouchableOpacity>
-            </View>
+            <FormLabel>
+              PASSWORD
+            </FormLabel>
+            <TextInput
+              accessibilityLabel={ 'passwordInput' }
+              style={ styles.input }
+              underlineColorAndroid='#ecf0f1'
+              autoCapitalize='none'
+              autoCorrect={ false }
+              secureTextEntry
+              onChangeText={ this.handlePasswordInput }
+            />
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          <Button
+            accessibilityLabel='loginButton'
+            title="LOG IN"
+            buttonStyle={ {
+              backgroundColor: '#346abb',
+              borderRadius: 7,
+              marginTop: 7,
+              marginBottom: 25,
+              width: 321
+            } }
+            onPress={ this.handleLoginSubmission }
+            large
+            icon={ { name: 'sign-in', type: 'font-awesome' } }
+          />
+          <View style={ styles.resetTextCont }>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Password') }>
+              <Text style={ styles.resetTextButton }>{ 'Forgot Password?' }</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={ styles.signupTextCont }>
+            <Text style={ styles.signupText }>{ 'Don\'t have an account?' }</Text>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Signup') }>
+              <Text style={ styles.signupTextButton }>{ ' Signup' }</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
