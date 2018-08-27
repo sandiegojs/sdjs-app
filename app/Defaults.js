@@ -1,4 +1,6 @@
 module.exports = {
+  /// default - https://sdjs-app.now.sh
+  backendUrl: 'https://sdjs-app.now.sh',
 
   userData: {
     firstName: '',

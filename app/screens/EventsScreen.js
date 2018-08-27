@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
-import RootNavigator from '../tabNavigation/MainTabNavigator';
 
 export default class EventsScreen extends React.Component {
   static navigationOptions = {
@@ -14,16 +13,7 @@ export default class EventsScreen extends React.Component {
     return (
       <View>
         <EventsContainer navigation={ this.props.navigation } />
-        <View style={ styles.container }>
-          <RootNavigator navigation={ this.props.navigation } />
-        </View>
       </View>
     );
   }
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});

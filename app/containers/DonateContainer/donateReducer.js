@@ -1,4 +1,4 @@
-import { donateData as defaultState } from '../../DefaultStates';
+import { donateData as defaultState } from '../../Defaults';
 
 export default function donateReducer(state = defaultState, action) {
   const { type, payload } = action;

@@ -1,4 +1,4 @@
-import { questionnaireData as defaultState } from '../../DefaultStates';
+import { questionnaireData as defaultState } from '../../Defaults';
 
 export default function questionnaireReducer(state = defaultState, action) {
   const { type, payload } = action;

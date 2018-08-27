@@ -1,4 +1,4 @@
-import { profileData as defaultState } from '../../DefaultStates';
+import { profileData as defaultState } from '../../Defaults';
 
 export default function ProfileReducer(state = defaultState, action) {
   const { type, payload } = action;

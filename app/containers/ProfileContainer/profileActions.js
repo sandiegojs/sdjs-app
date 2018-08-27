@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { backendUrl } from '../../Defaults';
 
 export function profileInit(id, token) {
   return {
     type: 'PROFILE_INIT',
     payload: axios
-      .get('https://sdjs-app.now.sh/api/users/' + id, { headers: { Authorization: token } })
+      .get(`${backendUrl}/api/users/` + id, { headers: { Authorization: token } })
       .then(r => r.data)
   };
 }
@@ -13,7 +14,7 @@ export function profileUpdate(newProfileData, id, token) {
   return {
     type: 'PROFILE_UPDATE',
     payload: axios
-      .patch('https://sdjs-app.now.sh/api/users/' + id, newProfileData, { headers: { Authorization: token } })
+      .patch(`${backendUrl}/api/users/` + id, newProfileData, { headers: { Authorization: token } })
       .then(r => r.data)
   };
 }

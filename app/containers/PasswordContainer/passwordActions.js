@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { backendUrl } from '../../Defaults';
 
 export function emailResetPasswordEntry(text) {
   return {
@@ -11,7 +12,7 @@ export function resetPassword(email, navigate) {
   return {
     type: 'RESET_PASSWORD',
     payload: axios
-      .post('https://sdjs-app.now.sh/api/users/reset', { email })
+      .post(`${backendUrl}/api/users/reset`, { email })
       .then(() => {
         alert(`${'An email has been sent to' + ' '}${email}.`);
         navigate('Login');

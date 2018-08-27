@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { profileInit } from '../ProfileContainer/profileActions';
+import { backendUrl } from '../../Defaults';
 
 export function updateEmailInput(text) {
   return {
@@ -22,7 +23,7 @@ export function submitLogin(credentials, navigate, dispatch) {
   return {
     type: 'SUBMIT_LOGIN',
     payload: axios
-      .post('https://sdjs-app.now.sh/api/users/login', { email, password, ttl })
+      .post(`${backendUrl}/api/users/login`, { email, password, ttl })
       .then(response => {
         const { id: token, userId: id } = response.data;
         dispatch(profileInit(id, token));

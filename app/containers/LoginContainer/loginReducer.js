@@ -1,4 +1,4 @@
-import { userData as defaultState } from '../../DefaultStates';
+import { userData as defaultState } from '../../Defaults';
 
 export default function loginReducer(state = defaultState, action) {
   const { type, payload } = action;
