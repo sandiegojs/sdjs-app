@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { WebBrowser } from 'expo';
 import {
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  Platform,
+  TextInput
 } from 'react-native';
 import { Button, FormInput, FormLabel } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SwitchToggle from 'react-native-switch-toggle';
 import * as actions from './profileActions';
 
@@ -88,104 +90,93 @@ class ProfileContainer extends React.Component {
   render() {
     const { firstName, lastName, email, bio, company, url, phone, allowEmails, allowSMS } = this.props.profileData;
     return (
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView enableOnAndroid={true}
+        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
+        extraHeight={130} extraScrollHeight={130}
+        >
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
               First Name
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={firstName}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
+              autoCapitalize='none'
               autoCorrect={false}
-              returnKeyType={"next"}
+              defaultValue={firstName}
               onChangeText={this.handleFirstNameUpdate}
             />
             <FormLabel>
               Last Name
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={lastName}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
+              autoCapitalize='none'
               autoCorrect={false}
-              returnKeyType={"next"}
+              defaultValue={lastName}
               onChangeText={this.handleLastNameUpdate}
             />
             <FormLabel>
               Email
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={email}
-              autoCorrect={false}
-              returnKeyType={"next"}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
+              autoCorrect={false}
+              defaultValue={email}
               keyboardType='email-address'
               onChangeText={this.handleEmailUpdate}
             />
             <FormLabel>
               Phone Number
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={phone}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
+              autoCapitalize='none'
               autoCorrect={false}
+              defaultValue={phone}
               maxLength={10}
               type="number"
               keyboardType='numeric'
-              returnKeyType={"next"}
               onChangeText={this.handleNumberUpdate}
             />
             <FormLabel>
               Bio
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={bio}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
+              autoCapitalize='none'
               autoCorrect={false}
-              returnKeyType={"next"}
+              defaultValue={bio}
               onChangeText={this.handleBioUpdate}
             />
             <FormLabel>
               Company
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                borderBottomColor: 'black'
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={company}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
+              textContentType='name'
+              autoCapitalize='none'
               autoCorrect={false}
-              returnKeyType={"next"}
+              defaultValue={company}
               onChangeText={this.handleCompanyUpdate}
             />
             <FormLabel>
               Website
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                borderBottomColor: 'black',
-                marginBottom: 25,
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={url}
-              autoCorrect={false}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
+              textContentType='name'
               autoCapitalize='none'
+              autoCorrect={false}
+              defaultValue={url}
               keyboardType='email-address'
               onChangeText={this.handleUrlUpdate}
             />
@@ -278,7 +269,7 @@ class ProfileContainer extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
@@ -303,6 +294,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  input: {
+    margin: 15,
+    borderColor: '#ecf0f1',
+    borderWidth: 1,
+    paddingLeft: 4,
+    borderBottomColor: '#7f8c8d',
+    fontSize: 18
+  }
 });
 
 function mapStoreToProps(store) {

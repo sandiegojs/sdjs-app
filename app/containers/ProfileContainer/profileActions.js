@@ -75,7 +75,6 @@ export function profileWipe() {
 }
 
 export function toggleEmails(flag) {
-  console.log(flag);
   return {
     type: 'TOGGLE_EMAILS',
     payload: flag

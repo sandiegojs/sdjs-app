@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
-  StyleSheet, View, Alert, ScrollView
+  StyleSheet, View, Alert, Platform, TextInput
 } from 'react-native';
-import { FormLabel, Button, FormInput } from 'react-native-elements';
+import { FormLabel, Button } from 'react-native-elements';
 import {
   question1Entry, question2Entry, question3Entry, allAnswers
 } from './QuestionnaireActions';
@@ -60,7 +61,7 @@ class QuestionnaireContainer extends React.Component {
       );
       const answers = { question1, question2, question3 };
       dispatch(allAnswers(answers, user.id, user.token));
-      navigate('Events');
+      navigate('Splash');
     }
   }
 
@@ -74,38 +75,37 @@ class QuestionnaireContainer extends React.Component {
       }],
     );
     const { navigate } = this.props.navigation;
-    navigate('Events');
+    navigate('Splash');
   }
 
   render() {
     return (
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView
+        enableOnAndroid={true}
+        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
+        extraHeight={130}
+        extraScrollHeight={100}
+        >
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
               inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleQuestion1Input}
             />
             <FormLabel>How did you hear about SDJS?</FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
               inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleQuestion2Input}
             />
             <FormLabel>What would you like to learn?</FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black'
-              }}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
               inputStyle={{ paddingLeft: 4 }}
               onChangeText={this.handleQuestion3Input}
             />
@@ -137,7 +137,7 @@ class QuestionnaireContainer extends React.Component {
             title="Skip"
           />
         </View>
-      </ScrollView>
+        </KeyboardAwareScrollView>
     )
   }
 }
@@ -155,6 +155,14 @@ const styles = StyleSheet.create({
     width: 350,
     margin: 15,
   },
+  input: {
+    margin: 15,
+    borderColor: '#ecf0f1',
+    borderWidth: 1,
+    paddingLeft: 4,
+    borderBottomColor: '#7f8c8d',
+    fontSize: 18
+  }
 });
 
 function mapStoreToProps(store) {

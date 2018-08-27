@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "0.9.0",
+    "version": "2",
     "orientation": "portrait",
     "icon": "./assets/images/sdjs512x512.png",
     "splash": {
@@ -36,7 +36,8 @@
         "googleMaps": {
           "apiKey": "AIzaSyAFqc0V6I1nMu_-OC1UL_9wIYdo_D2ev0k"
         }
-      }
+      },
+      "versionCode": 2
     }
   }
 }
