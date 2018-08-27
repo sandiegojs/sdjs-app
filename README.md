@@ -21,7 +21,7 @@ The main app source code is in `\app` and the local development server is a loop
 
 ## Setting up ngrok for your phone to hit your localhost
 
-* download ngrok, extract the .exe into your project's root folder
+* download ngrok, validate your account as per ngrok instructions, extract the .exe into your project's root folder
 * in one terminal, start your mongod instance
 * in another terminal, start your local server ("node ." or "npm start")
 * in a 3rd terminal, run "./ngrok http {port}" where {port} is whatever port your localhost server is running on (usually 3000)
