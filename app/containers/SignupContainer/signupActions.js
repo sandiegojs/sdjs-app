@@ -29,6 +29,13 @@ export function updatePasswordInput(text) {
   };
 }
 
+export function updateConfirmPasswordInput(text) {
+  return {
+    type: 'UPDATE_CONFIRM_PASSWORD_INPUT',
+    payload: text,
+  };
+}
+
 export function submitSignUp(credentials, navigate, dispatch) {
   return {
     type: 'SUBMIT_SIGN_UP',
