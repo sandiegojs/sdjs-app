@@ -144,6 +144,7 @@ class SignupContainer extends React.Component {
               textContentType='name'
               autoCapitalize='none'
               autoCorrect={false}
+              secureTextEntry={true}
               onChangeText={this.handlePasswordInput}
             />
             <FormLabel>CONFIRM PASSWORD</FormLabel>
@@ -152,6 +153,7 @@ class SignupContainer extends React.Component {
               textContentType='name'
               autoCapitalize='none'
               autoCorrect={false}
+              secureTextEntry={true}
               onChangeText={this.handleConfirmPasswordInput}
             />
             <TouchableOpacity
