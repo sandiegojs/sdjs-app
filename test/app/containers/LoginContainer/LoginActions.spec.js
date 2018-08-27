@@ -2,13 +2,13 @@ const expect = require('chai').expect;
 const LoginActions = require('../../../../app/containers/LoginContainer/LoginActions');
 
 describe('Login Actions', () => {
-  it('checks for existance of email input', () => {
+  it('email input function should exist', () => {
     expect(LoginActions.updateEmailInput).to.exist;
   });
-  it('checks for existance of email input', () => {
+  it('password function should exist', () => {
     expect(LoginActions.updatePasswordInput).to.exist;
   });
-  it('checks for existance of email input', () => {
+  it('submitLogin function should exist', () => {
     expect(LoginActions.submitLogin).to.exist;
   });
 });
