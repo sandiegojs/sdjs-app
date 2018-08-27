@@ -3,7 +3,7 @@ jobs:
   build-job:
     working_directory: ~/sdjs-app
     docker:
-      - image: circleci/node:8.11.0
+      - image: circleci/node:8.11.3
       - image: mongo:3.4.4
     steps:
       - checkout

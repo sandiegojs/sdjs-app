@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "start": "node .",
-    "test": "jest test"
+    "test": " "
   },
   "androidStatusBar": {
     "backgroundColor": "#000000"
@@ -58,6 +58,9 @@
     "moxios": "^0.4.0",
     "nsp": "^2.1.0",
     "redux-mock-store": "^1.5.3"
+  },
+  "jest": {
+    "verbose": true
   },
   "repository": {
     "type": "",
