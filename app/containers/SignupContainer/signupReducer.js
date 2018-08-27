@@ -32,6 +32,13 @@ export default function signupReducer(state = defaultState, action) {
       };
     }
 
+    case 'UPDATE_CONFIRM_PASSWORD_INPUT': {
+      return {
+        ...state,
+        confirmPasswordInput: payload,
+      };
+    }
+
     case 'SUBMIT_SIGN_UP_FULFILLED': {
       return {
         ...state,
