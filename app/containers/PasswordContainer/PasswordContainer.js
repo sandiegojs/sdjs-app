@@ -29,7 +29,8 @@ class PasswordContainer extends React.Component {
   render() {
     const { emailInput } = this.props;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={ true }
+      <KeyboardAwareScrollView
+        enableOnAndroid={ true }
         enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
         extraHeight={ 130 } extraScrollHeight={ 130 }
         keyboardShouldPersistTaps={ 'handled' }

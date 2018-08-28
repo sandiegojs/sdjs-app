@@ -114,7 +114,8 @@ class SignupContainer extends React.Component {
 
   render() {
     return (
-      <KeyboardAwareScrollView enableOnAndroid={ true }
+      <KeyboardAwareScrollView
+        enableOnAndroid={ true }
         enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
         extraHeight={ 130 } extraScrollHeight={ 100 }
         keyboardShouldPersistTaps={ 'handled' }

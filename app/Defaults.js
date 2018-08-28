@@ -3,9 +3,9 @@ module.exports = {
   backendUrl: 'https://sdjs-app.now.sh',
 
   userData: {
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstNameInput: '',
+    lastNameInput: '',
+    emailInput: '',
     passwordInput: '',
     user: {
       id: '',

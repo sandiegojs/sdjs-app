@@ -90,7 +90,8 @@ class ProfileContainer extends React.Component {
   render() {
     const { firstName, lastName, email, bio, company, url, phone, allowEmails, allowSMS } = this.props.profileData;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={ true }
+      <KeyboardAwareScrollView
+        enableOnAndroid={ true }
         enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
         extraHeight={ 130 } extraScrollHeight={ 130 }
         keyboardShouldPersistTaps={ 'handled' }
