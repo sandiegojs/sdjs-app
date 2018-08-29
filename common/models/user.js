@@ -1,4 +1,4 @@
-const sendSMSNotification = require('../../server/sendSMSNotifications');
+const sendSMSNotification = require('../utility/sendSMSNotifications');
 
 module.exports = (User) => {
   // send password reset link when requested
