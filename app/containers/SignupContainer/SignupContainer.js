@@ -9,7 +9,7 @@ import {
   updateLastNameInput,
   updateEmailInput,
   updatePasswordInput,
-  submitSignUp, 
+  submitSignUp,
   updateConfirmPasswordInput,
 } from './signupActions';
 
@@ -240,10 +240,12 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   input: {
-    margin: 15,
+    margin: 11,
     borderColor: '#ecf0f1',
     borderWidth: 1,
     paddingLeft: 4,
+    paddingTop: 3,
+    paddingBottom: 3,
     borderBottomColor: '#7f8c8d',
     fontSize: 18
   }

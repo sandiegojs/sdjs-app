@@ -45,7 +45,10 @@ styles = StyleSheet.create({
     },
     text:{
         fontWeight: '500',
-        fontSize: 15
+        fontSize: 15,
+        justifyContent: 'center',
+        marginTop: '5%',
+        marginBottom: '5%'
     }
 })
 

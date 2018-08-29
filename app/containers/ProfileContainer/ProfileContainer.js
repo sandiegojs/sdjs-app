@@ -9,7 +9,7 @@ import {
   Platform,
   TextInput
 } from 'react-native';
-import { Button, FormInput, FormLabel } from 'react-native-elements';
+import { Button, FormLabel } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SwitchToggle from 'react-native-switch-toggle';
 import * as actions from './profileActions';
@@ -93,7 +93,7 @@ class ProfileContainer extends React.Component {
       <KeyboardAwareScrollView enableOnAndroid={true}
         enableAutoAutomaticScroll={(Platform.OS === 'ios')}
         extraHeight={130} extraScrollHeight={130}
-        >
+      >
         <View style={styles.container}>
           <View style={styles.formContainer}>
             <FormLabel>
@@ -295,10 +295,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    margin: 15,
+    margin: 11,
     borderColor: '#ecf0f1',
     borderWidth: 1,
     paddingLeft: 4,
+    paddingTop: 3,
+    paddingBottom: 3,
     borderBottomColor: '#7f8c8d',
     fontSize: 18
   }
