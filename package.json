@@ -19,7 +19,6 @@
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "chai": "*",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
