@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  StyleSheet, Text, View, ScrollView, TouchableOpacity,
+  StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity,
 } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { FormLabel, Button } from 'react-native-elements';
 import { emailResetPasswordEntry, resetPassword } from './passwordActions';
 
 class PasswordContainer extends React.Component {
@@ -34,14 +34,12 @@ class PasswordContainer extends React.Component {
             <FormLabel>
               Enter your E-mail
             </FormLabel>
-            <FormInput
-              containerStyle={{
-                margin: 5,
-                borderBottomColor: 'black',
-              }}
-              inputStyle={{ paddingLeft: 4 }}
-              defaultValue={emailInput}
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
+              autoCorrect={false}
+              defaultValue={emailInput}
               onChangeText={this.updateEmailInput}
             />
           </View>
@@ -93,6 +91,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  input: {
+    margin: 11,
+    borderColor: '#ecf0f1',
+    borderWidth: 1,
+    paddingLeft: 4,
+    paddingTop: 3,
+    paddingBottom: 3,
+    borderBottomColor: '#7f8c8d',
+    fontSize: 18
+  }
 });
 
 function mapStoreToProps(store) {
