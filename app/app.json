@@ -4,7 +4,7 @@
     "description": "San Diego JavaScript Community, Inc.",
     "slug": "sdjs",
     "privacy": "public",
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "29.0.0",
     "platforms": [
       "ios",
       "android"

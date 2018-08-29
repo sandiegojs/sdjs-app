@@ -64,7 +64,7 @@ class LoginContainer extends React.Component {
               PASSWORD
             </FormLabel>
             <TextInput
-              accessibilityLabel={ 'passwordInput' }
+              accessibilityLabel='passwordInput'
               style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'

@@ -11,8 +11,7 @@ import LoginScreen from './screens/LogInScreen';
 import SDJSScreen from './screens/SDJSScreen';
 import SlackScreen from './screens/SlackScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
-// import DonateScreen from './screens/DonateScreen';
-import ThankyouScreen from './screens/ThankyouScreen';
+import DonateScreen from './screens/DonateScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
 import ShoppingScreen from './screens/ShoppingScreen';
@@ -51,7 +50,7 @@ export default class App extends React.Component {
           SanDiegoJS: { screen: SDJSScreen },
           Slack: { screen: SlackScreen },
           Events: { screen: EventsScreen },
-          // Donate: { screen: DonateScreen },
+          Donate: { screen: DonateScreen },
           Profile: { screen: ProfileScreen },
           Shopping: { screen: ShoppingScreen },
           Logout: { screen: LogoutScreen }
@@ -81,14 +80,11 @@ export default class App extends React.Component {
                   iconSize = 23;
                   return <Ionicons name={ iconName } size={ iconSize } color={ tintColor }/>;
 
-                  // case 'Donate':
-                  //   return (
-                  //     <Image
-                  //       source={require('./assets/images/donate.png')}
-                  //       fadeDuration={0}
-                  //       style={{ width: 30, height: 30 }}
-                  //     />
-                  //   )
+                case 'Donate':
+                  iconName = `gift${focused ? '' : '-outline'}`;
+                  iconName = 'gift';
+                  iconSize = 30;
+                  return <Ionicons name={ iconName } size={ iconSize } color={ tintColor }/>;
 
                 case 'Profile':
                   iconName = `user${focused ? '' : '-outline'}`;
@@ -119,8 +115,7 @@ export default class App extends React.Component {
       )
       },
       EventDetails: { screen: EventDetailsScreen },
-      // Donate: { screen: DonateScreen },
-      ThankYou: { screen: ThankyouScreen }
+      Donate: { screen: DonateScreen }
     });
     return (
       <Provider store={ store }>

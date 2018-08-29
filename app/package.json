@@ -1,16 +1,22 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios"
+  },
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
     "dotenv": "^6.0.0",
-    "expo": "^25.1.2",
+    "expo": "^29.0.0",
     "loopback-connector-sendgrid": "^2.2.4",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
     "qs": "^6.5.1",
     "react": "^16.2.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native": "^0.55.4",
     "react-native-elements": "^0.19.0",
     "react-native-expo-geofence": "^0.1.6",
     "react-native-fit-image": "^1.5.4",
@@ -27,6 +33,9 @@
     "xde": "^2.10.0"
   },
   "devDependencies": {
+    "jest-expo": "^29.0.0",
+    "react-native-scripts": "^1.14.0",
+    "react-test-renderer": "^16.4.2",
     "reactotron-react-native": "^1.14.0"
   }
 }

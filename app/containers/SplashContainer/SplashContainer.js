@@ -12,7 +12,7 @@ class SplashContainer extends React.Component {
   render() {
     return (
       <TouchableWithoutFeedback onPress={ Keyboard.dismiss } accessible={ false }>
-        <View style={ styles.container }>
+        <View accessibilityLabel='splashScreen' style={ styles.container }>
           <View style={ styles.logoContainer }>
             <Image
               style={ styles.logo }

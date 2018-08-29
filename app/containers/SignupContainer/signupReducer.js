@@ -35,7 +35,7 @@ export default function signupReducer(state = defaultState, action) {
     case 'UPDATE_CONFIRM_PASSWORD_INPUT': {
       return {
         ...state,
-        confirmPasswordInput: payload,
+        confirmPasswordInput: payload
       };
     }
 
