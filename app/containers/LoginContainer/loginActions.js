@@ -17,6 +17,13 @@ export function updatePasswordInput(text) {
   };
 }
 
+export function updateUser(user) {
+  return {
+    type: 'UPDATE_USER',
+    payload: user
+  };
+}
+
 export function submitLogin(credentials, navigate, dispatch) {
   const { email, password } = credentials;
   const ttl = 1209600;
@@ -32,7 +39,7 @@ export function submitLogin(credentials, navigate, dispatch) {
         AsyncStorage.multiSet([
           ['token', token],
           ['id', id],
-          ['ttl', ttl],
+          ['ttl', ttl.toString()],
           ['created', created]
         ]);
         return { id, token };

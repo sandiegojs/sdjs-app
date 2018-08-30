@@ -9,6 +9,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import { profileInit } from '../ProfileContainer/profileActions';
+import { updateUser } from '../LoginContainer/loginActions';
 
 class SplashContainer extends React.Component {
   componentWillMount() {
@@ -17,24 +18,19 @@ class SplashContainer extends React.Component {
     AsyncStorage.multiGet(['token', 'id', 'ttl', 'created']).then(response => {
       const token = response[0][1];
       const id = response[1][1];
-      const ttl = response[2][1];
+      const ttl = Number(response[2][1]);
       const created = response[3][1];
 
       // if token exists and token was created less milliseconds ago than ttl
       if (token && (new Date().getTime() - new Date(created).getTime() < ttl)) {
-        dispatch(profileInit(id, token));
+        dispatch(profileInit(id, token))
+          .then(dispatch(updateUser({ id, token })));
         navigate('Events');
         return response.data;
       } else {
         return navigate('Login');
       }
     });
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.props.navigation.navigate('Login');
-    }, 3000);
   }
 
   render() {

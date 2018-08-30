@@ -17,16 +17,17 @@ export default function loginReducer(state = defaultState, action) {
       };
     }
 
-    case 'SUBMIT_LOGIN_FULFILLED': {
+    case 'UPDATE_USER': {
       return {
         ...state,
         user: payload
       };
     }
 
-    case 'SUBMIT_LOGIN_REJECTED': {
+    case 'SUBMIT_LOGIN_FULFILLED': {
       return {
-        ...state
+        ...state,
+        user: payload
       };
     }
 

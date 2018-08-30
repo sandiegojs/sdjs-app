@@ -62,7 +62,7 @@ export function submitSignUp(credentials, navigate, dispatch) {
               AsyncStorage.multiSet([
                 ['token', token],
                 ['id', id],
-                ['ttl', ttl],
+                ['ttl', ttl.toString()],
                 ['created', created]
               ]);
               dispatch(profileInit(id, token));
