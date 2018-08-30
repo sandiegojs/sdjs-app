@@ -11,4 +11,4 @@ export default class ProfileScreen extends React.Component {
   render() {
     return <ProfileContainer navigation={ this.props.navigation } />;
   }
-};
+}

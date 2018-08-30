@@ -64,7 +64,7 @@ class SignupContainer extends React.Component {
 
   handleChecked(checked) {
     this.setState(checked);
-  };
+  }
 
   handleSignUpSubmission() {
     const { dispatch, firstNameInput, lastNameInput, emailInput, passwordInput, confirmPasswordInput } = this.props;

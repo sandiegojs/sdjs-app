@@ -11,4 +11,4 @@ export default class SDJSScreen extends React.Component {
   render() {
     return <SDJSContainer />;
   }
-};
+}

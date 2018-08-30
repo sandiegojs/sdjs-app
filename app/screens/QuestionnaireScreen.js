@@ -10,4 +10,4 @@ export default class QuestionnaireScreen extends React.Component {
   render() {
     return <QuestionnaireContainer navigation={ this.props.navigation } />;
   }
-};
+}

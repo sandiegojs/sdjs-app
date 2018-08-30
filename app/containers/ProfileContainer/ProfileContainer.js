@@ -80,12 +80,12 @@ class ProfileContainer extends React.Component {
   handleEmailToggle(allowEmails) {
     const { dispatch } = this.props;
     dispatch(actions.toggleEmails(allowEmails));
-  };
+  }
 
   handlePhoneToggle(allowSMS) {
     const { dispatch } = this.props;
     dispatch(actions.toggleSMS(allowSMS));
-  };
+  }
 
   render() {
     const { firstName, lastName, email, bio, company, url, phone, allowEmails, allowSMS } = this.props.profileData;

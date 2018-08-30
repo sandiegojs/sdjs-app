@@ -40,11 +40,11 @@ export default class App extends React.Component {
   }
   render() {
     const AppRoot = StackNavigator({
+      Splash: { screen: SplashScreen },
       Login: { screen: LoginScreen },
       Signup: { screen: SignupScreen },
       Password: { screen: PasswordResetScreen },
       Questionnaire: { screen: QuestionnaireScreen },
-      Splash: { screen: SplashScreen },
       Events: { screen: TabNavigator(
         {
           SanDiegoJS: { screen: SDJSScreen },

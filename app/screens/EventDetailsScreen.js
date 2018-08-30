@@ -26,4 +26,4 @@ export default class EventDetailsScreen extends React.Component {
   render() {
     return <EventDetailsContainer />;
   }
-};
+}
