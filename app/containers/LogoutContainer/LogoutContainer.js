@@ -32,7 +32,9 @@ class LogoutContainer extends React.Component {
             marginTop: 34,
             marginBottom: 24,
             width: 313,
-            height: 55
+            height: 55,
+            paddingBottom: 3,
+            paddingTop: 3
           } }
           onPress={ this.logout }
           title="Yes"
@@ -45,7 +47,9 @@ class LogoutContainer extends React.Component {
             marginTop: 24,
             marginBottom: 21,
             width: 313,
-            height: 55
+            height: 55,
+            paddingBottom: 3,
+            paddingTop: 3
           } }
           onPress={ () => this.props.navigation.goBack() }
           title="No"

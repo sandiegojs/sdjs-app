@@ -199,7 +199,9 @@ class SignupContainer extends React.Component {
                 marginBottom: 25,
                 alignSelf: 'center',
                 width: 300,
-                height: 55
+                height: 55,
+                paddingBottom: 3,
+                paddingTop: 3
               } }
               onPress={ this.handleSignUpSubmission }
               large

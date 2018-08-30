@@ -116,7 +116,9 @@ class QuestionnaireContainer extends React.Component {
               marginTop: 7,
               marginBottom: 25,
               width: 300,
-              height: 55
+              height: 55,
+              paddingBottom: 3,
+              paddingTop: 3
             } }
             onPress={ this.handleFormSubmit }
             title="Submit"
@@ -129,7 +131,9 @@ class QuestionnaireContainer extends React.Component {
               marginTop: 7,
               marginBottom: 25,
               width: 300,
-              height: 55
+              height: 55,
+              paddingBottom: 3,
+              paddingTop: 3
             } }
             onPress={ this.handleSkipButton }
             title="Skip"

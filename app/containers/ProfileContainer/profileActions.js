@@ -77,7 +77,7 @@ export function profileWipe() {
 
 export function toggleEmails(flag) {
   return {
-    type: 'TOGGLE_EMAILS',
+    type: 'TOGGLE_EMAIL',
     payload: flag
   };
 }
