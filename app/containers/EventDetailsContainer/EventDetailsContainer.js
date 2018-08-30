@@ -1,28 +1,27 @@
+/* eslint-disable camelcase,max-len */
 import React from 'react';
 import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { StyleSheet, Text, View, Linking, ScrollView, Platform } from 'react-native';
-import { Constants, Location, Permissions, WebBrowser } from 'expo';
-import { Button } from 'react-native-elements'
+import { StyleSheet, Text, View, ScrollView, Platform } from 'react-native';
+import { Location, Permissions, WebBrowser } from 'expo';
+import { Button } from 'react-native-elements';
 import {
   setLocationError,
   checkedInTrue,
   checkedInFalse,
   addAttendeeToEvent,
-  removeAttendee,
+  removeAttendee
 } from '../EventsContainer/eventsActions';
 import {
   getDayOfTheWeek,
   getMonthString,
-  getMonthAbr,
   getDateString,
-  getYearString,
   standardTime
 } from '../EventsContainer/eventsDateAndTime';
 import Hyperlink from 'react-native-hyperlink';
+
 const moment = require('moment-timezone');
-import EventMap from './EventMap';
 
 class EventDetailsContainer extends React.Component {
   constructor(props) {
@@ -32,49 +31,54 @@ class EventDetailsContainer extends React.Component {
     this.handleUnCheckIn = this.handleUnCheckIn.bind(this);
   }
 
-  _getLocationAsync = async () => {
-
+  _getLocationAsync = async() => {
     const { dispatch, eventsData, user } = this.props;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== 'granted') {
-      let errorMessage = 'Permission to access location was denied.';
-      dispatch(setLocationError(errorMessage));
+      dispatch(setLocationError('Permission to access location was denied.'));
     } else {
       let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
-      var points = [ // user's location
+      // user's location
+      const points = [
         {
           latitude: location.coords.latitude.toFixed(6),
           longitude: location.coords.longitude.toFixed(6)
         }
-      ]
+      ];
 
-      var startPoint = { //venue lat lon
+      // venue lat lon
+      const startPoint = {
         latitude: eventsData[0].venue.lat,
         longitude: eventsData[0].venue.lon
-      }
+      };
 
-      var maxDistanceInKM = 0.5; // 500m distance
+      // 500m distance
+      const maxDistanceInKM = 0.5;
+
       // startPoint - center of perimeter
       // points - array of points
       // maxDistanceInKM - max point distance from startPoint in KM's
       // result - array of points inside the max distance
-      var result = Geofence.filterByProximity(startPoint, points, maxDistanceInKM);
-      if (result[0] === undefined) {
-        Alert.alert(
+      const result = Geofence.filterByProximity(
+        startPoint,
+        points,
+        maxDistanceInKM,
+      );
+
+      if (!result[0]) {
+        alert(
           'Unable to Check In',
-          'You need to be within 500 meters of the event location to check in', [{
-            text: 'OK',
-          }], {
-            cancelable: false
-          }
-        )
+          'You need to be within 500 meters of the event location to check in',
+          [{ text: 'OK' }],
+          { cancelable: false }
+        );
       } else {
-        eventObj = {
+        const eventObj = {
           event_title: eventsData[0].name,
           meetup_id: eventsData[0].id,
-          url: eventsData[0].group.urlname + ".org",
+          url: `${eventsData[0].group.urlname}.org`,
           location: startPoint
         };
         dispatch(checkedInTrue(true));
@@ -89,10 +93,11 @@ class EventDetailsContainer extends React.Component {
       .then(dispatch(removeAttendee(attendeeId, user.token)));
   }
 
-  _handlePressButtonAsync = async () => {
+  _handlePressButtonAsync = async() => {
     const { eventDetails, eventsData } = this.props;
     const eventInfo = eventsData.filter(event => event.id === eventDetails);
 
+    // eslint-disable-next-line no-unused-vars
     let result = await WebBrowser.openBrowserAsync(eventInfo[0].link);
   };
 
@@ -101,215 +106,251 @@ class EventDetailsContainer extends React.Component {
 
     function addZero(i) {
       if (i < 10) {
-        i = "0" + i;
+        i = '0' + i;
       }
       return i;
     }
 
-    var d = new Date();
+    const d = new Date();
     // below date using moment.js/moment-timezone npm package
-    var todaysDate = moment().tz("America/Los_Angeles").format().slice(0, 10); // for testing, hard code date as string, format: '2018-07-24'
-    var nextEvent = eventsData.filter(event => event.id === eventDetails);
-    var hours = (addZero(d.getHours())).toString();
-    var mins = (addZero(d.getMinutes())).toString();
-    var currentTime = parseInt(hours + mins);
-    var eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
-    var hoursPriorToEvent = eventTime - 100;
-    var hoursAfterEventStart = eventTime + 400;
+    // for testing, hard code date as string, format: '2018-07-24'
+    const todaysDate = moment().tz('America/Los_Angeles').format().slice(0, 10);
+    const nextEvent = eventsData.filter(event => event.id === eventDetails);
+    const hours = (addZero(d.getHours())).toString();
+    const mins = (addZero(d.getMinutes())).toString();
+    const currentTime = parseInt(hours + mins);
+    const eventTime = parseInt(nextEvent[0].local_time.replace(':', ''));
+    const hoursPriorToEvent = eventTime - 100;
+    const hoursAfterEventStart = eventTime + 400;
+    let nextEventButton;
 
-    if (currentTime >= hoursPriorToEvent && currentTime <= hoursAfterEventStart && todaysDate === nextEvent[0].local_date) {
+    if (
+      currentTime >= hoursPriorToEvent &&
+      currentTime <= hoursAfterEventStart &&
+      todaysDate === nextEvent[0].local_date
+    ) {
       if (checkedIn) {
         nextEventButton = <Button
           large
-          backgroundColor={'#D95351'}
-          borderRadius={3}
-          style={styles.checkInButton}
+          backgroundColor={ '#D95351' }
+          borderRadius={ 3 }
           raised
-          icon={{ name: 'undo', type: 'font-awesome' }}
+          icon={ { name: 'undo', type: 'font-awesome' } }
           title=' UNDO CHECK-IN'
-          onPress={this.handleUnCheckIn}
-        />
-      }
-      if (!checkedIn) {
+          onPress={ this.handleUnCheckIn }
+        />;
+      } else {
         nextEventButton = <Button
           large
-          buttonStyle={{
+          buttonStyle={ {
             backgroundColor: '#346abb',
             borderRadius: 7
-          }}
+          } }
           raised
-          icon={{ name: 'check-circle', type: 'font-awesome' }}
+          icon={ { name: 'check-circle', type: 'font-awesome' } }
           title=' CHECK-IN'
-          onPress={this._getLocationAsync}
-        />
+          onPress={ this._getLocationAsync }
+        />;
       }
     }
 
     if (currentTime < hoursPriorToEvent || todaysDate !== nextEvent[0].local_date) {
-
       nextEventButton = <Button
         large
-        buttonStyle={{
+        buttonStyle={ {
           backgroundColor: '#346abb',
           borderRadius: 7
-        }}
+        } }
         raised
-        icon={{ name: 'check-circle', type: 'font-awesome' }}
+        icon={ { name: 'check-circle', type: 'font-awesome' } }
         title=' RSVP'
-        onPress={this._handlePressButtonAsync}
-      />
+        onPress={ this._handlePressButtonAsync }
+      />;
     }
+
     if (currentTime > hoursAfterEventStart && todaysDate === nextEvent[0].local_date) {
       nextEventButton = null;
     }
+
     return nextEventButton;
   }
 
   render() {
-    const { eventDetails, eventsData, locationError, dispatch } = this.props;
-    const eventInfo = eventsData.filter(event => event.id === eventDetails)
-    var latitude = 32.7157
+    const { eventDetails, eventsData, locationError } = this.props;
+    const eventInfo = eventsData.filter(event => event.id === eventDetails);
+    const latitudeDelta = 0.0922;
+    const longitudeDelta = 0.0421;
+
+    let latitude = 32.7157;
     if (!!eventInfo[0].venue) {
       latitude = eventInfo[0].venue.lat;
     }
-    var longitude = -117.1611
+
+    let longitude = -117.1611;
     if (!!eventInfo[0].venue) {
       longitude = eventInfo[0].venue.lon;
     }
-    var location = { latitude, longitude }
 
-    var locationText = null;
+    let locationText = null;
     if (!!eventInfo[0].venue) {
       locationText =
         <View>
-          <Text style={styles.venueName}>{eventInfo[0].venue.name}</Text>
-          <Text style={styles.venueAddress}>{`${eventInfo[0].venue.address_1}`}</Text>
-          <Text style={styles.venueAddress}>{`${eventInfo[0].venue.city}, ${eventInfo[0].venue.state}`}</Text>
-        </View>
+          <Text style={ styles.venueName }>{ eventInfo[0].venue.name }</Text>
+          <Text style={ styles.venueAddress }>{ `${eventInfo[0].venue.address_1}` }</Text>
+          <Text style={ styles.venueAddress }>{ `${eventInfo[0].venue.city}, ${eventInfo[0].venue.state}` }</Text>
+        </View>;
     }
 
     let locationErrorMessage = null;
     if (!!locationError) {
-      locationErrorMessage = <Text style={styles.locationErrorMessage}>Please Enable location services </Text>
+      locationErrorMessage =
+        <Text style={ styles.locationErrorMessage }>Please Enable location
+          services </Text>;
     }
 
-    if (eventInfo[0].rsvp_limit == undefined) {
+    if (!eventInfo[0].rsvp_limit) {
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={ styles.container }>
           <View>
-            <Text style={styles.title}>{eventInfo[0].name}</Text>
-            <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
-            <Text style={{ fontWeight: 'bold', paddingLeft: 20, fontSize: 16, marginBottom: 10 }}>
+            <Text style={ styles.title }>{ eventInfo[0].name }</Text>
+            <Text style={ styles.date }>{
+              `${getDayOfTheWeek(eventInfo[0].local_date)}, ` +
+              `${getMonthString(eventInfo[0].local_date)} ` +
+              `${getDateString(eventInfo[0].local_date)}, ` +
+              `${standardTime(eventInfo[0].local_time)}`
+            }</Text>
+            <Text style={ {
+              fontWeight: 'bold',
+              paddingLeft: 20,
+              fontSize: 16,
+              marginBottom: 10
+            } }>
               Are you going?
-                            <Text style={{ fontSize: 16, fontWeight: '100' }}> {`  ${eventInfo[0].yes_rsvp_count} people are going`}
+              <Text style={ {
+                fontSize: 16,
+                fontWeight: '100'
+              } }>{ `  ${eventInfo[0].yes_rsvp_count} people are going` }
               </Text>
             </Text>
-            {this.handleButtons()}
-            {locationErrorMessage}
-            <View style={styles.venueContainer}>
-              {locationText}
-            </View>
+            { this.handleButtons() }
+            { locationErrorMessage }
+            <View style={ styles.venueContainer }>{ locationText }</View>
           </View>
           <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
+            style={ styles.map }
+            initialRegion={ { latitude, longitude, latitudeDelta, longitudeDelta } }
           >
             <MapView.Marker
-              key={1}
+              key={ 1 }
               title='My Marker'
-              coordinate={{ latitude: latitude, longitude: longitude }}
+              coordinate={ { latitude, longitude } }
             />
           </MapView>
-          <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
+          <Hyperlink linkDefault={ true } linkStyle={ { color: '#2980b9' } }>
             <View>
-              <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
+              <Text style={ styles.bodyText }>{ eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, '\n') }</Text>
             </View>
           </Hyperlink>
         </ScrollView>
-      )
-
-    } else if (eventInfo[0].yes_rsvp_count == undefined) {
-
+      );
+    } else if (!eventInfo[0].yes_rsvp_count) {
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={ styles.container }>
           <View>
-            <Text style={styles.title}>{eventInfo[0].name}</Text>
-            <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
-            <Text style={{ fontWeight: 'bold', paddingLeft: 20, fontSize: 16, marginBottom: 10 }}>
+            <Text style={ styles.title }>{ eventInfo[0].name }</Text>
+            <Text style={ styles.date }>
+              {
+                `${getDayOfTheWeek(eventInfo[0].local_date)}, ` +
+                `${getMonthString(eventInfo[0].local_date)} ` +
+                `${getDateString(eventInfo[0].local_date)}, ` +
+                `${standardTime(eventInfo[0].local_time)}`
+              }
+            </Text>
+            <Text style={ {
+              fontWeight: 'bold',
+              paddingLeft: 20,
+              fontSize: 16,
+              marginBottom: 10
+            } }
+            >
               Are you going?
-                        </Text>
-            {this.handleButtons()}
-            {locationErrorMessage}
-            <View style={styles.venueContainer}>
-              {locationText}
+            </Text>
+            { this.handleButtons() }
+            { locationErrorMessage }
+            <View style={ styles.venueContainer }>
+              { locationText }
             </View>
           </View>
           <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
+            style={ styles.map }
+            initialRegion={ { latitude, longitude, latitudeDelta, longitudeDelta } }
           >
             <MapView.Marker
-              key={1}
+              key={ 1 }
               title='My Marker'
-              coordinate={{ latitude: latitude, longitude: longitude }}
+              coordinate={ { latitude, longitude } }
             />
           </MapView>
-          <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
+          <Hyperlink linkDefault={ true } linkStyle={ { color: '#2980b9' } }>
             <View>
-              <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
+              <Text style={ styles.bodyText }>
+                { eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, '\n') }
+              </Text>
             </View>
           </Hyperlink>
         </ScrollView>
-      )
+      );
     } else {
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={ styles.container }>
           <View>
-            <Text style={styles.title}>{eventInfo[0].name}</Text>
-            <Text style={styles.date}>{`${getDayOfTheWeek(eventInfo[0].local_date)}, ${getMonthString(eventInfo[0].local_date)} ${getDateString(eventInfo[0].local_date)}, ${standardTime(eventInfo[0].local_time)}`}</Text>
-            <Text style={{ fontWeight: 'bold', paddingLeft: 20, fontSize: 16, marginBottom: 10 }}>
+            <Text style={ styles.title }>{ eventInfo[0].name }</Text>
+            <Text style={ styles.date }>
+              {
+                `${getDayOfTheWeek(eventInfo[0].local_date)}, ` +
+                `${getMonthString(eventInfo[0].local_date)} ` +
+                `${getDateString(eventInfo[0].local_date)}, ` +
+                `${standardTime(eventInfo[0].local_time)}`
+              }
+            </Text>
+            <Text style={ {
+              fontWeight: 'bold',
+              paddingLeft: 20,
+              fontSize: 16,
+              marginBottom: 10
+            } }>
               Are you going?
-                        <Text style={{ fontSize: 16, fontWeight: '100' }}> {`  ${eventInfo[0].rsvp_limit - eventInfo[0].yes_rsvp_count} spots left`}
+              <Text style={ {
+                fontSize: 16,
+                fontWeight: '100'
+              } }>{ `  ${eventInfo[0].rsvp_limit - eventInfo[0].yes_rsvp_count} spots left` }
               </Text>
             </Text>
-            {this.handleButtons()}
-            {locationErrorMessage}
-            <View style={styles.venueContainer}>
-              {locationText}
+            { this.handleButtons() }
+            { locationErrorMessage }
+            <View style={ styles.venueContainer }>
+              { locationText }
             </View>
           </View>
           <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
+            style={ styles.map }
+            initialRegion={ { latitude, longitude, latitudeDelta, longitudeDelta } }
           >
             <MapView.Marker
-              key={1}
+              key={ 1 }
               title='My Marker'
-              coordinate={{ latitude: latitude, longitude: longitude }}
+              coordinate={ { latitude, longitude } }
             />
           </MapView>
-          <Hyperlink linkDefault={true} linkStyle={{ color: '#2980b9' }}>
+          <Hyperlink linkDefault={ true } linkStyle={ { color: '#2980b9' } }>
             <View>
-              <Text style={styles.bodyText}>{eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, "\n")}</Text>
+              <Text style={ styles.bodyText }>
+                { eventInfo[0].description.replace(/<(?:.|\n)*?>/gm, '\n') }
+              </Text>
             </View>
           </Hyperlink>
         </ScrollView>
-      )
+      );
     }
   }
 }
@@ -356,9 +397,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center'
   },
-  checkInButton: {
-
-  },
   date: {
     alignSelf: 'center',
     fontSize: 15,
@@ -373,14 +411,14 @@ const styles = StyleSheet.create({
     marginTop: 43
   },
   venueAddress: {
-    marginTop: 1,
+    marginTop: 1
   },
   venueContainer: {
     paddingLeft: 20
   },
   locationErrorMessage: {
     textAlign: 'center'
-  },
+  }
 });
 
 export default connect(mapStoreToProps)(EventDetailsContainer);

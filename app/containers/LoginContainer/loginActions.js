@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { profileInit } from '../ProfileContainer/profileActions';
+import { backendUrl } from '../../Defaults';
 
 export function updateEmailInput(text) {
   return {
     type: 'UPDATE_EMAIL_INPUT',
-    payload: text,
+    payload: text
   };
 }
 
 export function updatePasswordInput(text) {
   return {
     type: 'UPDATE_PASSWORD_INPUT',
-    payload: text,
+    payload: text
   };
 }
 
@@ -22,7 +23,7 @@ export function submitLogin(credentials, navigate, dispatch) {
   return {
     type: 'SUBMIT_LOGIN',
     payload: axios
-      .post('https://sdjs-app.now.sh/api/users/login', { email, password, ttl })
+      .post(`${backendUrl}/api/users/login`, { email, password, ttl })
       .then(response => {
         const { id: token, userId: id } = response.data;
         dispatch(profileInit(id, token));
@@ -33,12 +34,12 @@ export function submitLogin(credentials, navigate, dispatch) {
         alert(
           'Invalid Login',
           'Please submit a valid e-mail and password', [{
-            text: 'OK',
-          }],
+            text: 'OK'
+          }]
         );
         console.log(error);
         console.log('invalid login');
         return Promise.resolve(error);
-      }),
+      })
   };
 }

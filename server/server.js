@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const loopback = require('loopback');

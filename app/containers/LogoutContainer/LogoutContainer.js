@@ -21,33 +21,33 @@ class LogoutContainer extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>
+      <View style={ styles.container }>
+        <Text style={ styles.text }>
           You Want To Log Out?
         </Text>
         <Button
-          buttonStyle={{
+          buttonStyle={ {
             backgroundColor: '#346abb',
             borderRadius: 7,
             marginTop: 34,
             marginBottom: 24,
             width: 313,
-            height: 55,
-          }}
-          onPress={this.logout}
+            height: 55
+          } }
+          onPress={ this.logout }
           title="Yes"
           large
         />
         <Button
-          buttonStyle={{
+          buttonStyle={ {
             backgroundColor: '#346abb',
             borderRadius: 7,
             marginTop: 24,
             marginBottom: 21,
             width: 313,
-            height: 55,
-          }}
-          onPress={() => this.props.navigation.goBack()}
+            height: 55
+          } }
+          onPress={ () => this.props.navigation.goBack() }
           title="No"
           large
         />
@@ -62,14 +62,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#DCDCDC',
     alignItems: 'center',
-    padding: 30,
+    padding: 30
   },
   text: {
     marginBottom: 11,
-    fontSize: 24,
-  },
+    fontSize: 24
+  }
 });
 
+// eslint-disable-next-line no-unused-vars
 function mapStoreToProps(store) {
   return {};
 }

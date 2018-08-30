@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 module.exports = {
   MongoDB: {
     url: process.env.MONGO_URI,
