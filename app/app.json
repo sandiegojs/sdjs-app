@@ -21,7 +21,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.sdjs.SDJSapp",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "This app will only use your location to validate that you're at the designated events location."
+        "NSLocationWhenInUseUsageDescription": "This app will only use your location to validate that you're at the designated events location.",
+        "NSLocationAlwaysUsageDescription": "This app will only use your location to validate that you're at the designated events location.",
+        "NSLocationAlwaysAndWhenInUsageDescription": "This app will only use your location to validate that you're at the designated events location."
       }
     },
     "android": {
