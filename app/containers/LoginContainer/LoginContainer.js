@@ -109,7 +109,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20
+    padding: 20,
+    ...Platform.select({
+      ios: {
+        paddingTop: 80
+      }
+    })
   },
   formContainer: {
     paddingBottom: 20,
