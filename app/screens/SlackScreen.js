@@ -11,4 +11,4 @@ export default class SlackScreen extends React.Component {
   render() {
     return <SlackContainer />;
   }
-};
+}

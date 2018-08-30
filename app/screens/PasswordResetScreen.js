@@ -14,4 +14,4 @@ export default class PasswordResetScreen extends React.Component {
   render() {
     return <PasswordContainer navigation={ this.props.navigation } />;
   }
-};
+}
