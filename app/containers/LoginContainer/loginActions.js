@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { profileInit } from '../ProfileContainer/profileActions';
 import { backendUrl } from '../../Defaults';
+import { AsyncStorage } from 'react-native';
 
 export function updateEmailInput(text) {
   return {
@@ -28,6 +29,10 @@ export function submitLogin(credentials, navigate, dispatch) {
         const { id: token, userId: id } = response.data;
         dispatch(profileInit(id, token));
         navigate('Splash');
+        AsyncStorage.multiSet([
+          ['token', token],
+          ['userId', id]
+        ]);
         return { id, token };
       })
       .catch((error) => {

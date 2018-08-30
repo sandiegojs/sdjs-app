@@ -1,8 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet, Text, Image, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+  AsyncStorage
+} from 'react-native';
+import { profileInit } from '../ProfileContainer/profileActions';
 
 class SplashContainer extends React.Component {
+  componentWillMount() {
+    const { dispatch } = this.props;
+    const { navigate } = this.props.navigation;
+    AsyncStorage.multiGet(['token', 'userId']).then(response => {
+      if (response[0][1]) {
+        dispatch(profileInit(response[1][1], response[0][1]));
+        navigate('Events');
+      } else {
+        return navigate('Login');
+      }
+    });
+  }
+
   componentDidMount() {
     setTimeout(() => {
       this.props.navigation.navigate('Events');

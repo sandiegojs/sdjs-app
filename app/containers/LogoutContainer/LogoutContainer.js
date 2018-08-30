@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { submitLogout } from './LogoutActions';
@@ -14,6 +14,7 @@ class LogoutContainer extends React.Component {
   logout() {
     const { navigate } = this.props.navigation;
     const { dispatch } = this.props;
+    AsyncStorage.multiRemove(['userId', 'token']);
     dispatch(submitLogout());
     dispatch(profileWipe());
     navigate('Login');

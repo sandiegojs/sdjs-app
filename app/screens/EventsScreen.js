@@ -16,4 +16,4 @@ export default class EventsScreen extends React.Component {
       </View>
     );
   }
-};
+}

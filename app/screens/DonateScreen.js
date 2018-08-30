@@ -10,4 +10,4 @@ export default class DonateScreen extends React.Component {
   render() {
     return <DonateContainer navigation={ this.props.navigation } />;
   }
-};
+}
