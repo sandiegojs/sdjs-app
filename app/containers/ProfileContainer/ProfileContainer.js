@@ -249,7 +249,9 @@ class ProfileContainer extends React.Component {
                 marginTop: 25,
                 marginBottom: 21,
                 width: 300,
-                height: 55
+                height: 55,
+                paddingBottom: 3,
+                paddingTop: 3
               } }
               onPress={ this.handleProfileUpdate }
               title="UPDATE"
