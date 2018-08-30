@@ -1,5 +1,5 @@
-import React from 'react'
-import { Image, Dimensions } from 'react-native'
+import React from 'react';
+import { Image, Dimensions } from 'react-native';
 
 const LocalImage = ({ source, originalWidth, originalHeight, columns }) => {
   let windowWidth = Dimensions.get('window').width;
@@ -12,8 +12,8 @@ const LocalImage = ({ source, originalWidth, originalHeight, columns }) => {
   let newWidth = originalWidth * widthChange;
   let newHeight = originalHeight * widthChange;
   return (
-    <Image source={source} style={{ width: newWidth, height: newHeight }} />
-  )
-}
+    <Image source={ source } style={ { width: newWidth, height: newHeight } } />
+  );
+};
 
-export default LocalImage
+export default LocalImage;

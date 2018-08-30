@@ -1,5 +1,5 @@
 const defaultState = {
-  emailInput: '',
+  emailInput: ''
 };
 
 export default function PasswordReducer(state = defaultState, action) {
@@ -9,7 +9,7 @@ export default function PasswordReducer(state = defaultState, action) {
     case 'EMAIL_RESET_PASSWORD_ENTRY': {
       return {
         ...state,
-        emailInput: payload,
+        emailInput: payload
       };
     }
 

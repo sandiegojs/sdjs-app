@@ -10,7 +10,7 @@ import {
   TextInput
 } from 'react-native';
 import { Button, FormLabel } from 'react-native-elements';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SwitchToggle from 'react-native-switch-toggle';
 import * as actions from './profileActions';
 
@@ -90,182 +90,184 @@ class ProfileContainer extends React.Component {
   render() {
     const { firstName, lastName, email, bio, company, url, phone, allowEmails, allowSMS } = this.props.profileData;
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true}
-        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
-        extraHeight={130} extraScrollHeight={130}
+      <KeyboardAwareScrollView
+        enableOnAndroid={ true }
+        enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
+        extraHeight={ 130 } extraScrollHeight={ 130 }
+        keyboardShouldPersistTaps={ 'handled' }
       >
-        <View style={styles.container}>
-          <View style={styles.formContainer}>
+        <View style={ styles.container }>
+          <View style={ styles.formContainer }>
             <FormLabel>
               First Name
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={firstName}
-              onChangeText={this.handleFirstNameUpdate}
+              autoCorrect={ false }
+              defaultValue={ firstName }
+              onChangeText={ this.handleFirstNameUpdate }
             />
             <FormLabel>
               Last Name
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={lastName}
-              onChangeText={this.handleLastNameUpdate}
+              autoCorrect={ false }
+              defaultValue={ lastName }
+              onChangeText={ this.handleLastNameUpdate }
             />
             <FormLabel>
               Email
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={email}
+              autoCorrect={ false }
+              defaultValue={ email }
               keyboardType='email-address'
-              onChangeText={this.handleEmailUpdate}
+              onChangeText={ this.handleEmailUpdate }
             />
             <FormLabel>
               Phone Number
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={phone}
-              maxLength={10}
+              autoCorrect={ false }
+              defaultValue={ phone }
+              maxLength={ 10 }
               type="number"
               keyboardType='numeric'
-              onChangeText={this.handleNumberUpdate}
+              onChangeText={ this.handleNumberUpdate }
             />
             <FormLabel>
               Bio
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={bio}
-              onChangeText={this.handleBioUpdate}
+              autoCorrect={ false }
+              defaultValue={ bio }
+              onChangeText={ this.handleBioUpdate }
             />
             <FormLabel>
               Company
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               textContentType='name'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={company}
-              onChangeText={this.handleCompanyUpdate}
+              autoCorrect={ false }
+              defaultValue={ company }
+              onChangeText={ this.handleCompanyUpdate }
             />
             <FormLabel>
               Website
             </FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
               textContentType='name'
               autoCapitalize='none'
-              autoCorrect={false}
-              defaultValue={url}
+              autoCorrect={ false }
+              defaultValue={ url }
               keyboardType='email-address'
-              onChangeText={this.handleUrlUpdate}
+              onChangeText={ this.handleUrlUpdate }
             />
-            <Text style={{
+            <Text style={ {
               textAlign: 'center',
               fontSize: 15,
               fontWeight: '500',
               marginBottom: 21
-              }}
+            } }
             >
               I Want To Recieve SDJS Notifications
             </Text>
-              <View style={styles.row}>
-                <View style={styles.inputWrap}>
-                  <Text>Phone Notifications</Text>
-                  <SwitchToggle
-                    containerStyle={{
-                      marginBottom: 16,
-                      width: 55,
-                      height: 26,
-                      borderRadius: 18,
-                      padding: 5,
-                    }}
-                    backgroundColorOn='#346abb'
-                    backgroundColorOff='#e5e1e0'
-                    circleColorOff='white'
-                    circleColorOn='white'
-                    circleStyle={{
-                      width: 15,
-                      height: 15,
-                      borderRadius: 7
-                    }}
-                    duration={200}
-                    switchOn={allowSMS}
-                    onPress={() => this.handlePhoneToggle(!allowSMS)}
-                  />
-                </View>
-                <View style={styles.inputWrap}>
-                  <Text>Email Notifications</Text>
-                  <SwitchToggle
-                    containerStyle={{
-                      marginBottom: 16,
-                      width: 55,
-                      height: 26,
-                      borderRadius: 18,
-                      padding: 5,
-                    }}
-                    backgroundColorOn='#346abb'
-                    backgroundColorOff='#e5e1e0'
-                    circleColorOff='white'
-                    circleColorOn='white'
-                    circleStyle={{
-                      width: 15,
-                      height: 15,
-                      borderRadius: 7
-                    }}
-                    duration={200}
-                    switchOn={allowEmails}
-                    onPress={() => this.handleEmailToggle(!allowEmails)}
-                  />
-                </View>
+            <View style={ styles.row }>
+              <View style={ styles.inputWrap }>
+                <Text>Phone Notifications</Text>
+                <SwitchToggle
+                  containerStyle={ {
+                    marginBottom: 16,
+                    width: 55,
+                    height: 26,
+                    borderRadius: 18,
+                    padding: 5
+                  } }
+                  backgroundColorOn='#346abb'
+                  backgroundColorOff='#e5e1e0'
+                  circleColorOff='white'
+                  circleColorOn='white'
+                  circleStyle={ {
+                    width: 15,
+                    height: 15,
+                    borderRadius: 7
+                  } }
+                  duration={ 200 }
+                  switchOn={ allowSMS }
+                  onPress={ () => this.handlePhoneToggle(!allowSMS) }
+                />
               </View>
+              <View style={ styles.inputWrap }>
+                <Text>Email Notifications</Text>
+                <SwitchToggle
+                  containerStyle={ {
+                    marginBottom: 16,
+                    width: 55,
+                    height: 26,
+                    borderRadius: 18,
+                    padding: 5
+                  } }
+                  backgroundColorOn='#346abb'
+                  backgroundColorOff='#e5e1e0'
+                  circleColorOff='white'
+                  circleColorOn='white'
+                  circleStyle={ {
+                    width: 15,
+                    height: 15,
+                    borderRadius: 7
+                  } }
+                  duration={ 200 }
+                  switchOn={ allowEmails }
+                  onPress={ () => this.handleEmailToggle(!allowEmails) }
+                />
+              </View>
+            </View>
             <Button
               large
-              buttonStyle={{
+              buttonStyle={ {
                 backgroundColor: '#346abb',
                 borderRadius: 7,
                 marginTop: 25,
                 marginBottom: 21,
                 width: 300,
-                height: 55,
-              }}
-              onPress={this.handleProfileUpdate}
+                height: 55
+              } }
+              onPress={ this.handleProfileUpdate }
               title="UPDATE"
             />
           </View>
           <TouchableOpacity
-            onPress={async () => {
-              return await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5')
-            }}
+            onPress={ async() => {
+              return await WebBrowser.openBrowserAsync('https://www.freeprivacypolicy.com/privacy/view/2a457560dcd4e317d6be72a2727c35f5');
+            } }
           >
             <Text
-              style={{
+              style={ {
                 marginBottom: 11,
                 fontSize: 16,
                 fontWeight: '500'
-              }}
+              } }
             >
-              {'Privacy Policy'}
+              { 'Privacy Policy' }
             </Text>
           </TouchableOpacity>
         </View>
@@ -287,7 +289,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   inputWrap: {
     flex: 2,

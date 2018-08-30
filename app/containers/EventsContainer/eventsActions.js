@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { backendUrl } from '../../Defaults';
 
 export function updateEventsData() {
   return {
@@ -7,76 +8,70 @@ export function updateEventsData() {
       axios
         .get('https://api.meetup.com/sandiegojs/events?&sign=true&photo-host=public&page=8&key=7c1c22226a10175697e6e91e4870')
         .then(response => response.data)
-        .catch((error) => {
-          const errorSearch = {
-            error: true,
-          };
-
-          return errorSearch;
-        }),
+        .catch(() => ({ error: true }))
   };
 }
 
 export function updateSelectedEvent(selectedEventId) {
   return {
     type: 'UPDATE_SELECETED_EVENT',
-    payload: selectedEventId,
+    payload: selectedEventId
   };
 }
 
 export function addLocationData(location) {
   return {
     type: 'ADD_LOCATION_DATA',
-    payload: location,
+    payload: location
   };
 }
 
 export function setLocationError(errorMessage) {
   return {
     type: 'SET_LOCATION_ERROR',
-    payload: errorMessage,
+    payload: errorMessage
   };
 }
 
 export function checkedInTrue(checkedInTrue) {
   return {
     type: 'CHECKED_IN_TRUE',
-    payload: true,
+    payload: checkedInTrue
   };
 }
 
 export function checkedInFalse(checkedInFalse) {
   return {
     type: 'CHECKED_IN_FALSE',
-    payload: false,
+    payload: checkedInFalse
   };
 }
 
 export function rsvpTrue(rsvpTrue) {
   return {
     type: 'RSVP_TRUE',
-    payload: true,
+    payload: rsvpTrue
   };
 }
 
 export function rsvpFalse(rsvpFalse) {
   return {
     type: 'RSVP_FALSE',
-    payload: false,
+    payload: rsvpFalse
   };
 }
 
 export function rsvpEventDetailsTrue(rsvpEventDetailsTrue) {
   return {
     type: 'RSVP_EVENT_DETAILS_TRUE',
-    payload: true,
+    payload: rsvpEventDetailsTrue
   };
 }
 
 export function rsvpEventDetailsFalse(rsvpEventDetailsFalse) {
   return {
     type: 'RSVP_EVENT_DETAILS_FALSE',
-    payload: false,
+    payload: rsvpEventDetailsFalse
   };
 }
 
@@ -85,12 +80,10 @@ export function addAttendeeToEvent(eventObj, userId) {
     type: 'ADD_ATTENDEE_TO_EVENT',
     payload:
       axios
-        .post('https://sdjs-app.now.sh/checkin', { eventObj, userId })
-        .then(response => {
-          return response.data;
-        })
+        .post(`${backendUrl}/checkin`, { eventObj, userId })
+        .then(response => response.data)
         .catch(error => console.log(error))
-  }
+  };
 }
 
 export function profileQuery(userId, token) {
@@ -98,14 +91,10 @@ export function profileQuery(userId, token) {
     type: 'PROFILE_QUERY',
     payload:
       axios
-        .get('https://sdjs-app.now.sh/api/users/' + userId, { headers: { Authorization: token } })
-        .then(response => {
-          return response.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
-  }
+        .get(`${backendUrl}/api/users/` + userId, { headers: { Authorization: token } })
+        .then(response => response.data)
+        .catch(error => console.log(error))
+  };
 }
 
 export function removeAttendee(attendeeId, token) {
@@ -113,14 +102,10 @@ export function removeAttendee(attendeeId, token) {
     type: 'REMOVE_ATTENDEE',
     payload:
       axios
-        .delete('https://sdjs-app.now.sh/api/attendees/' + attendeeId, { headers: { Authorization: token } })
-        .then(response => {
-          return response.data;
-        })
-        .catch(error => {
-          console.log(error)
-        })
-  }
+        .delete(`${backendUrl}/api/attendees/` + attendeeId, { headers: { Authorization: token } })
+        .then(response => response.data)
+        .catch(error => console.log(error))
+  };
 }
 
 export function addRSVPToEvent(eventObj, userId) {
@@ -128,18 +113,9 @@ export function addRSVPToEvent(eventObj, userId) {
     type: 'ADD_RSVP_TO_EVENT',
     payload:
       axios
-        .post('https://sdjs-app.now.sh/rsvp', { eventObj, userId })
-        .then(response => {
-          console.log('returned data', response.data)
-          return response.data;
-        })
-        .catch(error => {
-          const errorSearch = {
-            error: true
-          }
-
-          return errorSearch;
-        }),
+        .post(`${backendUrl}/rsvp`, { eventObj, userId })
+        .then(response => response.data)
+        .catch(() => ({ error: true }))
   };
 }
 
@@ -148,17 +124,9 @@ export function removeRSVPFromEvent(rsvpEventId, token) {
     type: 'REMOVE_RSVP_FROM_EVENT',
     payload:
       axios
-        .delete('https://sdjs-app.now.sh/api/rsvps/' + rsvpEventId, { header: { Authorization: token } })
-        .then(response => {
-          return response.data;
-        })
-        .catch(error => {
-          const errorSearch = {
-            error: true
-          }
-
-          return errorSearch;
-        }),
+        .delete(`${backendUrl}/api/rsvps/` + rsvpEventId, { header: { Authorization: token } })
+        .then(response => response.data)
+        .catch(() => ({ error: true }))
   };
 }
 
@@ -167,30 +135,24 @@ export function updateRSVPList(user, token) {
     type: 'UPDATE_RSVP_LIST',
     payload:
       axios
-        .get('https://sdjs-app.now.sh/api/rsvps?filter[where][userId]=' + user, { headers: { Authorization: token } })
+        .get(`${backendUrl}/api/rsvps?filter[where][userId]=` + user, { headers: { Authorization: token } })
         .then(response => {
-
           return response.data;
         })
-        .catch(error => {
-          const errorSearch = {
-            error: true
-          }
-          return errorSearch;
-        })
-  }
+        .catch(() => ({ error: true }))
+  };
 }
 
 export function updateEventDetailsRSVP(rsvp) {
   return {
     type: 'UPDATE_EVENT_DETAILS_RSVP',
-    payload: rsvp,
+    payload: rsvp
   };
 }
 
 export function updateEventDetailsRSVPEventId(eventDetailsRSVPEventId) {
   return {
     type: 'UPDATE_EVENT_DETAILS_RSVP_EVENT_ID',
-    payload: eventDetailsRSVPEventId,
+    payload: eventDetailsRSVPEventId
   };
 }

@@ -1,130 +1,36 @@
 export function getMonthString(date) {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+    'January'
+  ];
   const d = new Date(date);
-  const n = d.getMonth();
-
-  let month;
-  switch (n) {
-    case 0:
-      month = 'January';
-      break;
-    case 1:
-      month = 'February';
-      break;
-    case 2:
-      month = 'March';
-      break;
-    case 3:
-      month = 'April';
-      break;
-    case 4:
-      month = 'May';
-      break;
-    case 5:
-      month = 'June';
-      break;
-    case 6:
-      month = 'July';
-      break;
-    case 7:
-      month = 'August';
-      break;
-    case 8:
-      month = 'September';
-      break;
-    case 9:
-      month = 'October';
-      break;
-    case 10:
-      month = 'November';
-      break;
-    case 11:
-      month = 'December';
-      break;
-    case 12:
-      month = 'January';
-  }
-  return month;
-}
-
-export function getMonthAbr(date) {
-  const d = new Date(date);
-  const n = d.getMonth();
-
-  let month;
-  switch (n) {
-    case 0:
-      month = 'JAN';
-      break;
-    case 1:
-      month = 'FEB';
-      break;
-    case 2:
-      month = 'MAR';
-      break;
-    case 3:
-      month = 'APR';
-      break;
-    case 4:
-      month = 'MAY';
-      break;
-    case 5:
-      month = 'JUN';
-      break;
-    case 6:
-      month = 'JUL';
-      break;
-    case 7:
-      month = 'AUG';
-      break;
-    case 8:
-      month = 'SEP';
-      break;
-    case 9:
-      month = 'OCT';
-      break;
-    case 10:
-      month = 'NOV';
-      break;
-    case 11:
-      month = 'DEC';
-      break;
-    case 12:
-      month = 'JAN';
-  }
-  return month;
+  return months[d.getMonth()];
 }
 
 export function getDayOfTheWeek(date) {
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
   const d = new Date(date);
-  const n = d.getDay() + 1;
-
-  let day;
-  switch (n) {
-    case 0:
-      day = 'Sunday';
-      break;
-    case 1:
-      day = 'Monday';
-      break;
-    case 2:
-      day = 'Tuesday';
-      break;
-    case 3:
-      day = 'Wednesday';
-      break;
-    case 4:
-      day = 'Thursday';
-      break;
-    case 5:
-      day = 'Friday';
-      break;
-    case 6:
-      day = 'Saturday';
-      break;
-    case 7:
-      day = 'Sunday';
-  }
-  return day;
+  return days[d.getDay() + 1];
 }
 
 export function getDateString(date) {
@@ -144,6 +50,5 @@ export function standardTime(time) {
     amOrPm = ' PM';
   }
 
-  const regTime = `${hour}:${min}${amOrPm}`;
-  return regTime;
+  return `${hour}:${min}${amOrPm}`;
 }

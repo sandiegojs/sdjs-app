@@ -5,31 +5,19 @@ import SignupReducer from './containers/SignupContainer/signupReducer';
 import ProfileReducer from './containers/ProfileContainer/profileReducer';
 import LoginReducer from './containers/LoginContainer/loginReducer';
 import PasswordReducer from './containers/PasswordContainer/passwordReducer';
-import DonateReducer from './containers/DonateContainer/donateReducer';
 import QuestionnaireReducer from './containers/QuestionnaireContainer/QuestionnaireReducer';
 import LogoutReducer from './containers/LogoutContainer/LogoutReducer';
+import { userData as userDataDefault } from './Defaults';
 
-const userDataDefaultState = {
-  firstNameInput: '',
-  lastNameInput: '',
-  emailInput: '',
-  passwordInput: '',
-  user: {
-    id: '',
-    token: '',
-  },
-};
-
-const signoutReducer = reduceReducer(LogoutReducer, LoginReducer, userDataDefaultState);
+const signoutReducer = reduceReducer(LogoutReducer, LoginReducer, userDataDefault);
 
 const rootReducer = combineReducers({
   eventsData: EventsReducer,
   signUpData: SignupReducer,
-  userData: reduceReducer(SignupReducer, signoutReducer, userDataDefaultState),
+  userData: reduceReducer(SignupReducer, signoutReducer, userDataDefault),
   profileData: ProfileReducer,
-  donateData: DonateReducer,
   questionnaireData: QuestionnaireReducer,
-  passwordData: PasswordReducer,
+  passwordData: PasswordReducer
 });
 
 export default rootReducer;

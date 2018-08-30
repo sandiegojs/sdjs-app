@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   StyleSheet, View, Alert, Platform, TextInput
 } from 'react-native';
@@ -37,7 +37,7 @@ class QuestionnaireContainer extends React.Component {
 
   handleFormSubmit() {
     const {
-      dispatch, question1, question2, question3, user,
+      dispatch, question1, question2, question3, user
     } = this.props;
     const { navigate } = this.props.navigation;
 
@@ -47,7 +47,7 @@ class QuestionnaireContainer extends React.Component {
         'Complete all fields to submit', [{
           text: 'OK',
           onPress: null,
-          style: 'cancel',
+          style: 'cancel'
         }],
       );
     } else {
@@ -56,7 +56,7 @@ class QuestionnaireContainer extends React.Component {
         'Congratulations! You have signed up successfully!', [{
           text: 'OK',
           onPress: null,
-          style: 'cancel',
+          style: 'cancel'
         }],
       );
       const answers = { question1, question2, question3 };
@@ -71,7 +71,7 @@ class QuestionnaireContainer extends React.Component {
       'Congratulations! You have signed up successfully!', [{
         text: 'OK',
         onPress: null,
-        style: 'cancel',
+        style: 'cancel'
       }],
     );
     const { navigate } = this.props.navigation;
@@ -81,64 +81,62 @@ class QuestionnaireContainer extends React.Component {
   render() {
     return (
       <KeyboardAwareScrollView
-        enableOnAndroid={true}
-        enableAutoAutomaticScroll={(Platform.OS === 'ios')}
-        extraHeight={130}
-        extraScrollHeight={100}
-        >
-        <View style={styles.container}>
-          <View style={styles.formContainer}>
+        enableOnAndroid={ true }
+        enableAutoAutomaticScroll={ (Platform.OS === 'ios') }
+        extraHeight={ 130 }
+        extraScrollHeight={ 100 }
+        keyboardShouldPersistTaps={ 'handled' }
+      >
+        <View style={ styles.container }>
+          <View style={ styles.formContainer }>
             <FormLabel>Have you ever attended an SDJS meetup?</FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
-              inputStyle={{ paddingLeft: 4 }}
-              onChangeText={this.handleQuestion1Input}
+              onChangeText={ this.handleQuestion1Input }
             />
             <FormLabel>How did you hear about SDJS?</FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
-              inputStyle={{ paddingLeft: 4 }}
-              onChangeText={this.handleQuestion2Input}
+              onChangeText={ this.handleQuestion2Input }
             />
             <FormLabel>What would you like to learn?</FormLabel>
             <TextInput
-              style={styles.input}
+              style={ styles.input }
               underlineColorAndroid='#ecf0f1'
-              inputStyle={{ paddingLeft: 4 }}
-              onChangeText={this.handleQuestion3Input}
+              onChangeText={ this.handleQuestion3Input }
             />
           </View>
           <Button
             large
-            buttonStyle={{
+            buttonStyle={ {
               backgroundColor: '#346abb',
               borderRadius: 7,
               marginTop: 7,
               marginBottom: 25,
               width: 300,
               height: 55
-            }}
-            onPress={this.handleFormSubmit}
+            } }
+            onPress={ this.handleFormSubmit }
             title="Submit"
           />
           <Button
             large
-            buttonStyle={{
+            buttonStyle={ {
               backgroundColor: '#346abb',
               borderRadius: 7,
               marginTop: 7,
               marginBottom: 25,
               width: 300,
               height: 55
-            }}
-            onPress={this.handleSkipButton}
+            } }
+            onPress={ this.handleSkipButton }
             title="Skip"
           />
         </View>
-        </KeyboardAwareScrollView>
-    )
+      </KeyboardAwareScrollView>
+    );
   }
 }
 
@@ -148,12 +146,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    padding: 30,
+    padding: 30
   },
   formContainer: {
     paddingBottom: 20,
     width: 350,
-    margin: 15,
+    margin: 15
   },
   input: {
     margin: 11,
@@ -172,7 +170,7 @@ function mapStoreToProps(store) {
     user: store.userData.user,
     question1: store.questionnaireData.question1,
     question2: store.questionnaireData.question2,
-    question3: store.questionnaireData.question3,
+    question3: store.questionnaireData.question3
   };
 }
 
