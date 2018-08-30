@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import Geofence from 'react-native-expo-geofence';
 import { connect } from 'react-redux';
@@ -190,7 +189,9 @@ class EventsContainer extends React.Component {
     if (!!eventsData) {
       return (
         <View style={ styles.listWrapper }>
-          <Text style={ { textAlign: 'center', paddingTop: 10, fontWeight: 'bold' } }>Next Event: { eventsData[0].name }</Text>
+          <Text style={ { textAlign: 'center', paddingTop: 10, fontWeight: 'bold' } }>
+            Next Event: { eventsData[0].name }
+          </Text>
           { this.handleButtons() }
           { locationErrorMessage }
           <Text style={ { textAlign: 'center', paddingTop: 20, marginBottom: 0 } }>Upcoming Events</Text>

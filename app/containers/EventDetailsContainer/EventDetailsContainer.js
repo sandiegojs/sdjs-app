@@ -134,7 +134,6 @@ class EventDetailsContainer extends React.Component {
           large
           backgroundColor={ '#D95351' }
           borderRadius={ 3 }
-          style={ styles.checkInButton }
           raised
           icon={ { name: 'undo', type: 'font-awesome' } }
           title=' UNDO CHECK-IN'
@@ -398,7 +397,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center'
   },
-  checkInButton: {},
   date: {
     alignSelf: 'center',
     fontSize: 15,

@@ -58,4 +58,3 @@ function mapStoreToProps(store) {
 }
 
 export default connect(mapStoreToProps)(SplashContainer);
-

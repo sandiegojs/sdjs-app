@@ -93,21 +93,18 @@ class QuestionnaireContainer extends React.Component {
             <TextInput
               style={ styles.input }
               underlineColorAndroid='#ecf0f1'
-              inputStyle={ { paddingLeft: 4 } }
               onChangeText={ this.handleQuestion1Input }
             />
             <FormLabel>How did you hear about SDJS?</FormLabel>
             <TextInput
               style={ styles.input }
               underlineColorAndroid='#ecf0f1'
-              inputStyle={ { paddingLeft: 4 } }
               onChangeText={ this.handleQuestion2Input }
             />
             <FormLabel>What would you like to learn?</FormLabel>
             <TextInput
               style={ styles.input }
               underlineColorAndroid='#ecf0f1'
-              inputStyle={ { paddingLeft: 4 } }
               onChangeText={ this.handleQuestion3Input }
             />
           </View>
