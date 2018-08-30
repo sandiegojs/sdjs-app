@@ -19,19 +19,21 @@ export function updatePasswordInput(text) {
 
 export function submitLogin(credentials, navigate, dispatch) {
   const { email, password } = credentials;
-  const ttl = 86400;
+  const ttl = 1209600;
 
   return {
     type: 'SUBMIT_LOGIN',
     payload: axios
       .post(`${backendUrl}/api/users/login`, { email, password, ttl })
       .then(response => {
-        const { id: token, userId: id } = response.data;
+        const { id: token, userId: id, ttl, created } = response.data;
         dispatch(profileInit(id, token));
-        navigate('Splash');
+        navigate('Events');
         AsyncStorage.multiSet([
           ['token', token],
-          ['userId', id]
+          ['id', id],
+          ['ttl', ttl],
+          ['created', created]
         ]);
         return { id, token };
       })

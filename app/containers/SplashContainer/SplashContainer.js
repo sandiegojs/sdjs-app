@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   View,
   StyleSheet,
-  Text,
   Image,
   TouchableWithoutFeedback,
   Keyboard,
@@ -15,10 +14,17 @@ class SplashContainer extends React.Component {
   componentWillMount() {
     const { dispatch } = this.props;
     const { navigate } = this.props.navigation;
-    AsyncStorage.multiGet(['token', 'userId']).then(response => {
-      if (response[0][1]) {
-        dispatch(profileInit(response[1][1], response[0][1]));
+    AsyncStorage.multiGet(['token', 'id', 'ttl', 'created']).then(response => {
+      const token = response[0][1];
+      const id = response[1][1];
+      const ttl = response[2][1];
+      const created = response[3][1];
+
+      // if token exists and token was created less milliseconds ago than ttl
+      if (token && (new Date().getTime() - new Date(created).getTime() < ttl)) {
+        dispatch(profileInit(id, token));
         navigate('Events');
+        return response.data;
       } else {
         return navigate('Login');
       }
@@ -27,7 +33,7 @@ class SplashContainer extends React.Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Events');
+      this.props.navigation.navigate('Login');
     }, 3000);
   }
 
@@ -40,9 +46,6 @@ class SplashContainer extends React.Component {
               style={ styles.logo }
               source={ require('../../assets/images/sandiegojs.png') }
             />
-            <Text style={ styles.text }>Speak</Text>
-            <Text style={ styles.text }>Connect</Text>
-            <Text style={ styles.text }>Learn</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -64,13 +67,6 @@ const styles = StyleSheet.create({
   logo: {
     width: '50%',
     height: '10%'
-  },
-  text: {
-    fontWeight: '500',
-    fontSize: 15,
-    justifyContent: 'center',
-    marginTop: '5%',
-    marginBottom: '5%'
   }
 });
 

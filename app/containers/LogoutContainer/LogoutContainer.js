@@ -2,8 +2,10 @@ import React from 'react';
 import { Text, View, StyleSheet, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { submitLogout } from './LogoutActions';
 import { profileWipe } from '../ProfileContainer/profileActions';
+import { backendUrl } from '../../Defaults';
 
 class LogoutContainer extends React.Component {
   constructor(props) {
@@ -13,8 +15,14 @@ class LogoutContainer extends React.Component {
 
   logout() {
     const { navigate } = this.props.navigation;
-    const { dispatch } = this.props;
-    AsyncStorage.multiRemove(['userId', 'token']);
+    const { dispatch, user } = this.props;
+
+    axios
+      .post(`${backendUrl}/api/users/logout`, {}, { headers: { Authorization: user.token } })
+      .then(response => response.data)
+      .catch(err => console.log(err));
+
+    AsyncStorage.multiRemove(['id', 'token', 'ttl', 'created']);
     dispatch(submitLogout());
     dispatch(profileWipe());
     navigate('Login');
@@ -77,7 +85,9 @@ const styles = StyleSheet.create({
 
 // eslint-disable-next-line no-unused-vars
 function mapStoreToProps(store) {
-  return {};
+  return {
+    user: store.userData.user
+  };
 }
 
 export default connect(mapStoreToProps)(LogoutContainer);
