@@ -3,32 +3,34 @@ import { connect } from 'react-redux';
 import {
   View,
   StyleSheet,
-  Text,
   Image,
   TouchableWithoutFeedback,
   Keyboard,
   AsyncStorage
 } from 'react-native';
 import { profileInit } from '../ProfileContainer/profileActions';
+import { updateUser } from '../LoginContainer/loginActions';
 
 class SplashContainer extends React.Component {
   componentWillMount() {
     const { dispatch } = this.props;
     const { navigate } = this.props.navigation;
-    AsyncStorage.multiGet(['token', 'userId']).then(response => {
-      if (response[0][1]) {
-        dispatch(profileInit(response[1][1], response[0][1]));
+    AsyncStorage.multiGet(['token', 'id', 'ttl', 'created']).then(response => {
+      const token = response[0][1];
+      const id = response[1][1];
+      const ttl = Number(response[2][1]);
+      const created = response[3][1];
+
+      // if token exists and token was created less milliseconds ago than ttl
+      if (token && (new Date().getTime() - new Date(created).getTime() < ttl)) {
+        dispatch(profileInit(id, token))
+          .then(dispatch(updateUser({ id, token })));
         navigate('Events');
+        return response.data;
       } else {
         return navigate('Login');
       }
     });
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.props.navigation.navigate('Events');
-    }, 3000);
   }
 
   render() {
@@ -40,9 +42,6 @@ class SplashContainer extends React.Component {
               style={ styles.logo }
               source={ require('../../assets/images/sandiegojs.png') }
             />
-            <Text style={ styles.text }>Speak</Text>
-            <Text style={ styles.text }>Connect</Text>
-            <Text style={ styles.text }>Learn</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -64,13 +63,6 @@ const styles = StyleSheet.create({
   logo: {
     width: '50%',
     height: '10%'
-  },
-  text: {
-    fontWeight: '500',
-    fontSize: 15,
-    justifyContent: 'center',
-    marginTop: '5%',
-    marginBottom: '5%'
   }
 });
 

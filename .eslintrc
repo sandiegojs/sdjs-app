@@ -28,7 +28,7 @@
     "strict": "off",
     "react-native/no-unused-styles": 2,
     "object-curly-spacing": [
-      1,
+      2,
       "always"
     ],
     "comma-dangle": [

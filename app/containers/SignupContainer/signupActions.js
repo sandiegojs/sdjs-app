@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { profileInit } from '../ProfileContainer/profileActions';
 import { backendUrl } from '../../Defaults';
+import { AsyncStorage } from 'react-native';
 
 export function updateFirstNameInput(text) {
   return {
@@ -52,10 +53,18 @@ export function submitSignUp(credentials, navigate, dispatch) {
         } else {
           navigate('Questionnaire');
           const { email, password } = credentials;
+          const ttl = 1209600;
+
           return axios
-            .post(`${backendUrl}/api/users/login`, { email, password })
+            .post(`${backendUrl}/api/users/login`, { email, password, ttl })
             .then(r => {
-              const { id: token, userId: id } = r.data;
+              const { id: token, userId: id, ttl, created } = r.data;
+              AsyncStorage.multiSet([
+                ['token', token],
+                ['id', id],
+                ['ttl', ttl.toString()],
+                ['created', created]
+              ]);
               dispatch(profileInit(id, token));
               return { id, token };
             });
