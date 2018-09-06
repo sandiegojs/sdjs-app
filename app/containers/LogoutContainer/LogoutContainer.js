@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { submitLogout } from './LogoutActions';
 import { profileWipe } from '../ProfileContainer/profileActions';
+import { backendUrl } from '../../Defaults';
 
 class LogoutContainer extends React.Component {
   constructor(props) {
@@ -13,7 +15,14 @@ class LogoutContainer extends React.Component {
 
   logout() {
     const { navigate } = this.props.navigation;
-    const { dispatch } = this.props;
+    const { dispatch, user } = this.props;
+
+    axios
+      .post(`${backendUrl}/api/users/logout`, {}, { headers: { Authorization: user.token } })
+      .then(response => response.data)
+      .catch(err => console.log(err));
+
+    AsyncStorage.multiRemove(['id', 'token', 'ttl', 'created']);
     dispatch(submitLogout());
     dispatch(profileWipe());
     navigate('Login');
@@ -21,33 +30,37 @@ class LogoutContainer extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>
+      <View style={ styles.container }>
+        <Text style={ styles.text }>
           You Want To Log Out?
         </Text>
         <Button
-          buttonStyle={{
+          buttonStyle={ {
             backgroundColor: '#346abb',
             borderRadius: 7,
             marginTop: 34,
             marginBottom: 24,
             width: 313,
             height: 55,
-          }}
-          onPress={this.logout}
+            paddingBottom: 3,
+            paddingTop: 3
+          } }
+          onPress={ this.logout }
           title="Yes"
           large
         />
         <Button
-          buttonStyle={{
+          buttonStyle={ {
             backgroundColor: '#346abb',
             borderRadius: 7,
             marginTop: 24,
             marginBottom: 21,
             width: 313,
             height: 55,
-          }}
-          onPress={() => this.props.navigation.goBack()}
+            paddingBottom: 3,
+            paddingTop: 3
+          } }
+          onPress={ () => this.props.navigation.goBack() }
           title="No"
           large
         />
@@ -62,16 +75,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#DCDCDC',
     alignItems: 'center',
-    padding: 30,
+    padding: 30
   },
   text: {
     marginBottom: 11,
-    fontSize: 24,
-  },
+    fontSize: 24
+  }
 });
 
+// eslint-disable-next-line no-unused-vars
 function mapStoreToProps(store) {
-  return {};
+  return {
+    user: store.userData.user
+  };
 }
 
 export default connect(mapStoreToProps)(LogoutContainer);

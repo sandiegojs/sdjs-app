@@ -4,7 +4,7 @@
     "description": "San Diego JavaScript Community, Inc.",
     "slug": "sdjs",
     "privacy": "public",
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "29.0.0",
     "platforms": [
       "ios",
       "android"
@@ -19,7 +19,12 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.sdjs.SDJSapp"
+      "bundleIdentifier": "com.sdjs.SDJSapp",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app will only use your location to validate that you're at the designated events location.",
+        "NSLocationAlwaysUsageDescription": "This app will only use your location to validate that you're at the designated events location.",
+        "NSLocationAlwaysAndWhenInUsageDescription": "This app will only use your location to validate that you're at the designated events location."
+      }
     },
     "android": {
       "package": "com.sdjs.SDJSapp",

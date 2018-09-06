@@ -1,4 +1,4 @@
-const sendSMSNotification = require('../../server/sendSMSNotifications');
+const sendSMSNotification = require('../utility/sendSMSNotifications');
 
 module.exports = (User) => {
   // send password reset link when requested
@@ -35,26 +35,26 @@ module.exports = (User) => {
       });
     }
 
-    const {
-      from, subject, html, text
-    } = req.body;
-    User.find().then((users) => {
-      users
-        .filter((user) => user.allowEmails)
-        .forEach((user) => {
-          const msg = {
-            to: user.email,
-            from: from || 'noreply@sdjs.com',
-            subject: subject || 'No Subject',
-            html,
-            text: text || 'a'
-          };
+    const { from, subject, html, text } = req.body;
+    User
+      .find()
+      .then((users) => {
+        users
+          .filter((user) => user.allowEmails)
+          .forEach((user) => {
+            const msg = {
+              to: user.email,
+              from: from || 'noreply@sdjs.com',
+              subject: subject || 'No Subject',
+              html,
+              text: text || 'a'
+            };
 
-          User.app.models.Email.send(msg, (err) => {
-            if (err) return console.log(err.response.body.errors);
+            User.app.models.Email.send(msg, (err) => {
+              if (err) return console.log(err.response.body.errors);
+            });
           });
-        });
-    })
+      })
       .catch(err => console.log(err));
     callback(null);
   };

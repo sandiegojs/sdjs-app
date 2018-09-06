@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const defaultState = {
   eventsData: '',
   selectedEvent: '',
@@ -20,8 +21,8 @@ const defaultState = {
     location: '',
     company: '',
     tokens: [],
-    photo: '',
-  },
+    photo: ''
+  }
 };
 
 export default function EventsReducer(state = defaultState, action) {
@@ -31,56 +32,56 @@ export default function EventsReducer(state = defaultState, action) {
     case 'UPDATE_EVENTS_DATA_FULFILLED': {
       return {
         ...state,
-        eventsData: payload,
+        eventsData: payload
       };
     }
 
     case 'UPDATE_SELECETED_EVENT': {
       return {
         ...state,
-        selectedEvent: payload,
+        selectedEvent: payload
       };
     }
     case 'SET_LOCATION_ERROR': {
       return {
         ...state,
-        locationError: payload,
+        locationError: payload
       };
     }
     case 'CHECKED_IN_TRUE': {
       return {
         ...state,
-        checkedIn: payload,
+        checkedIn: payload
       };
     }
     case 'CHECKED_IN_FALSE': {
       return {
         ...state,
-        checkedIn: payload,
+        checkedIn: payload
       };
     }
     case 'RSVP_TRUE': {
       return {
         ...state,
-        rsvp: payload,
+        rsvp: payload
       };
     }
     case 'RSVP_FALSE': {
       return {
         ...state,
-        rsvp: payload,
+        rsvp: payload
       };
     }
     case 'RSVP_EVENT_DETAILS_TRUE': {
       return {
         ...state,
-        eventDetailsRSVP: payload,
+        eventDetailsRSVP: payload
       };
     }
     case 'RSVP_EVENT_DETAILS_FALSE': {
       return {
         ...state,
-        eventDetailsRSVP: payload,
+        eventDetailsRSVP: payload
       };
     }
     case 'ADD_ATTENDEE_TO_EVENT_PENDING': {
@@ -89,7 +90,7 @@ export default function EventsReducer(state = defaultState, action) {
     case 'ADD_ATTENDEE_TO_EVENT_FULFILLED': {
       return {
         ...state,
-        attendeeId: payload,
+        attendeeId: payload
       };
     }
     case 'ADD_ATTENDEE_TO_EVENT_REJECTED': {
@@ -101,7 +102,7 @@ export default function EventsReducer(state = defaultState, action) {
     case 'REMOVE_ATTENDEE_FULFILLED': {
       return {
         ...state,
-        attendeeId: '',
+        attendeeId: ''
       };
     }
     case 'REMOVE_ATTENDEE_REJECTED': {
@@ -110,43 +111,43 @@ export default function EventsReducer(state = defaultState, action) {
     case 'PROFILE_QUERY_FULFILLED': {
       return {
         ...state,
-        profileData: payload,
+        profileData: payload
       };
     }
     case 'UPDATE_RSVP_LIST_FULFILLED': {
       return {
         ...state,
-        userRSVPs: payload,
+        userRSVPs: payload
       };
     }
     case 'UPDATE_EVENT_DETAILS_RSVP': {
       return {
         ...state,
-        eventDetailsRSVP: payload,
+        eventDetailsRSVP: payload
       };
     }
     case 'UPDATE_EVENT_DETAILS_RSVP_EVENT_ID': {
       return {
         ...state,
-        eventDetailsRSVPEventId: payload,
+        eventDetailsRSVPEventId: payload
       };
     }
     case 'UPDATE_CHECKED_IN_STATUS': {
       return {
         ...state,
-        checkedInStatus: payload,
+        checkedInStatus: payload
       };
     }
     case 'ADD_RSVP_TO_EVENT_FULFILLED': {
       return {
         ...state,
-        rsvpEventId: payload,
+        rsvpEventId: payload
       };
     }
     case 'REMOVE_RSVP_FROM_EVENT': {
       return {
         ...state,
-        rsvp: false,
+        rsvp: false
       };
     }
     default: {

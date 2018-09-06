@@ -8,7 +8,7 @@ describe('Signup Actions', () => {
   it('checks for existance of last name input', () => {
     expect(SignupActions.updateLastNameInput).to.exist;
   });
-  it('checks for existance of emai input', () => {
+  it('checks for existance of email input', () => {
     expect(SignupActions.updateEmailInput).to.exist;
   });
   it('checks for existance of password input', () => {

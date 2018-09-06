@@ -5,13 +5,10 @@ export default class SDJSScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: '.Org',
     headerTitle: 'Visit Us',
-    headerLeft: null,
+    headerLeft: null
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <SDJSContainer />
-    );
+    return <SDJSContainer />;
   }
-};
+}

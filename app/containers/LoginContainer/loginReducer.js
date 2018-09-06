@@ -1,4 +1,4 @@
-import {userData as defaultState} from '../../DefaultStates';
+import { userData as defaultState } from '../../Defaults';
 
 export default function loginReducer(state = defaultState, action) {
   const { type, payload } = action;
@@ -6,27 +6,28 @@ export default function loginReducer(state = defaultState, action) {
     case 'UPDATE_EMAIL_INPUT': {
       return {
         ...state,
-        emailInput: payload,
+        emailInput: payload
       };
     }
 
     case 'UPDATE_PASSWORD_INPUT': {
       return {
         ...state,
-        passwordInput: payload,
+        passwordInput: payload
+      };
+    }
+
+    case 'UPDATE_USER': {
+      return {
+        ...state,
+        user: payload
       };
     }
 
     case 'SUBMIT_LOGIN_FULFILLED': {
       return {
         ...state,
-        user: payload,
-      };
-    }
-
-    case 'SUBMIT_LOGIN_REJECTED': {
-      return {
-        ...state,
+        user: payload
       };
     }
 

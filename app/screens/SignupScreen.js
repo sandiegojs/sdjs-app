@@ -7,7 +7,7 @@ export default class SignupScreen extends React.Component {
     title: 'Sign Up',
     ...Platform.select({
       ios: {
-        headerLeft: null,
+        headerLeft: null
       },
       android: {
         headerLeft: ''
@@ -16,9 +16,6 @@ export default class SignupScreen extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <SignupContainer navigation={this.props.navigation} />
-    );
+    return <SignupContainer navigation={ this.props.navigation } />;
   }
-};
+}
